@@ -1,0 +1,179 @@
+﻿@model SStorm.CTH.Web.Models.TreeViewNode
+@{
+    Layout = null;
+}
+@using SStorm.CTH.Web.Resources
+
+@inject LocService SharedLocalizer
+<div class="card">
+    <div class="card-body">
+        <h4>
+            <span>-(@Model.CancerType.ID) @Model.CancerType.TypeName </span>
+            <span>
+                @if (Authorize(UserPermission.CancerType_EditCreate))
+                {
+                    <a href="#modal-add-entity" data-toggle="modal"
+                       data-url="@Url.Action("EditCreate", "CancerType", new { ID = Model.CancerType.ID})"
+                       data-modalsize="modal-lg"
+                       data-modalcolor="hmodal-danger">
+                        @SharedLocalizer.GetLocalizedHtmlString("Edit")
+
+                    </a>
+                }
+                else
+                {
+
+                }
+                /
+                @if (Authorize(UserPermission.CancerType_Delete))
+                {
+                    <a href="#modal-delete-entity" data-toggle="modal"
+                       data-url="@Url.Action("Delete", "CancerType", new { ID = Model.CancerType.ID})"
+                       data-modalsize="modal-lg"
+                       data-modalcolor="hmodal-danger">
+                        @SharedLocalizer.GetLocalizedHtmlString("Delete")
+
+                    </a>
+                }
+                else
+                {
+
+                }
+                /
+                @if (Authorize(UserPermission.CancerType_EditCreate))
+                {
+                    <a href="#modal-add-entity" data-toggle="modal"
+                       data-url="@Url.Action("EditCreate", "CancerType", new { ID = 0,ParentID=Model.CancerType.ID})"
+                       data-modalsize="modal-lg"
+                       data-modalcolor="hmodal-danger">
+                        @SharedLocalizer.GetLocalizedHtmlString("AddNewSubType")
+                    </a>
+                }
+                else
+                {
+
+                }
+                @if (Authorize(UserPermission.CancerType_ViewCancerTypeProtocols))
+                {
+                    <span class="float-right">
+                        <a asp-controller="Protocol" asp-action="Index" asp-route-CancerTypeID="@Model.CancerType.ID" class="btn btn-info">
+                            @SharedLocalizer.GetLocalizedHtmlString("ChemotherapyProtocol")
+                        </a>
+                    </span>
+                }
+                else
+                {
+
+                }
+            </span>
+        </h4>
+    </div>
+</div>
+<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link" id="Histological-tab" data-toggle="tab" href="#Histological" role="tab" aria-controls="Histological" aria-selected="true">
+            <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
+            <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("Histological")</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="Molecular-tab" data-toggle="tab" href="#Molecular" role="tab" aria-controls="Molecular" aria-selected="false">
+            <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
+            <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("Molecular")</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="Staging-Matrex-tab" data-toggle="tab" href="#Staging-Matrex" role="tab" aria-controls="Staging-Matrex" aria-selected="false">
+            <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
+            <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("StagingMatrix")</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="SurgeryType-tab" data-toggle="tab" href="#SurgeryType" role="tab" aria-controls="SurgeryType" aria-selected="false">
+            <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
+            <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("SurgeryType")</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="Staging-tab" data-toggle="tab" href="#Staging" role="tab" aria-controls="Staging" aria-selected="false">
+            <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
+            <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("Staging")</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="TUMERSIZE-tab" data-toggle="tab" href="#TUMERSIZE" role="tab" aria-controls="TUMERSIZE" aria-selected="false">
+            <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
+            <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("T:TUMER SIZE")</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="LYMPHNODE-tab" data-toggle="tab" href="#LYMPHNODE" role="tab" aria-controls="LYMPHNODE" aria-selected="false">
+            <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
+            <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("N:LYMPH NODE")</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="DISTANTMETASTASIS-tab" data-toggle="tab" href="#DISTANTMETASTASIS" role="tab" aria-controls="DISTANTMETASTASIS" aria-selected="false">
+            <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
+            <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("M:DISTANT METASTASIS")</span>
+        </a>
+    </li>
+    @*<li class="nav-item">
+            <a class="nav-link" id="Protocol-tab" data-toggle="tab" href="#Protocol" role="tab" aria-controls="Protocol" aria-selected="false">
+                <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
+                <span class="d-none d-sm-block">Chemotherapy Protocol</span>
+            </a>
+        </li>*@
+
+</ul>
+<div class="tab-content">
+    <div id="Histological" class="tab-pane" role="tabpanel" aria-labelledby="Histological-tab">
+        <div id="dvHistological">
+            <partial name="_Histological" model="@Model" />
+        </div>
+    </div>
+
+    <div id="Molecular" class="tab-pane" role="tabpanel" aria-labelledby="Molecular-tab">
+        <div id="dvMolecular">
+            <partial name="_Molecular" model="@Model" />
+        </div>
+    </div>
+
+    <div id="Staging-Matrex" class="tab-pane" role="tabpanel" aria-labelledby="Staging-Matrex-tab">
+        <div id="dvStagingMatrix">
+            <partial name="_StagingMatrix" model="@Model" />
+        </div>
+    </div>
+    <div id="SurgeryType" class="tab-pane" role="tabpanel" aria-labelledby="SurgeryType-tab">
+        <div id="dvSurgeryType">
+            <partial name="_SurgeryTypeDetails" model="@Model" />
+        </div>
+    </div>
+    <div id="Staging" class="tab-pane" role="tabpanel" aria-labelledby="Staging-tab">
+        <div id="dvStaging">
+            <partial name="_Staging" model="@Model" />
+        </div>
+    </div>
+    <div id="TUMERSIZE" class="tab-pane" role="tabpanel" aria-labelledby="TUMERSIZE-tab">
+        <div id="dvTUMERSIZE">
+            <partial name="_TumerSize" model="@Model" />
+        </div>
+    </div>
+    <div id="LYMPHNODE" class="tab-pane" role="tabpanel" aria-labelledby="LYMPHNODE-tab">
+        <div id="dvLYMPHNODE">
+            <partial name="_LymphNode" model="@Model" />
+        </div>
+    </div>
+    <div id="DISTANTMETASTASIS" class="tab-pane" role="tabpanel" aria-labelledby="DISTANTMETASTASIS-tab">
+        <div id="dvDISTANTMETASTASIS">
+            <partial name="_DistantMetastasis" model="@Model" />
+        </div>
+    </div>
+    @*<div id="Protocol" class="tab-pane" role="tabpanel" aria-labelledby="Protocol-tab">
+            <div id="dvProtocol">
+                <partial name="_ChemotherapyProtocol" model="@Model" />
+            </div>
+        </div>*@
+</div>
+
+

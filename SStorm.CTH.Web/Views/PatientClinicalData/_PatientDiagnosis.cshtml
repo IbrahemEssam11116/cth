@@ -1,0 +1,299 @@
+﻿@model SStorm.CTH.Web.Models.PatientClinicalDataModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    Layout = null;
+}
+
+<style>
+    .BrrowseClass {
+        pointer-events: none;
+        cursor: default;
+    }
+</style>
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+@Html.SmartModal("modal-folder", ModalSize.Large, modalType: ModalType.Default, backdrop: "static")
+@{
+    var CancerTypeID = 0;
+
+    <form asp-action="EditCreate">
+        <input type="hidden" asp-for="PatientClinicalData.ID" value="@Model.PatientClinicalData.ID" />
+        <input type="hidden" asp-for="PatientClinicalData.PatientID" value="@Model.PatientClinicalData.PatientID" />
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label class="control-label" asp-for="PatientClinicalData.CancerTypeID">@SharedLocalizer.GetLocalizedHtmlString("CancerType")</label>
+                <div class="bootstrap-filestyle input-group">
+                    <select asp-for="PatientClinicalData.CancerTypeID" class="form-control selectpicker"
+                            data-live-search="true" asp-items="@Model.CancerTypeList" required>
+                        <option selected disabled value="0">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("CancerType")</option>
+                    </select>
+                    @if (Authorize(UserPermission.CancerType_EditCreate))
+                    {
+                        <span class="group-span-filestyle input-group-btn" tabindex="0">
+                            <label for="filestyle-3" style="margin-bottom: 0;">
+
+                                <a href="#modal-add-entity" data-toggle="modal"
+                                   data-url="@Url.Action("AddNewCancerType", "PatientClinicalData")"
+                                   data-modalsize="modal-lg"
+                                   data-modalcolor="hmodal-danger" class="btn btn-info">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+
+                                <!--browse button-->
+
+                                <a href="#modal-add-entity" data-toggle="modal"
+                                   data-url="@Url.Action("CancerTypeTree", "PatientClinicalData")"
+                                   data-modalsize="modal-lg"
+                                   data-modalcolor="hmodal-danger" class="btn btn-info">
+                                    <i class="fa fa-fw fa-search-plus"></i>
+                                    @SharedLocalizer.GetLocalizedHtmlString("Browse")
+                                </a>
+
+                            </label>
+                        </span>
+                    }
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="PatientClinicalData.CancerSideId" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("CancerSide")</label>
+                <select asp-for="PatientClinicalData.CancerSideId" class="form-control selectpicker"
+                        data-live-search="true" asp-items="@Model.CancerSideList" required>
+                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("CancerSide")</option>
+                </select>
+                <span asp-validation-for="PatientClinicalData.CancerSideId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label class="control-label"> @SharedLocalizer.GetLocalizedHtmlString("HistologicalSubTypeCancer")</label>
+                <div class="bootstrap-filestyle input-group">
+                    <select asp-for="PatientClinicalData.CancerHistologicalID" class="form-control selectpicker"
+                            data-live-search="true" asp-items="@Model.HistologicalSubTypeCancerList" required>
+                        <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("HistologicalSubTypeCancer")</option>
+                    </select>
+                    @if (Authorize(UserPermission.CancerType_EditCreateHistologicalSubtype))
+                    {
+                        <span class="group-span-filestyle input-group-btn" tabindex="0">
+                            <label for="filestyle-3" style="margin-bottom: 0;">
+                                @if (Model.PatientClinicalData.ID > 0)
+                                {
+                                    <a href="#modal-add-entity" data-toggle="modal"
+                                       data-url="@Url.Action("AddNewHistological", "PatientClinicalData",new {CancerID = Model.PatientClinicalData.CancerTypeID })"
+                                       data-modalsize="modal-lg"
+                                       data-modalcolor="hmodal-danger" class="btn btn-info">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="#modal-add-entity" data-toggle="modal"
+                                       data-url="@Url.Action("AddNewHistological", "PatientClinicalData",new {CancerID = 0 })"
+                                       data-modalsize="modal-lg"
+                                       data-modalcolor="hmodal-danger" class="btn btn-info">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                }
+                                <a href="#modal-add-entity" data-toggle="modal" id="HistologicalBrowserLink" class="btn btn-info BrrowseClass">
+                                    <i class="fa fa-fw fa-search-plus"></i>
+                                    @SharedLocalizer.GetLocalizedHtmlString("Browse")
+                                </a>
+                            </label>
+                        </span>
+                    }
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label"> @SharedLocalizer.GetLocalizedHtmlString("MolecularSubType")</label>
+                <div class="bootstrap-filestyle input-group">
+                    <select asp-for="PatientClinicalData.CancerMolecularID" class="form-control selectpicker"
+                            data-live-search="true" asp-items="@Model.MolecularSubTypeList" required>
+                        <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("MolecularSubType")</option>
+                    </select>
+                    @if (Authorize(UserPermission.CancerType_EditCreateMolecularSubtype))
+                    {
+                        <span class="group-span-filestyle input-group-btn" tabindex="0">
+                            <label for="filestyle-3" style="margin-bottom: 0;">
+                                @if (Model.PatientClinicalData.ID > 0)
+                                {
+                                    <a href="#modal-add-entity" data-toggle="modal"
+                                       data-url="@Url.Action("AddNewMolecular", "PatientClinicalData",new { CancerID = Model.PatientClinicalData.CancerTypeID})"
+                                       data-modalsize="modal-lg"
+                                       data-modalcolor="hmodal-danger" class="btn btn-info">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="#modal-add-entity" data-toggle="modal"
+                                       data-url="@Url.Action("AddNewMolecular", "PatientClinicalData",new { CancerID = 0})"
+                                       data-modalsize="modal-lg"
+                                       data-modalcolor="hmodal-danger" class="btn btn-info">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                }
+                                <a href="#modal-add-entity" data-toggle="modal" id="MolecularTreeBrowserLink" class="btn btn-info BrrowseClass">
+                                    <i class="fa fa-fw fa-search-plus"></i>
+                                    @SharedLocalizer.GetLocalizedHtmlString("Browse")
+                                </a>
+                            </label>
+
+                        </span>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label asp-for="PatientClinicalData.TumorGradeID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("TumorGrade")</label>
+                <div class="bootstrap-filestyle input-group">
+                    <select asp-for="PatientClinicalData.TumorGradeID" class="form-control selectpicker"
+                            data-live-search="true" asp-items="@Model.TumorGradeList" required>
+                        <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("TumorGrade")</option>
+                    </select>
+                    <span asp-validation-for="PatientClinicalData.TumorGradeID" class="text-danger"></span>
+                    <span class="group-span-filestyle input-group-btn" tabindex="0">
+                        <label for="filestyle-3" style="margin-bottom: 0;">
+
+                            <a href="#modal-add-entity" data-toggle="modal"
+                               data-url="@Url.Action("AddNewTumorGrade", "PatientClinicalData")"
+                               data-modalsize="modal-lg"
+                               data-modalcolor="hmodal-danger" class="btn btn-info">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-2">
+                <label class="control-label">T</label>
+                <select id="TNM_T" class="form-control selectpicker"
+                        data-live-search="true" asp-items="@Model.TumorSizeList">
+                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("TumorSize")</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="control-label">N</label>
+                <select id="TNM_N" class="form-control selectpicker"
+                        data-live-search="true" asp-items="@Model.LymphNodeList">
+                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("LymphNode")</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="control-label">M</label>
+                <select id="TNM_M" class="form-control selectpicker"
+                        data-live-search="true" asp-items="@Model.DistantMetastasisList">
+                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("DistantMetastasis")</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Calculate")</label>
+
+                <a class="btn btn-info form-control text-white" id="calculateStage">@SharedLocalizer.GetLocalizedHtmlString("Calculate")</a>
+            </div>
+            <input type="hidden" value="@Model.PatientClinicalData.StageGradeID" asp-for="PatientClinicalData.StageGradeID" />
+            <div class="col-md-4">
+                <label class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Stage")</label>
+                @if (Model.PatientClinicalData.StageGradeID != null)
+                {
+                    <input type="text" id="stageName" value="@Model.PatientClinicalData.CTHStagingItem.Name" class="form-control readonly" required />
+                }
+                else
+                {
+                    <input type="text" id="stageName" value="" class="form-control readonly" required />
+                }
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+
+        </div>
+    </form>
+
+
+    <script src="~/assets/ajax/Binding.js"></script>
+    <script>
+        $(document).ready(function () {
+            var CancerTypeID = $("#PatientClinicalData_CancerTypeID  option:selected").val();
+            if (CancerTypeID != 0) {
+                var x = document.getElementById("MolecularTreeBrowserLink");
+                x.classList.remove("BrrowseClass");
+                var y = document.getElementById("HistologicalBrowserLink");
+                y.classList.remove("BrrowseClass");
+                $("#MolecularTreeBrowserLink").data('url', '/PatientClinicalData/MolecularTree?ID=' + CancerTypeID);
+                $("#HistologicalBrowserLink").data('url', '/PatientClinicalData/HistologicalTree?ID=' + CancerTypeID);
+            }
+
+        $("#calculateStage").click(function () {
+            var T = Number(document.getElementById("TNM_T").value);
+            var N = Number(document.getElementById("TNM_N").value);
+            var M = Number(document.getElementById("TNM_M").value);
+
+            $.ajax({
+                type: 'GET',
+                url: '/PatientClinicalData/CalculateStage?T=' + T + "&&N=" + N + "&&M=" + M,
+                contentType: 'json',
+                success: function (result) {
+                    if (result.responseID == 0) {
+                        swal("Error", "No stage for this TNM", "error");
+                        //alert("No stage for this TNM");
+                        document.getElementById("stageName").value = null;
+                        document.getElementById("PatientClinicalData_StageGradeID").value = null;
+                    }
+                    else {
+                        document.getElementById("stageName").value = result.responseName;
+                        document.getElementById("PatientClinicalData_StageGradeID").value = result.responseID;
+                    }
+                }
+            });
+        });
+
+        $('select').selectpicker({
+            dropupAuto: false
+        });
+
+        $("#PatientClinicalData_CancerTypeID").change(function () {
+            CancerTypeVal = $("#PatientClinicalData_CancerTypeID  option:selected").val();
+            var x = document.getElementById("MolecularTreeBrowserLink");
+            x.classList.remove("BrrowseClass");
+            var y = document.getElementById("HistologicalBrowserLink");
+            y.classList.remove("BrrowseClass");
+           $("#MolecularTreeBrowserLink").data('url', '/PatientClinicalData/MolecularTree?ID=' +  CancerTypeVal);
+           $("#HistologicalBrowserLink").data('url', '/PatientClinicalData/HistologicalTree?ID=' +  CancerTypeVal);
+            $.ajax({
+                url: '@Url.Action("GethistologicalListComp", "PatientClinicalData")',
+                type: 'GET',
+                cache: false,
+                data: { ID: CancerTypeVal }
+            }).done(function (response) {
+                $("#PatientClinicalData_CancerHistologicalID").empty();
+                BindCombo('PatientClinicalData_CancerHistologicalID', response, false);
+                $('#PatientClinicalData_CancerHistologicalID').selectpicker('refresh');
+            });
+            $.ajax({
+                url: '@Url.Action("GetmolecularListComp", "PatientClinicalData")',
+                type: 'GET',
+                cache: false,
+                data: { ID: CancerTypeVal }
+            }).done(function (response) {
+                $("#PatientClinicalData_CancerMolecularID").empty();
+                BindCombo('PatientClinicalData_CancerMolecularID', response, false);
+                $('#PatientClinicalData_CancerMolecularID').selectpicker('refresh');
+            });
+
+      
+        });
+    });
+
+    $(".readonly").keydown(function(e){
+        e.preventDefault();
+        swal("Error", "You Can't Write here, Click on Calculate Button", "error");
+    });
+    </script>
+}

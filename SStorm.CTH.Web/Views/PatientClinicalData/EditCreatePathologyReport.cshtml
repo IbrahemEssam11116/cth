@@ -1,0 +1,96 @@
+﻿@model SStorm.CTH.Web.Models.PatientClinicalDataModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<link href="~/assets/libs/dropify/dropify.min.css" rel="stylesheet" />
+
+
+<form asp-action="EditCreatePathologyReport" enctype="multipart/form-data" id="PathologyReportForm">
+    <div class="modal-header">
+        <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("PathologyReport") </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" asp-for="PathologyReportEntity.ID" value="@Model.PathologyReportEntity.ID" />
+        <input type="hidden" asp-for="PathologyReportEntity.PatienClinicalDataID" value="@Model.PathologyReportEntity.PatienClinicalDataID" />
+        <input type="hidden" asp-for="PatientClinicalData.PatientID" value="@Model.PatientClinicalData.PatientID" />
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="PathologyReportEntity.ReportTypeID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("PathologyReportType") </label>
+                <select asp-for="PathologyReportEntity.ReportTypeID" class="form-control selectpicker"
+                        data-live-search="true" asp-items="@Model.ReportTypeList" required>
+                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("PathologyReportType")</option>
+                </select>
+                <span asp-validation-for="PathologyReportEntity.ReportTypeID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="PathologyReportEntity.Report" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("PathologyReport") </label>
+                @if (Model.PathologyReportEntity.ID > 0)
+                {
+                    <input type="file" asp-for="Image" id="ProductPhoto" class="dropify" data-default-file="@Model.PathologyReportEntity.Report" />
+                }
+                else
+                {
+                    <input type="file" asp-for="Image" id="ProductPhoto" class="dropify" />
+                }
+                <span asp-validation-for="PathologyReportEntity.Report" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="btn btn-secondary text-white" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Canceel")</a>
+
+            <button id="btnDone" type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+        </div>
+    </div>
+</form>
+<script src="~/assets/libs/dropify/dropify.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $('select').selectpicker({
+            dropupAuto: false
+        });
+        $('.dropify').dropify({
+            messages: {
+                'default': 'Drag a file or click here to upload a file',
+                'replace': 'Drag another file or click here to change the file',
+                'remove': 'Delete',
+                'error': 'Ooops, something wrong happended.'
+            }
+        });
+        $('#PathologyReportForm').submit(function (e) {
+            e.preventDefault();
+            var form = $('#PathologyReportForm')[0]; // Get form
+            var data = new FormData(form); // Create an FormData object
+            $("#btnDone").prop("disabled", true); // disabled the submit button
+
+            $.ajax({
+                url: form.action,
+                type: form.method,
+                enctype: form.enctype,
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 600000,
+                success: function (data) {
+                    $('#modal-add-entity').modal('hide');
+                    $('#ShowPathologyReport').html(data);
+                    $("#btnDone").prop("disabled", false);
+                    swal("Done", "Data Saved Successfully", "success");
+                    $(".fade").hide();
+                },
+                error: function (e) {
+                    swal("Error", "Data Don't Saved successfully", "error");
+                    console.log("ERROR : ", e);
+                    $("#btnDone").prop("disabled", false);
+                }
+            });
+        });
+
+    });
+</script>

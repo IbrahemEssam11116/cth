@@ -1,0 +1,87 @@
+﻿@model DoctorModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("EditCreate");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("DocProfile")</a></li>
+                        <li class="breadcrumb-item active"> @SharedLocalizer.GetLocalizedHtmlString("DocProfile")</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">@SharedLocalizer.GetLocalizedHtmlString("MyProfile")</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <form asp-action="Profile">
+                        <div class="modal-body">
+                            <input type="hidden" asp-for="DoctorEntity.ID" />
+                            <input type="hidden" asp-for="DoctorEntity.CTHUserItem.ID" />
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label asp-for="DoctorEntity.Name" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Name")</label>
+                                    <input asp-for="DoctorEntity.Name" class="form-control" required />
+                                    <span asp-validation-for="DoctorEntity.Name" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="DoctorEntity.CTHUserItem.Email" class="control-label"> @SharedLocalizer.GetLocalizedHtmlString("Email")</label>
+                                    <input asp-for="DoctorEntity.CTHUserItem.Email" class="form-control" required type="email" />
+                                    <span asp-validation-for="DoctorEntity.CTHUserItem.Email" class="text-danger"></span>
+                                </div>
+
+                                @*<div class="col-md-6">
+                                    <label asp-for="DoctorEntity.ArName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Name") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                                    <input asp-for="DoctorEntity.ArName" class="form-control" />
+                                    <span asp-validation-for="DoctorEntity.ArName" class="text-danger"></span>
+                                </div>*@
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label asp-for="DoctorEntity.Degree" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Degree")</label>
+                                    <input asp-for="DoctorEntity.Degree" class="form-control" required type="number" />
+                                    <span asp-validation-for="DoctorEntity.Degree" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="DoctorEntity.ContactNumber" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Contactnumber")</label>
+                                    <input asp-for="DoctorEntity.ContactNumber" class="form-control" required type="tel" />
+                                    <span asp-validation-for="DoctorEntity.ContactNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label asp-for="DoctorEntity.CTHUserItem.UserName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("username")</label>
+                                    <input asp-for="DoctorEntity.CTHUserItem.UserName" class="form-control" />
+                                    <span asp-validation-for="DoctorEntity.CTHUserItem.UserName" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="DoctorEntity.CTHUserItem.Password" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Password")</label>
+                                    <input asp-for="DoctorEntity.CTHUserItem.Password" class="form-control" type="password" />
+                                    <span asp-validation-for="DoctorEntity.CTHUserItem.Password" class="text-danger"></span>
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

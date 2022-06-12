@@ -1,0 +1,181 @@
+﻿@model PatientSymptomModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<link href="~/assets/css/site.css" rel="stylesheet" />
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form asp-controller="Patient" asp-action="CreatePatientSymptom"
+                      data-ajax-method="post" data-ajax="true" data-ajax-success="LoadPatienSymptoms">
+                    <div class="modal-header">
+                        <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("PatientSymptom")</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" asp-for="PatientSymptom.PatientID" value="@Model.PatientSymptom.PatientID" />
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label asp-for="IsNewSymptom" class="control-label d-block">@SharedLocalizer.GetLocalizedHtmlString("IsNewSymptom")</label>
+                                <!-- Rounded switch -->
+                                <label class="switch">
+                                    <input asp-for="IsNewSymptom" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                                <span asp-validation-for="IsNewSymptom" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6" id="dvSymptomList">
+                                <label asp-for="PatientSymptom.SymptomID">@SharedLocalizer.GetLocalizedHtmlString("Symptom")</label>
+                                <select asp-for="PatientSymptom.SymptomID" class="form-control selectpicker"
+                                        data-live-search="true" asp-items="@Model.SymptomList" required>
+                                    <option selected disabled value="">
+                                        @SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("Symptom")
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label asp-for="PatientSymptom.SymptomDurationAmount">@SharedLocalizer.GetLocalizedHtmlString("DurationAmount")</label>
+                                <input asp-for="PatientSymptom.SymptomDurationAmount" class="form-control" type="number" required />
+                                <span asp-validation-for="PatientSymptom.SymptomDurationAmount" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="PatientSymptom.SymptomDurationUnit">@SharedLocalizer.GetLocalizedHtmlString("DurationUnit")</label>
+                                <select asp-for="PatientSymptom.SymptomDurationUnit" class="form-control selectpicker"
+                                        data-live-search="true" asp-items="@Model.DurationUnitList" required>
+                                    <option selected disabled value="">
+                                        @SharedLocalizer.GetLocalizedHtmlString("SelectUnit")
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="dvNewSymptom" style="display:none">
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label asp-for="Symptom.Name" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Name")</label>
+                                    <input asp-for="Symptom.Name" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("EnterName")" />
+                                    <span asp-validation-for="Symptom.Name" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="Symptom.Grade">@SharedLocalizer.GetLocalizedHtmlString("Grade")</label>
+                                    <select asp-for="Symptom.Grade" class="form-control"
+                                            data-live-search="true">
+                                        <option selected disabled value="">
+                                            @SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("Grade")
+                                        </option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                                @*<div class="col-md-6">
+                                        <label asp-for="Symptom.ArName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Name") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                                        <input asp-for="Symptom.ArName" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("EnterName") @SharedLocalizer.GetLocalizedHtmlString("inArabic")" />
+                                        <span asp-validation-for="Symptom.ArName" class="text-danger"></span>
+                                    </div>*@
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label asp-for="Symptom.Description" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Description")</label>
+                                    <textarea asp-for="Symptom.Description" class="form-control" rows="4" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Description")"></textarea>
+                                    <span asp-validation-for="Symptom.Description" class="text-danger"></span>
+                                </div>
+                            </div>
+                            @*<div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label asp-for="Symptom.ArDescription" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Description") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                                        <textarea asp-for="Symptom.ArDescription" class="form-control" rows="4" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Description") @SharedLocalizer.GetLocalizedHtmlString("inArabic")"></textarea>
+                                        <span asp-validation-for="Symptom.ArDescription" class="text-danger"></span>
+                                    </div>
+                                </div>*@
+                        </div>
+
+
+                    </div>
+
+                    <div id="dvSymptomData"></div>
+
+                    <div class="modal-footer">
+                        @if (Authorize(UserPermission.Symptom_View))
+                        {
+                            <a asp-controller="Symptom" asp-action="Index" class="btn btn-secondary waves-effect">@SharedLocalizer.GetLocalizedHtmlString("Back")</a>
+                        }
+                        <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+        $('#IsNewSymptom').change(function () {
+            if ($(this).is(':checked') == true) {
+                $('#dvSymptomList').hide();
+                $('#dvNewSymptom').show();
+                $("#Symptom_Name").prop('required', true);
+                //$("#Symptom_ArName").prop('required', true);
+                $("#Symptom_Grade").prop('required', true);
+                $("#Symptom_Description").prop('required', true);
+                $("#PatientSymptom_SymptomID").prop('required', false);
+                 $("#dvSymptomData").html("");
+            }
+            else {
+                $('#dvSymptomList').show();
+                $('#dvNewSymptom').hide();
+                $("#Symptom_Name").prop('required', false);
+                //$("#Symptom_ArName").prop('required', false);
+                $("#Symptom_Grade").prop('required', false);
+                $("#Symptom_Description").prop('required', false);
+                $("#PatientSymptom_SymptomID").prop('required', true);
+
+                var ID = $("#PatientSymptom_SymptomID").val();
+                if (ID != null) {
+                    $.ajax({
+                        url: '@Url.Action("GetSymptomData", "Patient")',
+                        type: 'GET',
+                        cache: false,
+                        data: {ID:ID}
+                    }).done(function (result) {
+                        $("#dvSymptomData").html(result);
+                    });
+                }
+
+            }
+
+        });
+    });
+
+
+    $("#PatientSymptom_SymptomID").change(function () {
+        var ID = $(this).val();
+        $.ajax({
+            url: '@Url.Action("GetSymptomData", "Patient")',
+            type: 'GET',
+            cache: false,
+            data: {ID:ID}
+        }).done(function (result) {
+            $("#dvSymptomData").html(result);
+        });
+    });
+
+    $(document).ready(function () {
+        $('select').selectpicker({
+            dropupAuto: false
+        });
+    });
+
+    function LoadPatienSymptoms(response) {
+        $("#dvCreatePatientSymptom").hide();
+        $("#dvChemoSymptoms").html("");
+        $("#dvChemoSymptoms").html(response);
+    }
+</script>

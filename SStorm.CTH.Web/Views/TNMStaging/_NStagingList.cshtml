@@ -1,0 +1,103 @@
+﻿@model SStorm.CTH.Web.Models.TNMStagingModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+}
+<div class="card">
+    <div class="card-body">
+        @if (Authorize(UserPermission.TNMStaging_EditCreateLymphNode))
+        {
+            <a href="#modal-add-entity" data-toggle="modal"
+               data-url="@Url.Action("EditCreate", "TNMStaging", new { ID = 0 , TNMTypeID = 2})"
+               data-modalsize="modal-lg"
+               data-modalcolor="hmodal-danger" class="btn btn-info">
+                <i class="fas fa-plus"></i> @SharedLocalizer.GetLocalizedHtmlString("NewLymphNode")
+            </a>
+        }
+        <div class="table-responsive">
+            <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                <thead class="btn-primary text-white">
+                    <tr>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("Name")</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("Number")</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("From")</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("To")</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("Description")</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("Remarks")</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.TNMStagingCollection.Count() == 0)
+                    {
+                        <tr>
+                            <th scope="row">@SharedLocalizer.GetLocalizedHtmlString("NoData")</th>
+                        </tr>
+                    }
+                    @for (int i = 0; i < Model.TNMStagingCollection.Count(); i++)
+                        {
+                            if (Model.TNMStagingCollection[i].TNMTypeID == 2)
+                            {
+                                <tr>
+                                    <td>@Model.TNMStagingCollection[i].Name</td>
+                                    <td>@Model.TNMStagingCollection[i].Number</td>
+                                    <td>@Model.TNMStagingCollection[i].TNMFrom</td>
+                                    <td>@Model.TNMStagingCollection[i].TNMTo</td>
+                                    <td>@Model.TNMStagingCollection[i].Description</td>
+                                    <td>@Model.TNMStagingCollection[i].Remarks</td>
+                                    <td>
+                                        @if (Authorize(UserPermission.TNMStaging_EditCreateLymphNode))
+                                        {
+                                            <a href="#modal-add-entity" data-toggle="modal"
+                                               data-url="@Url.Action("EditCreate", "TNMStaging", new { ID = @Model.TNMStagingCollection[i].ID, TNMTypeID = Model.TNMStagingCollection[i].TNMTypeID})"
+                                               data-modalsize="modal-lg"
+                                               data-modalcolor="hmodal-danger" class="btn btn-info">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        }
+                                        @if (Authorize(UserPermission.TNMStaging_DeleteLymphNode))
+                                        {
+                                            <a href="#modal-delete-entity" data-toggle="modal"
+                                               data-url="@Url.Action("Delete", "TNMStaging", new { ID = @Model.TNMStagingCollection[i].ID ,TNMTypeID = 2})"
+                                               data-modalsize="modal-lg"
+                                               data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+
+                        }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<script src="~/assets/ajax/jquery.unobtrusive-ajax.js"></script>
+
+<script>
+    function LoadLymphNode(response) {
+        if (response[0] == 3) {
+            $.ajax({
+             url: '@Url.Action("GETTNMStagingList", "TNMStaging")',
+            type: 'GET',
+                cache: false,
+                data: { TNMTypeID:2}
+            }).done(function (result)
+            {
+                swal("Done", "Deleted Successfully", "success");
+                $('#N').html(result);
+            });
+          }
+        else {
+               swal("Done", "error ", "error");
+          }
+    }
+</script>

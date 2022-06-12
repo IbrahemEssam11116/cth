@@ -1,0 +1,131 @@
+﻿@model SStorm.CTH.Web.Models.PremedicationModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<link href="~/assets/css/site.css" rel="stylesheet" />
+
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("EditCreate");
+    Layout = null;
+}
+
+
+<form asp-action="AddNewPremidication" data-ajax-method="post" data-ajax="true"
+      data-ajax-success="BindPremidicationList">
+    <!-- start page title -->
+    <div class="color-line"></div>
+    <!-- start model header fro edit/ create -->
+    <div class="modal-header">
+        <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("Premedication")</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <!-- end page title -->
+    <div class="modal-body">
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label asp-for="PreMedicationEntity.Title" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Name")</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-language"></i></span>
+                    </div>
+                    <input asp-for="PreMedicationEntity.Title" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("EnterName")" required type="text" />
+                </div>
+                <span asp-validation-for="PreMedicationEntity.Title" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="PreMedicationEntity.Number" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Number")</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-percentage"></i></span>
+                    </div>
+                    <input asp-for="PreMedicationEntity.Number" id="TaxRate" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Number")" required type="number" />
+                </div>
+                <span asp-validation-for="PreMedicationEntity.Number" class="text-danger"></span>
+            </div>
+            @*
+            <div class="col-md-6">
+                <label asp-for="PreMedicationEntity.ArTitle" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Name") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-language"></i></span>
+                    </div>
+                    <input asp-for="PreMedicationEntity.ArTitle" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("EnterName") @SharedLocalizer.GetLocalizedHtmlString("inArabic")" type="text" />
+                </div>
+                <span asp-validation-for="PreMedicationEntity.ArTitle" class="text-danger"></span>
+            </div>
+            *@
+        </div>
+        @*
+        <div class="form-group row">
+
+        </div>
+        *@
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="PreMedicationEntity.Description" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Description")</label>
+                <div class="input-group">
+                    <textarea asp-for="PreMedicationEntity.Description" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Description")" required rows="4"></textarea>
+                </div>
+                <span asp-validation-for="PreMedicationEntity.Description" class="text-danger"></span>
+            </div>
+        </div>
+        @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="PreMedicationEntity.ArDescription" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Description") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <div class="input-group">
+                    <textarea asp-for="PreMedicationEntity.ArDescription" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("Description")" rows="4"></textarea>
+                </div>
+                <span asp-validation-for="PreMedicationEntity.ArDescription" class="text-danger"></span>
+            </div>
+        </div>
+        *@
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="PreMedicationEntity.EmetogenicID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Emetogenicrisk")</label>
+                <select required asp-for="PreMedicationEntity.EmetogenicID" class="form-control selectpicker"
+                        data-live-search="true" asp-items="@Model.EmetogenicList">
+                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("Emetogenicrisk")</option>
+                </select>
+                <span asp-validation-for="PreMedicationEntity.EmetogenicID" class="text-danger"></span>
+            </div>
+        </div>
+        <input name="EmetogenicRisk" id="EmetogenicRisk" value="" type="hidden" />
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal"> @SharedLocalizer.GetLocalizedHtmlString("Cancel")</button>
+            <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+        </div>
+    </div>
+</form>
+
+<script src="~/assets/ajax/Binding.js"></script>
+
+<script>
+
+    $(function () {
+
+    });
+
+    $(document).ready(function () {
+        $('select').selectpicker({
+            dropupAuto: false
+        });
+        var r = $("#ChemotherapyProtocolEntity_EmetodenicRiskID").val();
+        if (r == "") {
+            r = "0";
+        }
+        $("#EmetogenicRisk").val(r);
+
+    });
+    function BindPremidicationList(response) {
+        $('#modal-add-entity').modal('hide');
+        $("#ChemotherapyProtocolEntity_PremedicationID").empty();
+        BindCombo('ChemotherapyProtocolEntity_PremedicationID', response, false);
+        $('#ChemotherapyProtocolEntity_PremedicationID').selectpicker('refresh');
+        //var premidication = document.getElementById("ChemotherapyProtocolEntity_PremedicationID");
+        //var selValue = premidication.options[premidication.selectedIndex].value;
+    }
+
+</script>
+

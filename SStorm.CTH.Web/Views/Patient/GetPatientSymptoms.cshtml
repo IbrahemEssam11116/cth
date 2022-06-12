@@ -1,0 +1,41 @@
+﻿@model SStorm.CTH.DAL.EntityClasses.CTHPatientEntity
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    Layout = null;
+}
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+
+
+            <div class="card">
+                <div class="card-body">
+                    <a class="btn btn-info" id="btnCreatePatientSymptom" href="#">
+                        <i class="fa fa-plus"></i>@SharedLocalizer.GetLocalizedHtmlString("CreatePatientSymptom")
+                    </a>
+                    <div id="dvCreatePatientSymptom">
+                    </div>
+                    <div id="dvChemoSymptoms">
+                        <partial name="_ChemoSymptomView" model="@Model" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+<script>
+    $("#btnCreatePatientSymptom").click(function () {
+        $("#dvCreatePatientSymptom").show();
+        $("#dvCreatePatientSymptom").load("/Patient/CreatePatientSymptom?patientID=" + @Model.ID);
+    });
+</script>
+

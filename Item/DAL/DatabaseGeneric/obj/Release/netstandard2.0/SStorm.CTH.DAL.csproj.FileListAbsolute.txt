@@ -1,0 +1,9 @@
+D:\WorkSpace\CTH\Item\DAL\Bin\Release\SStorm.CTH.DAL.deps.json
+D:\WorkSpace\CTH\Item\DAL\Bin\Release\SStorm.CTH.DAL.dll
+D:\WorkSpace\CTH\Item\DAL\Bin\Release\SStorm.CTH.DAL.pdb
+D:\WorkSpace\CTH\Item\DAL\DatabaseGeneric\obj\Release\netstandard2.0\SStorm.CTH.DAL.csprojAssemblyReference.cache
+D:\WorkSpace\CTH\Item\DAL\DatabaseGeneric\obj\Release\netstandard2.0\SStorm.CTH.DAL.csproj.CoreCompileInputs.cache
+D:\WorkSpace\CTH\Item\DAL\DatabaseGeneric\obj\Release\netstandard2.0\SStorm.CTH.DAL.AssemblyInfoInputs.cache
+D:\WorkSpace\CTH\Item\DAL\DatabaseGeneric\obj\Release\netstandard2.0\SStorm.CTH.DAL.AssemblyInfo.cs
+D:\WorkSpace\CTH\Item\DAL\DatabaseGeneric\obj\Release\netstandard2.0\SStorm.CTH.DAL.dll
+D:\WorkSpace\CTH\Item\DAL\DatabaseGeneric\obj\Release\netstandard2.0\SStorm.CTH.DAL.pdb

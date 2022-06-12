@@ -1,0 +1,75 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout_Blank.cshtml";
+}
+
+<div class="account-pages my-5 pt-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 col-xl-5">
+                <div>
+
+                    <div class="text-center mb-4">
+                        <a href="index.html">
+                            <span><img src="~/assets/images/CAP1.jpeg" alt="" height="225" width="450"></span>
+                        </a>
+                    </div>
+
+                    <form asp-action="Login">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+
+                        @Html.HiddenFor(x => x.ReturnUrl)
+                        <div class="form-group mb-3">
+
+                            <label asp-for="Username">User Name</label>
+
+
+                            <input class="form-control" asp-for="Username" placeholder="Enter your User Name" v>
+                            <span asp-validation-for="Username" class="text-danger"></span>
+
+                        </div>
+
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Password">Password</label>
+                            <input class="form-control" type="password" asp-for="Password" placeholder="Enter your password">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+
+                        </div>
+                        <div class="form-group mb-3">
+                            <div class="custom-control custom-checkbox float-right">
+                                <input type="checkbox" class="custom-control-input" id="checkbox-signin" asp-for="RememberMe">
+                                <label class="custom-control-label" for="checkbox-signin">Remember Me</label>
+                            </div>
+                            <a asp-action="PasswordRecovery" asp-controller="Account">Forget Password?</a>
+                        </div>
+
+                        <div class="form-group text-center mb-3">
+                            <button class="btn btn-info btn-lg width-lg btn-rounded" type="submit"> Sign In </button>
+                        </div>
+
+                    </form>
+
+                </div>
+                <!-- end card -->
+
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <p class="text-muted">User Name: <a href="#" class="text-dark ml-1">1</a></p>
+                        <p class="text-muted">Password: <a href="#" class="text-dark ml-1">1</a></p>
+
+                        <p class="text-muted">Don't have an account? <a href="#" class="text-dark ml-1">Sign Up</a></p>
+                    </div>
+                </div>
+                <!-- end row -->
+
+            </div> <!-- end col -->
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container -->
+</div>
+
+
+<script src="~/assets/libs/jquery-validation/jquery.validate.min.js"></script>

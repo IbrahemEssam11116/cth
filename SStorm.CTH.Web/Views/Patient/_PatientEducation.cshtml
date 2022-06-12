@@ -1,0 +1,58 @@
+﻿@model SStorm.CTH.Web.Models.PatientModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    var i = 1;
+}
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="table-responsive">
+                <h4>@SharedLocalizer.GetLocalizedHtmlString("PatientEducations")</h4>
+
+                <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("DrugName")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("DrugDose")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Route")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Files")</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.PatientEntity.CTHPatientClinicalDataCollection.First().CTHKimoSurveyCollection.Last().CTHChemotherapyProtocolItem.CTHDrugCollection.Count == 0)
+                        {
+                            <tr>
+                                <th scope="row" colspan="7">@SharedLocalizer.GetLocalizedHtmlString("NoData")</th>
+                            </tr>
+                        }
+                        else
+                        {
+                            foreach (var item in Model.PatientEntity.CTHPatientClinicalDataCollection.First().CTHKimoSurveyCollection.Last().CTHChemotherapyProtocolItem.CTHDrugCollection)
+                            {
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Dose @item.CTHDoseUnitItem.Name</td>
+                                    <td>@Enum.GetName(typeof(Route), item.RouteID)</td>
+                                    <td>
+                                        <a href="#modal-add-entity" data-toggle="modal"
+                                           data-url="@Url.Action("AttachmentCollection", "Patient", new { DrugID = item.ID})"
+                                           data-modalsize="modal-lg"
+                                           data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                            <i class="fas fa-file"></i>
+                                            @SharedLocalizer.GetLocalizedHtmlString("Files")
+                                        </a>
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

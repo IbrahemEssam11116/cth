@@ -1,0 +1,53 @@
+﻿
+@model SStorm.CTH.Web.Models.TreeViewNode
+@{
+    Layout = null;
+}
+
+
+<ul id="myUL3">
+
+    @foreach (var node in Model.MolecularCollection)
+    {
+        if (node.ParentID == Model.Seed)
+        {
+            SStorm.CTH.Web.Models.TreeViewNode inner = new SStorm.CTH.Web.Models.TreeViewNode { Seed = node.ID, MolecularCollection = Model.MolecularCollection };
+            <li>
+                <span class="caret3"></span> <a href="#" class="text-black-50"><i class="fa fa-folder"></i>@node.Name</a>
+
+                <span>
+                    @if (Authorize(UserPermission.SurgeryType_EditCreate))
+                    {
+                        <a href="#modal-add-entity" data-toggle="modal"
+                           data-url="@Url.Action("EditCreateSurgeryType", "CancerType", new { ID = 0 ,CancerID = node.CanerID ,ParentID = node.ID})"
+                           data-modalsize="modal-lg"
+                           data-modalcolor="hmodal-danger">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    }
+                    @if (Authorize(UserPermission.SurgeryType_EditCreate))
+                    {
+                        <a href="#modal-add-entity" data-toggle="modal"
+                           data-url="@Url.Action("EditCreateSurgeryType", "CancerType", new { ID = node.ID, CancerID = node.CanerID })"
+                           data-modalsize="modal-lg"
+                           data-modalcolor="hmodal-danger">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    }
+                    @if (Authorize(UserPermission.SurgeryType_Delete))
+                    {
+                        <a href="#modal-delete-entity" data-toggle="modal"
+                           data-url="@Url.Action("DeleteSurgeryType", "CancerType", new { id = node.ID })"
+                           data-modalsize="modal-lg"
+                           data-modalcolor="hmodal-danger">
+                            <i class="fa fa-trash" />
+                        </a>
+                    }
+                </span>
+
+            </li>
+
+        }
+
+    }
+</ul>

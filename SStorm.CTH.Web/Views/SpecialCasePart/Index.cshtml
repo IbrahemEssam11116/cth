@@ -1,0 +1,111 @@
+﻿@model SStorm.CTH.DAL.EntityClasses.CTHSpecialCaseEntity
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("SpecialCasePartList");
+}
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("SpecialCasePartList")</a></li>
+                        <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("SpecialCasePartList")</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">@SharedLocalizer.GetLocalizedHtmlString("Index")</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-sm-12">
+            @if (Authorize(UserPermission.SpecialCase_EditCreatePart))
+            {
+                <a href="#modal-add-entity" data-toggle="modal"
+                   data-url="@Url.Action("EditCreate", "SpecialCasePart", new { ID = 0, CaseID = Model.ID})"
+                   data-modalsize="modal-lg"
+                   data-modalcolor="hmodal-danger" class="btn btn-info">
+                    <i class="fas fa-plus"></i> @SharedLocalizer.GetLocalizedHtmlString("NewPart")
+                </a>
+            }
+
+            <div class="card">
+                <div class="card-body">
+
+
+                    <div class="table-responsive">
+                        <table class="table m-0 table-hover">
+                            <thead class="btn-info text-white">
+                                <tr>
+                                    <th colspan="4">
+                                        @SharedLocalizer.GetLocalizedHtmlString("SpecialCaseName"): @Model.CaseName
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>#</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Part")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Remarks")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.CTHSpecialCasePartCollection.Count() == 0)
+                                {
+                                    <tr>
+                                        <th scope="row" colspan="7">@SharedLocalizer.GetLocalizedHtmlString("NoData")</th>
+                                    </tr>
+                                }
+                                @for (int i = 0; i < Model.CTHSpecialCasePartCollection.Count(); i++)
+                                    {
+                                        <tr>
+                                            <th scope="row">@(i + 1)</th>
+                                            <td>@Model.CTHSpecialCasePartCollection[i].PartName</td>
+                                            <td>@Model.CTHSpecialCasePartCollection[i].Remarks</td>
+                                            <td>
+                                                @if (Authorize(UserPermission.SpecialCase_EditCreatePart))
+                                                {
+                                                    <a href="#modal-add-entity" data-toggle="modal"
+                                                       data-url="@Url.Action("EditCreate", "SpecialCasePart", new { ID = Model.CTHSpecialCasePartCollection[i].ID, CaseID = Model.ID})"
+                                                       data-modalsize="modal-lg"
+                                                       data-modalcolor="hmodal-danger" class="btn btn-info">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                }
+                                                @if (Authorize(UserPermission.SpecialCase_DeletePart))
+                                                {
+                                                    <a href="#modal-delete-entity" data-toggle="modal"
+                                                       data-url="@Url.Action("Delete", "SpecialCasePart", new { ID = @Model.CTHSpecialCasePartCollection[i].ID})"
+                                                       data-modalsize="modal-lg"
+                                                       data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="modal-footer">
+                        @if (Authorize(UserPermission.SpecialCase_View))
+                        {
+                            <a asp-controller="SpecialCase" asp-action="Index" class="btn btn-secondary waves-effect">@SharedLocalizer.GetLocalizedHtmlString("Back")</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+﻿@model SStorm.CTH.Web.Models.TNMStagingModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+}
+<div class="card">
+    <div class="card-body">
+        @if (Authorize(UserPermission.TNMStaging_EditCreateStaging))
+        {
+            <a href="#modal-add-entity" data-toggle="modal"
+               data-url="@Url.Action("EditCreate", "Staging", new { ID = 0 , TNMTypeID = 1})"
+               data-modalsize="modal-lg"
+               data-modalcolor="hmodal-danger" class="btn btn-info">
+                <i class="fas fa-plus"></i> @SharedLocalizer.GetLocalizedHtmlString("NewStaging")
+            </a>
+        }
+        <div class="table-responsive">
+            <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                <thead class="btn-primary text-white">
+                    <tr>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("Name")</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("Number")</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("Remarks")</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.StagingCollection.Count() == 0)
+                    {
+                        <tr>
+                            <th scope="row">@SharedLocalizer.GetLocalizedHtmlString("NoData")</th>
+                        </tr>
+                    }
+                    
+                    @for (int i = 0; i < Model.StagingCollection.Count(); i++)
+                        {
+
+                            <tr>
+                                <td>@Model.StagingCollection[i].Name</td>
+                                <td>@Model.StagingCollection[i].Number</td>
+                                <td>@Model.StagingCollection[i].Remarks</td>
+                                <td>
+                                    @if (Authorize(UserPermission.TNMStaging_EditCreateStaging))
+                                    {
+                                        <a href="#modal-add-entity" data-toggle="modal"
+                                           data-url="@Url.Action("EditCreate", "Staging", new { ID = @Model.StagingCollection[i].ID})"
+                                           data-modalsize="modal-lg"
+                                           data-modalcolor="hmodal-danger" class="btn btn-info">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    }
+                                    @if (Authorize(UserPermission.TNMStaging_DeleteStaging))
+                                    {
+                                        <a href="#modal-delete-entity" data-toggle="modal"
+                                           data-url="@Url.Action("Delete", "Staging", new { ID = @Model.StagingCollection[i].ID})"
+                                           data-modalsize="modal-lg"
+                                           data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                            <i class="fas fa-times"></i>
+                                        </a>
+                                    }
+
+
+                                </td>
+                            </tr>
+
+                        }
+
+                    
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

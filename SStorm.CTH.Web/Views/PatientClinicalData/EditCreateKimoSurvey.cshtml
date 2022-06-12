@@ -1,0 +1,520 @@
+﻿@model SStorm.CTH.Web.Models.KimoSurveyModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString("EditCreateKimoSurvey");
+}
+<style>
+    .DisableClass {
+        pointer-events: none;
+        cursor: default;
+    }
+</style>
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("ChemicalSurveySessions")</a></li>
+                    <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("ChemicalSurveySessions")</li>
+                </ol>
+            </div>
+            <h4 class="page-title">@SharedLocalizer.GetLocalizedHtmlString("EditCreate")</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+@if (Model.KimoSurveyEntity.ID > 0)
+{
+    <a asp-controller="ChemotherapySheet" asp-action="PrintOutSheetPDF" asp-route-ID="@Model.KimoSurveyEntity.ID" asp-route-lang="en" class="btn btn-info"><i class="fa fa-file-pdf"></i>  @SharedLocalizer.GetLocalizedHtmlString("PrintOutSheet") @SharedLocalizer.GetLocalizedHtmlString("DownloadEnglishPdf")</a>
+    <a asp-controller="Discharge" asp-action="DischargeNotePDF" asp-route-ID="@Model.KimoSurveyEntity.ID" asp-route-lang="en" class="btn btn-info"><i class="fa fa-file-pdf"></i>  @SharedLocalizer.GetLocalizedHtmlString("DischargeNote") @SharedLocalizer.GetLocalizedHtmlString("DownloadEnglishPdf")</a>
+}
+
+<div class="row my-2">
+    <div class="col-lg-12 my-12">
+        <div class="card h-auto">
+            <div class="card-header bg-info">
+                <h4 class="card-title text-white mb-0">@SharedLocalizer.GetLocalizedHtmlString("PatientDataAndClinicalData")</h4>
+            </div>
+            <div class="card-body font-15">
+                <table style="width:100%;">
+                    <tr>
+                        <td>
+                            <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("PatientID")</span> &nbsp;  : @Model.PatientClinicalDataEntity.PatientID</p>
+                        </td>
+                        <td>
+                            <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("PatientName")</span> &nbsp;  : @Model.PatientClinicalDataEntity.CTHPatientItem.PatientNameE</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("CancerType")</span> &nbsp; : @Model.PatientClinicalDataEntity.CTHCancerTypeItem.TypeName</p>
+                        </td>
+                        <td>
+                            <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("CancerSide")</span> &nbsp;  : @Model.PatientClinicalDataEntity.CTHCancerSideItem.Side</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("HistologicalSubTypeCancer")</span> &nbsp;  : @Model.PatientClinicalDataEntity.CTHCancerHistologicItem.Name</p>
+                        </td>
+                        <td>
+                            <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("MolecularSubType")</span> &nbsp; : @Model.PatientClinicalDataEntity.CTHCancerMolecularItem.Name</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("TumorGrade")</span> &nbsp;  : @Model.PatientClinicalDataEntity.CTHTumorGradeItem.TumorGrade</p>
+                        </td>
+                        <td>
+                            <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("Stage")</span> &nbsp;  : @Model.PatientClinicalDataEntity.CTHStagingItem.Name</p>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="EditCreateKimoSurvey" enctype="multipart/form-data">
+            <input type="hidden" asp-for="PatientClinicalDataEntity.ID" value="@Model.PatientClinicalDataEntity.ID" />
+            <div class="modal-body">
+                <input type="hidden" asp-for="KimoSurveyEntity.ID" value="@Model.KimoSurveyEntity.ID" />
+                <input type="hidden" asp-for="PatientClinicalDataEntity.ID" value="@Model.PatientClinicalDataEntity.ID" />
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label asp-for="KimoSurveyEntity.Date" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Date")</label>
+                        <input asp-for="KimoSurveyEntity.Date" type="date" class="form-control datepicker" placeholder="yyyy-mm-dd" asp-format="{0:yyyy-MM-dd}"
+                               data-provide="datepicker" data-date-autoclose="true" data-date-todayHighlight="true" data-date-format="yyyy-mm-dd" required>
+                        <span asp-validation-for="KimoSurveyEntity.Date" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="KimoSurveyEntity.IsSpecialCase" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("IsSpecialCase")</label>
+                        @if (Model.KimoSurveyEntity.IsSpecialCase == true)
+                        {
+                            <input type="checkbox" name="KimoSurveyEntity_IsSpecialCase" id="KimoSurveyEntity_IsSpecialCase" value="true" checked>
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="KimoSurveyEntity_IsSpecialCase" id="KimoSurveyEntity_IsSpecialCase" value="false">
+                        }
+                        <span asp-validation-for="KimoSurveyEntity.IsSpecialCase" class="text-danger"></span>
+                    </div>
+                </div>
+                @if (Model.KimoSurveyEntity.IsSpecialCase == true)
+                {
+                    <div class="form-group row" id="specialCaseDv">
+                        <div class="col-md-6">
+                            <label asp-for="KimoSurveyEntity.SpecialCaseID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("SpecialCases")</label>
+                            <div class="input-group">
+                                <select asp-for="KimoSurveyEntity.SpecialCaseID" class="form-control selectpicker"
+                                        data-live-search="true" asp-items="@Model.SpecialCaseList">
+                                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("SpecialCase")</option>
+                                </select>
+                                <span asp-validation-for="KimoSurveyEntity.SpecialCaseID" class="text-danger"></span>
+                                <span class="input-group-btn">
+                                    <a href="#modal-add-entity" data-toggle="modal"
+                                       data-url="@Url.Action("AddNewSpecialCase", "PatientClinicalData")"
+                                       data-modalsize="modal-lg"
+                                       data-modalcolor="hmodal-danger" class="btn btn-info">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6" id="partDv">
+                            <label asp-for="KimoSurveyEntity.SpecialCasePartID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("SpecialCaseParts")</label>
+                            <div class="input-group">
+                                <select asp-for="KimoSurveyEntity.SpecialCasePartID" class="form-control selectpicker"
+                                        data-live-search="true" asp-items="@Model.SpecialCasePartList">
+                                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("SpecialCasePart")</option>
+                                </select>
+                                <span asp-validation-for="KimoSurveyEntity.SpecialCasePartID" class="text-danger"></span>
+                                <span class="input-group-btn">
+                                    <a href="#modal-add-entity" data-toggle="modal" id="SpecialCasePartID" class="btn btn-info DisableClass">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group row" id="specialCaseDv" style="display:none">
+                        <div class="col-md-6">
+                            <label asp-for="KimoSurveyEntity.SpecialCaseID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("SpecialCases")</label>
+                            <div class="input-group">
+                                <select asp-for="KimoSurveyEntity.SpecialCaseID" class="form-control selectpicker"
+                                        data-live-search="true" asp-items="@Model.SpecialCaseList">
+                                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("SpecialCase")</option>
+                                </select>
+                                <span asp-validation-for="KimoSurveyEntity.SpecialCaseID" class="text-danger"></span>
+                                <span class="input-group-btn">
+                                    <a href="#modal-add-entity" data-toggle="modal"
+                                       data-url="@Url.Action("AddNewSpecialCase", "PatientClinicalData")"
+                                       data-modalsize="modal-lg"
+                                       data-modalcolor="hmodal-danger" class="btn btn-info">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6" id="partDv">
+                            <label asp-for="KimoSurveyEntity.SpecialCasePartID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("SpecialCaseParts")</label>
+                            <div class="input-group">
+                                <select asp-for="KimoSurveyEntity.SpecialCasePartID" class="form-control selectpicker"
+                                        data-live-search="true" asp-items="@Model.SpecialCasePartList">
+                                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("SpecialCasePart")</option>
+                                </select>
+                                <span asp-validation-for="KimoSurveyEntity.SpecialCasePartID" class="text-danger"></span>
+                                <span class="input-group-btn">
+                                    <a href="#modal-add-entity" data-toggle="modal" id="SpecialCasePartID" class="btn btn-info DisableClass">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div class="form-group row">
+                    <div class="col-md-4">
+                        <label asp-for="KimoSurveyEntity.Weight" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Weight")</label>
+                        <input type="number" asp-for="KimoSurveyEntity.Weight" class="form-control" required />
+                        <span asp-validation-for="KimoSurveyEntity.Weight" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="KimoSurveyEntity.Height" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Height")</label>
+                        <input type="number" asp-for="KimoSurveyEntity.Height" class="form-control" required />
+                        <span asp-validation-for="KimoSurveyEntity.Height" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="KimoSurveyEntity.SerumCreatinine" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("SerumCreatinine")</label>
+                        <input type="number" asp-for="KimoSurveyEntity.SerumCreatinine" class="form-control" required />
+                        <span asp-validation-for="KimoSurveyEntity.SerumCreatinine" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-12 text-center text-white">
+                        <a class="btn btn-info" id="CalculateEqs">@SharedLocalizer.GetLocalizedHtmlString("Caculate")</a>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label asp-for="KimoSurveyEntity.BodyMassIndex" class="control-label">
+                            @SharedLocalizer.GetLocalizedHtmlString("BodyMassIndex")
+                        </label>
+                        <input asp-for="KimoSurveyEntity.BodyMassIndex" class="form-control readonly"  required/>
+                        <span asp-validation-for="KimoSurveyEntity.BodyMassIndex" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="KimoSurveyEntity.BodySurfaceArea" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Bodysurfacearea")</label>
+                        <input asp-for="KimoSurveyEntity.BodySurfaceArea" class="form-control readonly"  required/>
+                        <span asp-validation-for="KimoSurveyEntity.BodySurfaceArea" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label asp-for="KimoSurveyEntity.AdjustBodyWeight" class="control-label">
+                            @SharedLocalizer.GetLocalizedHtmlString("AdjustBodyWeight")
+                        </label>
+                        <input asp-for="KimoSurveyEntity.AdjustBodyWeight" class="form-control readonly"  required/>
+                        <span asp-validation-for="KimoSurveyEntity.AdjustBodyWeight" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="KimoSurveyEntity.LeanBodyWeight" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("LeanBodyWeight")</label>
+                        <input asp-for="KimoSurveyEntity.LeanBodyWeight" class="form-control readonly" required/>
+                        <span asp-validation-for="KimoSurveyEntity.LeanBodyWeight" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label asp-for="KimoSurveyEntity.CRCL" class="control-label">CRCL</label>
+                        <input asp-for="KimoSurveyEntity.CRCL" class="form-control readonly" required />
+                        <span asp-validation-for="KimoSurveyEntity.CRCL" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="KimoSurveyEntity.TreatementTypeID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("TreatementPlane")</label>
+                        <div class="input-group">
+                            <select asp-for="KimoSurveyEntity.TreatementTypeID" class="form-control selectpicker"
+                                    data-live-search="true" asp-items="@Model.TreatementList">
+                                <option selected disabled value="">Select Treatement Plan</option>
+                            </select>
+                            <span asp-validation-for="KimoSurveyEntity.TreatementTypeID" class="text-danger"></span>
+                            <span class="input-group-btn">
+                                <a href="#modal-add-entity" data-toggle="modal"
+                                   data-url="@Url.Action("AddNewTreatmentPlan", "PatientClinicalData")"
+                                   data-modalsize="modal-lg"
+                                   data-modalcolor="hmodal-danger" class="btn btn-info">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label asp-for="KimoSurveyEntity.ProtocolID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Protocol")</label>
+                        <div class="input-group">
+                            <select asp-for="KimoSurveyEntity.ProtocolID" class="form-control selectpicker"
+                                    data-live-search="true" asp-items="@Model.ProtocolList" required>
+                                <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("SelectProtocol")</option>
+                            </select>
+                            <span asp-validation-for="KimoSurveyEntity.ProtocolID" class="text-danger"></span>
+                            <span class="input-group-btn">
+                                <a href="#modal-add-entity" data-toggle="modal"
+                                   data-url="@Url.Action("AddNewProtocol", "PatientClinicalData",new { CancerID = Model.PatientClinicalDataEntity.CancerTypeID})"
+                                   data-modalsize="modal-lg"
+                                   data-modalcolor="hmodal-danger" class="btn btn-info">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="KimoSurveyEntity.CycleID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Cycles")</label>
+                        <div class="input-group">
+                            <select asp-for="KimoSurveyEntity.CycleID" class="form-control selectpicker"
+                                    data-live-search="true" asp-items="@Model.ProtocolCycleList" required>
+                                <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("Cycle")</option>
+                            </select>
+                            <span asp-validation-for="KimoSurveyEntity.CycleID" class="text-danger"></span>
+                            <span class="input-group-btn">
+                                <a href="#modal-add-entity" data-toggle="modal" 
+                                   data-url="@Url.Action("AddNewCycle", "PatientClinicalData",new { CancerID = Model.PatientClinicalDataEntity.CancerTypeID})"
+                                   data-modalsize="modal-lg"
+                                   data-modalcolor="hmodal-danger" class="btn btn-info">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                    @*<div class="col-md-6">
+            <label asp-for="KimoSurveyEntity.CycleID" class="control-label">
+                @SharedLocalizer.GetLocalizedHtmlString("Cycles")
+            </label>
+            <select asp-for="KimoSurveyEntity.CycleID" class="form-control selectpicker"
+                    data-live-search="true" asp-items="@Model.ProtocolCycleList" required>
+                <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("Cycle")</option>
+            </select>
+            <span asp-validation-for="KimoSurveyEntity.CycleID" class="text-danger"></span>
+        </div>*@
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label asp-for="KimoSurveyEntity.CycleNum" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Cyclenumber")</label>
+                        <input type="number" asp-for="KimoSurveyEntity.CycleNum" class="form-control readonly"  required />
+                        <span asp-validation-for="KimoSurveyEntity.CycleNum" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="KimoSurveyEntity.Days" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Dayno")</label>
+                        <input type="number" asp-for="KimoSurveyEntity.Days" class="form-control" required />
+                        <span asp-validation-for="KimoSurveyEntity.Days" class="text-danger"></span>
+                    </div>
+                </div>
+                @if (Model.KimoSurveyEntity.ID != 0)
+                {
+                    <div id="DrugList">
+                        <partial name="_Druglist" model="@Model" />
+                    </div>
+
+                    <div id="LabList">
+                        <partial name="_Lablist" model="@Model" />
+                    </div>
+                }
+                <div class="modal-footer">
+                    @if (Authorize(UserPermission.Patient_ViewPatientChemoSurveySessions))
+                    {
+                        <a class="btn btn-secondary text-white" asp-controller="Patient" asp-action="EditCreate" asp-route-ID="@Model.PatientClinicalDataEntity.PatientID">@SharedLocalizer.GetLocalizedHtmlString("Back")</a>
+                    }
+                    <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+<script src="~/assets/ajax/jquery.unobtrusive-ajax.js"></script>
+<script src="~/assets/ajax/Binding.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('select').selectpicker({
+            dropupAuto: false
+        });
+        var SpecialID = $("#KimoSurveyEntity_SpecialCaseID  option:selected").val();
+        if (SpecialID != 0) {
+            var x = document.getElementById("SpecialCasePartID");
+            x.classList.remove("DisableClass");
+            $("#SpecialCasePartID").data('url', '/PatientClinicalData/AddNewSpecialCasePart?ID=' + SpecialID);
+        }
+        $("#MainDataBtn").click(function () {
+            $("#MainDataDv").toggle(1000);
+        });
+
+        $("#KimoSurveyEntity_IsSpecialCase").change(function () {
+            var checkVal = $(this).val();
+            if (checkVal == "true") {
+                $(this).val("false");
+                $("#specialCaseDv").hide();
+            }
+            else {
+                $(this).val("true");
+                $("#specialCaseDv").show();
+            }
+        });
+
+        $("#KimoSurveyEntity_SpecialCaseID").change(function () {
+            var SpecialCaseID = this.value;
+            var x = document.getElementById("SpecialCasePartID");
+            x.classList.remove("DisableClass");
+            $("#SpecialCasePartID").data('url', '/PatientClinicalData/AddNewSpecialCasePart?ID=' + SpecialCaseID);
+            $.ajax({
+                url: '@Url.Action("GetSpecialCaseParts", "PatientClinicalData")',
+                type: 'GET',
+                cache: false,
+                data: { ID: this.value}
+            }).done(function (result) {
+                $('#KimoSurveyEntity_SpecialCasePartID').empty();
+                $("#KimoSurveyEntity_SpecialCasePartID").append('<option selected="true" disabled="true" value="" >Select Specail Case Part</option>');
+                if (result != null) {
+                    BindCombo('KimoSurveyEntity_SpecialCasePartID', result, false);
+                    $('#KimoSurveyEntity_SpecialCasePartID').selectpicker('refresh');
+                } else {
+                    $('#KimoSurveyEntity_SpecialCasePartID').selectpicker('refresh');
+                }
+            });
+        });
+
+        var ChemoID = $("#KimoSurveyEntity_ID").val();
+        $("#KimoSurveyEntity_ProtocolID").change(function () {
+            var ProtocolID = $(this).val();
+            $.ajax({
+                url: '@Url.Action("GetProtocolCycle", "PatientClinicalData")',
+                type: 'GET',
+                cache: false,
+                data: { ProtocolID:ProtocolID}
+            }).done(function (result) {
+                if (result != "") {
+                    $('#KimoSurveyEntity_CycleID').empty();
+                    $("#KimoSurveyEntity_CycleID").append('<option selected="true" disabled="true" value="" >Select Cycle</option>');
+                    BindCombo('KimoSurveyEntity_CycleID', result, false);
+                    $('#KimoSurveyEntity_CycleID').selectpicker('refresh');
+                    var CycleNum = $("#KimoSurveyEntity_CycleID option:selected").html();
+                    $("#KimoSurveyEntity_CycleNum").val(CycleNum);
+                    var CycleID = $("#KimoSurveyEntity_CycleID").val();
+                    var ChemoID = $("#KimoSurveyEntity_ID").val();
+                    $.ajax({
+                        url: '@Url.Action("GetChemoDay", "PatientClinicalData")',
+                        type: 'GET',
+                        cache: false,
+                        data: { CycleID: CycleID,ChemoID:ChemoID }
+                    }).done(function (result) {
+                        $("#KimoSurveyEntity_Days").val(result);
+
+                        $.ajax({
+                            url: '@Url.Action("GetDrugList", "PatientClinicalData")',
+                            type: 'GET',
+                            cache: false,
+                            data: {ChemoID:ChemoID,CycleID :CycleID , Day: result}
+                        }).done(function (result) {
+                            $("#DrugList").html(result);
+                        });
+
+                        $.ajax({
+                            url: '@Url.Action("GetCycleLabList", "PatientClinicalData")',
+                            type: 'GET',
+                            cache: false,
+                            data: {ChemoID:ChemoID,CycleID :CycleID}
+                        }).done(function (result) {
+                            $("#LabList").html(result);
+                        });
+
+                    });
+
+                } else {
+                    $('#KimoSurveyEntity_CycleID').empty();
+                    $("#KimoSurveyEntity_CycleID").append('<option selected="true" disabled="true" value="" >Select Cycle</option>')
+                    $('#KimoSurveyEntity_CycleID').selectpicker('refresh');
+                    $("#KimoSurveyEntity_CycleNum").val("");
+                    $("#KimoSurveyEntity_Days").val("");
+                    $("#DrugList").html("");
+                    $("#LabList").html("");
+                }
+            });
+        });
+
+        $("#KimoSurveyEntity_CycleID").change(function () {
+            var CycleID = $(this).val();
+            var CycleNum = $("#KimoSurveyEntity_CycleID option:selected").html();
+            $("#KimoSurveyEntity_CycleNum").val(CycleNum);
+            var Day = $("#KimoSurveyEntity_Days").val();
+
+            $.ajax({
+                url: '@Url.Action("GetDrugList", "PatientClinicalData")',
+                type: 'GET',
+                cache: false,
+                data: {ChemoID:ChemoID,CycleID :CycleID , Day: Day}
+            }).done(function (result) {
+                $("#DrugList").html(result);
+            });
+
+            $.ajax({
+                url: '@Url.Action("GetCycleLabList", "PatientClinicalData")',
+                type: 'GET',
+                cache: false,
+                data: {ChemoID:ChemoID,CycleID :CycleID}
+            }).done(function (result) {
+                $("#LabList").html(result);
+            });
+
+        });
+
+        $("#KimoSurveyEntity_Days").keyup(function () {
+            var Day = $(this).val();
+            var CycleID = $("#KimoSurveyEntity_CycleID").val();
+
+            $.ajax({
+                url: '@Url.Action("GetDrugList", "PatientClinicalData")',
+                type: 'GET',
+                cache: false,
+                data: {ChemoID:ChemoID,CycleID :CycleID , Day: Day}
+            }).done(function (result) {
+                $("#DrugList").html(result);
+            });
+
+        });
+
+        $("#CalculateEqs").click(function () {
+            var Height = Number(document.getElementById("KimoSurveyEntity_Height").value);
+            var Weight = Number(document.getElementById("KimoSurveyEntity_Weight").value);
+            var SerumCreatinine = Number(document.getElementById("KimoSurveyEntity_SerumCreatinine").value);
+            $.ajax({
+                url: '@Url.Action("GetCalculations", "PatientClinicalData")',
+                type: 'GET',
+                cache: false,
+                data: { height: Height, weight: Weight, SerumCreatinine: SerumCreatinine, PatientID: @Model.PatientClinicalDataEntity.PatientID}
+            }).done(function (result) {
+                document.getElementById("KimoSurveyEntity_BodyMassIndex").value = Number(result[0]);
+                document.getElementById("KimoSurveyEntity_BodySurfaceArea").value = Number(result[1]);
+                document.getElementById("KimoSurveyEntity_AdjustBodyWeight").value = Number(result[2]);
+                document.getElementById("KimoSurveyEntity_LeanBodyWeight").value = Number(result[3]);
+                document.getElementById("KimoSurveyEntity_CRCL").value = Number(result[4]);
+            });
+        });
+
+    });
+
+    $(".readonly").keydown(function(e){
+        e.preventDefault();
+        swal("Error", "You Can't Write here, Click on Calculate Button", "error");
+    });
+</script>

@@ -1,0 +1,88 @@
+﻿@model SStorm.CTH.Web.Models.TreeViewNode
+@using SStorm.CTH.Web.Resources
+
+@inject LocService SharedLocalizer
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+<div class="card">
+    <div class="card-body">
+        <div class="modal-body">
+            @if (Authorize(UserPermission.SurgeryType_EditCreate))
+            {
+                <a href="#modal-add-entity" data-toggle="modal"
+                   data-url="@Url.Action("EditCreateSurgeryType", "CancerType", new { CancerTypeID = Model.CancerType.ID})"
+                   data-modalsize="modal-lg"
+                   data-modalcolor="hmodal-danger" class="btn btn-info">
+                    <i class="fas fa-plus"></i>@SharedLocalizer.GetLocalizedHtmlString("NewSurgeryType")
+                </a>
+            }
+            <div class="table-responsive">
+                <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("SurgeryType")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+                        </tr>
+                    </thead>
+                    @if (Model.CancerType.CTHSurgeryTypeCollection.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="5"><span>@SharedLocalizer.GetLocalizedHtmlString("NoData")</span></td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model.CancerType.CTHSurgeryTypeCollection)
+                        {
+                            <tr>
+                                <td>@item.SurgeryType</td>
+                               
+                                <td>
+                                    @if (Authorize(UserPermission.SurgeryType_EditCreate))
+                                    {
+                                        <a href="#modal-add-entity" data-toggle="modal"
+                                           data-url="@Url.Action("EditCreateSurgeryType", "CancerType", new { CancerTypeID = Model.CancerType.ID, ID = item.ID})"
+                                           data-modalsize="modal-lg"
+                                           data-modalcolor="hmodal-danger" class="btn btn-info">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    }
+                                    @if (Authorize(UserPermission.SurgeryType_Delete))
+                                    {
+                                        <a href="#modal-delete-entity" data-toggle="modal"
+                                           data-url="@Url.Action("DeleteSurgeryType", "CancerType", new {ID = item.ID})"
+                                           data-modalsize="modal-lg"
+                                           data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                            <i class="fas fa-times"></i>
+                                        </a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function LoadSurgeryTypeList(response) {
+        $('#modal-add-entity').modal('hide');
+        if (response == 2) {
+            swal("Error", "Data not Saved", "error");
+        }
+        else {
+            $.ajax({
+                url: '@Url.Action("GetSurgeryType", "CancerType")',
+                type: 'GET',
+                cache: false,
+                data: { CancerTypeID: @Model.CancerType.ID}
+            }).done(function (result) {
+                $('#dvSurgeryType').html(result);
+                swal("Done", "Data Saved Successfully", "success");
+            });
+        }
+    }
+</script>

@@ -1,0 +1,55 @@
+﻿@model SStorm.CTH.DAL.EntityClasses.CTHCancerTypeEntity
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<form asp-action="EditCreate">
+    <div class="color-line"></div>
+
+    <div class="modal-header">
+        <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreateCancerType")</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" name="ID" asp-for="ID" value="@Model.ID" />
+        <input type="hidden" name="ParentID" asp-for="ParentID" value="@Model.ParentID" />
+        <input type="hidden" name="IsParent" asp-for="IsParent" value="@Model.IsParent" />
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="ICDCode" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("ICDCode")</label>
+                <input asp-for="ICDCode" class="form-control" required />
+                <span asp-validation-for="ICDCode" class="text-danger"></span>
+            </div>
+        </div>
+        @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="ArICDCode" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("ICDCode") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input asp-for="ArICDCode" class="form-control" />
+                <span asp-validation-for="ArICDCode" class="text-danger"></span>
+            </div>
+        </div>
+        *@
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="TypeName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("CancerType")</label>
+                <input asp-for="TypeName" class="form-control" required />
+                <span asp-validation-for="TypeName" class="text-danger"></span>
+            </div>
+        </div>
+        @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="ArTypeName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("CancerType") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input asp-for="ArTypeName" class="form-control" />
+                <span asp-validation-for="ArTypeName" class="text-danger"></span>
+            </div>
+        </div>
+        *@
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</button>
+
+        <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+    </div>
+</form>

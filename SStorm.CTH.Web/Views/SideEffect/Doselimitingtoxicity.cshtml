@@ -1,0 +1,160 @@
+﻿@model SearchFacade<SStorm.CTH.DAL.EntityClasses.CTHSymptomEntity>
+@using X.PagedList.Mvc.Core.Fluent;
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+}
+
+<link href="~/assets/css/PagedList.css" rel="stylesheet" />
+<link href="~/assets/css/footable.bootstrap.css" rel="stylesheet" />
+<link href="~/assets/css/site.css" rel="stylesheet" />
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("DoselimitingtoxicityList");
+}
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("DoseLimitingToxicityList")</a></li>
+                        <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("DoseLimitingToxicityList")</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">@SharedLocalizer.GetLocalizedHtmlString("Index")</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <div class=" form-group row">
+                        <div class="col-md-12">
+                            <form asp-action="Doselimitingtoxicity" asp-controller="SideEffect">
+                                <div class="input-group">
+                                    @Html.TextBox("searchString", "", new { @class = "form-control", placeholder = "Search" })
+
+                                    <button type="submit" class="btn  btn-sm btn-info"><i class="fa fa-search"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <div class="float-left">
+                                    @if (Authorize(UserPermission.Symptom_EditCreate))
+                                    {
+                                        <a href="#modal-add-entity" data-toggle="modal"
+                                            data-url="@Url.Action("DoselimitingtoxicityEditCreate", "SideEffect", new { ID = 0 })"
+                                            data-modalsize="modal-lg"
+                                            data-modalcolor="hmodal-danger" class="btn btn-info">
+                                            <i class="fas fa-plus"></i>@SharedLocalizer.GetLocalizedHtmlString("AddNew")
+                                        </a>
+                                    }
+                                </div>
+                                <div class="float-right">
+                                    @(Html.Pager(Model.DataPagedList).Url(Page => Url.Action("Doselimitingtoxicity", new { Page })).Build())
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                            <thead class="btn-primary text-white">
+                                <tr>
+                                    <th>#</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Name")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Grade")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Description")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("SymptomColor")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Recommendation")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.DataPagedList.Count() == 0)
+                                {
+                                    <tr>
+                                        <th scope="row" colspan="7">@SharedLocalizer.GetLocalizedHtmlString("NoData")</th>
+                                    </tr>
+                                }
+                                @for (int i = 0; i < Model.DataPagedList.Count(); i++)
+                                    {
+                                        <tr>
+                                            <th scope="row">@(i + 1)</th>
+                                            <td>@Model.DataPagedList[i].Name</td>
+                                            <td>@Model.DataPagedList[i].Grade</td>
+                                            <td>@Model.DataPagedList[i].Description</td>
+                                            <td>
+                                                <input type="color" disabled id="Color" value="@Model.DataPagedList[i].AlertColor" />
+                                            </td>
+                                            @if (String.IsNullOrEmpty(@Model.DataPagedList[i].Recommendation) != true)
+                                            {
+                                                <td>
+                                                    @Model.DataPagedList[i].Recommendation
+                                                </td>
+
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    @SharedLocalizer.GetLocalizedHtmlString("NoRecommendation")
+                                                </td>
+                                            }
+                                        <td>
+                                            @if (Authorize(UserPermission.Symptom_EditCreate))
+                                            {
+                                                <a href="#modal-add-entity" data-toggle="modal"
+                                                   data-url="@Url.Action("DoselimitingtoxicityEditCreate", "SideEffect", new { Model.DataPagedList[i].ID })"
+                                                   data-modalsize="modal-lg"
+                                                   data-modalcolor="hmodal-danger" class="btn btn-info">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                            }
+                                            @if (Authorize(UserPermission.Symptom_Delete))
+                                            {
+                                                <a href="#modal-delete-entity" data-toggle="modal"
+                                                   data-url="@Url.Action("DeleteDoselimitingtoxicity", "SideEffect", new { ID = @Model.DataPagedList[i].ID})"
+                                                   data-modalsize="modal-lg"
+                                                   data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                            }
+                                        </td>
+                                        </tr>
+                                    }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/js/footable.js"></script>
+<script src="~/assets/js/moment.min.js"></script>
+<script type="text/javascript">
+
+    jQuery(function ($) {
+        $('.table').footable();
+    });
+
+</script>

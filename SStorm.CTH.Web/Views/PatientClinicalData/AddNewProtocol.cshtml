@@ -1,0 +1,116 @@
+﻿@model SStorm.CTH.Web.Models.ChemotherapyProtocolModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+
+<form asp-action="AddNewProtocol" data-ajax-method="post" data-ajax="true" data-ajax-success="BindProtocolList">
+    <div class="color-line"></div>
+        <div class="modal-header">
+        <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EdiCreate") @SharedLocalizer.GetLocalizedHtmlString("Protocol")</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        </div>
+        <div class="modal-body">
+            <input asp-for="ChemotherapyProtocolEntity.ID" class="form-control" value="@Model.ChemotherapyProtocolEntity.ID" hidden />
+            <div class="form-group row">
+                <input type="hidden" name="CancerID" value="@ViewBag.CancerID" />
+                <div class="col-md-6">
+                    <label asp-for="ChemotherapyProtocolEntity.ProtocolName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("ProtocolName")</label>
+                    <input asp-for="ChemotherapyProtocolEntity.ProtocolName" class="form-control" required />
+                    <span asp-validation-for="ChemotherapyProtocolEntity.ProtocolName" class="text-danger"></span>
+                </div>
+                @*
+            <div class="col-md-6">
+                <label asp-for="ChemotherapyProtocolEntity.ArProtocolName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("ProtocolName") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input asp-for="ChemotherapyProtocolEntity.ArProtocolName" class="form-control" />
+                <span asp-validation-for="ChemotherapyProtocolEntity.ArProtocolName" class="text-danger"></span>
+            </div>
+                *@
+                <div class="col-md-6">
+                    <label asp-for="ChemotherapyProtocolEntity.Days" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("recycledays")</label>
+                    <input asp-for="ChemotherapyProtocolEntity.Days" class="form-control" required />
+                    <span asp-validation-for="ChemotherapyProtocolEntity.Days" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <label class="control-label" asp-for="ChemotherapyProtocolEntity.CancerTypeID">@SharedLocalizer.GetLocalizedHtmlString("CancerType")</label>
+                    <select asp-for="ChemotherapyProtocolEntity.CancerTypeID" class="form-control selectpicker"
+                            data-live-search="true" asp-items="@Model.CancerTypeList" required>
+                        <option selected disabled value="0">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("CancerType")</option>
+                    </select>
+                    <span asp-validation-for="ChemotherapyProtocolEntity.CancerTypeID" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="ChemotherapyProtocolEntity.EmetodenicRiskID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Emetodenicrisk")</label>
+                    <select asp-for="ChemotherapyProtocolEntity.EmetodenicRiskID" class="form-control selectpicker"
+                            data-live-search="true" asp-items="@Model.EmatogenicRiskList" required>
+                        <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("Emetodenicrisk")</option>
+                    </select>
+                    <span asp-validation-for="ChemotherapyProtocolEntity.EmetodenicRiskID" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <label asp-for="ChemotherapyProtocolEntity.PremedicationID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Premedication")</label>
+                    <select asp-for="ChemotherapyProtocolEntity.PremedicationID" class="form-control selectpicker" data-live-search="true" asp-items="Model.PreMedicationList" required style="overflow:scroll; ">
+                        <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("Premedication")</option>
+                    </select>
+                    <span asp-validation-for="ChemotherapyProtocolEntity.PremedicationID" class="text-danger"></span>
+                </div>
+                <div class="col-md-6"></div>
+            </div>
+            <div class="form-group row">
+
+                <div class="col-md-6">
+                    <label asp-for="ChemotherapyProtocolEntity.IsGrowthFactor" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Isgrowthfactor")</label>
+                    <input asp-for="ChemotherapyProtocolEntity.IsGrowthFactor" type="checkbox" />
+                    <span asp-validation-for="ChemotherapyProtocolEntity.IsGrowthFactor" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="ChemotherapyProtocolEntity.IsAntimicrobial" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Isantimicrobial")</label>
+                    <input asp-for="ChemotherapyProtocolEntity.IsAntimicrobial" type="checkbox" />
+                    <span asp-validation-for="ChemotherapyProtocolEntity.IsAntimicrobial" class="text-danger"></span>
+                </div>
+            </div>
+
+            </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</button>
+            <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+        </div>
+</form>
+
+
+<script src="~/assets/ajax/Binding.js"></script>
+<script>
+    $(document).ready(function () {
+        $('select').selectpicker({
+            dropupAuto: false
+        });
+    });
+$("#ChemotherapyProtocolEntity_EmetodenicRiskID").change(function () {
+    var EmetogenicRiskID = $(this).val();
+    $.ajax({
+        url: '@Url.Action("GetPremedicationList", "Protocol")',
+        type: 'GET',
+        dataType : "json",
+        contentType: "application/json; charset=utf-8",
+        data: {EmetogenicRiskID: EmetogenicRiskID}
+    }).done(function (result) {
+        $("#ChemotherapyProtocolEntity_PremedicationID").empty();
+        $("#ChemotherapyProtocolEntity_PremedicationID").append('<option selected disabled value="">Select Premedication</option>');
+        BindCombo('ChemotherapyProtocolEntity_PremedicationID', result, false);
+        $('#ChemotherapyProtocolEntity_PremedicationID').selectpicker('refresh');
+    });
+});
+
+function BindProtocolList(response) {
+    $('#modal-add-entity').modal('hide');
+    $('#KimoSurveyEntity_ProtocolID').empty();
+    BindCombo('KimoSurveyEntity_ProtocolID', response, false);
+    $('#KimoSurveyEntity_ProtocolID').selectpicker('refresh');
+}
+</script>

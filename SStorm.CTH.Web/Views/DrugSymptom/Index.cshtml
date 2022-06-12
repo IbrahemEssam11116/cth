@@ -1,0 +1,91 @@
+﻿@*@model SStorm.CTH.DAL.HelperClasses.EntityCollection<SStorm.CTH.DAL.EntityClasses.CTHDrugSymptomEntity>
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("DrugSymptom");
+}
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+<div class="container-fluid">
+     start page title 
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("DrugSymptom")</a></li>
+                        <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("DrugSymptom") @SharedLocalizer.GetLocalizedHtmlString("List")</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">@SharedLocalizer.GetLocalizedHtmlString("Index")</h4>
+            </div>
+        </div>
+    </div>
+     end page title 
+    <div class="row">
+        <div class="col-sm-12">
+            @if (Authorize(UserPermission.DrugSymptom_EditCreate))
+            {
+                <a href="#modal-add-entity" data-toggle="modal"
+                   data-url="@Url.Action("EditCreate", "DrugSymptom", new { ID = 0, DrugID = ViewBag.DrugID})"
+                   data-modalsize="modal-lg"
+                   data-modalcolor="hmodal-danger" class="btn btn-primary">
+                    <i class="fas fa-plus"></i>
+                    Add Drug
+                </a>
+            }
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table m-0 table-hover">
+                            <thead class="btn-primary text-white">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Drug</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Symptom")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Count() == 0)
+                                {
+                                    <tr>
+                                        <th scope="row" colspan="7">@SharedLocalizer.GetLocalizedHtmlString("NoData")</th>
+                                    </tr>
+                                }
+                                @for (int i = 0; i < Model.Count(); i++)
+                                {
+                                    <tr>
+                                        <th scope="row">@(i + 1)</th>
+                                        <td>@Model[i].CTHDrugItem.Name</td>
+                                        <td>@Model[i].CTHSymptomItem.Name</td>
+                                        <td>
+                                            @if (Authorize(UserPermission.DrugSymptom_EditCreate))
+                                            {
+                                                <a href="#modal-add-entity" data-toggle="modal"
+                                                   data-url="@Url.Action("EditCreate", "DrugSymptom", new { ID = @Model[i].ID, DrugID = ViewBag.DrugID })"
+                                                   data-modalsize="modal-lg"
+                                                   data-modalcolor="hmodal-danger" class="btn btn-primary">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                            }
+                                            @if (Authorize(UserPermission.DrugSymptom_Delete))
+                                            {
+                                                <a href="#modal-delete-entity" data-toggle="modal"
+                                                   data-url="@Url.Action("Delete", "DrugSymptom", new { ID = @Model[i].ID })"
+                                                   data-modalsize="modal-lg"
+                                                   data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@

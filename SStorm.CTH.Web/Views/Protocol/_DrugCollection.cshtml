@@ -1,0 +1,121 @@
+﻿@model SStorm.CTH.Web.Models.ChemotherapyProtocolModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("DrugsList");
+    Layout = null;
+}
+@Html.SmartModal("modal-add-entity", modalSize: ModalSize.Large, modalType: ModalType.Danger, backdrop: "true")
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("Drugs") </a></li>
+                        <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("DrugsList")</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div id="dvEditCreateDrug"></div>
+            <div class="card">
+                <div class="card-body">
+                    <button type="button" class="close" id="btnCloseDrag">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <div id="DragDiv">
+                        @if (Authorize(UserPermission.CancerType_EditCreateDrug))
+                        {
+                            <a asp-controller="Protocol" asp-action="EditCreateDrug" asp-route-ID="0" asp-route-ProtocolID="@Model.ChemotherapyProtocolEntity.ID" class="btn btn-info">
+                                <i class="fas fa-plus"></i> @SharedLocalizer.GetLocalizedHtmlString("NewDrug")
+                            </a>
+                        }
+
+                        <br />
+                        <div class="table-responsive">
+                            <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("DrugName")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("DrugDose")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Route")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Files")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.ChemotherapyProtocolEntity.CTHDrugCollection.Count() == 0)
+                                    {
+                                        <tr>
+                                            <th scope="row" colspan="7">@SharedLocalizer.GetLocalizedHtmlString("NoData")</th>
+                                        </tr>
+                                    }
+                                    @foreach (var item in Model.ChemotherapyProtocolEntity.CTHDrugCollection)
+                                        {
+                                            <tr>
+                                                <td>@item.Name</td>
+                                                <td>@item.Dose @item.CTHDoseUnitItem.Name</td>
+                                                <td>@Enum.GetName(typeof(Route), item.RouteID)</td>
+                                                <td>
+                                                    <a href="#modal-add-entity" data-toggle="modal"
+                                                       data-url="@Url.Action("AttachmentCollection", "Protocol", new { DrugID = item.ID})"
+                                                       data-modalsize="modal-lg"
+                                                       data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                                        <i class="fas fa-file"></i>
+                                                        @SharedLocalizer.GetLocalizedHtmlString("Files")
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    @if (Authorize(UserPermission.CancerType_EditCreateDrug))
+                                                    {
+                                                        <a asp-controller="Protocol" asp-action="EditCreateDrug" asp-route-ID="@item.ID" asp-route-ProtocolID="@Model.ChemotherapyProtocolEntity.ID" class="btn btn-info">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    }
+                                                    @if (Authorize(UserPermission.CancerType_DeleteDrug))
+                                                    {
+                                                        <a href="#modal-delete-entity" data-toggle="modal"
+                                                           data-url="@Url.Action("DeleteDrug", "Protocol", new { ID = item.ID})"
+                                                           data-modalsize="modal-lg"
+                                                           data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                                            <i class="fas fa-times"></i>
+                                                        </a>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#btnCloseDrag").click(function () {
+            $("#DragDiv").slideToggle(1000);
+        })
+
+    });
+    function EditCreateDrug(id) {
+        //$("#dvEditCreateDrug").show();
+        //$("#dvEditCreateDrug").load("/Drug/EditCreateDrug/" + id + "?ProtocolID=" + @Model.ChemotherapyProtocolEntity.ID + "&CancerID=" + @Model.ChemotherapyProtocolEntity.CancerTypeID);
+    }
+</script>

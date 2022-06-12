@@ -1,0 +1,1251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Actions" xml:space="preserve">
+    <value>عمليات</value>
+  </data>
+  <data name="AddNew" xml:space="preserve">
+    <value>إضافة جديد</value>
+  </data>
+  <data name="AddNewCancerType" xml:space="preserve">
+    <value>إضافة نوع سرطان جديد</value>
+  </data>
+  <data name="AddNewImaging" xml:space="preserve">
+    <value>إضافة اشعه</value>
+  </data>
+  <data name="AddNewSubType" xml:space="preserve">
+    <value>إضافة نوع فرعي جديد</value>
+  </data>
+  <data name="AddRow" xml:space="preserve">
+    <value>إضافة صف</value>
+  </data>
+  <data name="AdjustBodyWeight" xml:space="preserve">
+    <value>تعديل وزن الجسم</value>
+  </data>
+  <data name="Administrationnotes" xml:space="preserve">
+    <value>ملاحظات الإدارة</value>
+  </data>
+  <data name="Age" xml:space="preserve">
+    <value>العمر</value>
+  </data>
+  <data name="AlertColor" xml:space="preserve">
+    <value>لون الانذار</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>الكمية</value>
+  </data>
+  <data name="AppendCondition" xml:space="preserve">
+    <value>إلحاق شرط</value>
+  </data>
+  <data name="ArabicDocRecommendation" xml:space="preserve">
+    <value>ملاحظات الدكتور بالعربية</value>
+  </data>
+  <data name="Assessment" xml:space="preserve">
+    <value>التقييم</value>
+  </data>
+  <data name="AttachmentResult" xml:space="preserve">
+    <value>نتيجة الملف</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>رجوع</value>
+  </data>
+  <data name="BackToHome" xml:space="preserve">
+    <value>الرجوع الى الصفحه الرئيسية</value>
+  </data>
+  <data name="BirthDate" xml:space="preserve">
+    <value>تاريخ الميلاد</value>
+  </data>
+  <data name="BodyMassIndex" xml:space="preserve">
+    <value>(BMI) مؤشر كتلة الجسم     </value>
+  </data>
+  <data name="Bodysurfacearea" xml:space="preserve">
+    <value>مساحة سطح الجسم</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>للمزيد</value>
+  </data>
+  <data name="Calculate" xml:space="preserve">
+    <value>احسب</value>
+  </data>
+  <data name="Canceel" xml:space="preserve">
+    <value>اغلق</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>لا ، إلغاء</value>
+  </data>
+  <data name="CancerDefinitions" xml:space="preserve">
+    <value>تعريفات السرطان</value>
+  </data>
+  <data name="CancerSide" xml:space="preserve">
+    <value>آثار السرطان</value>
+  </data>
+  <data name="CancerType" xml:space="preserve">
+    <value>نوع السرطان</value>
+  </data>
+  <data name="CancerTypes" xml:space="preserve">
+    <value>انواع السرطانات</value>
+  </data>
+  <data name="CantDeleteRow" xml:space="preserve">
+    <value>لا يمكنك مسح هذا الصف</value>
+  </data>
+  <data name="CaseName" xml:space="preserve">
+    <value>أسم الحالة</value>
+  </data>
+  <data name="ChangeImage" xml:space="preserve">
+    <value>تغيير الصورة</value>
+  </data>
+  <data name="ChemicalSurveySessions" xml:space="preserve">
+    <value>جلسات المسح الكيميائي</value>
+  </data>
+  <data name="Chemo" xml:space="preserve">
+    <value>جلسات العلاج الكيميائي</value>
+  </data>
+  <data name="ChemoProtocole" xml:space="preserve">
+    <value>بروتوكول العلاج الكيميائي</value>
+  </data>
+  <data name="ChemoSessions" xml:space="preserve">
+    <value>جلسات العلاج الكيماوي</value>
+  </data>
+  <data name="ChemotherapyProtocol" xml:space="preserve">
+    <value>بروتوكول العلاج الكيميائي</value>
+  </data>
+  <data name="Clickhere" xml:space="preserve">
+    <value>أضغط هنا</value>
+  </data>
+  <data name="ClinicalData" xml:space="preserve">
+    <value>بيانات سريرية</value>
+  </data>
+  <data name="CollapseAll" xml:space="preserve">
+    <value>تقليس الجميع</value>
+  </data>
+  <data name="Concentration" xml:space="preserve">
+    <value>التركيز</value>
+  </data>
+  <data name="Condition" xml:space="preserve">
+    <value>الشرط</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>تأكيد الحذف</value>
+  </data>
+  <data name="Contactnumber" xml:space="preserve">
+    <value>رقم الإتصال</value>
+  </data>
+  <data name="CreatePatientSymptom" xml:space="preserve">
+    <value>إنشاء عرض للمريض</value>
+  </data>
+  <data name="Cycle" xml:space="preserve">
+    <value>دورة</value>
+  </data>
+  <data name="CycleDrugs" xml:space="preserve">
+    <value>دورة الادوية</value>
+  </data>
+  <data name="CycleDrugsList" xml:space="preserve">
+    <value>قائمة دورة الادوية</value>
+  </data>
+  <data name="CycleLabs" xml:space="preserve">
+    <value>دورة التحاليل</value>
+  </data>
+  <data name="CycleLabsCategory" xml:space="preserve">
+    <value>فئة التحليل</value>
+  </data>
+  <data name="CycleLabsCategoryList" xml:space="preserve">
+    <value>فئات التحاليل</value>
+  </data>
+  <data name="CycleLabsList" xml:space="preserve">
+    <value>قائمة دورة التحاليل</value>
+  </data>
+  <data name="Cyclenumber" xml:space="preserve">
+    <value>رقم الدورة</value>
+  </data>
+  <data name="Cycles" xml:space="preserve">
+    <value>دورات</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>لوحة القيادة</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>بيانات</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
+  <data name="Dayno" xml:space="preserve">
+    <value>اليوم</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>الأيام</value>
+  </data>
+  <data name="Definitions" xml:space="preserve">
+    <value>التعريفات</value>
+  </data>
+  <data name="Degree" xml:space="preserve">
+    <value>درجه</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>مسح</value>
+  </data>
+  <data name="DeleteRow" xml:space="preserve">
+    <value>مسح الصف</value>
+  </data>
+  <data name="Dergee" xml:space="preserve">
+    <value>الدرجة العلمية</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>وصف</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>تفاصيل (الشروط)</value>
+  </data>
+  <data name="Diagnosis" xml:space="preserve">
+    <value>التشخيص</value>
+  </data>
+  <data name="DischargeNote" xml:space="preserve">
+    <value>ملاحظة التفريغ</value>
+  </data>
+  <data name="DischargeNoteData" xml:space="preserve">
+    <value>بيانات ملاحظة التفريغ</value>
+  </data>
+  <data name="DistantMetastasis" xml:space="preserve">
+    <value>M: الانبثاث البعيدة</value>
+  </data>
+  <data name="DocProfile" xml:space="preserve">
+    <value>ملف الطبيب الشخصي</value>
+  </data>
+  <data name="Doctor" xml:space="preserve">
+    <value>طبيب</value>
+  </data>
+  <data name="DoctorRecommendation" xml:space="preserve">
+    <value>ملاحظات الطبيب</value>
+  </data>
+  <data name="Doctors" xml:space="preserve">
+    <value>الأطباء</value>
+  </data>
+  <data name="Dose" xml:space="preserve">
+    <value>الجرعة</value>
+  </data>
+  <data name="Doselimitingtoxicity" xml:space="preserve">
+    <value>جرعة الحد من السمية</value>
+  </data>
+  <data name="DoseLimitingToxicityList" xml:space="preserve">
+    <value>جرعات الحد من التسمم</value>
+  </data>
+  <data name="DoseLimitingToxicityType" xml:space="preserve">
+    <value>نوع جرعه الحد من التسمم</value>
+  </data>
+  <data name="DosePer" xml:space="preserve">
+    <value>الجرعة لكل</value>
+  </data>
+  <data name="DosePercentage" xml:space="preserve">
+    <value>نسبة الجرعة</value>
+  </data>
+  <data name="DoseUnits" xml:space="preserve">
+    <value>وحدات الجرعات</value>
+  </data>
+  <data name="DownlaodEnglishPdf" xml:space="preserve">
+    <value>التحميل بالانجليزية</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>تحميل</value>
+  </data>
+  <data name="DownloadArabicPdf" xml:space="preserve">
+    <value>التحميل بالعربية</value>
+  </data>
+  <data name="DownloadAsPdf" xml:space="preserve">
+    <value>تنزيل بصيغة pdf</value>
+  </data>
+  <data name="Drug" xml:space="preserve">
+    <value>الدواء</value>
+  </data>
+  <data name="DrugDay" xml:space="preserve">
+    <value>يوم الدواء</value>
+  </data>
+  <data name="DrugDays" xml:space="preserve">
+    <value>أيام الدواء</value>
+  </data>
+  <data name="DrugDaysList" xml:space="preserve">
+    <value>قائمة أيام الدواء</value>
+  </data>
+  <data name="DrugDose" xml:space="preserve">
+    <value>جرعة الدواء</value>
+  </data>
+  <data name="DrugName" xml:space="preserve">
+    <value>أسم الدواء</value>
+  </data>
+  <data name="Drugs" xml:space="preserve">
+    <value>الأدوية</value>
+  </data>
+  <data name="DrugsList" xml:space="preserve">
+    <value>قائمة الادوية</value>
+  </data>
+  <data name="DrugSymptom" xml:space="preserve">
+    <value>عرض الدواء</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>المدة الزمنية</value>
+  </data>
+  <data name="DurationAmount" xml:space="preserve">
+    <value>الجرعة</value>
+  </data>
+  <data name="DurationUnit" xml:space="preserve">
+    <value>وحدة المدة</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="EditCreate" xml:space="preserve">
+    <value>تعديل / إنشاء</value>
+  </data>
+  <data name="EditCreateAssignTNMToStage" xml:space="preserve">
+    <value>تعديل / إنشاء تعيين TNM للمرحلة</value>
+  </data>
+  <data name="EditCreateCancerType" xml:space="preserve">
+    <value>تعديل / حفظ نوع سرطان</value>
+  </data>
+  <data name="EditCreateDrug" xml:space="preserve">
+    <value>تعديل / إنشاء دواء</value>
+  </data>
+  <data name="EditCreateHistological" xml:space="preserve">
+    <value>تعديل / إنشاء السرطان النسيجي</value>
+  </data>
+  <data name="EditCreateKimoSurvey" xml:space="preserve">
+    <value>تعديل / إنشاء مسح كيميائي</value>
+  </data>
+  <data name="EditCreateMolecular" xml:space="preserve">
+    <value>تعديل / إنشاء السرطان الجزيئي</value>
+  </data>
+  <data name="EditCreateProtocolCycle" xml:space="preserve">
+    <value>تعديل /  إنشاء دورة البروتوكول </value>
+  </data>
+  <data name="Education" xml:space="preserve">
+    <value>التعلم</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>البريد الألكتروني</value>
+  </data>
+  <data name="Emetodenicrisk" xml:space="preserve">
+    <value>مخاطر خلوية</value>
+  </data>
+  <data name="Emetogenicrisk" xml:space="preserve">
+    <value>خطر خلقي</value>
+  </data>
+  <data name="EnglishDocRecommendation" xml:space="preserve">
+    <value>ملاحظات الدكتور بالانجليزية</value>
+  </data>
+  <data name="EnterName" xml:space="preserve">
+    <value>أدخل الأسم</value>
+  </data>
+  <data name="Every" xml:space="preserve">
+    <value>كل</value>
+  </data>
+  <data name="EveryUnit" xml:space="preserve">
+    <value>وحدة الكل</value>
+  </data>
+  <data name="ExpandAll" xml:space="preserve">
+    <value>تفاصيل الكل</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>أنثى</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>أسم الملف</value>
+  </data>
+  <data name="Files" xml:space="preserve">
+    <value>الملفات</value>
+  </data>
+  <data name="FinalConcentration" xml:space="preserve">
+    <value>التركيز النهائي</value>
+  </data>
+  <data name="FinalConentration" xml:space="preserve">
+    <value>التركيز النهائي</value>
+  </data>
+  <data name="Finish" xml:space="preserve">
+    <value>إنهاء</value>
+  </data>
+  <data name="FirstVisitDate" xml:space="preserve">
+    <value>تاريخ اول زيارة</value>
+  </data>
+  <data name="FollowUp" xml:space="preserve">
+    <value>متابعة</value>
+  </data>
+  <data name="Form" xml:space="preserve">
+    <value>الشكل</value>
+  </data>
+  <data name="FormAmount" xml:space="preserve">
+    <value>عدد الجرعة</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>من</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>الأسم كامل</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>الجنس</value>
+  </data>
+  <data name="GetLabDetailCondition" xml:space="preserve">
+    <value>الحصول على شرط تفاصيل التحليل</value>
+  </data>
+  <data name="GetLabDetails" xml:space="preserve">
+    <value>قائمة تفاصيل التحليل</value>
+  </data>
+  <data name="GetLabsInfo" xml:space="preserve">
+    <value>الحصول على معلومات التحليل</value>
+  </data>
+  <data name="GetPatientSymptoms" xml:space="preserve">
+    <value>قائمة اعراض المريض</value>
+  </data>
+  <data name="Gotolabs" xml:space="preserve">
+    <value>أذهب الى التحاليل</value>
+  </data>
+  <data name="Grade" xml:space="preserve">
+    <value>الدرجة</value>
+  </data>
+  <data name="GroupName" xml:space="preserve">
+    <value>اسم المجموعة</value>
+  </data>
+  <data name="HasPart" xml:space="preserve">
+    <value>لديه جزء</value>
+  </data>
+  <data name="HasParts" xml:space="preserve">
+    <value>لديه اجزاء؟</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>الطول</value>
+  </data>
+  <data name="HematologicTumorImage" xml:space="preserve">
+    <value>اورام الدم</value>
+  </data>
+  <data name="Histological" xml:space="preserve">
+    <value>نسيجية</value>
+  </data>
+  <data name="HistologicalName" xml:space="preserve">
+    <value>أسم السرطان النسيجي</value>
+  </data>
+  <data name="HistologicalSubTypeCancer" xml:space="preserve">
+    <value>النوع الفرعي للسرطان النسيجي</value>
+  </data>
+  <data name="ICDCode" xml:space="preserve">
+    <value>ICD كود</value>
+  </data>
+  <data name="ImageName" xml:space="preserve">
+    <value>أسم الأشعه</value>
+  </data>
+  <data name="Imaging" xml:space="preserve">
+    <value>تصوير</value>
+  </data>
+  <data name="ImagingList" xml:space="preserve">
+    <value>قائمة الأشعات</value>
+  </data>
+  <data name="ImagingType" xml:space="preserve">
+    <value>نوع الأشعة</value>
+  </data>
+  <data name="inArabic" xml:space="preserve">
+    <value>بالعربية</value>
+  </data>
+  <data name="Index" xml:space="preserve">
+    <value>صفحه</value>
+  </data>
+  <data name="IntialLab" xml:space="preserve">
+    <value>تحاليل مبدئية</value>
+  </data>
+  <data name="IntialLabList" xml:space="preserve">
+    <value>قائمة التحاليل المبدئية</value>
+  </data>
+  <data name="IntialLabs" xml:space="preserve">
+    <value>المختبرات الأولية</value>
+  </data>
+  <data name="Investigation" xml:space="preserve">
+    <value>إستقصاء</value>
+  </data>
+  <data name="Isantimicrobial" xml:space="preserve">
+    <value>مضاد للميكروبات</value>
+  </data>
+  <data name="IsDoseLimitingToxicity" xml:space="preserve">
+    <value>هل السمية تحد من الجرعة؟</value>
+  </data>
+  <data name="Isgrowthfactor" xml:space="preserve">
+    <value>عامل النمو</value>
+  </data>
+  <data name="IsMandatory" xml:space="preserve">
+    <value>إلزامي ؟</value>
+  </data>
+  <data name="IsNewSymptom" xml:space="preserve">
+    <value>هل هو عرض جديد؟</value>
+  </data>
+  <data name="IsSepecialCase" xml:space="preserve">
+    <value>هل هو حالة خاصه ؟</value>
+  </data>
+  <data name="Kimosurveydata" xml:space="preserve">
+    <value>بيانات إستقصاء الكيماوي</value>
+  </data>
+  <data name="KimoSurveyList" xml:space="preserve">
+    <value>قائمة إستقصاء الكيمياوي</value>
+  </data>
+  <data name="Lab" xml:space="preserve">
+    <value>تحليل</value>
+  </data>
+  <data name="Lab Category" xml:space="preserve">
+    <value>مختبر جديد</value>
+  </data>
+  <data name="LabCategory" xml:space="preserve">
+    <value>فئة التحليل</value>
+  </data>
+  <data name="LabDetail" xml:space="preserve">
+    <value>تفاصيل التحليل</value>
+  </data>
+  <data name="LabDetailCondition" xml:space="preserve">
+    <value>شرط تفصيل التحليل</value>
+  </data>
+  <data name="LabDetailConditionList" xml:space="preserve">
+    <value>قائمة شروط تفاصيل التحاليل</value>
+  </data>
+  <data name="LabDetailName" xml:space="preserve">
+    <value>أسم تفصيل التحليل</value>
+  </data>
+  <data name="LabDetails" xml:space="preserve">
+    <value>تفاصيل التحليل</value>
+  </data>
+  <data name="LabDetailsList" xml:space="preserve">
+    <value>قائمة تفاصيل التحليل</value>
+  </data>
+  <data name="LabGroupList" xml:space="preserve">
+    <value>مجموعة التحاليل</value>
+  </data>
+  <data name="LabGroup_LabList" xml:space="preserve">
+    <value>مجموعة التحاليل الداخلية</value>
+  </data>
+  <data name="LabItem" xml:space="preserve">
+    <value>عنصر التحليل</value>
+  </data>
+  <data name="LabItems(Conditions)" xml:space="preserve">
+    <value>تفاصيل فئه التحليل (الشرط)</value>
+  </data>
+  <data name="LabItemsList" xml:space="preserve">
+    <value>تفاصيل فئه التحاليل</value>
+  </data>
+  <data name="LabList" xml:space="preserve">
+    <value>قائمة التحاليل</value>
+  </data>
+  <data name="LabName" xml:space="preserve">
+    <value>أسم التحليل</value>
+  </data>
+  <data name="Labs" xml:space="preserve">
+    <value>تحاليل</value>
+  </data>
+  <data name="LabsInfo" xml:space="preserve">
+    <value>معلومات التحليل</value>
+  </data>
+  <data name="LabSubtype" xml:space="preserve">
+    <value>نوع التحليل الفرعي</value>
+  </data>
+  <data name="LabType" xml:space="preserve">
+    <value>نوع التحليل</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>اللغة</value>
+  </data>
+  <data name="LeanBodyWeight" xml:space="preserve">
+    <value>(LBW) وزن الجسم النحيل </value>
+  </data>
+  <data name="ListUserRole" xml:space="preserve">
+    <value>قائمة وظائف المستخدم</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>تسجيل الخروج</value>
+  </data>
+  <data name="LymphNode" xml:space="preserve">
+    <value>N: العقدة الليمفاوية</value>
+  </data>
+  <data name="MainCancerType" xml:space="preserve">
+    <value>نوع السرطان الأساسي</value>
+  </data>
+  <data name="Maintenance" xml:space="preserve">
+    <value>تصليح</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>ذكر</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>الرسالة</value>
+  </data>
+  <data name="Molecular" xml:space="preserve">
+    <value>الجزيئي</value>
+  </data>
+  <data name="MolecularName" xml:space="preserve">
+    <value>أسم السرطان الجزيئي</value>
+  </data>
+  <data name="MolecularSubType" xml:space="preserve">
+    <value>النوع الفرعي للسرطان الجزيئي</value>
+  </data>
+  <data name="MRN" xml:space="preserve">
+    <value>MRN (رقم السجل الطبي)</value>
+  </data>
+  <data name="Myprofile" xml:space="preserve">
+    <value>ملفي الشخصي</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>الأسم</value>
+  </data>
+  <data name="NationalID" xml:space="preserve">
+    <value>الرقم القومي</value>
+  </data>
+  <data name="NationalIDPhotoCopy" xml:space="preserve">
+    <value>صورة من الرقم القومي</value>
+  </data>
+  <data name="Navigation" xml:space="preserve">
+    <value>تصفح</value>
+  </data>
+  <data name="NewAssessment" xml:space="preserve">
+    <value>تقييم جديد</value>
+  </data>
+  <data name="NewCancerHistological" xml:space="preserve">
+    <value>إضافه سرطان نسيجي جديد</value>
+  </data>
+  <data name="NewCancerMolecular" xml:space="preserve">
+    <value>إضافه سرطان جزيئي جديد</value>
+  </data>
+  <data name="NewChemotherapyProtocol" xml:space="preserve">
+    <value>إضافة بروتوكول علاج كيميائي جديد</value>
+  </data>
+  <data name="NewCycle" xml:space="preserve">
+    <value>إضافة دورة</value>
+  </data>
+  <data name="NewDistantMetastasis" xml:space="preserve">
+    <value>إضافة ورم خبيث</value>
+  </data>
+  <data name="NewDoctor" xml:space="preserve">
+    <value>إضافة دكتور جديد</value>
+  </data>
+  <data name="NewDrug" xml:space="preserve">
+    <value>إضافة دواء</value>
+  </data>
+  <data name="NewDrugDay" xml:space="preserve">
+    <value>إضافة يوم للدواء</value>
+  </data>
+  <data name="NewGroup" xml:space="preserve">
+    <value>اضافة مجموعة</value>
+  </data>
+  <data name="NewImage" xml:space="preserve">
+    <value>أشعة جديدة</value>
+  </data>
+  <data name="NewLab" xml:space="preserve">
+    <value>تحليل جديد</value>
+  </data>
+  <data name="NewLabCategory" xml:space="preserve">
+    <value>اضافه مختبر جديد  </value>
+  </data>
+  <data name="NewLabDetail" xml:space="preserve">
+    <value>إضافة تفاصيل</value>
+  </data>
+  <data name="NewLabDetailCondition" xml:space="preserve">
+    <value>إضافة شرط</value>
+  </data>
+  <data name="NewLymphNode" xml:space="preserve">
+    <value>إضافة عقدة لمفاوية</value>
+  </data>
+  <data name="NewPart" xml:space="preserve">
+    <value>إضافة عضو</value>
+  </data>
+  <data name="NewPathologyReport" xml:space="preserve">
+    <value>إضافة تقرير</value>
+  </data>
+  <data name="NewPatient" xml:space="preserve">
+    <value>إضافة مريض</value>
+  </data>
+  <data name="NewPreMedication" xml:space="preserve">
+    <value>إضافة مخدر</value>
+  </data>
+  <data name="NewSession" xml:space="preserve">
+    <value>جلسة جديدة</value>
+  </data>
+  <data name="NewSolution" xml:space="preserve">
+    <value>ملحلول جديد</value>
+  </data>
+  <data name="NewSpecialCase" xml:space="preserve">
+    <value>إضافة حالة خاصة</value>
+  </data>
+  <data name="NewSpecialCasePart" xml:space="preserve">
+    <value>جزء جديد</value>
+  </data>
+  <data name="NewStaging" xml:space="preserve">
+    <value>إضافة مرحلة</value>
+  </data>
+  <data name="NewSurgery" xml:space="preserve">
+    <value>جراحة جديدة</value>
+  </data>
+  <data name="NewSurgeryType" xml:space="preserve">
+    <value>نوع الجراحة الجديدة</value>
+  </data>
+  <data name="NewSymptom" xml:space="preserve">
+    <value>إضافة عرض</value>
+  </data>
+  <data name="NewTreatmentType" xml:space="preserve">
+    <value>إضافة علاج</value>
+  </data>
+  <data name="NewTumorGrade" xml:space="preserve">
+    <value>اضافه درجه ورم</value>
+  </data>
+  <data name="NewTumorsize" xml:space="preserve">
+    <value>إضافة حجم الورم</value>
+  </data>
+  <data name="NewUnit" xml:space="preserve">
+    <value>وحدة جديدة</value>
+  </data>
+  <data name="NewUser" xml:space="preserve">
+    <value>إضافة مستخدم</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>التالي</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>لا</value>
+  </data>
+  <data name="NoCycle" xml:space="preserve">
+    <value>لا يوجد دورة تالية</value>
+  </data>
+  <data name="NoData" xml:space="preserve">
+    <value>لا توجد بيانات لعرضها</value>
+  </data>
+  <data name="NoNotificationFound" xml:space="preserve">
+    <value>لا يوجد إشعارات</value>
+  </data>
+  <data name="NoRecommendation" xml:space="preserve">
+    <value>لا يوجد مقترحات</value>
+  </data>
+  <data name="NotASpecialCase" xml:space="preserve">
+    <value>ليس لديه حاله خاصة</value>
+  </data>
+  <data name="Notification" xml:space="preserve">
+    <value>إشعار</value>
+  </data>
+  <data name="NotifyAfterCycle" xml:space="preserve">
+    <value>إشعار بعد الدورة ؟</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>الرقم</value>
+  </data>
+  <data name="Occupation" xml:space="preserve">
+    <value>مهنة</value>
+  </data>
+  <data name="Operator" xml:space="preserve">
+    <value>العمليات</value>
+  </data>
+  <data name="OpertorType" xml:space="preserve">
+    <value>نوع العملية</value>
+  </data>
+  <data name="Part" xml:space="preserve">
+    <value>العضو</value>
+  </data>
+  <data name="PartName" xml:space="preserve">
+    <value>أسم العضو</value>
+  </data>
+  <data name="Parts" xml:space="preserve">
+    <value>الاجزاء</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>كلمة السر</value>
+  </data>
+  <data name="PathologyReport" xml:space="preserve">
+    <value>تقرير مرضي</value>
+  </data>
+  <data name="PathologyReportList" xml:space="preserve">
+    <value>قائمة تقارير الأمراض</value>
+  </data>
+  <data name="PathologyReportName" xml:space="preserve">
+    <value>اسم تقرير الأمراض</value>
+  </data>
+  <data name="PathologyReportType" xml:space="preserve">
+    <value>نوع التقرير المرضي</value>
+  </data>
+  <data name="PathologyReportTypeList" xml:space="preserve">
+    <value>قائمة أنواع التقارير</value>
+  </data>
+  <data name="Patient" xml:space="preserve">
+    <value>مريض</value>
+  </data>
+  <data name="PatientAssessment" xml:space="preserve">
+    <value>تقييم المريض</value>
+  </data>
+  <data name="PatientClinicalData" xml:space="preserve">
+    <value>البيانات السريرية للمريض</value>
+  </data>
+  <data name="PatientData" xml:space="preserve">
+    <value>بيانات المريض</value>
+  </data>
+  <data name="PatientDataAndClinicalData" xml:space="preserve">
+    <value>بيانات المريض</value>
+  </data>
+  <data name="PatientDetails" xml:space="preserve">
+    <value>تفاصيل المريض</value>
+  </data>
+  <data name="PatientDrugs" xml:space="preserve">
+    <value>أدوية المريض</value>
+  </data>
+  <data name="PatientEducations" xml:space="preserve">
+    <value>تثقيف المرضى</value>
+  </data>
+  <data name="PatientFollowUp" xml:space="preserve">
+    <value>متابعة المريض</value>
+  </data>
+  <data name="PatientID" xml:space="preserve">
+    <value>رقم المريض</value>
+  </data>
+  <data name="PatientLab" xml:space="preserve">
+    <value>تحليل المريض</value>
+  </data>
+  <data name="PatientList" xml:space="preserve">
+    <value>قائمة المرضى</value>
+  </data>
+  <data name="PatientName" xml:space="preserve">
+    <value>اسم المريض</value>
+  </data>
+  <data name="Patients" xml:space="preserve">
+    <value>المريض</value>
+  </data>
+  <data name="PatientSheet" xml:space="preserve">
+    <value>تقرير المريض</value>
+  </data>
+  <data name="PatientSurgery" xml:space="preserve">
+    <value>عملية المريض</value>
+  </data>
+  <data name="PatientSymptom" xml:space="preserve">
+    <value>أعراض المريض</value>
+  </data>
+  <data name="PaymentType" xml:space="preserve">
+    <value>طريقة الدفع</value>
+  </data>
+  <data name="Permissions" xml:space="preserve">
+    <value>صالحيات</value>
+  </data>
+  <data name="PostChemoFollowUp" xml:space="preserve">
+    <value>متابعة ما بعد العلاج</value>
+  </data>
+  <data name="Premdication" xml:space="preserve">
+    <value>تخدير</value>
+  </data>
+  <data name="Premedication" xml:space="preserve">
+    <value>مخدر</value>
+  </data>
+  <data name="PrintOutSheet" xml:space="preserve">
+    <value>طباعة الورقة</value>
+  </data>
+  <data name="Privacymessage" xml:space="preserve">
+    <value>استخدم هذه الصفحة لتفصيل سياسة الخصوصية الخاصة بموقعك</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>سياسة الخصوصية</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>الملف الشخصي</value>
+  </data>
+  <data name="Protocol" xml:space="preserve">
+    <value>بروتوكول</value>
+  </data>
+  <data name="ProtocolCycle" xml:space="preserve">
+    <value>بروتوكول الدورة</value>
+  </data>
+  <data name="ProtocolCycles" xml:space="preserve">
+    <value>دورة البروتوكول</value>
+  </data>
+  <data name="ProtocolCyclesList" xml:space="preserve">
+    <value>قائمة دورات البروتوكول</value>
+  </data>
+  <data name="ProtocolDrugs" xml:space="preserve">
+    <value>بروتوكول الأدوية</value>
+  </data>
+  <data name="ProtocolName" xml:space="preserve">
+    <value>أسم البروتوكول</value>
+  </data>
+  <data name="ProtocolofchemosurveyData" xml:space="preserve">
+    <value>بيانات بروتوكول الإستقصاء الكيماوي</value>
+  </data>
+  <data name="ProtocolsList" xml:space="preserve">
+    <value>قائمة البروتوكولات</value>
+  </data>
+  <data name="Recommendation" xml:space="preserve">
+    <value>توصية</value>
+  </data>
+  <data name="recycledays" xml:space="preserve">
+    <value>أيام إعادة الدوره</value>
+  </data>
+  <data name="Remarks" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>المسح</value>
+  </data>
+  <data name="RepeatRow" xml:space="preserve">
+    <value>لا يمكنك تكرار الصف</value>
+  </data>
+  <data name="ReportTypeName" xml:space="preserve">
+    <value>اسم نوع الالتقرير</value>
+  </data>
+  <data name="Residence" xml:space="preserve">
+    <value>إقامة</value>
+  </data>
+  <data name="Response" xml:space="preserve">
+    <value>الاستجابة</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>الوظيفة</value>
+  </data>
+  <data name="RoleName" xml:space="preserve">
+    <value>أسم الوظيفة</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>الوظائف</value>
+  </data>
+  <data name="RolesList" xml:space="preserve">
+    <value>قائمة الوظائف</value>
+  </data>
+  <data name="Route" xml:space="preserve">
+    <value>المسار</value>
+  </data>
+  <data name="Rowexist" xml:space="preserve">
+    <value>الصف موجود بالفعل!</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="Schedule" xml:space="preserve">
+    <value>جدول المريض</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>أختر</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>أختر الكل</value>
+  </data>
+  <data name="SelectDistantMetastasis" xml:space="preserve">
+    <value>إختيار الانبثاث البعيدة</value>
+  </data>
+  <data name="SelectLymphNode" xml:space="preserve">
+    <value>إختيار العقدة الليمفاوية</value>
+  </data>
+  <data name="SelectOpertor" xml:space="preserve">
+    <value>أختر العملية</value>
+  </data>
+  <data name="SelectProtocol" xml:space="preserve">
+    <value>أختر البروتوكول</value>
+  </data>
+  <data name="SelectRoute" xml:space="preserve">
+    <value>أختر المسار</value>
+  </data>
+  <data name="SelectSolution" xml:space="preserve">
+    <value>أختر المحلول</value>
+  </data>
+  <data name="SelectStage" xml:space="preserve">
+    <value>إختيار مرحلة</value>
+  </data>
+  <data name="SelectSymptomType" xml:space="preserve">
+    <value>أختر نوع العرض</value>
+  </data>
+  <data name="SelectTumorSize" xml:space="preserve">
+    <value>إختيار حجم الورم</value>
+  </data>
+  <data name="SelectUnit" xml:space="preserve">
+    <value>أختر الوحدة</value>
+  </data>
+  <data name="SerumCreatinine" xml:space="preserve">
+    <value>الكرياتنيين في الدم</value>
+  </data>
+  <data name="SideEffect" xml:space="preserve">
+    <value>أثر جانبي</value>
+  </data>
+  <data name="SideEffectList" xml:space="preserve">
+    <value>قائمة الآثار الجانبية</value>
+  </data>
+  <data name="SolidTumorImage" xml:space="preserve">
+    <value>الاورام الصلبة</value>
+  </data>
+  <data name="Solution" xml:space="preserve">
+    <value>المحلول</value>
+  </data>
+  <data name="SolutionAmount" xml:space="preserve">
+    <value>كمية المحلول</value>
+  </data>
+  <data name="SolutionList" xml:space="preserve">
+    <value>قائمة المحاليل</value>
+  </data>
+  <data name="SolutionName" xml:space="preserve">
+    <value>أسم المحلول</value>
+  </data>
+  <data name="Solutions" xml:space="preserve">
+    <value>محاليل</value>
+  </data>
+  <data name="SorryMessage" xml:space="preserve">
+    <value>عذرًا ، ولكن لا يمكنك الوصول إلى الصفحة التي تبحث عنها. حاول التحقق من عنوان الخطأ ، ثم انقر فوق الزر تحديث في المستعرض الخاص بك ، أو انقر فوق الزر السابق</value>
+  </data>
+  <data name="SpecialCase" xml:space="preserve">
+    <value>حالة خاصه</value>
+  </data>
+  <data name="SpecialCaseList" xml:space="preserve">
+    <value>قائمة الحالات الخاصة</value>
+  </data>
+  <data name="SpecialCaseName" xml:space="preserve">
+    <value>أسم الحالة الخاصة</value>
+  </data>
+  <data name="SpecialCasePart" xml:space="preserve">
+    <value>العضو</value>
+  </data>
+  <data name="SpecialCasePartList" xml:space="preserve">
+    <value>قائمة أعضاء الحالات الخاصة</value>
+  </data>
+  <data name="SpecialCaseParts" xml:space="preserve">
+    <value>الاعضاء</value>
+  </data>
+  <data name="SpecialCases" xml:space="preserve">
+    <value>حالات خاصة</value>
+  </data>
+  <data name="SponserCompanyName" xml:space="preserve">
+    <value>اسم الشركة الراعية</value>
+  </data>
+  <data name="Stage" xml:space="preserve">
+    <value>مرحلة</value>
+  </data>
+  <data name="Staging" xml:space="preserve">
+    <value>مرحلة</value>
+  </data>
+  <data name="StagingList" xml:space="preserve">
+    <value>قائمة المرحلة</value>
+  </data>
+  <data name="StagingMatrix" xml:space="preserve">
+    <value>مصفوفة انطلاق</value>
+  </data>
+  <data name="Statement" xml:space="preserve">
+    <value>بيان الشرط</value>
+  </data>
+  <data name="sureMessage" xml:space="preserve">
+    <value>هل أنت متأكد أنك تريد حذف هذا البند؟</value>
+  </data>
+  <data name="Surgery" xml:space="preserve">
+    <value>عملية جراحية</value>
+  </data>
+  <data name="SurgeryName" xml:space="preserve">
+    <value>اسم العملية</value>
+  </data>
+  <data name="SurgeryType" xml:space="preserve">
+    <value>نوع الجراحه</value>
+  </data>
+  <data name="SurgeryTypes" xml:space="preserve">
+    <value>انواع الجراحات</value>
+  </data>
+  <data name="Symptom" xml:space="preserve">
+    <value>العرض</value>
+  </data>
+  <data name="SymptomColor" xml:space="preserve">
+    <value>لون العرض</value>
+  </data>
+  <data name="SymptomDrug" xml:space="preserve">
+    <value>عرض الدواء</value>
+  </data>
+  <data name="SymptomList" xml:space="preserve">
+    <value>قائمة الاعراض</value>
+  </data>
+  <data name="SymptomsDrugs" xml:space="preserve">
+    <value>اعراض الادوية</value>
+  </data>
+  <data name="SymptomsDrugsList" xml:space="preserve">
+    <value>قائمة اعراض الادوية</value>
+  </data>
+  <data name="SymptomType" xml:space="preserve">
+    <value>نوع العرض</value>
+  </data>
+  <data name="TextResult" xml:space="preserve">
+    <value>نتيجة النص</value>
+  </data>
+  <data name="TimeofAdministration" xml:space="preserve">
+    <value>وقت الإدارة</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>العنوان</value>
+  </data>
+  <data name="TNMStage" xml:space="preserve">
+    <value>مرحلة الTNM</value>
+  </data>
+  <data name="TNMStaging" xml:space="preserve">
+    <value>مراحل الTNM</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>إلى</value>
+  </data>
+  <data name="Treatment" xml:space="preserve">
+    <value>علاج</value>
+  </data>
+  <data name="TreatmentPlan" xml:space="preserve">
+    <value>خطة العلاج</value>
+  </data>
+  <data name="TreatmentPlans" xml:space="preserve">
+    <value>خطط العلاج</value>
+  </data>
+  <data name="TreatmentResponse" xml:space="preserve">
+    <value>الاستجابة للعلاج</value>
+  </data>
+  <data name="TreatmentResponses" xml:space="preserve">
+    <value>استجابات العلاج</value>
+  </data>
+  <data name="TreatmentType" xml:space="preserve">
+    <value>نوع العلاج</value>
+  </data>
+  <data name="TreatmentTypeList" xml:space="preserve">
+    <value>قائمة انواع العلاج</value>
+  </data>
+  <data name="TreatmentTypes" xml:space="preserve">
+    <value>انواع العلاجات</value>
+  </data>
+  <data name="TumorGrade" xml:space="preserve">
+    <value>درجة الورم</value>
+  </data>
+  <data name="TumorSize" xml:space="preserve">
+    <value>T: حجم الورم</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>النوع</value>
+  </data>
+  <data name="TypeName" xml:space="preserve">
+    <value>اسم النوع</value>
+  </data>
+  <data name="Unauthorized" xml:space="preserve">
+    <value>غير مسموح</value>
+  </data>
+  <data name="unit" xml:space="preserve">
+    <value>الوحدة</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>المستخدم</value>
+  </data>
+  <data name="UserList" xml:space="preserve">
+    <value>قائمة المستخدمين</value>
+  </data>
+  <data name="username" xml:space="preserve">
+    <value>أسم المستخدم</value>
+  </data>
+  <data name="Weight" xml:space="preserve">
+    <value>الوزن</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>آهلا</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>نعم</value>
+  </data>
+  <data name="Youdonothaveaccess" xml:space="preserve">
+    <value>ليس لديك حق الوصول</value>
+  </data>
+</root>

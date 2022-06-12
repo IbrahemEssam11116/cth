@@ -1,0 +1,174 @@
+﻿@model SearchFacade<SStorm.CTH.DAL.EntityClasses.CTHSpecialCaseEntity>
+@using X.PagedList.Mvc.Core.Fluent;
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+}
+<link href="~/assets/css/PagedList.css" rel="stylesheet" />
+<link href="~/assets/css/footable.bootstrap.css" rel="stylesheet" />
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("SpecialCaseList");
+}
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("SpecialCaseList")</a></li>
+                        <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("SpecialCaseList")</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">@SharedLocalizer.GetLocalizedHtmlString("Index")</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <div class=" form-group row">
+                        <div class="col-md-12">
+                            <form asp-action="Index" asp-controller="SpecialCase">
+                                <div class="input-group">
+                                    @Html.TextBox("searchString", "", new { @class = "form-control", placeholder = "Search" })
+
+                                    <button type="submit" class="btn  btn-sm btn-info"><i class="fa fa-search"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <div class="float-left">
+                                    @if (Authorize(UserPermission.SpecialCase_EditCreate))
+                                    {
+                                        <a href="#modal-add-entity" data-toggle="modal"
+                                           data-url="@Url.Action("EditCreate", "SpecialCase", new {  ID = 0})"
+                                           data-modalsize="modal-lg"
+                                           data-modalcolor="hmodal-danger" class="btn btn-info">
+                                            <i class="fas fa-plus"></i> @SharedLocalizer.GetLocalizedHtmlString("NewSpecialCase")
+                                        </a>
+                                    }
+                                </div>
+                                <div class="float-right">
+                                    @(Html.Pager(Model.DataPagedList).Url(Page => Url.Action("Index", new { Page })).Build())
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("SpecialCaseName")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Remarks")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("HasPart")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Parts")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.DataPagedList.Count() == 0)
+                                {
+                                    <tr>
+                                        <th scope="row">@SharedLocalizer.GetLocalizedHtmlString("NoData")</th>
+                                    </tr>
+                                }
+                                @for (int i = 0; i < Model.DataPagedList.Count(); i++)
+                                    {
+                                        <tr>
+                                            <th scope="row">@(i + 1)</th>
+                                            <td>@Model.DataPagedList[i].CaseName</td>
+                                            <td>@Model.DataPagedList[i].Remarks</td>
+                                            <td>@Model.DataPagedList[i].HasParts</td>
+                                            @if (Model.DataPagedList[i].HasParts == true)
+                                            {
+                                                <td>
+                                                    @foreach (var item in Model.DataPagedList[i].CTHSpecialCasePartCollection)
+                                                    {
+                                                        <span>
+                                                            @item.PartName
+                                                            @if (item.ID != Model.DataPagedList[i].CTHSpecialCasePartCollection.Last().ID)
+                                                            {
+                                                                <span>, </span>
+                                                            }
+                                                        </span>
+
+                                                    }
+                                                </td>
+
+                                            }
+                                            else
+                                            {
+                                                <td></td>
+                                            }
+                                        <td>
+                                            @if (Authorize(UserPermission.SpecialCase_EditCreate))
+                                            {
+                                                <a href="#modal-add-entity" data-toggle="modal"
+                                                   data-url="@Url.Action("EditCreate", "SpecialCase", new { ID = @Model.DataPagedList[i].ID})"
+                                                   data-modalsize="modal-lg"
+                                                   data-modalcolor="hmodal-danger" class="btn btn-info">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                            }
+                                            @if (Authorize(UserPermission.SpecialCase_Delete))
+                                            {
+                                                <a href="#modal-delete-entity" data-toggle="modal"
+                                                   data-url="@Url.Action("Delete", "SpecialCase", new { ID = @Model.DataPagedList[i].ID})"
+                                                   data-modalsize="modal-lg"
+                                                   data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                            }
+                                            @if (Authorize(UserPermission.SpecialCase_ViewParts))
+                                            {
+                                                @if (Model.DataPagedList[i].HasParts == true)
+                                                {
+                                                    <a href="#modal-add-entity" data-toggle="modal"
+                                                       data-url="@Url.Action("EditCreatePart", "SpecialCase", new { ID = 0, CaseID = @Model.DataPagedList[i].ID })"
+                                                       data-modalsize="modal-lg"
+                                                       data-modalcolor="hmodal-danger" class="btn btn-info">
+                                                        <i class="fas fa-plus"></i> @SharedLocalizer.GetLocalizedHtmlString("NewSpecialCasePart")
+                                                    </a>
+                                                }
+                                            }
+                                        </td>
+                                        </tr>
+                                    }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/js/footable.js"></script>
+<script src="~/assets/js/moment.min.js"></script>
+<script type="text/javascript">
+
+    jQuery(function ($) {
+        $('.table').footable();
+    });
+
+</script>

@@ -1,0 +1,23 @@
+﻿
+@model SStorm.CTH.Web.Models.TreeViewNode
+@{
+    Layout = null;
+}
+<ul id="myUL">
+
+    @foreach (var node in Model.CancerTypeCollection)
+    {
+        if (node.ParentID == Model.Seed)
+        {
+            SStorm.CTH.Web.Models.TreeViewNode inner = new SStorm.CTH.Web.Models.TreeViewNode { Seed = node.ID, CancerTypeCollection = Model.CancerTypeCollection };
+            <li>
+
+                <span class="caretCencer"></span> <a href="#" onclick="GetCancerDetails(@node.ID);" class="text-black-50"><i class="fa fa-folder"></i>(@node.ICDCode)@node.TypeName</a>
+                <ul class="nestedCencer">
+                    <partial name="CancerTypeList" model="inner">
+                </ul>
+            </li>
+        }
+    }
+</ul>
+

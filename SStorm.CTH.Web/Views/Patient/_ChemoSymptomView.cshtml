@@ -1,0 +1,31 @@
+﻿@model SStorm.CTH.DAL.EntityClasses.CTHPatientEntity
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+
+<div class="table-responsive">
+    <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>@SharedLocalizer.GetLocalizedHtmlString("Name")</th>
+                <th>@SharedLocalizer.GetLocalizedHtmlString("Grade")</th>
+                <th>@SharedLocalizer.GetLocalizedHtmlString("Duration")</th>
+                <th>@SharedLocalizer.GetLocalizedHtmlString("Date")</th>
+                <th>@SharedLocalizer.GetLocalizedHtmlString("DoctorRecommendation")</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.CTHPatientSymptomCollection)
+            {
+                <tr>
+                    <td>@item.CTHSymptomItem.Name</td>
+                    <td>@item.CTHSymptomItem.Grade</td>
+                    <td>@item.SymptomDurationAmount @Enum.GetName(typeof(DurationUnit), item.SymptomDurationUnit)</td>
+                    <td>@item.Date</td>
+                    <td>@item.EnDoctorRecommendation</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

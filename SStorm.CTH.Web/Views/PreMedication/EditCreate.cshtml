@@ -1,0 +1,80 @@
+﻿@model PremedicationModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    Layout = null;
+}
+
+<div class="color-line"></div>
+<div class="modal-header">
+    <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("Premedication")</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<form asp-action="EditCreate">
+    <div class="modal-body">
+        <input type="hidden" asp-for="PreMedicationEntity.ID" value="@Model.PreMedicationEntity.ID" />
+
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="PreMedicationEntity.Number" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Number")</label>
+                <input class="form-control" asp-for="PreMedicationEntity.Number" required>
+                <span asp-validation-for="PreMedicationEntity.Number" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="PreMedicationEntity.Title" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Title")</label>
+                <input class="form-control" asp-for="PreMedicationEntity.Title" required>
+                <span asp-validation-for="PreMedicationEntity.Title" class="text-danger"></span>
+            </div>
+        </div>
+        @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="PreMedicationEntity.ArTitle" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Title") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input class="form-control" asp-for="PreMedicationEntity.ArTitle">
+                <span asp-validation-for="PreMedicationEntity.ArTitle" class="text-danger"></span>
+            </div>
+        </div>
+        *@
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="PreMedicationEntity.Description" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Description")</label>
+                <textarea class="form-control" asp-for="PreMedicationEntity.Description" rows="4"></textarea>
+                <span asp-validation-for="PreMedicationEntity.Description" class="text-danger"></span>
+            </div>
+        </div>
+        @*<div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="PreMedicationEntity.ArDescription" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Description") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <textarea class="form-control" asp-for="PreMedicationEntity.ArDescription" rows="4"></textarea>
+                <span asp-validation-for="PreMedicationEntity.ArDescription" class="text-danger"></span>
+            </div>
+        </div>*@
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="PreMedicationEntity.EmetogenicID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Emetogenicrisk")</label>
+                <select required asp-for="PreMedicationEntity.EmetogenicID" class="form-control selectpicker"
+                        data-live-search="true" asp-items="@Model.EmetogenicList">
+                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("Emetogenicrisk")</option>
+                </select>
+                <span asp-validation-for="PreMedicationEntity.EmetogenicID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="btn btn-secondary text-white" id="CancelBtn" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</a>
+
+            <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+        </div>
+    </div>
+</form>
+
+
+<script>
+    $('select').selectpicker({
+        dropupAuto: false
+    });
+</script>

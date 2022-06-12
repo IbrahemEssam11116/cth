@@ -1,0 +1,127 @@
+﻿@model SStorm.CTH.Web.Models.ProtocolCycleModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("CycleLabsList");
+    Layout = null;
+}
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("CycleLabsCategory")</a></li>
+                        <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("CycleLabsCategoryList")</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <button type="button" class="close" id="btnCloseProtocolCycleDiv">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <div id="ProtocolCycleDiv">
+
+                        @if (Authorize(UserPermission.CancerType_AssignLabToCycle))
+                        {
+                            <a href="#modal-add-entity" data-toggle="modal"
+                               data-url="@Url.Action("EditCreateCycleLab", "Protocol", new { ID = 0 ,ProtocolCycleID=@Model.protocolCycleEntity.ID , ProtocolID=Model.protocolCycleEntity.ProtocolID})"
+                               data-modalsize="modal-lg"
+                               data-modalcolor="hmodal-danger" class="btn btn-info">
+                                <i class="fas fa-plus"></i> @SharedLocalizer.GetLocalizedHtmlString("AddNew")
+                            </a>
+                        }
+
+
+                        <div class="table-responsive">
+                            <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("CycleLabsCategory")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("LabItems(Conditions)")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.protocolCycleEntity.CTHCycleLabCollection.Count() == 0)
+                                    {
+                                        <tr>
+                                            <th scope="row" colspan="7">@SharedLocalizer.GetLocalizedHtmlString("NoData")</th>
+                                        </tr>
+                                    }
+
+                                    @foreach (var item in Model.protocolCycleEntity.CTHCycleLabCollection)
+                                    {
+                                        var condition = "(";
+                                        <tr>
+                                            <td>@item.CTHLabDetailItem.CTHLabItem.LabName</td>
+                                            <td>
+                                                <span class="btn btn-outline-info text-dark">
+                                                    @item.CTHLabDetailItem.LabDetailsName
+
+                                                    @foreach (var cond in @item.CTHLabDetailItem.CTHLabDetailConditionCollection)
+                                                    {
+                                                        condition += cond.Condition;
+                                                        if (cond.ID != @item.CTHLabDetailItem.CTHLabDetailConditionCollection.Last().ID)
+                                                        {
+                                                            condition += ", ";
+                                                        }
+                                                        else
+                                                        {
+                                                            condition += ")";
+                                                        }
+                                                    }
+                                                    @condition
+                                                </span>
+                                            </td>
+                                            <td>
+                                                @if (Authorize(UserPermission.CancerType_AssignLabToCycle))
+                                                {
+                                                    <a href="#modal-add-entity" data-toggle="modal"
+                                                       data-url="@Url.Action("EditCreateCycleLab", "Protocol", new { ID = @item.ID ,ProtocolCycleID = @Model.protocolCycleEntity.ID, ProtocolID=Model.protocolCycleEntity.ProtocolID})"
+                                                       data-modalsize="modal-lg"
+                                                       data-modalcolor="hmodal-danger" class="btn btn-info">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                }
+                                                @if (Authorize(UserPermission.CancerType_DeleteLabFromCycle))
+                                                {
+                                                    <a href="#modal-delete-entity" data-toggle="modal"
+                                                       data-url="@Url.Action("DeleteCycleLab", "Protocol", new {ID = item.ID})"
+                                                       data-modalsize="modal-lg"
+                                                       data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#btnCloseProtocolCycleDiv").click(function () {
+            $("#ProtocolCycleDiv").slideToggle(1000);
+        });
+    });
+</script>

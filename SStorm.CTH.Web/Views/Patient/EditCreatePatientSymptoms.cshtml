@@ -1,0 +1,45 @@
+﻿@model SStorm.CTH.DAL.EntityClasses.CTHPatientSymptomEntity
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form asp-controller="Patient" asp-action="EditCreatePatientSymptoms">
+                    <div class="modal-header">
+                        <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("Edit") @SharedLocalizer.GetLocalizedHtmlString("PatientSymptom")</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" asp-for="PatientID" value="@Model.PatientID" />
+                        <input type="hidden" asp-for="ID" value="@Model.ID" />
+                        <input type="hidden" value="@ViewBag.NotifID" name="NotifID" />
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <label asp-for="EnDoctorRecommendation" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("EnglishDocRecommendation")</label>
+                                <input asp-for="EnDoctorRecommendation" class="form-control" required />
+                                <span asp-validation-for="EnDoctorRecommendation"></span>
+                            </div>
+                        </div>
+                        @*
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <label asp-for="ArDoctorRecommendation" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("ArabicDocRecommendation")</label>
+                                <input asp-for="ArDoctorRecommendation" class="form-control" />
+                                <span asp-validation-for="ArDoctorRecommendation"></span>
+                            </div>
+                        </div>
+                        *@
+                    </div>
+                    <div class="modal-footer">
+                        @if (Authorize(UserPermission.Patient_View))
+                        {
+                            <a asp-controller="Patient" asp-action="Index" class="btn btn-secondary waves-effect">@SharedLocalizer.GetLocalizedHtmlString("Back")</a>
+                        }
+                        <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

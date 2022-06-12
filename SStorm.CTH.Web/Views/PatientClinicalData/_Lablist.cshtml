@@ -1,0 +1,64 @@
+﻿@model SStorm.CTH.Web.Models.KimoSurveyModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("LabList");
+    Layout = null;
+}
+
+<div class="form-group row">
+    <div class="col-md-12">
+        <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>@SharedLocalizer.GetLocalizedHtmlString("LabCategory")</th>
+                    <th>@SharedLocalizer.GetLocalizedHtmlString("LabSubtype")</th>
+                    <th>@SharedLocalizer.GetLocalizedHtmlString("TextResult")</th>
+                    <th>@SharedLocalizer.GetLocalizedHtmlString("AttachmentResult")</th>
+                    <th>@SharedLocalizer.GetLocalizedHtmlString("Date")</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.ChemoLabs.Count == 0)
+                {
+                    <tr><th colspan="5">@SharedLocalizer.GetLocalizedHtmlString("NoData")</th></tr>
+                }
+                @{ var i = 0;}
+                @foreach (var item in Model.ChemoLabs)
+                {
+                    <tr>
+                        <td>
+                            @item.LabName
+                        </td>
+                        <td>
+                            @item.LabDetailName
+                        </td>
+                        <td>
+                            <input asp-for="ChemoLabs[i].ID" type="hidden" value="@item.ID" />
+                            <textarea asp-for="ChemoLabs[i].TextResult" class="form-control" placeholder="Lab Text Result" cols="50">@item.TextResult</textarea>
+                            @*<input type="text" class="form-control" placeholder="Lab Text Result" value="@item.TextResult" name="LabTextResultList" />*@
+                        </td>
+                        <td>
+                            <div class="input-group">
+                                <input asp-for="ChemoLabs[i].AttachmentResultToUpload" type="file" class="form-control" />
+                                @if (!item.AttachmentResultToDownload.Equals(""))
+                                {
+                                    <a class="btn btn-info" href="@Url.Action("DownloadFile", "Patient", new { path = item.AttachmentResultToDownload })">
+                                        <i class="fa fa-download text-white"></i>
+                                    </a>
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            <input asp-for="ChemoLabs[i].Date" type="date" class="form-control datepicker" placeholder="yyyy-mm-dd" asp-format="{0:yyyy-MM-dd}"
+                                       data-provide="datepicker" data-date-autoclose="true" data-date-todayHighlight="true" data-date-format="yyyy-mm-dd" required />
+                        </td>
+                    </tr>
+                    i++;
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+

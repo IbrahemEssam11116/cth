@@ -1,0 +1,47 @@
+﻿@model SStorm.CTH.DAL.HelperClasses.EntityCollection<SStorm.CTH.DAL.EntityClasses.CTHPatientClinicalDataEntity>
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("PatientClinicalData");
+}
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("Patient")</a></li>
+                        <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("PatientList")</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">@SharedLocalizer.GetLocalizedHtmlString("Index")</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+        <div class="col-sm-12">
+            @if (Authorize(UserPermission.Patient_EditCreate))
+            {
+                <a asp-controller="Patient" asp-action="EditCreate" asp-route-ID="0" class="btn btn-info">
+                    <i class="fa fa-plus"></i> @SharedLocalizer.GetLocalizedHtmlString("NewPatient")
+                </a>
+            }
+
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group row mb-0">
+                        <div class="col-sm-12">
+                            <a class="btn btn-info btn-rounded" asp-action="Index" asp-controller="Search"><i class="fa fa-search"></i>@SharedLocalizer.GetLocalizedHtmlString("Back")</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

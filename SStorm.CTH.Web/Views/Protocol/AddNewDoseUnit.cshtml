@@ -1,0 +1,75 @@
+﻿@model SStorm.CTH.DAL.EntityClasses.CTHDoseUnitEntity
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<link href="~/assets/css/site.css" rel="stylesheet" />
+
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("EditCreate");
+    Layout = null;
+}
+
+
+<form asp-action="AddNewDoseUnit" data-ajax-method="post" data-ajax="true"
+      data-ajax-success="BindDoseUnitList">
+    <!-- start page title -->
+    <div class="color-line"></div>
+    <!-- start model header fro edit/ create -->
+    <div class="modal-header">
+        <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("DoseUnits")</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <!-- end page title -->
+    <div class="modal-body">
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="Name" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Name")</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-language"></i></span>
+                    </div>
+                    <input asp-for="Name" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("EnterName")" required type="text" />
+                </div>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="ArName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Name") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-language"></i></span>
+                    </div>
+                    <input asp-for="ArName" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("EnterName")" type="text" />
+                </div>
+                <span asp-validation-for="ArName" class="text-danger"></span>
+            </div>
+        </div>
+        *@
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal"> @SharedLocalizer.GetLocalizedHtmlString("Cancel")</button>
+            <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $('select').selectpicker({
+            dropupAuto: false
+        });
+
+    });
+    function BindDoseUnitList(response) {
+        $('#modal-add-entity').modal('hide');
+        $("#DrugEntity_DoseUnitID").empty();
+        BindCombo('DrugEntity_DoseUnitID', response, false);
+        $('#DrugEntity_DoseUnitID').selectpicker('refresh');
+        //var DoseUnits = document.getElementById("DrugEntity_DoseUnitID");
+        // var selValue = DoseUnits.options[DoseUnits.selectedIndex].value;
+    }
+
+</script>
+

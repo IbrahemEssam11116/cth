@@ -1,0 +1,92 @@
+﻿@model SStorm.CTH.Web.Models.PatientClinicalDataModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<link href="~/assets/css/site.css" rel="stylesheet" />
+
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("EditCreate");
+    Layout = null;
+}
+<form asp-action="AddNewCancerType" data-ajax-method="post" data-ajax="true"
+      data-ajax-success="BindCancertypeList">
+    <!-- start page title -->
+    <div class="color-line"></div>
+    <!-- start model header fro edit/ create -->
+    <div class="modal-header">
+        <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("CancerType")</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <!-- end page title -->
+    <div class="modal-body">
+
+
+        <input type="hidden" asp-for="CancerTypeEntity.ID" value="@Model.CancerTypeEntity.ID" />
+        <input type="hidden" asp-for="CancerTypeEntity.IsParent" value="False" />
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="CancerTypeEntity.ParentID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("CancerType")</label>
+                <select id="EveryUnit" asp-for="CancerTypeEntity.ParentID" class="form-control selectpicker" data-live-search="true" asp-items="Model.CancerList">
+                    <option selected disabled value="">
+                        @SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("CancerType")
+                    </option>
+                </select>
+                <span asp-validation-for="CancerTypeEntity.ParentID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="CancerTypeEntity.ICDCode" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("ICDCode")</label>
+                <input asp-for="CancerTypeEntity.ICDCode" class="form-control" required/>
+                <span asp-validation-for="CancerTypeEntity.ICDCode" class="text-danger"></span>
+            </div>
+        </div>
+        @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="CancerTypeEntity.ArICDCode" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("ICDCode") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input asp-for="CancerTypeEntity.ArICDCode" class="form-control" />
+                <span asp-validation-for="CancerTypeEntity.ArICDCode" class="text-danger"></span>
+            </div>
+        </div>
+        *@
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="CancerTypeEntity.TypeName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("TypeName")</label>
+                <input asp-for="CancerTypeEntity.TypeName" class="form-control" required/>
+                <span asp-validation-for="CancerTypeEntity.TypeName" class="text-danger"></span>
+            </div>
+        </div>
+        @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="CancerTypeEntity.ArTypeName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("TypeName") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input asp-for="CancerTypeEntity.ArTypeName" class="form-control" />
+                <span asp-validation-for="CancerTypeEntity.ArTypeName" class="text-danger"></span>
+            </div>
+        </div>
+        *@
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</button>
+            <button type="submit" class="btn btn-primary waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+        </div>
+    </div>
+</form>
+
+
+<script src="~/assets/ajax/Binding.js"></script>
+<script>
+    $(document).ready(function () {
+        $('select').selectpicker({
+            dropupAuto: false
+        });
+
+    });
+    function BindCancertypeList(response) {
+        debugger;
+        $('#modal-add-entity').modal('hide');
+        BindCombo('PatientClinicalData_CancerTypeID', response, false);
+        $('#PatientClinicalData_CancerTypeID').selectpicker('refresh');
+    }
+</script>

@@ -1,0 +1,133 @@
+﻿@model SStorm.CTH.Web.Models.PatientClinicalDataModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<link href="~/assets/libs/dropify/dropify.min.css" rel="stylesheet" />
+
+
+<form asp-action="EditCreateImaging" enctype="multipart/form-data" id="fileUploadForm">
+    <div class="modal-header">
+        <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("Imaging")</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" asp-for="PatientImagingEntity.ID" value="@Model.PatientImagingEntity.ID" />
+        <input type="hidden" asp-for="PatientImagingEntity.PatientClinicalDataID" value="@Model.PatientImagingEntity.PatientClinicalDataID" />
+        <input type="hidden" asp-for="PatientClinicalData.PatientID" value="@Model.PatientClinicalData.PatientID" />
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="PatientImagingEntity.ImagingTypeID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("ImagingType")</label>
+                <select asp-for="PatientImagingEntity.ImagingTypeID" class="form-control selectpicker"
+                        data-live-search="true" asp-items="@Model.ImagingTypeList" required>
+                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("ImagingType")</option>
+                </select>
+                <span asp-validation-for="PatientImagingEntity.ImagingTypeID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="PatientImagingEntity.TextResult" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("TextResult")</label>
+                <input asp-for="PatientImagingEntity.TextResult" class="form-control" />
+                <span asp-validation-for="PatientImagingEntity.TextResult" class="text-danger"></span>
+            </div>
+        </div>
+        @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="PatientImagingEntity.ArTextResult" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("TextResult") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input asp-for="PatientImagingEntity.ArTextResult" class="form-control" />
+                <span asp-validation-for="PatientImagingEntity.ArTextResult" class="text-danger"></span>
+            </div>
+        </div>
+        *@
+        @*<div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="PatientImagingEntity.Image" class="control-label">Image </label>
+                @if (Model.PatientImagingEntity.ID > 0)
+                {
+                    <input type="file" asp-for="Image" id="ProductPhoto" class="dropify" data-default-file="@Model.PatientImagingEntity.Image" />
+                }
+                else
+                {
+                    <input type="file" asp-for="Image" id="ProductPhoto" class="dropify" />
+                }
+                <span asp-validation-for="PatientImagingEntity.Image" class="text-danger"></span>
+            </div>
+        </div>*@
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="ImageAttachmentResult" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("AttachmentResult")</label>
+
+                <div class="input-group">
+                    <input asp-for="ImageAttachmentResult" class="form-control" type="file" />
+                    <span asp-validation-for="ImageAttachmentResult" class="text-danger"></span>
+
+                    @if (Model.PatientImagingEntity.AttachmentResult != "")
+                    {
+                        <a class="btn btn-dark" asp-controller="Home" asp-action="DownloadFile" asp-route-path="@Model.PatientImagingEntity.AttachmentResult">
+                            <i class="fa fa-download"></i>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="btn btn-secondary text-white" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</a>
+            <button id="btnSubmit" type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+        </div>
+    </div>
+</form>
+
+<script src="~/assets/libs/dropify/dropify.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $('select').selectpicker({
+            dropupAuto: false
+        });
+        $('.dropify').dropify({
+            messages: {
+                'default': 'Drag a file or click here to upload a file',
+                'replace': 'Drag another file or click here to change the file',
+                'remove': 'Delete',
+                'error': 'Ooops, something wrong happended.'
+            }
+        });
+        $('#fileUploadForm').submit(function (e) {
+            e.preventDefault();
+            var form = $('#fileUploadForm')[0]; // Get form
+            var data = new FormData(form); // Create an FormData object
+            $("#btnSubmit").prop("disabled", true); // disabled the submit button
+
+            $.ajax({
+                url: form.action,
+                type: form.method,
+                enctype: form.enctype,
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 600000,
+                success: function (data) {
+                    $('#modal-add-entity').modal('hide');
+                    $('#ShowImaging').html(data);
+                    $("#btnSubmit").prop("disabled", false);
+                    swal("Done", "Data Saved Successfully", "success");
+                    $(".fade").hide();
+                },
+                error: function (e) {
+                    swal("Error", "Data Don't Saved successfully", "error");
+
+                    console.log("ERROR : ", e);
+                    $("#btnSubmit").prop("disabled", false);
+
+                }
+            });
+        });
+    });
+</script>
+
+
+

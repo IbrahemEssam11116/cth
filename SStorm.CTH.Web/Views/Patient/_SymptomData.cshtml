@@ -1,0 +1,53 @@
+﻿@model SStorm.CTH.DAL.EntityClasses.CTHSymptomEntity
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<div class="table-responsive">
+    <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+        <thead> 
+            <tr>
+                <th>#</th>
+                <th>@SharedLocalizer.GetLocalizedHtmlString("Name")</th>
+                <th>@SharedLocalizer.GetLocalizedHtmlString("Grade")</th>
+                <th>@SharedLocalizer.GetLocalizedHtmlString("Description")</th>
+                <th>@SharedLocalizer.GetLocalizedHtmlString("Recommendation")</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="background-color:@Model.AlertColor"></td>
+                <td>@Model.Name</td>
+                <td>@Model.Grade</td>
+                <td>@Model.Description</td>
+                <td>@SharedLocalizer.GetLocalizedHtmlString("Recommendation")</td>
+            </tr>
+        </tbody>
+    </table>
+    @*@if (Model.CTHSymptomDrugCollection.Count > 0)
+    {
+        <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>@SharedLocalizer.GetLocalizedHtmlString("DrugName")</th>
+                    <th>@SharedLocalizer.GetLocalizedHtmlString("DrugDose")</th>
+                    <th>@SharedLocalizer.GetLocalizedHtmlString("Route")</th>
+                    <th>@SharedLocalizer.GetLocalizedHtmlString("Duration")</th>
+                    <th>@SharedLocalizer.GetLocalizedHtmlString("Every")</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CTHSymptomDrugCollection)
+                {
+                    <tr>
+                        <td>@item.CTHDrugItem.Name</td>
+                        <td>@item.CTHDrugItem.Dose @item.CTHDrugItem.CTHDoseUnitItem.Name</td>
+                        <td>@Enum.GetName(typeof(Route), item.CTHDrugItem.RouteID)</td>
+                        <td>@item.CTHDrugItem.Duration @Enum.GetName(typeof(DurationUnit), item.CTHDrugItem.DurationUnitID)</td>
+                        <td>@item.CTHDrugItem.Every @Enum.GetName(typeof(DurationUnit), item.CTHDrugItem.EveryUnitID)</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    }*@
+
+</div>

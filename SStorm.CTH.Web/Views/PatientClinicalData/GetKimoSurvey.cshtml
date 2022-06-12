@@ -1,0 +1,177 @@
+﻿@model SStorm.CTH.DAL.EntityClasses.CTHPatientClinicalDataEntity
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("ChemicalSurveySessions");
+}
+@{
+    var i = 1;
+}
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("ChemicalSurveySessions")</a></li>
+                    <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("ChemicalSurveySessions")</li>
+                </ol>
+            </div>
+            <h4 class="page-title">@SharedLocalizer.GetLocalizedHtmlString("Index")</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <a id="MainDataBtn" href="#"><h4>@SharedLocalizer.GetLocalizedHtmlString("PatientDataAndClinicalData")</h4></a>
+            <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover" id="MainDataDv">
+                <thead>
+                    <tr>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("PatientID")</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("PatientName")</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("CancerType")</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("CancerSide")</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("HistologicalSubTypeCancer")</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("MolecularSubType")</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("TumorGrade")</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("Stage")</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model.PatientID</td>
+                        <td>@Model.CTHPatientItem.PatientNameE</td>
+                        <td>@Model.CTHCancerTypeItem.TypeName</td>
+                        <td>@Model.CTHCancerSideItem.Side</td>
+                        <td>@Model.CTHCancerHistologicItem.Name</td>
+                        <td>@Model.CTHCancerMolecularItem.Name</td>
+                        <td>@Model.CTHTumorGradeItem.TumorGrade</td>
+                        <td>@Model.CTHStagingItem.Name</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <a href="#" id="KimoBtn"><h4>@SharedLocalizer.GetLocalizedHtmlString("ChemicalSurveySessions")</h4></a>
+            @if (Authorize(UserPermission.Patient_EditCreateChemo))
+            {
+                <a class="btn btn-info" asp-controller="PatientClinicalData" asp-action="EditCreateKimoSurvey" asp-route-ID="0" asp-route-DataID="@Model.ID"><i class="fa fa-plus"></i> @SharedLocalizer.GetLocalizedHtmlString("NewSession")</a>
+            }
+
+            <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover" id="KimoDv">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("Date")</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("IsSpecialCase")</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("SpecialCase")</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("ChemotherabyProtocol")</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("Cyclenumber")</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("Dayno")</th>
+                        <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.CTHKimoSurveyCollection.Count == 0)
+                    {
+                        <tr>
+                            <th scope="row" colspan="7">@SharedLocalizer.GetLocalizedHtmlString("NoData")</th>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var item in Model.CTHKimoSurveyCollection)
+                        {
+                                <tr>
+                   
+                                <td>@i</td>
+                                <td>@item.Date</td>
+                                @if (item.IsSpecialCase == true)
+                                {
+
+                                    <td>@SharedLocalizer.GetLocalizedHtmlString("Yes")</td>
+                                    <td>@item.CTHSpecialCaseItem.CaseName</td>
+                                }
+                                else
+                                {
+                                    <td>@SharedLocalizer.GetLocalizedHtmlString("No")</td>
+                                    <td>@SharedLocalizer.GetLocalizedHtmlString("NotASpecialCase")</td>
+                                }
+                                <td>@item.CTHChemotherapyProtocolItem.ProtocolName</td>
+                                <td>@item.CycleNum</td>
+                                <td>@item.Days</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-info dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false"> @SharedLocalizer.GetLocalizedHtmlString("Actions") <i class="mdi mdi-chevron-down"></i> </button>
+                                        <ul class="dropdown-menu" x-placement="top-start">
+                                            @if (Authorize(UserPermission.Patient_Delete))
+                                            {
+                                                <li>
+                                                    <a class="dropdown-item" asp-controller="PatientClinicalData" asp-action="EditCreateKimoSurvey" asp-route-ID="@item.ID"
+                                                       asp-route-DataID="@item.PatientClinicalDataID"><i class="fa fa-edit"></i> @SharedLocalizer.GetLocalizedHtmlString("Edit")</a>
+                                                </li>
+                                            }
+                                            @if (Authorize(UserPermission.Patient_ChemoDischargeNote))
+                                            {
+                                                <li>
+                                                    <a class="dropdown-item" asp-controller="Discharge" asp-action="DischargeNote" asp-route-ID="@item.ID">
+                                                        <i class="fa fa-notes-medical"></i> @SharedLocalizer.GetLocalizedHtmlString("DischargeNote")
+                                                    </a>
+                                                </li>
+                                            }
+                                            @if (Authorize(UserPermission.Patient_ChemoPrintOutSheet))
+                                            {
+                                                <li>
+                                                    <a class="dropdown-item" asp-controller="ChemotherapySheet" asp-action="PrintOutSheet" asp-route-ID="@item.ID">
+                                                        <i class="fa fa-print"></i> @SharedLocalizer.GetLocalizedHtmlString("PrintOutSheet")
+                                                    </a>
+                                                </li>
+                                            }
+                                            @if (Authorize(UserPermission.Patient_DeleteChemo))
+                                            {
+                                                <li>
+                                                    <a href="#modal-delete-entity" data-toggle="modal"
+                                                       data-url="@Url.Action("DeleteKimoSurvey", "PatientClinicalData", new { id = item.ID})"
+                                                       data-modalsize="modal-lg"
+                                                       data-modalcolor="hmodal-danger" class="dropdown-item">
+                                                        <i class="fas fa-times"></i> @SharedLocalizer.GetLocalizedHtmlString("Delete")
+                                                    </a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </td>
+                    
+                   
+                        </tr>
+                            i++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#MainDataBtn").click(function () {
+        $("#MainDataDv").toggle(1000);
+    });
+    $("#KimoBtn").click(function () {
+        $("#KimoDv").toggle(1000);
+    });
+</script>

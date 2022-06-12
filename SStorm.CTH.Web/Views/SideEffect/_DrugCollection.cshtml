@@ -1,0 +1,117 @@
+﻿@model SStorm.CTH.Web.Models.SymptomModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("SymptomsDrugsList");
+    Layout = null;
+}
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("SymptomsDrugs")</a></li>
+                        <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("SymptomsDrugsList")</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <button type="button" class="close" id="btnCloseSymptomsDrugsDiv">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <div id="ProtocolCycleDiv">
+                        @if (Authorize(UserPermission.Symptom_EditCreate))
+                        {
+                        <a href="#modal-add-entity" data-toggle="modal"
+                           data-url="@Url.Action("EditCreateDrug", "Symptom", new { ID = 0 ,SymptonID=@Model.SymptomEntity.ID})"
+                           data-modalsize="modal-lg"
+                           data-modalcolor="hmodal-danger" class="btn btn-info">
+                            <i class="fas fa-plus"></i> @SharedLocalizer.GetLocalizedHtmlString("NewDrug")
+                        </a>
+                        }
+
+
+                        <div class="table-responsive">
+                            <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Drug")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Dose")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Duration")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Files")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.SymptomEntity.CTHSymptomDrugCollection.Count() == 0)
+                                    {
+                                        <tr>
+                                            <th scope="row" colspan="7">@SharedLocalizer.GetLocalizedHtmlString("NoData")</th>
+                                        </tr>
+                                    }
+                                    @foreach (var item in Model.SymptomEntity.CTHSymptomDrugCollection)
+                                    {
+                                        <tr>
+                                            <td>@item.CTHDrugItem.Name</td>
+                                            <td>@item.CTHDrugItem.Dose</td>
+                                            <td>@item.CTHDrugItem.Duration</td>
+                                            <td>
+                                                <a href="#modal-add-entity" data-toggle="modal"
+                                                   data-url="@Url.Action("AttachmentCollection", "Symptom", new { DrugID = item.CTHDrugItem.ID})"
+                                                   data-modalsize="modal-lg"
+                                                   data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                                    <i class="fas fa-file"></i>
+                                                    @SharedLocalizer.GetLocalizedHtmlString("Files")
+                                                </a>
+                                            </td>
+                                            <td>
+                                                @if (Authorize(UserPermission.Symptom_EditCreate))
+                                                {
+                                                    <a href="#modal-add-entity" data-toggle="modal"
+                                                       data-url="@Url.Action("EditCreateDrug", "Symptom", new { ID = @item.ID ,SymptonID = @Model.SymptomEntity.ID})"
+                                                       data-modalsize="modal-lg"
+                                                       data-modalcolor="hmodal-danger" class="btn btn-info">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                }
+                                                @if (Authorize(UserPermission.Symptom_Delete))
+                                                {
+                                                    <a href="#modal-delete-entity" data-toggle="modal"
+                                                       data-url="@Url.Action("DeleteSymptomDrug", "Symptom", new {ID = item.ID})"
+                                                       data-modalsize="modal-lg"
+                                                       data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
+                                                }
+
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#btnCloseProtocolCycleDiv").click(function () {
+            $("#ProtocolCycleDiv").slideToggle(1000);
+        });
+    });
+</script>

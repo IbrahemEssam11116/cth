@@ -1,0 +1,91 @@
+﻿@model SStorm.CTH.Web.Models.PatientModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    var i = 1;
+}
+
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="table-responsive">
+                <h4>@SharedLocalizer.GetLocalizedHtmlString("PatientAssessment")</h4>
+
+                <a href="#modal-add-entity" data-toggle="modal"
+                   data-url="@Url.Action("EditCreateAssessment", "Patient", new { ID = 0, PatientID = Model.PatientEntity.ID})"
+                   data-modalsize="modal-lg"
+                   data-modalcolor="hmodal-danger" class="btn btn-info">
+                    <i class="fa fa-plus"></i> @SharedLocalizer.GetLocalizedHtmlString("NewAssessment")
+                </a>
+
+                <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("TreatmentResponse")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("TreatmentPlan")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Date")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.PatientEntity.CTHPatientAssessmentCollection)
+                        {
+                            <tr>
+                                <td>@i</td>
+                                <td>@item.CTHTreatmentTypeItem.TreatmentType</td>
+                                <td>@item.CTHTreatmentTypeItem1.TreatmentType</td>
+                                <td>@item.Date</td>
+                                <td>
+                                    <a href="#modal-add-entity" data-toggle="modal"
+                                       data-url="@Url.Action("EditCreateAssessment", "Patient", new { ID = item.ID, PatientID = item.PatientID})"
+                                       data-modalsize="modal-lg"
+                                       data-modalcolor="hmodal-danger" class="btn btn-info">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a href="#modal-delete-entity" data-toggle="modal"
+                                       data-url="@Url.Action("DeleteAssessment", "Patient", new { ID = item.ID})"
+                                       data-modalsize="modal-lg"
+                                       data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function LoadPatientAssessment(response) {
+        $('#modal-add-entity').modal('hide');
+        swal("Done", "Data Saved Successfully", "success");
+        $("#Assessment").html(response);
+    }
+
+    function LoadPatientAssessmentForDelete(response) {
+        var PatientID = response[0];
+        $('#modal-delete-entity').modal('hide');
+        $.ajax({
+            url: '@Url.Action("GetAssessments", "Patient")',
+            type: 'GET',
+            cache: false,
+            data: { ID: PatientID }
+        }).done(function (result)
+        {
+            swal("Done", "Data Deleted Successfully", "success");
+            $("#Assessment").html(result);
+        });
+    }
+
+</script>

@@ -1,0 +1,120 @@
+﻿@model SStorm.CTH.Web.Models.TreeViewNode
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    Layout = null;
+}
+
+<link href="~/assets/css/try.css" rel="stylesheet" />
+<div class="color-line"></div>
+<div class="card">
+    <div class="card-body">
+        <div class="modal-header">
+            <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("CancerType")</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div><br />
+        <div style="max-height:200px !important; overflow: auto">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-search"></i></span>
+                    </div>
+                    <input type="text" id="Search" class="form-control" placeholder="Search">
+                </div>
+            </div>
+            <div class="modal-body">
+                <partial name="_CancerTypeTreeList" model="@Model" />
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Canceel")</button>
+            <button type="button" class="btn btn-success fa fa-plus" onclick="CollapseAll()">@SharedLocalizer.GetLocalizedHtmlString("CollapseAll")</button>
+            <button type="button" class="btn btn-primary fa fa-minus" onclick="ExpandAll()">@SharedLocalizer.GetLocalizedHtmlString("ExpandAll")</button>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/ajax/Binding.js"></script>
+<script>
+    var toggler = document.getElementsByClassName("caretCencer");
+    $(document).ready(function () {
+        var i;
+        for (i = 0; i < toggler.length; i++) {
+            toggler[i].addEventListener("click", function () {
+                this.parentElement.querySelector(".nestedCencer").classList.toggle("active");
+                this.classList.toggle("caretCencer-down");
+            });
+        }
+        function Contains(text_one, text_two) {
+        if (text_one.indexOf(text_two) != -1)
+            return true;
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                }
+                else {
+                     for (i = 0; i < toggler.length; i++) {
+                            toggler[i].parentElement.querySelector(".nestedCencer").classList.toggle("active");
+                            toggler[i].classList.toggle("caretCencer-down");
+                            $(this).show();
+                     }
+                }
+            });
+        });
+    });
+    function CollapseAll() {
+        for (i = 0; i < toggler.length; i++) {
+                toggler[i].parentElement.querySelector(".nestedCencer").classList.remove("active");
+        }
+    }
+    function ExpandAll() {
+    for (i = 0; i < toggler.length; i++) {
+        toggler[i].parentElement.querySelector(".nestedCencer").classList.toggle("active");
+        toggler[i].classList.toggle("caretCencer-down");
+       }
+    }
+    function AppendCancer(CancerID, element) {
+       var NodeColor = document.getElementsByClassName("NodeColor");
+        for (i = 0; i < NodeColor.length; i++) {
+            NodeColor[i].style.backgroundColor="#FFFFFF"
+       }
+        element.style.backgroundColor = "#D3D3D3";
+        document.getElementById("PatientClinicalData_CancerTypeID").value = CancerID;
+        $('#PatientClinicalData_CancerTypeID').selectpicker('refresh');
+         $.ajax({
+                url: '@Url.Action("GethistologicalListComp", "PatientClinicalData")',
+                type: 'GET',
+                cache: false,
+                data: { ID: CancerID }
+            }).done(function (response) {
+                $("#PatientClinicalData_CancerHistologicalID").empty();
+                BindCombo('PatientClinicalData_CancerHistologicalID', response, false);
+                $('#PatientClinicalData_CancerHistologicalID').selectpicker('refresh');
+            });
+            $.ajax({
+                url: '@Url.Action("GetmolecularListComp", "PatientClinicalData")',
+                type: 'GET',
+                cache: false,
+                data: { ID: CancerID }
+            }).done(function (response) {
+                $("#PatientClinicalData_CancerMolecularID").empty();
+                BindCombo('PatientClinicalData_CancerMolecularID', response, false);
+                $('#PatientClinicalData_CancerMolecularID').selectpicker('refresh');
+            });
+        if (CancerID != 0) {
+               var x = document.getElementById("MolecularTreeBrowserLink");
+                x.classList.remove("BrrowseClass");
+                var y = document.getElementById("HistologicalBrowserLink");
+                y.classList.remove("BrrowseClass");
+                 $("#MolecularTreeBrowserLink").data('url', '/PatientClinicalData/MolecularTree?ID=' +  CancerID);
+                 $("#HistologicalBrowserLink").data('url', '/PatientClinicalData/HistologicalTree?ID=' +  CancerID);
+            }
+          //$('#modal-add-entity').modal('hide');
+    }
+</script>
+

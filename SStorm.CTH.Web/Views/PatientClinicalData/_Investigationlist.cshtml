@@ -1,0 +1,58 @@
+﻿@model SStorm.CTH.Web.Models.PatientClinicalDataModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<div class="modal-body">
+    @if (Authorize(UserPermission.Patient_ViewPatientInvestigations))
+    {
+        <ul class="nav float-right" role="tablist">
+
+            <li class="nav-item" style="margin-right:10px;">
+                <button type="button" id="Imaging" class="btn btn-light btn-rounded waves-effect waves-light"> @SharedLocalizer.GetLocalizedHtmlString("Imaging")</button>
+            </li>
+            <li class="nav-item" style="margin-right:10px;">
+                <button type="button" id="Lab" class="btn btn-light btn-rounded waves-effect waves-light"> @SharedLocalizer.GetLocalizedHtmlString("Lab")</button>
+            </li>
+
+            <li class="nav-item" style="margin-right:10px;">
+                <button type="button" id="PathologyReport" class="btn btn-light btn-rounded waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("PathologyReport")</button>
+            </li>
+
+        </ul><br />
+
+
+        <div class="tab-content">
+            <div id="ShowImaging" class="">
+                <partial name="_PatientImaging" model="@Model" />
+            </div>
+            <div id="ShowLab" class="" style="display:none;">
+                <partial name="_PatientLab" model="@Model" />
+            </div>
+            <div id="ShowPathologyReport" class="" style="display:none;">
+                <partial name="_PatientPathologyReport" model="@Model" />
+            </div>
+        </div>
+    }
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#Imaging").click(function () {
+            $("#ShowLab").hide();
+            $("#ShowPathologyReport").hide();
+            $("#ShowImaging").toggle(1000);
+        });
+        $("#Lab").click(function () {
+            $("#ShowPathologyReport").hide();
+            $("#ShowImaging").hide();
+            $("#ShowLab").toggle(1000);
+        });
+        $("#PathologyReport").click(function () {
+            $("#ShowLab").hide();
+            $("#ShowImaging").hide();
+            $("#ShowPathologyReport").toggle(1000);
+        });
+
+    });
+</script>

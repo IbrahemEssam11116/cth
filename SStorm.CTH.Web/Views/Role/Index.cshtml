@@ -1,0 +1,127 @@
+﻿@model SearchFacade<SStorm.CTH.DAL.EntityClasses.CTHRoleEntity>
+@using X.PagedList.Mvc.Core.Fluent;
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+}
+<link href="~/assets/css/PagedList.css" rel="stylesheet" />
+<link href="~/assets/css/footable.bootstrap.css" rel="stylesheet" />
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+@Html.SmartModal("modal-add-entity", ModalSize.Large, ModalType.Default, "static")
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("Roles");
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("RolesList")</a></li>
+                        <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("RolesList")</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">@SharedLocalizer.GetLocalizedHtmlString("Roles")</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <div class=" form-group row">
+                        <div class="col-md-12">
+                            <form asp-action="Index" asp-controller="Role">
+                                <div class="input-group">
+                                    @Html.TextBox("searchString", "", new { @class = "form-control", placeholder = "Search" })
+
+                                    <button type="submit" class="btn  btn-sm btn-info"><i class="fa fa-search"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <div class="float-left">
+                                    @if (Authorize(UserPermission.Role_EditCreate))
+                                    {
+                                        <a asp-controller="Role" asp-action="EditCreate" asp-route-ID="0" class="btn btn-info btn-sm header-button-top my-2">
+                                            <i class="fa fa-plus"></i>&nbsp; @SharedLocalizer.GetLocalizedHtmlString("AddNew")
+                                        </a>
+                                    }
+
+                                </div>
+                                <div class="float-right">
+                                    @(Html.Pager(Model.DataPagedList).Url(Page => Url.Action("Index", new { Page })).Build())
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id-="RoleTable" class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("RoleName")</th>
+                                    <th data-breakpoints="xs">@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                   @foreach (var item in Model.DataPagedList)
+                                    {
+                                        <tr>
+                                            <td>@item.RoleNmae</td>
+                                            <td>
+                                                @if (Authorize(UserPermission.Role_EditCreate))
+                                                {
+                                                    <a asp-controller="Role" asp-action="EditCreate" asp-route-ID=" @item.ID" class="btn btn-info">
+                                                        <i class="fa fa-edit"></i>   @SharedLocalizer.GetLocalizedHtmlString("Edit")
+                                                    </a>
+                                                }
+                                                @if (Authorize(UserPermission.Role_Delete))
+                                                {
+                                                    <a href="#modal-delete-entity" data-toggle="modal"
+                                                       data-url="@Url.Action("Delete", "Role", new { id = @item.ID })"
+                                                       data-modalsize="modal-lg"
+                                                       data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                                        <i class="fa fa-brush"></i>  @SharedLocalizer.GetLocalizedHtmlString("Delete")
+                                                    </a>
+                                                }
+                                                @if (Authorize(UserPermission.Role_ViewPermissions))
+                                                {
+                                                    <a class="btn btn-dark" asp-controller="Permission" asp-action="EditCreate" asp-route-ID="@item.ID">
+                                                        <i class="fa fa-user"></i> @SharedLocalizer.GetLocalizedHtmlString("Permissions")
+                                                    </a>
+                                                }
+                                            </td>
+
+                                        </tr>
+                                    }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/js/footable.js"></script>
+<script src="~/assets/js/moment.min.js"></script>
+<script type="text/javascript">
+
+    jQuery(function ($) {
+        $('.table').footable();
+    });
+
+</script>

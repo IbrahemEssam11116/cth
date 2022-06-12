@@ -1,0 +1,97 @@
+﻿@model SStorm.CTH.DAL.EntityClasses.CTHPatientSymptomEntity
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("PatientSymptom") ;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("PatientSymptom")</a></li>
+                        <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("PatientSymptom")</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Patient Name: @Model.CTHPatientItem.PatientNameE</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Name")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Description")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Grade")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Duration")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Date")</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@Model.CTHSymptomItem.Name</td>
+                                    <td>@Model.CTHSymptomItem.Description</td>
+                                    <td>@Model.CTHSymptomItem.Grade</td>
+                                    <td>@Model.SymptomDurationAmount @Enum.GetName(typeof(DurationUnit), Model.SymptomDurationUnit)</td>
+                                    <td>@Model.Date</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="EditCreatePatientSymptoms">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form asp-controller="Patient" asp-action="EditCreatePatientSymptoms">
+                            <div class="modal-header">
+                                <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("Edit") @SharedLocalizer.GetLocalizedHtmlString("PatientSymptom")</h4>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" asp-for="PatientID" value="@Model.PatientID" />
+                                <input type="hidden" asp-for="ID" value="@Model.ID" />
+                                <input type="hidden" value="@ViewBag.NotifID" name="NotifID" />
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <label asp-for="EnDoctorRecommendation" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("EnglishDocRecommendation")</label>
+                                        <input asp-for="EnDoctorRecommendation" class="form-control" />
+                                        <span asp-validation-for="EnDoctorRecommendation"></span>
+                                    </div>
+                                </div>
+                                @*
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <label asp-for="ArDoctorRecommendation" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("ArabicDocRecommendation")</label>
+                                        <input asp-for="ArDoctorRecommendation" class="form-control" />
+                                        <span asp-validation-for="ArDoctorRecommendation"></span>
+                                    </div>
+                                </div>
+                                *@
+                            </div>
+                            <div class="modal-footer">
+                                <a asp-controller="" asp-action="" class="btn btn-secondary waves-effect">@SharedLocalizer.GetLocalizedHtmlString("Back")</a>
+                                <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

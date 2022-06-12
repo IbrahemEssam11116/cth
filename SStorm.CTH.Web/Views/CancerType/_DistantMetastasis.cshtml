@@ -1,0 +1,105 @@
+﻿@model SStorm.CTH.Web.Models.TreeViewNode
+@using SStorm.CTH.Web.Resources
+
+@inject LocService SharedLocalizer
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+<div class="card">
+    <div class="card-body">
+        <div class="modal-body">
+            @if (Authorize(UserPermission.CancerType_AssignStageToTNM))
+            {
+                <a href="#modal-add-entity" data-toggle="modal"
+                   data-url="@Url.Action("EditCreateTNM", "CancerType", new { CancerTypeID = Model.CancerType.ID , ID = 0,Type = 3})"
+                   data-modalsize="modal-lg"
+                   data-modalcolor="hmodal-danger" class="btn btn-info">
+                    <i class="fas fa-plus"></i>New Tumer Size
+                </a>
+            }
+            <div class="table-responsive">
+                <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Number</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Description</th>
+                            <th>Remarks</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    @if (Model.CancerType.CTHStagingCollection.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="5"><span>No Data</span></td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model.CancerType.CTHTNMStagingCollection)
+                        {
+                            if (item.TNMTypeID == 3)
+                            {
+
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td title="@item.Number" style="cursor:pointer;">@item.Number</td>
+                                    <td title="@item.TNMFrom" style="cursor:pointer;">@item.TNMFrom</td>
+                                    <td title="@item.TNMTo" style="cursor:pointer;">@item.TNMTo</td>
+                                    <td title="@item.Description" style="cursor:pointer;">@item.Description</td>
+                                    <td title="@item.Remarks" style="cursor:pointer;">@item.Remarks</td>
+
+                                    <td>
+                                        @if (Authorize(UserPermission.CancerType_AssignStageToTNM))
+                                        {
+                                            <a href="#modal-add-entity" data-toggle="modal"
+                                               data-url="@Url.Action("EditCreateTNM", "CancerType", new { CancerTypeID = Model.CancerType.ID, ID = item.ID,Type = item.TNMTypeID})"
+                                               data-modalsize="modal-lg"
+                                               data-modalcolor="hmodal-danger" class="btn btn-info">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        }
+                                        @if (Authorize(UserPermission.CancerType_DeleteTNMStaging))
+                                        {
+                                            <a href="#modal-delete-entity" data-toggle="modal"
+                                               data-url="@Url.Action("DeleteStagingMatrix", "CancerType", new {ID = item.ID})"
+                                               data-modalsize="modal-lg"
+                                               data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function LoadStagingList(response) {
+        $('#modal-add-entity').modal('hide');
+        if (response == 2) {
+            swal("Error", "Data not Saved", "error");
+        }
+        else {
+            $.ajax({
+                url: '@Url.Action("TNMStaging", "CancerType")',
+                type: 'GET',
+                cache: false,
+                data: { CancerTypeID: @Model.CancerType.ID}
+            }).done(function (result) {
+                $('#dvTumerSize').html(result);
+                console.log(result)
+                swal("Done", "Data Saved Successfully", "success");
+            });
+        }
+    }
+</script>
+
+<script src="~/assets/ajax/jquery.unobtrusive-ajax.js"></script>

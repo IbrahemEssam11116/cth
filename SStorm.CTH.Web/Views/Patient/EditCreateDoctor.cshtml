@@ -1,0 +1,132 @@
+﻿@model DoctorModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    Layout = null;
+}
+
+
+<form asp-action="EditCreateDoctor" id="DoctorForm">
+    <!-- start page title -->
+    <div class="color-line"></div>
+    <!-- start model header for edit/ create -->
+    <div class="modal-header">
+        <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("Doctor")</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <input type="hidden" asp-for="DoctorEntity.ID" />
+        <input type="hidden" asp-for="DoctorEntity.CTHUserItem.ID" />
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label asp-for="DoctorEntity.Name" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Name")</label>
+                <input asp-for="DoctorEntity.Name" class="form-control" required />
+                <span asp-validation-for="DoctorEntity.Name" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="DoctorEntity.Degree" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Degree")</label>
+                <input asp-for="DoctorEntity.Degree" class="form-control" required />
+                <span asp-validation-for="DoctorEntity.Degree" class="text-danger"></span>
+            </div>
+            @*
+            <div class="col-md-6">
+                <label asp-for="DoctorEntity.ArName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Name") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input asp-for="DoctorEntity.ArName" class="form-control" />
+                <span asp-validation-for="DoctorEntity.ArName" class="text-danger"></span>
+            </div>
+            *@
+        </div>
+        @*
+            <div class="form-group row">
+
+
+            <div class="col-md-6">
+                <label asp-for="DoctorEntity.ArDegree" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Degree") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input asp-for="DoctorEntity.ArDegree" class="form-control" />
+                <span asp-validation-for="DoctorEntity.ArDegree" class="text-danger"></span>
+            </div>
+
+        </div>
+        *@
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label asp-for="DoctorEntity.ContactNumber" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Contactnumber")</label>
+                <input asp-for="DoctorEntity.ContactNumber" class="form-control" required />
+                <span asp-validation-for="DoctorEntity.ContactNumber" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="DoctorEntity.CTHUserItem.Email" class="control-label"> @SharedLocalizer.GetLocalizedHtmlString("Email")</label>
+                <input asp-for="DoctorEntity.CTHUserItem.Email" class="form-control" required />
+                <span asp-validation-for="DoctorEntity.CTHUserItem.Email" class="text-danger"></span>
+            </div>
+            @*
+            <div class="col-md-6">
+                <label asp-for="DoctorEntity.ArContactNumber" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Contactnumber") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input asp-for="DoctorEntity.ArContactNumber" class="form-control" />
+                <span asp-validation-for="DoctorEntity.ArContactNumber" class="text-danger"></span>
+            </div>
+            *@
+        </div>
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label asp-for="DoctorEntity.CTHUserItem.UserName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("username")</label>
+                <input asp-for="DoctorEntity.CTHUserItem.UserName" class="form-control" required />
+                <span asp-validation-for="DoctorEntity.CTHUserItem.UserName" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="DoctorEntity.CTHUserItem.Password" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Password")</label>
+                <input asp-for="DoctorEntity.CTHUserItem.Password" class="form-control" type="password" required />
+                <span asp-validation-for="DoctorEntity.CTHUserItem.Password" class="text-danger"></span>
+            </div>
+        </div>
+        @*
+        <div class="form-group row">
+
+        </div>
+        *@
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal"> @SharedLocalizer.GetLocalizedHtmlString("Cancel")</button>
+            <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+        </div>
+    </div>
+</form>
+
+
+<script src="~/assets/ajax/Binding.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#DoctorForm').submit(function (e) {
+            e.preventDefault();
+            var form = $('#DoctorForm')[0]; // Get form
+            var data = new FormData(form); // Create an FormData object
+            debugger;
+            $.ajax({
+                url: form.action,
+                type: form.method,
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 600000,
+                success: function (data) {
+                    if (data != 0) {
+                        $('#modal-add-entity').modal('hide');
+                        BindCombo('PatientEntity_DoctorID', data, false);
+                        $('#PatientEntity_DoctorID').selectpicker('refresh');
+                    }
+                    else {
+                        $('#modal-add-entity').modal('hide');
+                        swal("Error", "Error ,Change Your UserName Or Email", "error");
+                    }
+                },
+                error: function (e) {
+                    swal("Error", "Data Don't Saved successfully", "error");
+                    console.log("ERROR : ", e);
+                }
+            });
+        });
+    });
+</script>

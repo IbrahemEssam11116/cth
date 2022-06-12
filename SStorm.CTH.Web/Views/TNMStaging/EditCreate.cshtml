@@ -1,0 +1,107 @@
+﻿@model SStorm.CTH.DAL.EntityClasses.CTHTNMStagingEntity
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<form asp-action="EditCreate" id="FormData">
+    <div class="color-line"></div>
+
+    <div class="modal-header">
+        <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("TNMStage")</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" asp-for="ID" value="@Model.ID" />
+        <input type="hidden" asp-for="TNMTypeID" value="@Model.TNMTypeID" />
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="Name" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Name")</label>
+                <input asp-for="Name" class="form-control" required />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="ArName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Name") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input asp-for="ArName" class="form-control" />
+                <span asp-validation-for="ArName" class="text-danger"></span>
+            </div>
+        </div>
+        *@
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="Number" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Number")</label>
+                <input asp-for="Number" class="form-control" />
+                <span asp-validation-for="Number" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="Description" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Description")</label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+        @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="ArDescription" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Description") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <textarea asp-for="ArDescription" class="form-control"></textarea>
+                <span asp-validation-for="ArDescription" class="text-danger"></span>
+            </div>
+        </div>
+        *@
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label asp-for="TNMFrom" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("From")</label>
+                <input asp-for="TNMFrom" class="form-control" type="number" required />
+                <span asp-validation-for="TNMFrom" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="TNMTo" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("To")</label>
+                <input asp-for="TNMTo" class="form-control" type="number" required />
+                <span asp-validation-for="TNMTo" class="text-danger"></span>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</button>
+
+        <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $('#FormData').submit(function (e) {
+            e.preventDefault();
+            var form = $('#FormData')[0]; // Get form
+            var data = new FormData(form); // Create an FormData object
+            $.ajax({
+                url: form.action,
+                type: form.method,
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 600000,
+                success: function (data) {
+                    $('#modal-add-entity').modal('hide');
+                      if (@Model.TNMTypeID==1) {
+                             $('#T').html(data);
+                        }
+                            else if (@Model.TNMTypeID==2) {
+                             $('#N').html(data);
+                        }
+                        else if (@Model.TNMTypeID==3) {
+                             $('#M').html(data);
+                        }
+                    swal("Done", "Data Saved Successfully", "success");
+                    $(".fade").hide();
+                },
+            });
+        });
+    });
+</script>

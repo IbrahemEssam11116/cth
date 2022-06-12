@@ -1,0 +1,98 @@
+﻿@model SStorm.CTH.Web.Models.TreeViewNode
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    ViewData["Title"] = "EditCreate";
+}
+<link href="~/assets/css/try.css" rel="stylesheet" />
+
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("Definitions")</a></li>
+                    <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("CancerDefinitions")</li>
+                </ol>
+            </div>
+            <h4 class="page-title">@SharedLocalizer.GetLocalizedHtmlString("CancerDefinitions")</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+
+    <div class="col-xl-3">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title">@SharedLocalizer.GetLocalizedHtmlString("CancerType")</h4>
+
+                <div id="Cancer" class="tab-pane show active" role="tabpanel" aria-labelledby="Cancer-tab">
+                    <div>
+                        @if (Authorize(UserPermission.CancerType_EditCreate))
+                        {
+                            <a href="#modal-add-entity" data-toggle="modal"
+                               data-url="@Url.Action("EditCreate", "CancerType", new { ID = 0 })"
+                               data-modalsize="modal-lg"
+                               data-modalcolor="hmodal-danger" class="btn btn-info">
+                                <i class="fas fa-plus"></i>@SharedLocalizer.GetLocalizedHtmlString("AddNewCancerType")
+                            </a>
+                        }
+                        <br /><br />
+                        <div id="CancerType">
+                            <partial name="CancerTypeList" model="@Model" />
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-9">
+        <div class="card">
+            <div class="card-body">
+                <div id="CancerTypeDetails">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var toggler = document.getElementsByClassName("caretCencer");
+    var i;
+        for (i = 0; i < toggler.length; i++) {
+        toggler[i].addEventListener("click", function () {
+            this.parentElement.querySelector(".nestedCencer").classList.toggle("active");
+            this.classList.toggle("caretCencer-down");
+        });
+    }
+
+    function GetCancerDetails(cancerTypeID) {
+        $.ajax({
+            url: '@Url.Action("GetCancerDetails", "CancerType")',
+            type: 'GET',
+            cache: false,
+            data: { ID: cancerTypeID}
+        }).done(function (result)
+        {
+            $('#CancerTypeDetails').html(result);
+        });
+    }
+    //$(document).ready(function () {
+    //    $("#CancerType").load("/CancerType/CancerTypeList");
+    //});
+
+
+</script>

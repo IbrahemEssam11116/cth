@@ -1,0 +1,93 @@
+﻿@model SStorm.CTH.DAL.EntityClasses.CTHLabDetailEntity
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("LabDetailConditionList");
+}
+
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("LabDetailCondition")</a></li>
+                        <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("LabDetailConditionList")</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="dvEditCreateLabDetCondition"></div>
+            <div class="card">
+                <div class="card-body">
+                    @if (Authorize(UserPermission.CancerType_EditCreateLab))
+                    {
+                        <a href="#" class="btn btn-info" onclick="EditCreateLabDetCondition(0);">
+                            <i class="fas fa-plus"></i> @SharedLocalizer.GetLocalizedHtmlString("NewLabDetailCondition")
+                        </a>
+                    }
+                    <br />
+                    <div class="table-responsive">
+                        <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Condition")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("NoData")</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.CTHLabDetailConditionCollection.Count() == 0)
+                                {
+                                    <tr>
+                                        <th scope="row" colspan="7">@SharedLocalizer.GetLocalizedHtmlString("NoData")</th>
+                                    </tr>
+                                }
+                                @foreach (var item in Model.CTHLabDetailConditionCollection)
+                                {
+                                    <tr title="@item.Message">
+                                        <td>@item.Condition</td>
+                                        <td>
+                                            @if (Authorize(UserPermission.CancerType_EditCreateLab))
+                                            {
+                                                <a href="#" class="btn btn-info" onclick="EditCreateLabDetCondition(@item.ID);">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                            }
+                                            @if (Authorize(UserPermission.CancerType_DeleteLab))
+                                            {
+                                                <a href="#modal-delete-entity" data-toggle="modal"
+                                                   data-url="@Url.Action("DeleteLabDetailCondition", "Protocol", new { ID = item.ID})"
+                                                   data-modalsize="modal-lg"
+                                                   data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function EditCreateLabDetCondition(id) {
+        $("#dvEditCreateLabDetCondition").show();
+        $("#dvEditCreateLabDetCondition").load("/Protocol/EditCreateLabDetailCondition/" + id + "?LabDetailID=" + @Model.ID);
+    }
+</script>

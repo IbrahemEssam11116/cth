@@ -1,0 +1,52 @@
+﻿@model SStorm.CTH.DAL.EntityClasses.CTHPathologyReportTypeEntity
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<form asp-action="EditCreate">
+    <div class="modal-body">
+        <div class="form-group row" style="display:none;">
+            <label asp-for="ID" class="col-md-3 col-form-label"></label>
+            <div class="col-md-12">
+                <input asp-for="ID" readonly="" class="form-control" />
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="Name" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("PathologyReportName")</label>
+                <input asp-for="Name" class="form-control" required />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="ArName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("PathologyReportName") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input asp-for="ArName" class="form-control"  />
+                <span asp-validation-for="ArName" class="text-danger"></span>
+            </div>
+        </div>
+        *@
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="Remarks" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Remarks")</label>
+                <textarea asp-for="Remarks" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+        </div>
+        @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="ArRemarks" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Remarks") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <textarea asp-for="ArRemarks" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="ArRemarks" class="text-danger"></span>
+            </div>
+        </div>
+        *@
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</button>
+
+        <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+    </div>
+</form>

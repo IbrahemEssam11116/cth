@@ -1,0 +1,47 @@
+﻿@model DrugModel
+@{
+    Layout = null;
+}
+
+    <tr id='Drug@(Model.Index)'>
+        <td hidden>
+            <input type="hidden" asp-for="PatientDrugEntity.ID" name="KimoSurveyEntity.CTHPatientDrugCollection[@Model.Index].ID" value="@Model.PatientDrugEntity.ID" />
+            <input type="hidden" asp-for="PatientDrugEntity.Date" name="KimoSurveyEntity.CTHPatientDrugCollection[@Model.Index].Date" value="@Model.PatientDrugEntity.Date" />
+            <input type="hidden" asp-for="PatientDrugEntity.IsNew" name="KimoSurveyEntity.CTHPatientDrugCollection[@Model.Index].IsNew" value="@Model.PatientDrugEntity.IsNew" />
+            <input type="hidden" asp-for="PatientDrugEntity.DrugID" name="KimoSurveyEntity.CTHPatientDrugCollection[@Model.Index].DrugID" value="@Model.DrugEntity.ID" />
+            <input type="hidden" asp-for="PatientDrugEntity.KimoID" name="KimoSurveyEntity.CTHPatientDrugCollection[@Model.Index].KimoID" value="@Model.PatientDrugEntity.KimoID" />
+
+        </td>
+        <td class="text-center border-right-0 border-bottom-0">
+            <button type="button" data-toggle="tooltip" class="btn btn-icon btn-outline-danger btn-lg" onclick="DeleteRowDrug('Drug@(Model.Index)')">
+                <i class="fa fa-trash"></i>
+            </button>
+        </td>
+        <td>
+            <input type="hidden" value="@Model.DrugEntity.ID" class="IDDru" />
+            @Model.DrugEntity.Name
+        </td>
+        <td>
+            @Model.DrugEntity.Every  @Enum.GetName(typeof(EveryUnit), @Model.DrugEntity.EveryUnitID)
+        </td>
+        <td>
+            @Model.DrugEntity.Duration  @Enum.GetName(typeof(DurationUnit), @Model.DrugEntity.DurationUnitID)
+        </td>
+        <td>
+            <input type="hidden" asp-for="PatientDrugEntity.DoseModification" value="@Model.DrugEntity.Dose" name="KimoSurveyEntity.CTHPatientDrugCollection[@Model.Index].DosePercentage" />
+            @Model.DrugEntity.Dose @Model.DrugEntity.CTHDoseUnitItem.Name
+        </td>
+        <td>
+            @Enum.GetName(typeof(Route), @Model.DrugEntity.RouteID)
+        </td>
+        <td>
+            @foreach (var item in Model.DrugEntity.CTHDrugDayCollection)
+            {
+                <span>@item.Day , </span>
+            }
+        </td>
+        <td>
+            <input asp-for="PatientDrugEntity.Date" type="hidden" value="@Model.PatientDrugEntity.Date" />
+            @Model.PatientDrugEntity.Date
+        </td>
+    </tr>

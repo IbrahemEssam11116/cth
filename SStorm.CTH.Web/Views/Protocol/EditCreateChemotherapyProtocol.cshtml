@@ -1,0 +1,357 @@
+﻿@model SStorm.CTH.Web.Models.ChemotherapyProtocolModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("EditCreate");
+}
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                    </ol>
+                </div>
+                <h4 class="page-title">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("Protocol")</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="card">
+        <div class="card-body">
+            <button type="button" class="close" id="btnCloseform">
+                <span aria-hidden="true">×</span>
+            </button>
+            <div class="modal-body">
+
+                <form asp-action="EditCreateChemotherapyProtocol" id="formdiv">
+                    <div class="form-group row" style="display:none;">
+                        <input asp-for="ChemotherapyProtocolEntity.ID" class="form-control" value="@Model.ChemotherapyProtocolEntity.ID" />
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label asp-for="ChemotherapyProtocolEntity.ProtocolName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("ProtocolName")</label>
+                            <input asp-for="ChemotherapyProtocolEntity.ProtocolName" class="form-control" required />
+                            <span asp-validation-for="ChemotherapyProtocolEntity.ProtocolName" class="text-danger"></span>
+                        </div>
+                        @*
+            <div class="col-md-6">
+                <label asp-for="ChemotherapyProtocolEntity.ArProtocolName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("ProtocolName") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input asp-for="ChemotherapyProtocolEntity.ArProtocolName" class="form-control" />
+                <span asp-validation-for="ChemotherapyProtocolEntity.ArProtocolName" class="text-danger"></span>
+            </div>
+                        *@
+                        <div class="col-md-6">
+                            <label asp-for="ChemotherapyProtocolEntity.Days" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Number Of Cycles")</label>
+                            <input min="1" asp-for="ChemotherapyProtocolEntity.Days" class="form-control" required />
+                            <span asp-validation-for="ChemotherapyProtocolEntity.Days" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+
+                        <div class="col-md-6">
+                            <label class="control-label" asp-for="ChemotherapyProtocolEntity.CancerTypeID">@SharedLocalizer.GetLocalizedHtmlString("CancerType")</label>
+                            <div class="bootstrap-filestyle input-group">
+                                <select asp-for="ChemotherapyProtocolEntity.CancerTypeID" class="form-control selectpicker"
+                                        data-live-search="true" asp-items="@Model.CancerTypeList" required>
+                                    <option selected disabled value="0">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("CancerType")</option>
+                                </select>
+                                <span asp-validation-for="ChemotherapyProtocolEntity.CancerTypeID" class="text-danger"></span>
+                                <span class="group-span-filestyle input-group-btn" tabindex="0">
+                                    <label for="filestyle-3" style="margin-bottom: 0;">
+                                        <!--browse button-->
+                                        <a href="#modal-add-entity" data-toggle="modal"
+                                           data-url="@Url.Action("CancerTypeTree", "Protocol")"
+                                           data-modalsize="modal-lg"
+                                           data-modalcolor="hmodal-danger" class="btn btn-info">
+                                            <i class="fa fa-fw fa-search-plus"></i>
+                                            @SharedLocalizer.GetLocalizedHtmlString("Browse")
+                                        </a>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="ChemotherapyProtocolEntity.EmetodenicRiskID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Emetodenicrisk")</label>
+                            <select asp-for="ChemotherapyProtocolEntity.EmetodenicRiskID" class="form-control selectpicker"
+                                    data-live-search="true" asp-items="@Model.EmatogenicRiskList" required>
+                                <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("Emetodenicrisk")</option>
+                            </select>
+                            <span asp-validation-for="ChemotherapyProtocolEntity.EmetodenicRiskID" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+
+                        <div class="col-md-6">
+                            <label asp-for="ChemotherapyProtocolEntity.PremedicationID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Premedication")</label>
+                            <div class="bootstrap-filestyle input-group">
+                                <select asp-for="ChemotherapyProtocolEntity.PremedicationID" class="form-control selectpicker" data-live-search="true" asp-items="Model.PreMedicationList" required style="overflow:scroll; ">
+                                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("Premedication")</option>
+                                </select>
+                                <span class="group-span-filestyle input-group-btn" tabindex="0">
+                                    <label for="filestyle-3" style="margin-bottom: 0;">
+                                        @if (Authorize(UserPermission.Premedication_EditCreate))
+                                        {
+                                            <a href="#modal-add-entity" data-toggle="modal"
+                                               data-url="@Url.Action("AddNewPremidication", "Protocol")"
+                                               data-modalsize="modal-lg"
+                                               data-modalcolor="hmodal-danger" class="btn btn-info">
+                                                <i class="fa fa-plus"></i>
+                                            </a>
+                                        }
+                                    </label>
+                                </span>
+                            </div>
+                            <span asp-validation-for="ChemotherapyProtocolEntity.PremedicationID" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label asp-for="ChemotherapyProtocolEntity.IsGrowthFactor" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Isgrowthfactor")</label>
+                            <input id="growthfactor" asp-for="ChemotherapyProtocolEntity.IsGrowthFactor" type="checkbox" />
+                            <span asp-validation-for="ChemotherapyProtocolEntity.IsGrowthFactor" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="ChemotherapyProtocolEntity.IsAntimicrobial" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Isantimicrobial")</label>
+                            <input asp-for="ChemotherapyProtocolEntity.IsAntimicrobial" type="checkbox" id="Antimicrobialcheck"/>
+                            <span asp-validation-for="ChemotherapyProtocolEntity.IsAntimicrobial" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row d-none" id="growth">
+
+                                <input type="text" class="form-control col-md-3" id="drugitem" />
+                                <a class="btn btn-warning" id="btnnewdrug"><i class="fa fa-plus"></i></a>
+
+                            </div>
+                            <div class="form-group row" id="items">
+
+                                <div class="card">
+                                    <div class="card-header bg-primary">
+                                        <h4 class="card-title mb-0 text-light">Growth Factor Drug List</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <textarea class="form-control" style="display:block" asp-for="ChemotherapyProtocolEntity.GrowthFactorDrug" id="drugitems" readonly="readonly"></textarea>
+                                        <a id="Edit" class="btn btn-primary mt-1 text-light">Edit</a>
+                                        <a id="Save" class="btn btn-success mt-1 text-light d-none">Save</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row d-none" id="antimicrobial">
+
+                                <input type="text" class="form-control col-md-3" id="antimicrobialitem" />
+                                <a class="btn btn-warning" id="antimicrobialbtndrug"><i class="fa fa-plus"></i></a>
+
+                            </div>
+                            <div class="form-group row" id="antimicrobialitems">
+
+                                <div class="card">
+                                    <div class="card-header bg-primary">
+                                        <h4 class="card-title mb-0 text-light">Antimicrobial Drug List</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <textarea class="form-control" asp-for="ChemotherapyProtocolEntity.AntimicrobialDrug" id="antimicrobialdrugitems" readonly="readonly"></textarea>
+                                        <a id="Editantimicrobial" class="btn btn-primary mt-1 text-light">Edit</a>
+                                        <a id="Saveantimicrobial" class="btn btn-success mt-1 text-light d-none">Save</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-secondary" asp-controller="Protocol" asp-action="Index" asp-route-CancerTypeID="@Model.ChemotherapyProtocolEntity.CancerTypeID">@SharedLocalizer.GetLocalizedHtmlString("Back")</a>
+                            <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Model.ChemotherapyProtocolEntity.ID > 0)
+{
+    <div class="card">
+        <div class="card-body">
+            <ul class="nav nav-tabs nav-bordered" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="Drug-tab-b1" data-toggle="tab" href="#Drug-b1" role="tab" aria-controls="Drug-b1" aria-selected="false">
+                        <span class="d-block d-sm-none"><i class="fa fa-home"></i></span>
+                        <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("Drugs")</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="Lab-tab-b1" data-toggle="tab" href="#Lab-b1" role="tab" aria-controls="Lab-b1" aria-selected="true">
+                        <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
+                        <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("Labs")</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="ProtocolCycle-tab-b1" data-toggle="tab" href="#ProtocolCycle-b1" role="tab" aria-controls="ProtocolCycle-b1" aria-selected="false">
+                        <span class="d-block d-sm-none"><i class="fa fa-envelope-o"></i></span>
+                        <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("ProtocolCycles")</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane show active" id="Drug-b1" role="tabpanel" aria-labelledby="Drug-tab-b1">
+                    @if (Authorize(UserPermission.CancerType_ViewProtocolDrugs))
+                    {
+                        <partial name="_DrugCollection" model="@Model" />
+                    }
+                </div>
+                <div class="tab-pane" id="Lab-b1" role="tabpanel" aria-labelledby="Lab-tab-b1">
+                    @if (Authorize(UserPermission.CancerType_ViewProtocolLabs))
+                    {
+                        <partial name="_LabCollection" model="@Model" />
+                    }
+                </div>
+                <div class="tab-pane" id="ProtocolCycle-b1" role="tabpanel" aria-labelledby="ProtocolCycle-tab-b1">
+                    @if (Authorize(UserPermission.CancerType_ViewProtocolCycles))
+                    {
+                        <partial name="_ProtocolCycleCollection" model="@Model" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@*<div class="DrugList">
+        @if (Authorize(UserPermission.CancerType_ViewProtocolDrugs))
+        {
+            @if (Model.ChemotherapyProtocolEntity.ID > 0)
+            {
+                <partial name="_DrugCollection" model="@Model" />
+            }
+        }
+    </div>
+    <div class="LabList">
+        @if (Authorize(UserPermission.CancerType_ViewProtocolLabs))
+        {
+            @if (Model.ChemotherapyProtocolEntity.ID > 0)
+            {
+                <partial name="_LabCollection" model="@Model" />
+            }
+        }
+    </div>
+    <div class="ProtocolCycleList">
+        @if (Authorize(UserPermission.CancerType_ViewProtocolCycles))
+        {
+            @if (Model.ChemotherapyProtocolEntity.ID > 0)
+            {
+                <partial name="_ProtocolCycleCollection" model="@Model" />
+            }
+        }
+    </div>*@
+<script src="~/assets/ajax/Binding.js"></script>
+<script>
+$(document).ready(function () {
+    $("#btnCloseform").click(function () {
+        $("#formdiv").slideToggle(1000);
+    })
+    if ($('#growthfactor').is(":checked")) {
+
+        $('#growth').removeClass('d-none')
+    } else {
+        $('#growth').addClass('d-none')
+
+    }
+    $('#growthfactor').on('change', function () {
+
+        if ($('#growthfactor').is(":checked")) {
+        $('#growth').removeClass('d-none')
+        } else {
+            $('#growth').addClass('d-none')
+
+        }
+    });
+
+    var arr = []
+    $('#btnnewdrug').on('click', function () {
+        $('#drugitems').append($('#drugitem').val()).append('        ')
+        $('#drugitem').val("")
+    });
+
+    $("#Edit").on('click', function () {
+
+        $('#drugitems').removeAttr('readonly')
+        $("#Edit").addClass('d-none')
+        $("#Save").removeClass('d-none')
+
+    });
+
+    $("#Save").on('click', function () {
+
+        $('#drugitems').attr('readonly','readonly')
+        $("#Edit").removeClass('d-none')
+        $("#Save").addClass('d-none')
+
+    });
+
+
+
+
+    if ($('#Antimicrobialcheck').is(":checked")) {
+
+        $('#antimicrobial').removeClass('d-none')
+    } else {
+        $('#antimicrobial').addClass('d-none')
+
+    }
+    $('#Antimicrobialcheck').on('change', function () {
+
+        if ($('#Antimicrobialcheck').is(":checked")) {
+            $('#antimicrobial').removeClass('d-none')
+        } else {
+            $('#antimicrobial').addClass('d-none')
+
+        }
+    });
+
+    $('#antimicrobialbtndrug').on('click', function () {
+        $('#antimicrobialdrugitems').append($('#antimicrobialitem').val()).append('        ')
+        $('#antimicrobialitem').val("")
+    });
+
+    $("#Editantimicrobial").on('click', function () {
+
+        $('#antimicrobialdrugitems').removeAttr('readonly')
+        $("#Editantimicrobial").addClass('d-none')
+        $("#Saveantimicrobial").removeClass('d-none')
+
+    });
+
+    $("#Saveantimicrobial").on('click', function () {
+
+        $('#antimicrobialdrugitems').attr('readonly', 'readonly')
+        $("#Editantimicrobial").removeClass('d-none')
+        $("#Saveantimicrobial").addClass('d-none')
+
+    });
+
+});
+$("#ChemotherapyProtocolEntity_EmetodenicRiskID").change(function () {
+    var EmetogenicRiskID = $(this).val();
+    $.ajax({
+        url: '@Url.Action("GetPremedicationList", "Protocol")',
+        type: 'GET',
+        dataType : "json",
+        contentType: "application/json; charset=utf-8",
+        data: {EmetogenicRiskID: EmetogenicRiskID}
+    }).done(function (result) {
+        $("#ChemotherapyProtocolEntity_PremedicationID").empty();
+        $("#ChemotherapyProtocolEntity_PremedicationID").append('<option selected disabled value="">Select Premedication</option>');
+        BindCombo('ChemotherapyProtocolEntity_PremedicationID', result, false);
+        $('#ChemotherapyProtocolEntity_PremedicationID').selectpicker('refresh');
+    });
+
+
+});
+</script>
+<script src="~/assets/ajax/jquery.unobtrusive-ajax.min.js"></script>

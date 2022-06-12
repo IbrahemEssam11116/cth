@@ -1,0 +1,23 @@
+﻿
+@model SStorm.CTH.Web.Models.TreeViewNode
+@{
+    Layout = null;
+}
+
+
+<ul id="myUL1">
+
+    @foreach (var node in Model.HistologicCollection)
+    {
+        if (node.ParentID == Model.Seed)
+        {
+            SStorm.CTH.Web.Models.TreeViewNode inner = new SStorm.CTH.Web.Models.TreeViewNode { Seed = node.ID, HistologicCollection = Model.HistologicCollection };
+            <li class="Search">
+                <span class="caret1"></span> <a href="#" class="text-black-50 NodeColorHis" onclick="AppendHistological(@node.ID ,this)"><i class=""></i>@node.Name</a>
+                <ul class="nested1">
+                    <partial name="_HistologicalList" model="inner">
+                </ul>
+            </li>
+        }
+    }
+</ul>

@@ -1,0 +1,43 @@
+﻿@model SStorm.CTH.DAL.EntityClasses.CTHSurgeryTypeEntity
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    Layout = null;
+}
+<form asp-action="EditCreateSurgeryType" data-ajax-method="post" data-ajax="true"
+      data-ajax-success="LoadSurgeryTypeList">
+    <div class="color-line"></div>
+
+    <div class="modal-header">
+        <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreateSurgeryType")</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" asp-for="ID" value="@Model.ID" />
+        <input type="hidden" asp-for="CancerTypeID" value="@Model.CancerTypeID" />
+        <input type="hidden" asp-for="@Model.IsNew"  />
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="SurgeryType" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("SurgeryType")</label>
+                <input asp-for="SurgeryType" class="form-control" required />
+                <span asp-validation-for="SurgeryType" class="text-danger"></span>
+            </div>
+        </div>
+        @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="ArSurgeryType" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("SurgeryType") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input asp-for="ArSurgeryType" class="form-control" />
+                <span asp-validation-for="ArSurgeryType" class="text-danger"></span>
+            </div>
+        </div>
+        *@
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</button>
+
+        <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+    </div>
+</form>

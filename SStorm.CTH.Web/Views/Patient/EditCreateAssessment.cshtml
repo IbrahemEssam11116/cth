@@ -1,0 +1,62 @@
+﻿@model AssessmentModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    Layout = null;
+}
+
+<link href="~/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
+
+<form asp-action="EditCreateAssessment"
+      data-ajax-method="post" data-ajax="true" data-ajax-success="LoadPatientAssessment">
+    <!-- start page title -->
+    <div class="color-line"></div>
+    <!-- start model header for edit/ create -->
+    <div class="modal-header">
+        <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("Assessment")</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <input type="hidden" asp-for="assessmentEntity.ID" value="@Model.assessmentEntity.ID" />
+        <input type="hidden" asp-for="assessmentEntity.PatientID" value="@Model.assessmentEntity.PatientID" />
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="assessmentEntity.TreatmentPlanID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("TreatmentPlan")</label>
+                <select asp-for="assessmentEntity.TreatmentPlanID" class="form-control selectpicker"
+                        data-live-search="true" asp-items="@Model.TreatmentPlanList" required>
+                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("TreatmentPlan")</option>
+                </select>
+                <span asp-validation-for="assessmentEntity.TreatmentPlanID" class="text-danger"></span>
+            </div>
+            <div class="col-md-12">
+                <label asp-for="assessmentEntity.TreatmentResponseID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("TreatmentResponse")</label>
+                <select asp-for="assessmentEntity.TreatmentResponseID" class="form-control selectpicker"
+                        data-live-search="true" asp-items="@Model.TreatmentResponseList" required>
+                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("TreatmentResponse")</option>
+                </select>
+                <span asp-validation-for="assessmentEntity.TreatmentResponseID" class="text-danger"></span>
+            </div>
+            <div class="col-md-12">
+                <label asp-for="assessmentEntity.Date" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Date")</label>
+                <input asp-for="assessmentEntity.Date" class="form-control" type="date" required />
+                <span asp-validation-for="assessmentEntity.Date" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal"> @SharedLocalizer.GetLocalizedHtmlString("Cancel")</button>
+            <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+        </div>
+    </div>
+</form>
+
+<script src="~/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('select').selectpicker({
+            dropupAuto: false
+        });
+    });
+</script>

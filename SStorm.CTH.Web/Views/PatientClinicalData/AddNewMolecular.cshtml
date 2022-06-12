@@ -1,0 +1,99 @@
+﻿@model SStorm.CTH.Web.Models.PatientClinicalDataModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<link href="~/assets/css/site.css" rel="stylesheet" />
+
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("EditCreate") ;
+    Layout = null;
+}
+<form asp-action="AddNewMolecular" data-ajax-method="post" data-ajax="true"
+      data-ajax-success="BindMolecularList">
+    <!-- start page title -->
+    <div class="color-line"></div>
+    <!-- start model header fro edit/ create -->
+    <div class="modal-header">
+        <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("Molecular")</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <!-- end page title -->
+    <div class="modal-body">
+
+
+        <input type="hidden" asp-for="CancerMolecularEntity.ID" value="@Model.CancerMolecularEntity.ID" />
+        <input type="hidden" name="CancerID" value="@ViewBag.CancerID" />
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="CancerMolecularEntity.CanerID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("CancerType")</label>
+                <select id="select1" asp-for="CancerMolecularEntity.CanerID" class="form-control selectpicker" data-live-search="true" asp-items="Model.CancerList" required>
+                    <option selected disabled value="">
+                        @SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("CancerType")
+                    </option>
+                </select>
+                <span asp-validation-for="CancerMolecularEntity.CanerID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="CancerMolecularEntity.ParentID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Histological")</label>
+                <select id="select2" asp-for="CancerMolecularEntity.ParentID" class="form-control selectpicker" data-live-search="true" asp-items="Model.HistologicalList">
+                    <option selected disabled value="">
+                        @SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("Histological")
+                    </option>
+                </select>
+                <span asp-validation-for="CancerMolecularEntity.ParentID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="CancerMolecularEntity.Name" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("MolecularName")</label>
+                <input asp-for="CancerMolecularEntity.Name" class="form-control" required />
+                <span asp-validation-for="CancerMolecularEntity.Name" class="text-danger"></span>
+            </div>
+        </div>
+        @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="CancerMolecularEntity.ArName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("MolecularName") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input asp-for="CancerMolecularEntity.ArName" class="form-control" />
+                <span asp-validation-for="CancerMolecularEntity.ArName" class="text-danger"></span>
+            </div>
+        </div>
+        *@
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</button>
+            <button type="submit" class="btn btn-primary waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+        </div>
+    </div>
+</form>
+
+
+<script>
+        $(document).ready(function () {
+        $('select').selectpicker({
+            dropupAuto: false
+        });
+        $("#select1").change(function () {
+            var strUser = $(this).val();
+            //alert(strUser);
+            $.ajax({
+            url: '@Url.Action("GetMolecularList", "PatientClinicalData")',
+            type: 'GET',
+            cache: false,
+            data: { ID: strUser }
+           }).done(function (result) {
+            $("#select2").empty();
+            BindCombo("select2", result, false);
+            $("#select2").selectpicker('refresh');
+        });
+        });
+    });
+
+    function BindMolecularList(response) {
+        $('#modal-add-entity').modal('hide');
+        BindCombo('PatientClinicalData_CancerMolecularID', response, false);
+        $('#PatientClinicalData_CancerMolecularID').selectpicker('refresh');
+    }
+</script>

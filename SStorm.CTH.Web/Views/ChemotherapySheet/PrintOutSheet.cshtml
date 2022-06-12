@@ -1,0 +1,343 @@
+﻿@model KimoSurveyModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    ViewData["Title"] = "Chemo therapy Protocol List";
+}
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("KimoSurveyList")</a></li>
+                        <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("KimoSurveyList")</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">@SharedLocalizer.GetLocalizedHtmlString("PrintOutSheet")</h4>
+
+                <a asp-controller="ChemotherapySheet" asp-action="PrintOutSheetPDF" asp-route-ID="@Model.KimoSurveyEntity.ID" asp-route-lang="en" class="btn btn-info"><i class="fa fa-file-pdf"></i> @SharedLocalizer.GetLocalizedHtmlString("DownloadEnglishPdf")</a>
+
+                <a asp-controller="ChemotherapySheet" asp-action="PrintOutSheetPDF" asp-route-ID="@Model.KimoSurveyEntity.ID" asp-route-lang="ar" class="btn btn-info"><i class="fa fa-file-pdf"></i> @SharedLocalizer.GetLocalizedHtmlString("DownloadArabicPdf")</a>
+
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row my-2">
+        <div class="col-lg-3 my-1">
+            <div class="card h-100">
+                <div class="card-header bg-info">
+                    <h4 class="card-title text-white mb-0">@SharedLocalizer.GetLocalizedHtmlString("PatientClinicalData")</h4>
+                </div>
+                <div class="card-body font-15">
+                    <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("Name")</span> &nbsp;  : @Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHPatientItem.PatientNameE</p>
+                    <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("Type")</span> &nbsp;  : @Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHCancerTypeItem.TypeName</p>
+                    <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("BirthDate")</span> &nbsp; : @Model.KimoSurveyEntity.CTHPatientClinicalDataItem.DataDate</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 my-1">
+            <div class="card h-100">
+                <div class="card-header bg-info">
+                    <h4 class="card-title text-white mb-0">@SharedLocalizer.GetLocalizedHtmlString("Diagnosis")</h4>
+                </div>
+                <div class="card-body font-15">
+                    <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("CancerType")</span> &nbsp; : @Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHCancerTypeItem.TypeName</p>
+                    <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("CancerSide") </span> &nbsp; :  @Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHCancerSideItem.Side</p>
+                    <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("Histological") </span> &nbsp; :  @Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHCancerHistologicItem.Name</p>
+                    <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("Molecular") </span> &nbsp; :  @Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHCancerMolecularItem.Name</p>
+                    <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("Grade") </span> &nbsp; :  @Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHTumorGradeItem.TumorGrade</p>
+                    <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("Stage") </span> &nbsp; :  @Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHStagingItem.Name</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 my-1">
+            <div class="card h-100">
+                <div class="card-header bg-info">
+                    <h4 class="card-title text-white mb-0">@SharedLocalizer.GetLocalizedHtmlString("KimoSurveyData")</h4>
+                </div>
+                <div class="card-body font-15">
+                    <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("CycleNumber") </span> &nbsp; : @Model.cyclenum</p>
+                    <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("Days") </span> &nbsp; :@Model.KimoSurveyEntity.CTHChemotherapyProtocolItem.Days</p>
+                    <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("Bodysurfacearea")</span> &nbsp; : @SharedLocalizer.GetLocalizedHtmlString("Bodysurfacearea")</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 my-1">
+            <div class="card h-100">
+                <div class="card-header bg-info">
+                    <h4 class="card-title text-white mb-0">@SharedLocalizer.GetLocalizedHtmlString("ProtocolofchemosurveyData")</h4>
+                </div>
+                <div class="card-body font-15">
+                    <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("ProtocolName") </span> &nbsp; : @Model.KimoSurveyEntity.CTHChemotherapyProtocolItem.ProtocolName</p>
+                    <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("Emetogenicrisk")  </span> &nbsp; : @Enum.GetName(typeof(EmatogenicRisk), @Model.KimoSurveyEntity.CTHChemotherapyProtocolItem.EmetodenicRiskID)</p>
+                    <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("Isgrowthfactor")  </span> &nbsp; : @Model.KimoSurveyEntity.CTHChemotherapyProtocolItem.IsGrowthFactor</p>
+                    <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("Isantimicrobial")  </span> &nbsp; : @Model.KimoSurveyEntity.CTHChemotherapyProtocolItem.IsAntimicrobial</p>
+                    <p class="mb-0"><span style="font-weight:bold">@SharedLocalizer.GetLocalizedHtmlString("Premedication")  </span> &nbsp; : @Model.KimoSurveyEntity.CTHChemotherapyProtocolItem.CTHPreMedicationItem.Title  @Model.KimoSurveyEntity.CTHChemotherapyProtocolItem.CTHPreMedicationItem.Number</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <label>@SharedLocalizer.GetLocalizedHtmlString("KimoSurveyData")</label>
+                <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("CycleNumber")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Days")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Bodysurfacearea")</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Model.cyclenum</td>
+                            <td>@Model.KimoSurveyEntity.CTHChemotherapyProtocolItem.Days</td>
+                            <td>@Model.KimoSurveyEntity.BodySurfaceArea</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <label>@SharedLocalizer.GetLocalizedHtmlString("PatientClinicalData")</label>
+                <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Name")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Type")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("BirthDate")</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            @if (requestCulture.RequestCulture.UICulture.Name == "en-US")
+                            {
+                                <td>@Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHPatientItem.PatientNameE</td>
+                                <td>@Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHCancerTypeItem.TypeName</td>
+                                <td>@Model.KimoSurveyEntity.CTHPatientClinicalDataItem.DataDate</td>
+                            }
+                            else
+                            {
+                                <td>@Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHPatientItem.PatientNameA</td>
+                                <td>@Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHCancerTypeItem.ArTypeName</td>
+                                <td>@Model.KimoSurveyEntity.CTHPatientClinicalDataItem.DataDate</td>
+                            }
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <label>@SharedLocalizer.GetLocalizedHtmlString("Diagnosis")</label>
+                <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("CancerType")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("CancerSide")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Histological")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Molecular")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Grade")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Stage")</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            @if (requestCulture.RequestCulture.UICulture.Name == "en-US")
+                            {
+                                <td>@Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHCancerTypeItem.TypeName</td>
+                                <td>@Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHCancerSideItem.Side</td>
+                                <td>@Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHCancerHistologicItem.Name</td>
+                                <td>@Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHCancerMolecularItem.Name</td>
+                                <td>@Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHTumorGradeItem.TumorGrade</td>
+                                <td>@Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHStagingItem.Name</td>
+                            }
+                            else
+                            {
+                                <td>@Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHCancerTypeItem.ArTypeName</td>
+                                <td>@Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHCancerSideItem.ArSide</td>
+                                <td>@Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHCancerHistologicItem.ArName</td>
+                                <td>@Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHCancerMolecularItem.ArName</td>
+                                <td>@Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHTumorGradeItem.TumorGrade</td>
+                                <td>@Model.KimoSurveyEntity.CTHPatientClinicalDataItem.CTHStagingItem.ArName</td>
+                            }
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <label>@SharedLocalizer.GetLocalizedHtmlString("ProtocolofchemosurveyData")</label>
+                <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("ProtocolName")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Emetogenicrisk")</th>
+                            <th> @SharedLocalizer.GetLocalizedHtmlString("Isgrowthfactor")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Isantimicrobial")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Premedication")</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            @if (requestCulture.RequestCulture.UICulture.Name == "en-US")
+                            {
+                                <td>@Model.KimoSurveyEntity.CTHChemotherapyProtocolItem.ProtocolName</td>
+                                <td>
+                                    @Enum.GetName(typeof(EmatogenicRisk), @Model.KimoSurveyEntity.CTHChemotherapyProtocolItem.EmetodenicRiskID)
+                                </td>
+                                <td>@Model.KimoSurveyEntity.CTHChemotherapyProtocolItem.IsGrowthFactor</td>
+                                <td>@Model.KimoSurveyEntity.CTHChemotherapyProtocolItem.IsAntimicrobial </td>
+                                <td>@Model.KimoSurveyEntity.CTHChemotherapyProtocolItem.CTHPreMedicationItem.Title  @Model.KimoSurveyEntity.CTHChemotherapyProtocolItem.CTHPreMedicationItem.Number </td>
+                            }
+                            else
+                            {
+                                <td>@Model.KimoSurveyEntity.CTHChemotherapyProtocolItem.ArProtocolName</td>
+                                <td>
+                                    @Enum.GetName(typeof(EmatogenicRisk), @Model.KimoSurveyEntity.CTHChemotherapyProtocolItem.EmetodenicRiskID)
+                                </td>
+                                <td>@Model.KimoSurveyEntity.CTHChemotherapyProtocolItem.IsGrowthFactor</td>
+                                <td>@Model.KimoSurveyEntity.CTHChemotherapyProtocolItem.IsAntimicrobial </td>
+                                <td>@Model.KimoSurveyEntity.CTHChemotherapyProtocolItem.CTHPreMedicationItem.ArTitle  @Model.KimoSurveyEntity.CTHChemotherapyProtocolItem.CTHPreMedicationItem.Number </td>
+                            }
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    -->
+
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <label>@SharedLocalizer.GetLocalizedHtmlString("Labs")</label>
+                <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("LabCategory")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("LabItem")</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.KimoSurveyEntity.CTHChemoLabCollection.Count != 0)
+                        {
+                            @foreach (var item in Model.KimoSurveyEntity.CTHChemoLabCollection)
+                            {
+                                <tr>
+                                    <td>@item.CTHLabDetailItem.CTHLabItem.LabName</td>
+                                    <td>
+
+                                        @foreach (var labDetail in item.CTHLabDetailItem.CTHLabItem.CTHLabDetailCollection)
+                                        {
+                                            @if (labDetail.CTHLabDetailConditionCollection.Count != 0)
+                                            {
+                                                @foreach (var condition in labDetail.CTHLabDetailConditionCollection)
+                                                {
+                                                    <span class="btn btn-outline-dark text-info" title="@condition.Condition">@labDetail.LabDetailsName</span>
+                                                }
+
+                                            }
+                                            else
+                                            {
+                                                <span class="btn btn-outline-dark text-info">@labDetail.LabDetailsName</span>
+                                            }
+
+                                        }
+                                    </td>
+                                </tr>
+                            }
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <label>@SharedLocalizer.GetLocalizedHtmlString("Drugs")</label>
+                <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Name")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Dose")/@SharedLocalizer.GetLocalizedHtmlString("unit")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Amount")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Concentration")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Duration")/@SharedLocalizer.GetLocalizedHtmlString("unit")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Every")/@SharedLocalizer.GetLocalizedHtmlString("unit")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Administrationnotes")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("TimeofAdministration")</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.GroupByuniquecollDrug != null)
+                        {
+                            @foreach (var itemview in Model.GroupByuniquecollDrug)
+                            {
+                                var x = itemview.Count();
+                                var i = 0;
+                                @foreach (var item in itemview)
+                                {
+                                    <tr class="thead-light">
+                                        @if (i == 0)
+                                        {
+                                            <td tabindex="0" rowspan="@x">@itemview.Key @Enum.GetName(typeof(Route), @itemview.Key)</td>
+                                        }
+                                        else
+                                        {
+                                            <td tabindex="0" style="display: none;"></td>
+                                        }
+                                        <td>@item.Name</td>
+                                        <td>@item.Dose  @item.CTHDoseUnitItem.Name</td>
+                                        <td>@item.SolutionAmount</td>
+                                        <td>@item.FinalConcentration</td>
+                                        <td>
+                                            @item.Duration  @Enum.GetName(typeof(DurationUnit), @item.DurationUnitID)
+                                        </td>
+                                        <td>@item.Every  @Enum.GetName(typeof(EveryUnit), @item.EveryUnitID)</td>
+                                        <td>@item.SpecialAdminstrationNotes</td>
+                                        <td>@item.TimeOfAdminstration</td>
+                                    </tr>
+                                    i++;
+                                }
+
+                            }
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,1569 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--LLBLGen Pro v5.6 project file. Do not manually edit this file. Incorrect references could lead to an unloadable project file.-->
+<Project Version="5.6" TargetFrameworkName="LLBLGen Pro Runtime Framework">
+  <Properties>
+    <Abbreviations />
+    <Property Name="AdditionalTaskPerformerFolder" Value="" />
+    <Property Name="AdditionalTasksFolder" Value="" />
+    <Property Name="AdditionalTemplatesFolder" Value="" />
+    <Property Name="AdditionalTypeConverterFolder" Value="" />
+    <Property Name="AddNewElementsAfterRefresh_v5" Value="false" />
+    <Property Name="AddNewElementsAfterRelationalModelDataSync_v5" Value="false" />
+    <Property Name="AddNewFieldsAfterRefresh_v5" Value="true" />
+    <Property Name="AddNewFieldsAfterRelationalModelDataSync_v5" Value="true" />
+    <Property Name="AddNewViewsAsEntitiesAfterRefresh_v5" Value="false" />
+    <Property Name="AddNewViewsAsEntitiesAfterRelationalModelDataSync_v5" Value="false" />
+    <Property Name="AutoAddManyToManyRelationships" Value="true" />
+    <Property Name="AutoAssignSequencesToIntegerPks" Value="true" />
+    <Property Name="AutoAssignTypeConverterToFieldMapping" Value="true" />
+    <Property Name="AutomaticallyGenerateSourceCodeOnProjectSave" Value="false" />
+    <Property Name="ConnectionStringKeyNamePattern" Value="ConnectionString" />
+    <Property Name="DefaultDeleteRuleAction" Value="1" />
+    <Property Name="DefaultUpdateRuleAction" Value="0" />
+    <Property Name="DeleteObsoleteFiles" Value="true" />
+    <Property Name="EncodingToUse" Value="0" />
+    <Property Name="EntityActionCombinationDefaultForTable" Value="0" />
+    <Property Name="EntityActionCombinationDefaultForView" Value="4" />
+    <Property Name="EntityFieldNameStripPattern" Value="{}{}" />
+    <Property Name="EntityNameStripPattern" Value="{}{}" />
+    <Property Name="ExcludableOrphanedElementDetectedAction" Value="3" />
+    <Property Name="FailCodeGenerationOnWriteError" Value="false" />
+    <Property Name="FieldMappedOntoRelatedFieldPattern" Value="{$RelatedFieldName}" />
+    <Property Name="FkFieldsAreNamedAfterTargetField" Value="true" />
+    <Property Name="ForeignKeyConstraintPattern" Value="FK_{$Guid}" />
+    <Property Name="ForeignKeyFieldPattern" Value="{$NavigatorName}{$RelatedFieldName}" />
+    <Property Name="GroupUsage" Value="0" />
+    <Property Name="IdentifyingFieldsFollowDBPrimaryKeyConstraints_v5" Value="true" />
+    <Property Name="InsertUnderscoreAtWordBreakCaseInsensitiveDBs" Value="false" />
+    <Property Name="InsertUnderscoreAtWordBreakCaseSensitiveDBs" Value="false" />
+    <Property Name="LengthPrecisionScaleFollowDBLengthPrecisionScale_v5" Value="true" />
+    <Property Name="MakeElementNamePascalCasing" Value="false" />
+    <Property Name="NavigatorMappedOntoManyToManyPattern" Value="{$EndEntityName}CollectionVia{$IntermediateEntityName$S}" />
+    <Property Name="NavigatorMappedOntoOneManyToOnePattern" Value="{$EndEntityName}Item" />
+    <Property Name="NavigatorMappedOntoOneToManyPattern" Value="{$EndEntityName}Collection" />
+    <Property Name="NonExcludableOrphanedElementDetectedAction" Value="3" />
+    <Property Name="PreferDecimalOverCurrencyTypes" Value="true" />
+    <Property Name="PreferNaturalCharacterTypes" Value="true" />
+    <Property Name="PreferSystemSequencesOverSchemaSequencesIfApplicable" Value="true" />
+    <Property Name="PreferVariableLengthTypes" Value="true" />
+    <Property Name="PrimaryKeyConstraintPattern" Value="PK_{$Guid}" />
+    <Property Name="ProjectCreator" Value="Abdelmawgoud" />
+    <Property Name="ProjectName" Value="CTH" />
+    <Property Name="ReflectNullabilityOfElementFieldInTargetField_v5" Value="false" />
+    <Property Name="ReflectTypeOfElementFieldInTargetField_v5" Value="true" />
+    <Property Name="RelationalModelDataElementNameCasingCaseInsensitiveDBs" Value="3" />
+    <Property Name="RelationalModelDataElementNameCasingCaseSensitiveDBs" Value="3" />
+    <Property Name="RelationshipsFollowDBForeignKeyConstraints_v5" Value="true" />
+    <Property Name="RemoveUnderscoresFromElementName" Value="true" />
+    <Property Name="RemoveUnmappedElementsAfterRefresh_v5" Value="true" />
+    <Property Name="RemoveUnmappedElementsAfterRelationalModelDataSync_v5" Value="true" />
+    <Property Name="ResetFieldOrderBasedOnTargetOrderAtRefresh" Value="false" />
+    <Property Name="ResetFieldOrderBasedOnTargetOrderAtRelationalModelDataSync" Value="false" />
+    <Property Name="RetrieveDBCustomProperties" Value="false" />
+    <Property Name="RootNamespace" Value="SStorm.CTH.DAL" />
+    <Property Name="SequenceNameMatchingPattern" Value="SEQ_{$TableName}" />
+    <Property Name="SequencePattern" Value="SEQ_{$EntityName}" />
+    <Property Name="SetGroupNameAfterSchemaName" Value="true" />
+    <Property Name="SetSchemaNameAfterGroupName" Value="true" />
+    <Property Name="SingularizeElementNames" Value="true" />
+    <Property Name="StoredProcNameStripPattern" Value="{pr_, sp_}{}" />
+    <Property Name="StoreTimeLastGeneratedIntoProject" Value="false" />
+    <Property Name="StoreTimeLastSyncIntoProject" Value="true" />
+    <Property Name="SyncCustomFieldOrderingWithTableFieldIndex" Value="false" />
+    <Property Name="SyncMappedElementNamesAfterRefresh_v5" Value="false" />
+    <Property Name="SyncMappedElementNamesAfterRelationalModelDataSync_v5" Value="false" />
+    <Property Name="SyncRelationalModelDataElementNameWithModelElementName_v5" Value="false" />
+    <Property Name="SyncRenamedMappedElementNamesAfterRefresh_v5" Value="true" />
+    <Property Name="SyncRenamedMappedElementNamesAfterRelationalModelDataSync_v5" Value="true" />
+    <Property Name="TableValuedFunctionNameStripPattern" Value="{fn_, pr_, sp_}{}" />
+    <Property Name="TargetPerEntityEdgesRequireBackingFkConstraint" Value="true" />
+    <Property Name="TypedViewFieldNameStripPattern" Value="{}{}" />
+    <Property Name="TypedViewMappedOnResultsetPattern" Value="{$ProcFunctionName}{$ResultsetName}Result" />
+    <Property Name="TypedViewNameStripPattern" Value="{vw_}{}" />
+    <Property Name="UniqueConstraintPattern" Value="UC_{$Guid}" />
+    <Property Name="UniqueConstraintsFollowDBUniqueConstraints_v5" Value="true" />
+    <Property Name="UpdateCustomPropertiesAfterRefresh_v5" Value="false" />
+    <Property Name="UpdateCustomPropertiesAfterRelationalModelDataSync_v5" Value="false" />
+    <Property Name="UseCustomFieldOrderingOnNewElements" Value="false" />
+  </Properties>
+  <TypeShortcuts />
+  <IgnoredWarnings>
+    <IgnoredWarning ID="DZ0040" />
+  </IgnoredWarnings>
+  <SavedSearchQueries />
+  <CodeGenerationCyclePreferences>
+    <OutputType Value="3">
+      <LastUsedPreferences>
+        <DestinationRootFolder Value=".\DAL" />
+        <FrameworkName Value="LLBLGen Pro Runtime Framework" />
+        <LanguageName Value="C#" />
+        <PlatformName Value=".NET Standard 2.0" />
+        <PresetName Value="SD.Presets.Adapter.General.Netstandard" />
+        <RootNamespace Value="SStorm.CTH.DAL" />
+        <TemplateGroup Value="Adapter" />
+        <TemplateBindings>
+          <Binding Name="SD.TemplateBindings.SqlServerSpecific" />
+          <Binding Name="SD.TemplateBindings.SharedTemplates.Netstandard20" />
+          <Binding Name="SD.TemplateBindings.SharedTemplates" />
+          <Binding Name="SD.TemplateBindings.General" />
+        </TemplateBindings>
+        <AdhocTemplateSets />
+      </LastUsedPreferences>
+    </OutputType>
+    <OutputType Value="2">
+      <LastUsedPreferences>
+        <DestinationRootFolder Value="." />
+        <FrameworkName Value="DDL SQL" />
+        <LanguageName Value="SQL" />
+        <PlatformName Value="RDBMS" />
+        <PresetName Value="SD.Presets.DDLSQL.UpdateScript" />
+        <RootNamespace Value="" />
+        <TemplateGroup Value="Update DDL SQL" />
+        <TemplateBindings>
+          <Binding Name="SD.TemplateBindings.SqlServerSpecific.DDLSQL" />
+          <Binding Name="SD.TemplateBindings.SharedTemplates.DDLSQL" />
+        </TemplateBindings>
+        <AdhocTemplateSets />
+      </LastUsedPreferences>
+    </OutputType>
+    <OutputType Value="1">
+      <LastUsedPreferences>
+        <DestinationRootFolder Value="" />
+        <FrameworkName Value="DDL SQL" />
+        <LanguageName Value="SQL" />
+        <PlatformName Value="RDBMS" />
+        <PresetName Value="" />
+        <RootNamespace Value="" />
+        <TemplateGroup Value="Create DDL SQL" />
+        <TemplateBindings />
+        <AdhocTemplateSets />
+      </LastUsedPreferences>
+    </OutputType>
+  </CodeGenerationCyclePreferences>
+  <OutputSettingValues>
+    <SettingValues>
+      <SettingValue Name="1:AdapterDbGenericSubFolderName" Value="DatabaseGeneric" Type="18" />
+      <SettingValue Name="1:AdapterDbSpecificNamespaceSuffix" Value="DatabaseSpecific" Type="18" />
+      <SettingValue Name="1:AdapterDbSpecificProjectFileSuffix" Value="DBSpecific" Type="18" />
+      <SettingValue Name="1:AdapterDbSpecificSubFolderName" Value="DatabaseSpecific" Type="18" />
+      <SettingValue Name="1:ConvertNulledReferenceTypesToDefaultValue" Value="true" Type="3" />
+      <SettingValue Name="1:EntityBaseClassNameDefault" Value="CommonEntityBase" Type="18" />
+      <SettingValue Name="1:FieldPropertyIsPublicDefault" Value="true" Type="3" />
+      <SettingValue Name="1:GenerateAsNullableTypeDefault" Value="true" Type="3" />
+      <SettingValue Name="1:GenerateEntityFieldFactory" Value="false" Type="3" />
+      <SettingValue Name="1:GenerateEntityFieldsFactory" Value="false" Type="3" />
+      <SettingValue Name="1:InlineValueTypedFields" Value="true" Type="3" />
+      <SettingValue Name="1:LazyLoadingWithoutResultReturnsNew" Value="false" Type="3" />
+      <SettingValue Name="1:NavigatorPropertyIsPublicDefault" Value="true" Type="3" />
+      <SettingValue Name="1:SupportedActionCombinations" Value="0,1,2,3,4,5,6,7" Type="18" />
+      <SettingValue Name="1:TdlEmitTimeDateInOutputFiles" Value="false" Type="3" />
+      <SettingValue Name="1:TypedListOutputTypeDefault" Value="TypedDataTable" Type="18" />
+      <SettingValue Name="1:TypedViewOutputTypeDefault" Value="TypedDataTable" Type="18" />
+    </SettingValues>
+  </OutputSettingValues>
+  <CodeGenerationMetaDataDefaults>
+    <TargetElement Type="256">
+      <Defaults>
+        <Attributes>
+          <Attribute Value="Browsable($false)" />
+        </Attributes>
+      </Defaults>
+    </TargetElement>
+  </CodeGenerationMetaDataDefaults>
+  <EntityModel>
+    <ValueTypeDefinitions />
+    <EntityDefinitions>
+      <EntityDefinition Name="CTHCancerHistologic" ObjectID="552d0cf0-b06b-44df-abe0-927e7acae2e7">
+        <Fields>
+          <Field Name="CanerID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="Name" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="ParentID" Type="int" IsOptional="true" Precision="10" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHCancerMolecular" ObjectID="8ee111e4-c2ca-47c1-bc07-8ab22ef492f0">
+        <Fields>
+          <Field Name="CanerID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="Name" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="ParentID" Type="int" IsOptional="true" Precision="10" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHCancerSide" ObjectID="c214203b-28d4-41cd-a2fd-9cc6b3112eac">
+        <Fields>
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="Side" Type="string" IsOptional="true" MaxLength="2147483647" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHCancerStaging" ObjectID="269da82e-e560-46b6-b14e-74c06454af5b">
+        <Fields>
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="Name" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="Number" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="Remarks" Type="string" IsOptional="true" MaxLength="2147483647" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHCancerType" ObjectID="6139b6da-508a-4dbf-b79a-da8d15bf10b2">
+        <Fields>
+          <Field Name="ICDCode" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="IsParent" Type="bool" IsOptional="true" />
+          <Field Name="ParentID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="TypeName" Type="string" IsOptional="true" MaxLength="2147483647" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHChemotherapyProtocol" ObjectID="4bed4446-4608-47cc-bfe6-eee3b5796139">
+        <Fields>
+          <Field Name="CancerTypeID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="Days" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="ProtocolName" Type="string" IsOptional="true" MaxLength="2147483647" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHImaging" ObjectID="ec92836b-66a8-4439-b358-8aca5fecdc5c">
+        <Fields>
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="ImageName" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="Remarks" Type="string" IsOptional="true" MaxLength="2147483647" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHKimoSurvey" ObjectID="0703de38-765a-403b-8fe1-b980bb0c2552">
+        <Fields>
+          <Field Name="AdjustBodyWeight" Type="double" IsOptional="true" Precision="38" />
+          <Field Name="BodyMassIndex" Type="double" IsOptional="true" Precision="38" />
+          <Field Name="BodySurfaceArea" Type="double" IsOptional="true" Precision="38" />
+          <Field Name="BodySurfaceAreaInAdultAmputees" Type="double" IsOptional="true" Precision="38" />
+          <Field Name="CRCL" Type="double" IsOptional="true" Precision="38" />
+          <Field Name="CycleNum" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="Date" Type="datetime" IsOptional="true" />
+          <Field Name="Days" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="Height" Type="double" IsOptional="true" Precision="38" />
+          <Field Name="ID" Type="int" Precision="10" IsPrimaryKey="true" />
+          <Field Name="IsSpecialCase" Type="bool" IsOptional="true" />
+          <Field Name="LeanBodyWeight" Type="double" IsOptional="true" Precision="38" />
+          <Field Name="PatientClinicalDataID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="ProtocolID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="SerumCreatinine" Type="double" IsOptional="true" Precision="38" />
+          <Field Name="SpecialCaseID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="SpecialCasePartID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="Weight" Type="double" IsOptional="true" Precision="38" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHLab" ObjectID="6625fec9-0af9-4c89-84f4-3040eea3ea69">
+        <Fields>
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="LabName" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="Remarks" Type="string" IsOptional="true" MaxLength="2147483647" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHLabDetail" ObjectID="e68ca5c4-1363-4756-8101-e4523ca0ee7f">
+        <Fields>
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="LabDetailsName" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="LabID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="Remarks" Type="string" IsOptional="true" MaxLength="2147483647" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHLabDetailCondition" ObjectID="e14a181e-877b-4b2e-ac9c-106616d91eef">
+        <Fields>
+          <Field Name="Condition" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="LabDetailID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="Message" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="Number" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="OpertorID" Type="int" IsOptional="true" Precision="10" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHOperator" ObjectID="fff7a73f-b6ec-4812-84d6-93bc1f864428">
+        <Fields>
+          <Field Name="ID" Type="int" Precision="10" IsPrimaryKey="true" />
+          <Field Name="OpertorIcon" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="OpertorName" Type="string" IsOptional="true" MaxLength="2147483647" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHPathologyReportType" ObjectID="a6719f36-806b-4435-bff6-44b9cc4ef30b">
+        <Fields>
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="Name" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="Remarks" Type="string" IsOptional="true" MaxLength="2147483647" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHPatient" ObjectID="2cd2e645-f8a8-4e01-8496-9a5deeff0f87">
+        <Fields>
+          <Field Name="BirthDate" Type="datetime" IsOptional="true" />
+          <Field Name="CareProviderName" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="CareProviderTitle" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="ContactNumber" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="FirstVisitDate" Type="datetime" IsOptional="true" />
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="NationalID" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="NationalIDPhotoPath" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="Occupation" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="PatientAge" Type="double" IsOptional="true" Precision="38" />
+          <Field Name="PatientGender" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="PatientNameA" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="PatientNameE" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="PatientNumber" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="PaymentTypeId" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="Residence" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="SponserCompanyName" Type="string" IsOptional="true" MaxLength="2147483647" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHPatientClinicalData" ObjectID="3f481d82-cebd-4ae9-8298-c9d0f0e782e1">
+        <Fields>
+          <Field Name="CancerHistologicalID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="CancerMolecularID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="CancerSideId" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="CancerTypeID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="DataDate" Type="datetime" IsOptional="true" />
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="PatientID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="StageGradeID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="TreatmentTypeID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="TumorGradeID" Type="int" IsOptional="true" Precision="10" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHPatientImaging" ObjectID="da731652-7862-4e2c-aa2d-85c0fbd85df5">
+        <Fields>
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="Image" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="ImagingTypeID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="PatientClinicalDataID" Type="int" IsOptional="true" Precision="10" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHPatientLab" ObjectID="16b3a238-c802-438b-9042-17079b864bd5">
+        <Fields>
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="LabDetailID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="PatientClinicalDataID" Type="int" IsOptional="true" Precision="10" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHPatientPathologyReport" ObjectID="4a8beaa2-d138-456b-a024-01928903952d">
+        <Fields>
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="PatienClinicalDataID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="Report" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="ReportTypeID" Type="int" IsOptional="true" Precision="10" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHPatientSurgery" ObjectID="b0578825-0922-42ab-a002-1d498c647246">
+        <Fields>
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="PatientClinicalDataID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="SurgeryDate" Type="datetime" IsOptional="true" />
+          <Field Name="SurgeryTypeId" Type="int" IsOptional="true" Precision="10" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHPaymentType" ObjectID="ed8d904e-e0b3-46a2-a882-1bd530801694">
+        <Fields>
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="PaymentType" Type="string" IsOptional="true" MaxLength="2147483647" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHPermission" ObjectID="5fa821a6-bf02-493a-ac6b-f2db58defd35">
+        <Fields>
+          <Field Name="GroupID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="ID" Type="int" Precision="10" IsPrimaryKey="true" />
+          <Field Name="PermissionName" Type="string" IsOptional="true" MaxLength="2147483647" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHPermissionGroup" ObjectID="d409c4c4-43f1-4313-b3d1-4fa4793be4ff">
+        <Fields>
+          <Field Name="GroupName" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="ID" Type="int" Precision="10" IsPrimaryKey="true" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHSpecialCase" ObjectID="8242f250-9e83-4f31-b745-5f0db0b0734b">
+        <Fields>
+          <Field Name="CaseName" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="HasParts" Type="bool" IsOptional="true" />
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="Remarks" Type="string" IsOptional="true" MaxLength="2147483647" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHSpecialCasePart" ObjectID="d0beb443-e218-41cb-8fb0-068e0385ced8">
+        <Fields>
+          <Field Name="CaseID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="PartName" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="Remarks" Type="string" IsOptional="true" MaxLength="2147483647" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHStaging" ObjectID="43042768-3993-4bfd-851f-9ddba425ec72">
+        <Fields>
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="Name" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="Number" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="Remarks" Type="string" IsOptional="true" MaxLength="2147483647" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHSurgeryType" ObjectID="f3bd875b-2933-4602-b362-4d7ba0357156">
+        <Fields>
+          <Field Name="CancerTypeID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="SurgeryType" Type="string" IsOptional="true" MaxLength="2147483647" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHTNMStaging" ObjectID="ca278495-6588-4b3d-b459-f24d33d1f9bf">
+        <Fields>
+          <Field Name="Description" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="Name" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="Number" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="Remarks" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="TNMFrom" Type="double" IsOptional="true" Precision="38" />
+          <Field Name="TNMTo" Type="double" IsOptional="true" Precision="38" />
+          <Field Name="TNMTypeID" Type="int" IsOptional="true" Precision="10" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHTNMStagingMatrix" ObjectID="ca1be71b-c443-4e91-ae55-b5f13b0bee90">
+        <Fields>
+          <Field Name="CancerTypeID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="MID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="NID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="StageID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="TID" Type="int" IsOptional="true" Precision="10" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHTNMType" ObjectID="3a8136da-9458-454d-b7c2-7bc4cab03b61">
+        <Fields>
+          <Field Name="ID" Type="int" Precision="10" IsPrimaryKey="true" />
+          <Field Name="TypeName" Type="string" IsOptional="true" MaxLength="2147483647" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHTreatmentType" ObjectID="ef82a1cb-a00f-4973-891e-ffea85e92d36">
+        <Fields>
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="TreatmentType" Type="string" IsOptional="true" MaxLength="2147483647" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHTumorGrade" ObjectID="c6d1da5f-de36-446d-b85b-2e0771b32ed2">
+        <Fields>
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="TumorGrade" Type="double" IsOptional="true" Precision="38" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHUser" ObjectID="f7bdcc24-cfa6-489c-8bfb-f02390740525">
+        <Fields>
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="Password" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="UserName" Type="string" IsOptional="true" MaxLength="50" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="CTHUserPermission" ObjectID="00fa714f-0270-4925-8224-c31763d3d4dc">
+        <Fields>
+          <Field Name="ID" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="PermissionID" Type="int" IsOptional="true" Precision="10" />
+          <Field Name="UserID" Type="int" IsOptional="true" Precision="10" />
+        </Fields>
+      </EntityDefinition>
+    </EntityDefinitions>
+    <Relationships>
+      <NormalRelationship Name="CTHCancerHistologic.CTHCancerHistologicItem-CTHCancerHistologic.CTHCancerHistologicCollection" Start=":CTHCancerHistologic" End=":CTHCancerHistologic" StartNavigator="CTHCancerHistologicItem" EndNavigator="CTHCancerHistologicCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="ParentID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHCancerHistologic.CTHCancerTypeItem-CTHCancerType.CTHCancerHistologicCollection" Start=":CTHCancerHistologic" End=":CTHCancerType" StartNavigator="CTHCancerTypeItem" EndNavigator="CTHCancerHistologicCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="CanerID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHCancerMolecular.CTHCancerMolecularItem-CTHCancerMolecular.CTHCancerMolecularCollection" Start=":CTHCancerMolecular" End=":CTHCancerMolecular" StartNavigator="CTHCancerMolecularItem" EndNavigator="CTHCancerMolecularCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="ParentID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHCancerMolecular.CTHCancerTypeItem-CTHCancerType.CTHCancerMolecularCollection" Start=":CTHCancerMolecular" End=":CTHCancerType" StartNavigator="CTHCancerTypeItem" EndNavigator="CTHCancerMolecularCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="CanerID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHCancerType.CTHCancerTypeItem-CTHCancerType.CTHCancerTypeCollection" Start=":CTHCancerType" End=":CTHCancerType" StartNavigator="CTHCancerTypeItem" EndNavigator="CTHCancerTypeCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="ParentID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHChemotherapyProtocol.CTHCancerTypeItem-CTHCancerType.CTHChemotherapyProtocolCollection" Start=":CTHChemotherapyProtocol" End=":CTHCancerType" StartNavigator="CTHCancerTypeItem" EndNavigator="CTHChemotherapyProtocolCollection" Type="4" EndIsOptional="true" DeleteRuleAction="1">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="CancerTypeID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHKimoSurvey.CTHChemotherapyProtocolItem-CTHChemotherapyProtocol.CTHKimoSurveyCollection" Start=":CTHKimoSurvey" End=":CTHChemotherapyProtocol" StartNavigator="CTHChemotherapyProtocolItem" EndNavigator="CTHKimoSurveyCollection" Type="4" EndIsOptional="true" DeleteRuleAction="1">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="ProtocolID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHKimoSurvey.CTHPatientClinicalDataItem-CTHPatientClinicalData.CTHKimoSurveyCollection" Start=":CTHKimoSurvey" End=":CTHPatientClinicalData" StartNavigator="CTHPatientClinicalDataItem" EndNavigator="CTHKimoSurveyCollection" Type="4" EndIsOptional="true" DeleteRuleAction="1">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="PatientClinicalDataID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHKimoSurvey.CTHSpecialCaseItem-CTHSpecialCase.CTHKimoSurveyCollection" Start=":CTHKimoSurvey" End=":CTHSpecialCase" StartNavigator="CTHSpecialCaseItem" EndNavigator="CTHKimoSurveyCollection" Type="4" EndIsOptional="true" DeleteRuleAction="1">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="SpecialCaseID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHKimoSurvey.CTHSpecialCasePartItem-CTHSpecialCasePart.CTHKimoSurveyCollection" Start=":CTHKimoSurvey" End=":CTHSpecialCasePart" StartNavigator="CTHSpecialCasePartItem" EndNavigator="CTHKimoSurveyCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="SpecialCasePartID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHLabDetail.CTHLabItem-CTHLab.CTHLabDetailCollection" Start=":CTHLabDetail" End=":CTHLab" StartNavigator="CTHLabItem" EndNavigator="CTHLabDetailCollection" Type="4" EndIsOptional="true" DeleteRuleAction="1">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="LabID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHLabDetailCondition.CTHLabDetailItem-CTHLabDetail.CTHLabDetailConditionCollection" Start=":CTHLabDetailCondition" End=":CTHLabDetail" StartNavigator="CTHLabDetailItem" EndNavigator="CTHLabDetailConditionCollection" Type="4" EndIsOptional="true" DeleteRuleAction="1">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="LabDetailID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHLabDetailCondition.CTHOperatorItem-CTHOperator.CTHLabDetailConditionCollection" Start=":CTHLabDetailCondition" End=":CTHOperator" StartNavigator="CTHOperatorItem" EndNavigator="CTHLabDetailConditionCollection" Type="4" EndIsOptional="true" DeleteRuleAction="1">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="OpertorID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHPatient.CTHPaymentTypeItem-CTHPaymentType.CTHPatientCollection" Start=":CTHPatient" End=":CTHPaymentType" StartNavigator="CTHPaymentTypeItem" EndNavigator="CTHPatientCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="PaymentTypeId" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHPatientClinicalData.CTHCancerHistologicItem-CTHCancerHistologic.CTHPatientClinicalDataCollection" Start=":CTHPatientClinicalData" End=":CTHCancerHistologic" StartNavigator="CTHCancerHistologicItem" EndNavigator="CTHPatientClinicalDataCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="CancerHistologicalID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHPatientClinicalData.CTHCancerMolecularItem-CTHCancerMolecular.CTHPatientClinicalDataCollection" Start=":CTHPatientClinicalData" End=":CTHCancerMolecular" StartNavigator="CTHCancerMolecularItem" EndNavigator="CTHPatientClinicalDataCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="CancerMolecularID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHPatientClinicalData.CTHCancerSideItem-CTHCancerSide.CTHPatientClinicalDataCollection" Start=":CTHPatientClinicalData" End=":CTHCancerSide" StartNavigator="CTHCancerSideItem" EndNavigator="CTHPatientClinicalDataCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="CancerSideId" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHPatientClinicalData.CTHCancerTypeItem-CTHCancerType.CTHPatientClinicalDataCollection" Start=":CTHPatientClinicalData" End=":CTHCancerType" StartNavigator="CTHCancerTypeItem" EndNavigator="CTHPatientClinicalDataCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="CancerTypeID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHPatientClinicalData.CTHPatientItem-CTHPatient.CTHPatientClinicalDataCollection" Start=":CTHPatientClinicalData" End=":CTHPatient" StartNavigator="CTHPatientItem" EndNavigator="CTHPatientClinicalDataCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="PatientID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHPatientClinicalData.CTHStagingItem-CTHStaging.CTHPatientClinicalDataCollection" Start=":CTHPatientClinicalData" End=":CTHStaging" StartNavigator="CTHStagingItem" EndNavigator="CTHPatientClinicalDataCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="StageGradeID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHPatientClinicalData.CTHTreatmentTypeItem-CTHTreatmentType.CTHPatientClinicalDataCollection" Start=":CTHPatientClinicalData" End=":CTHTreatmentType" StartNavigator="CTHTreatmentTypeItem" EndNavigator="CTHPatientClinicalDataCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="TreatmentTypeID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHPatientClinicalData.CTHTumorGradeItem-CTHTumorGrade.CTHPatientClinicalDataCollection" Start=":CTHPatientClinicalData" End=":CTHTumorGrade" StartNavigator="CTHTumorGradeItem" EndNavigator="CTHPatientClinicalDataCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="TumorGradeID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHPatientImaging.CTHImagingItem-CTHImaging.CTHPatientImagingCollection" Start=":CTHPatientImaging" End=":CTHImaging" StartNavigator="CTHImagingItem" EndNavigator="CTHPatientImagingCollection" Type="4" EndIsOptional="true" DeleteRuleAction="1">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="ImagingTypeID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHPatientImaging.CTHPatientClinicalDataItem-CTHPatientClinicalData.CTHPatientImagingCollection" Start=":CTHPatientImaging" End=":CTHPatientClinicalData" StartNavigator="CTHPatientClinicalDataItem" EndNavigator="CTHPatientImagingCollection" Type="4" EndIsOptional="true" DeleteRuleAction="1">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="PatientClinicalDataID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHPatientLab.CTHLabDetailItem-CTHLabDetail.CTHPatientLabCollection" Start=":CTHPatientLab" End=":CTHLabDetail" StartNavigator="CTHLabDetailItem" EndNavigator="CTHPatientLabCollection" Type="4" EndIsOptional="true" DeleteRuleAction="1">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="LabDetailID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHPatientLab.CTHPatientClinicalDataItem-CTHPatientClinicalData.CTHPatientLabCollection" Start=":CTHPatientLab" End=":CTHPatientClinicalData" StartNavigator="CTHPatientClinicalDataItem" EndNavigator="CTHPatientLabCollection" Type="4" EndIsOptional="true" DeleteRuleAction="1">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="PatientClinicalDataID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHPatientPathologyReport.CTHPathologyReportTypeItem-CTHPathologyReportType.CTHPatientPathologyReportCollection" Start=":CTHPatientPathologyReport" End=":CTHPathologyReportType" StartNavigator="CTHPathologyReportTypeItem" EndNavigator="CTHPatientPathologyReportCollection" Type="4" EndIsOptional="true" DeleteRuleAction="1">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="ReportTypeID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHPatientPathologyReport.CTHPatientClinicalDataItem-CTHPatientClinicalData.CTHPatientPathologyReportCollection" Start=":CTHPatientPathologyReport" End=":CTHPatientClinicalData" StartNavigator="CTHPatientClinicalDataItem" EndNavigator="CTHPatientPathologyReportCollection" Type="4" EndIsOptional="true" DeleteRuleAction="1">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="PatienClinicalDataID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHPatientSurgery.CTHPatientClinicalDataItem-CTHPatientClinicalData.CTHPatientSurgeryCollection" Start=":CTHPatientSurgery" End=":CTHPatientClinicalData" StartNavigator="CTHPatientClinicalDataItem" EndNavigator="CTHPatientSurgeryCollection" Type="4" EndIsOptional="true" DeleteRuleAction="1">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="PatientClinicalDataID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHPatientSurgery.CTHSurgeryTypeItem-CTHSurgeryType.CTHPatientSurgeryCollection" Start=":CTHPatientSurgery" End=":CTHSurgeryType" StartNavigator="CTHSurgeryTypeItem" EndNavigator="CTHPatientSurgeryCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="SurgeryTypeId" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHPermission.CTHPermissionGroupItem-CTHPermissionGroup.CTHPermissionCollection" Start=":CTHPermission" End=":CTHPermissionGroup" StartNavigator="CTHPermissionGroupItem" EndNavigator="CTHPermissionCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="GroupID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHSpecialCasePart.CTHSpecialCaseItem-CTHSpecialCase.CTHSpecialCasePartCollection" Start=":CTHSpecialCasePart" End=":CTHSpecialCase" StartNavigator="CTHSpecialCaseItem" EndNavigator="CTHSpecialCasePartCollection" Type="4" EndIsOptional="true" DeleteRuleAction="1">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="CaseID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHSurgeryType.CTHCancerTypeItem-CTHCancerType.CTHSurgeryTypeCollection" Start=":CTHSurgeryType" End=":CTHCancerType" StartNavigator="CTHCancerTypeItem" EndNavigator="CTHSurgeryTypeCollection" Type="4" EndIsOptional="true" DeleteRuleAction="1">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="CancerTypeID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHTNMStaging.CTHTNMTypeItem-CTHTNMType.CTHTNMStagingCollection" Start=":CTHTNMStaging" End=":CTHTNMType" StartNavigator="CTHTNMTypeItem" EndNavigator="CTHTNMStagingCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="TNMTypeID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHTNMStagingMatrix.CTHCancerTypeItem-CTHCancerType.CTHTNMStagingMatrixCollection" Start=":CTHTNMStagingMatrix" End=":CTHCancerType" StartNavigator="CTHCancerTypeItem" EndNavigator="CTHTNMStagingMatrixCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="CancerTypeID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHTNMStagingMatrix.CTHStagingItem-CTHStaging.CTHTNMStagingMatrixCollection" Start=":CTHTNMStagingMatrix" End=":CTHStaging" StartNavigator="CTHStagingItem" EndNavigator="CTHTNMStagingMatrixCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="StageID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHTNMStagingMatrix.CTHTNMStagingItem-CTHTNMStaging.CTHTNMStagingMatrixCollection" Start=":CTHTNMStagingMatrix" End=":CTHTNMStaging" StartNavigator="CTHTNMStagingItem" EndNavigator="CTHTNMStagingMatrixCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="MID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHTNMStagingMatrix.CTHTNMStagingItem1-CTHTNMStaging.CTHTNMStagingMatrixCollection1" Start=":CTHTNMStagingMatrix" End=":CTHTNMStaging" StartNavigator="CTHTNMStagingItem1" EndNavigator="CTHTNMStagingMatrixCollection1" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="NID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHTNMStagingMatrix.CTHTNMStagingItem2-CTHTNMStaging.CTHTNMStagingMatrixCollection2" Start=":CTHTNMStagingMatrix" End=":CTHTNMStaging" StartNavigator="CTHTNMStagingItem2" EndNavigator="CTHTNMStagingMatrixCollection2" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="TID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHUserPermission.CTHPermissionItem-CTHPermission.CTHUserPermissionCollection" Start=":CTHUserPermission" End=":CTHPermission" StartNavigator="CTHPermissionItem" EndNavigator="CTHUserPermissionCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="PermissionID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="CTHUserPermission.CTHUserItem-CTHUser.CTHUserPermissionCollection" Start=":CTHUserPermission" End=":CTHUser" StartNavigator="CTHUserItem" EndNavigator="CTHUserPermissionCollection" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="UserID" PkField="ID" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <IndirectRelationship Start=":CTHCancerHistologic" End=":CTHCancerMolecular" StartNavigator="CTHCancerMolecularCollectionViaCTHPatientClinicalData" EndNavigator="CTHCancerHistologicCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHCancerHistologicItem-CTHCancerHistologic.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHCancerMolecularItem-CTHCancerMolecular.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHCancerHistologic" End=":CTHCancerSide" StartNavigator="CTHCancerSideCollectionViaCTHPatientClinicalData" EndNavigator="CTHCancerHistologicCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHCancerHistologicItem-CTHCancerHistologic.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHCancerSideItem-CTHCancerSide.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHCancerHistologic" End=":CTHCancerType" StartNavigator="CTHCancerTypeCollectionViaCTHCancerHistologic" EndNavigator="CTHCancerHistologicCollectionViaCTHCancerHistologic" Relationship1="CTHCancerHistologic.CTHCancerHistologicItem-CTHCancerHistologic.CTHCancerHistologicCollection" Relationship2="CTHCancerHistologic.CTHCancerTypeItem-CTHCancerType.CTHCancerHistologicCollection" />
+      <IndirectRelationship Start=":CTHCancerHistologic" End=":CTHCancerType" StartNavigator="CTHCancerTypeCollectionViaCTHPatientClinicalData" EndNavigator="CTHCancerHistologicCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHCancerHistologicItem-CTHCancerHistologic.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHCancerTypeItem-CTHCancerType.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHCancerHistologic" End=":CTHPatient" StartNavigator="CTHPatientCollectionViaCTHPatientClinicalData" EndNavigator="CTHCancerHistologicCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHCancerHistologicItem-CTHCancerHistologic.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHPatientItem-CTHPatient.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHCancerHistologic" End=":CTHStaging" StartNavigator="CTHStagingCollectionViaCTHPatientClinicalData" EndNavigator="CTHCancerHistologicCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHCancerHistologicItem-CTHCancerHistologic.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHStagingItem-CTHStaging.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHCancerHistologic" End=":CTHTreatmentType" StartNavigator="CTHTreatmentTypeCollectionViaCTHPatientClinicalData" EndNavigator="CTHCancerHistologicCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHCancerHistologicItem-CTHCancerHistologic.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHTreatmentTypeItem-CTHTreatmentType.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHCancerHistologic" End=":CTHTumorGrade" StartNavigator="CTHTumorGradeCollectionViaCTHPatientClinicalData" EndNavigator="CTHCancerHistologicCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHCancerHistologicItem-CTHCancerHistologic.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHTumorGradeItem-CTHTumorGrade.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHCancerMolecular" End=":CTHCancerSide" StartNavigator="CTHCancerSideCollectionViaCTHPatientClinicalData" EndNavigator="CTHCancerMolecularCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHCancerMolecularItem-CTHCancerMolecular.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHCancerSideItem-CTHCancerSide.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHCancerMolecular" End=":CTHPatient" StartNavigator="CTHPatientCollectionViaCTHPatientClinicalData" EndNavigator="CTHCancerMolecularCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHCancerMolecularItem-CTHCancerMolecular.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHPatientItem-CTHPatient.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHCancerMolecular" End=":CTHStaging" StartNavigator="CTHStagingCollectionViaCTHPatientClinicalData" EndNavigator="CTHCancerMolecularCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHCancerMolecularItem-CTHCancerMolecular.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHStagingItem-CTHStaging.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHCancerMolecular" End=":CTHTreatmentType" StartNavigator="CTHTreatmentTypeCollectionViaCTHPatientClinicalData" EndNavigator="CTHCancerMolecularCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHCancerMolecularItem-CTHCancerMolecular.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHTreatmentTypeItem-CTHTreatmentType.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHCancerMolecular" End=":CTHTumorGrade" StartNavigator="CTHTumorGradeCollectionViaCTHPatientClinicalData" EndNavigator="CTHCancerMolecularCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHCancerMolecularItem-CTHCancerMolecular.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHTumorGradeItem-CTHTumorGrade.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHCancerSide" End=":CTHPatient" StartNavigator="CTHPatientCollectionViaCTHPatientClinicalData" EndNavigator="CTHCancerSideCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHCancerSideItem-CTHCancerSide.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHPatientItem-CTHPatient.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHCancerSide" End=":CTHStaging" StartNavigator="CTHStagingCollectionViaCTHPatientClinicalData" EndNavigator="CTHCancerSideCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHCancerSideItem-CTHCancerSide.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHStagingItem-CTHStaging.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHCancerSide" End=":CTHTreatmentType" StartNavigator="CTHTreatmentTypeCollectionViaCTHPatientClinicalData" EndNavigator="CTHCancerSideCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHCancerSideItem-CTHCancerSide.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHTreatmentTypeItem-CTHTreatmentType.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHCancerSide" End=":CTHTumorGrade" StartNavigator="CTHTumorGradeCollectionViaCTHPatientClinicalData" EndNavigator="CTHCancerSideCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHCancerSideItem-CTHCancerSide.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHTumorGradeItem-CTHTumorGrade.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHCancerType" End=":CTHCancerMolecular" StartNavigator="CTHCancerMolecularCollectionViaCTHCancerMolecular" EndNavigator="CTHCancerTypeCollectionViaCTHCancerMolecular" Relationship1="CTHCancerMolecular.CTHCancerTypeItem-CTHCancerType.CTHCancerMolecularCollection" Relationship2="CTHCancerMolecular.CTHCancerMolecularItem-CTHCancerMolecular.CTHCancerMolecularCollection" />
+      <IndirectRelationship Start=":CTHCancerType" End=":CTHCancerMolecular" StartNavigator="CTHCancerMolecularCollectionViaCTHPatientClinicalData" EndNavigator="CTHCancerTypeCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHCancerTypeItem-CTHCancerType.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHCancerMolecularItem-CTHCancerMolecular.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHCancerType" End=":CTHCancerSide" StartNavigator="CTHCancerSideCollectionViaCTHPatientClinicalData" EndNavigator="CTHCancerTypeCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHCancerTypeItem-CTHCancerType.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHCancerSideItem-CTHCancerSide.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHCancerType" End=":CTHPatient" StartNavigator="CTHPatientCollectionViaCTHPatientClinicalData" EndNavigator="CTHCancerTypeCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHCancerTypeItem-CTHCancerType.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHPatientItem-CTHPatient.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHCancerType" End=":CTHStaging" StartNavigator="CTHStagingCollectionViaCTHPatientClinicalData" EndNavigator="CTHCancerTypeCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHCancerTypeItem-CTHCancerType.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHStagingItem-CTHStaging.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHCancerType" End=":CTHStaging" StartNavigator="CTHStagingCollectionViaCTHTNMStagingMatrix" EndNavigator="CTHCancerTypeCollectionViaCTHTNMStagingMatrix" Relationship1="CTHTNMStagingMatrix.CTHCancerTypeItem-CTHCancerType.CTHTNMStagingMatrixCollection" Relationship2="CTHTNMStagingMatrix.CTHStagingItem-CTHStaging.CTHTNMStagingMatrixCollection" />
+      <IndirectRelationship Start=":CTHCancerType" End=":CTHTNMStaging" StartNavigator="CTHTNMStagingCollectionViaCTHTNMStagingMatrix" EndNavigator="CTHCancerTypeCollectionViaCTHTNMStagingMatrix" Relationship1="CTHTNMStagingMatrix.CTHCancerTypeItem-CTHCancerType.CTHTNMStagingMatrixCollection" Relationship2="CTHTNMStagingMatrix.CTHTNMStagingItem-CTHTNMStaging.CTHTNMStagingMatrixCollection" />
+      <IndirectRelationship Start=":CTHCancerType" End=":CTHTNMStaging" StartNavigator="CTHTNMStagingCollectionViaCTHTNMStagingMatrix1" EndNavigator="CTHCancerTypeCollectionViaCTHTNMStagingMatrix1" Relationship1="CTHTNMStagingMatrix.CTHCancerTypeItem-CTHCancerType.CTHTNMStagingMatrixCollection" Relationship2="CTHTNMStagingMatrix.CTHTNMStagingItem1-CTHTNMStaging.CTHTNMStagingMatrixCollection1" />
+      <IndirectRelationship Start=":CTHCancerType" End=":CTHTNMStaging" StartNavigator="CTHTNMStagingCollectionViaCTHTNMStagingMatrix2" EndNavigator="CTHCancerTypeCollectionViaCTHTNMStagingMatrix2" Relationship1="CTHTNMStagingMatrix.CTHCancerTypeItem-CTHCancerType.CTHTNMStagingMatrixCollection" Relationship2="CTHTNMStagingMatrix.CTHTNMStagingItem2-CTHTNMStaging.CTHTNMStagingMatrixCollection2" />
+      <IndirectRelationship Start=":CTHCancerType" End=":CTHTreatmentType" StartNavigator="CTHTreatmentTypeCollectionViaCTHPatientClinicalData" EndNavigator="CTHCancerTypeCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHCancerTypeItem-CTHCancerType.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHTreatmentTypeItem-CTHTreatmentType.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHCancerType" End=":CTHTumorGrade" StartNavigator="CTHTumorGradeCollectionViaCTHPatientClinicalData" EndNavigator="CTHCancerTypeCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHCancerTypeItem-CTHCancerType.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHTumorGradeItem-CTHTumorGrade.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHChemotherapyProtocol" End=":CTHSpecialCase" StartNavigator="CTHSpecialCaseCollectionViaCTHKimoSurvey" EndNavigator="CTHChemotherapyProtocolCollectionViaCTHKimoSurvey" Relationship1="CTHKimoSurvey.CTHChemotherapyProtocolItem-CTHChemotherapyProtocol.CTHKimoSurveyCollection" Relationship2="CTHKimoSurvey.CTHSpecialCaseItem-CTHSpecialCase.CTHKimoSurveyCollection" />
+      <IndirectRelationship Start=":CTHChemotherapyProtocol" End=":CTHSpecialCasePart" StartNavigator="CTHSpecialCasePartCollectionViaCTHKimoSurvey" EndNavigator="CTHChemotherapyProtocolCollectionViaCTHKimoSurvey" Relationship1="CTHKimoSurvey.CTHChemotherapyProtocolItem-CTHChemotherapyProtocol.CTHKimoSurveyCollection" Relationship2="CTHKimoSurvey.CTHSpecialCasePartItem-CTHSpecialCasePart.CTHKimoSurveyCollection" />
+      <IndirectRelationship Start=":CTHLabDetail" End=":CTHOperator" StartNavigator="CTHOperatorCollectionViaCTHLabDetailCondition" EndNavigator="CTHLabDetailCollectionViaCTHLabDetailCondition" Relationship1="CTHLabDetailCondition.CTHLabDetailItem-CTHLabDetail.CTHLabDetailConditionCollection" Relationship2="CTHLabDetailCondition.CTHOperatorItem-CTHOperator.CTHLabDetailConditionCollection" />
+      <IndirectRelationship Start=":CTHPatient" End=":CTHStaging" StartNavigator="CTHStagingCollectionViaCTHPatientClinicalData" EndNavigator="CTHPatientCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHPatientItem-CTHPatient.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHStagingItem-CTHStaging.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHPatient" End=":CTHTreatmentType" StartNavigator="CTHTreatmentTypeCollectionViaCTHPatientClinicalData" EndNavigator="CTHPatientCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHPatientItem-CTHPatient.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHTreatmentTypeItem-CTHTreatmentType.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHPatient" End=":CTHTumorGrade" StartNavigator="CTHTumorGradeCollectionViaCTHPatientClinicalData" EndNavigator="CTHPatientCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHPatientItem-CTHPatient.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHTumorGradeItem-CTHTumorGrade.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHPatientClinicalData" End=":CTHChemotherapyProtocol" StartNavigator="CTHChemotherapyProtocolCollectionViaCTHKimoSurvey" EndNavigator="CTHPatientClinicalDataCollectionViaCTHKimoSurvey" Relationship1="CTHKimoSurvey.CTHPatientClinicalDataItem-CTHPatientClinicalData.CTHKimoSurveyCollection" Relationship2="CTHKimoSurvey.CTHChemotherapyProtocolItem-CTHChemotherapyProtocol.CTHKimoSurveyCollection" />
+      <IndirectRelationship Start=":CTHPatientClinicalData" End=":CTHImaging" StartNavigator="CTHImagingCollectionViaCTHPatientImaging" EndNavigator="CTHPatientClinicalDataCollectionViaCTHPatientImaging" Relationship1="CTHPatientImaging.CTHPatientClinicalDataItem-CTHPatientClinicalData.CTHPatientImagingCollection" Relationship2="CTHPatientImaging.CTHImagingItem-CTHImaging.CTHPatientImagingCollection" />
+      <IndirectRelationship Start=":CTHPatientClinicalData" End=":CTHLabDetail" StartNavigator="CTHLabDetailCollectionViaCTHPatientLab" EndNavigator="CTHPatientClinicalDataCollectionViaCTHPatientLab" Relationship1="CTHPatientLab.CTHPatientClinicalDataItem-CTHPatientClinicalData.CTHPatientLabCollection" Relationship2="CTHPatientLab.CTHLabDetailItem-CTHLabDetail.CTHPatientLabCollection" />
+      <IndirectRelationship Start=":CTHPatientClinicalData" End=":CTHPathologyReportType" StartNavigator="CTHPathologyReportTypeCollectionViaCTHPatientPathologyReport" EndNavigator="CTHPatientClinicalDataCollectionViaCTHPatientPathologyReport" Relationship1="CTHPatientPathologyReport.CTHPatientClinicalDataItem-CTHPatientClinicalData.CTHPatientPathologyReportCollection" Relationship2="CTHPatientPathologyReport.CTHPathologyReportTypeItem-CTHPathologyReportType.CTHPatientPathologyReportCollection" />
+      <IndirectRelationship Start=":CTHPatientClinicalData" End=":CTHSpecialCase" StartNavigator="CTHSpecialCaseCollectionViaCTHKimoSurvey" EndNavigator="CTHPatientClinicalDataCollectionViaCTHKimoSurvey" Relationship1="CTHKimoSurvey.CTHPatientClinicalDataItem-CTHPatientClinicalData.CTHKimoSurveyCollection" Relationship2="CTHKimoSurvey.CTHSpecialCaseItem-CTHSpecialCase.CTHKimoSurveyCollection" />
+      <IndirectRelationship Start=":CTHPatientClinicalData" End=":CTHSpecialCasePart" StartNavigator="CTHSpecialCasePartCollectionViaCTHKimoSurvey" EndNavigator="CTHPatientClinicalDataCollectionViaCTHKimoSurvey" Relationship1="CTHKimoSurvey.CTHPatientClinicalDataItem-CTHPatientClinicalData.CTHKimoSurveyCollection" Relationship2="CTHKimoSurvey.CTHSpecialCasePartItem-CTHSpecialCasePart.CTHKimoSurveyCollection" />
+      <IndirectRelationship Start=":CTHPatientClinicalData" End=":CTHSurgeryType" StartNavigator="CTHSurgeryTypeCollectionViaCTHPatientSurgery" EndNavigator="CTHPatientClinicalDataCollectionViaCTHPatientSurgery" Relationship1="CTHPatientSurgery.CTHPatientClinicalDataItem-CTHPatientClinicalData.CTHPatientSurgeryCollection" Relationship2="CTHPatientSurgery.CTHSurgeryTypeItem-CTHSurgeryType.CTHPatientSurgeryCollection" />
+      <IndirectRelationship Start=":CTHPermission" End=":CTHUser" StartNavigator="CTHUserCollectionViaCTHUserPermission" EndNavigator="CTHPermissionCollectionViaCTHUserPermission" Relationship1="CTHUserPermission.CTHPermissionItem-CTHPermission.CTHUserPermissionCollection" Relationship2="CTHUserPermission.CTHUserItem-CTHUser.CTHUserPermissionCollection" />
+      <IndirectRelationship Start=":CTHSpecialCase" End=":CTHSpecialCasePart" StartNavigator="CTHSpecialCasePartCollectionViaCTHKimoSurvey" EndNavigator="CTHSpecialCaseCollectionViaCTHKimoSurvey" Relationship1="CTHKimoSurvey.CTHSpecialCaseItem-CTHSpecialCase.CTHKimoSurveyCollection" Relationship2="CTHKimoSurvey.CTHSpecialCasePartItem-CTHSpecialCasePart.CTHKimoSurveyCollection" />
+      <IndirectRelationship Start=":CTHStaging" End=":CTHTNMStaging" StartNavigator="CTHTNMStagingCollectionViaCTHTNMStagingMatrix" EndNavigator="CTHStagingCollectionViaCTHTNMStagingMatrix" Relationship1="CTHTNMStagingMatrix.CTHStagingItem-CTHStaging.CTHTNMStagingMatrixCollection" Relationship2="CTHTNMStagingMatrix.CTHTNMStagingItem-CTHTNMStaging.CTHTNMStagingMatrixCollection" />
+      <IndirectRelationship Start=":CTHStaging" End=":CTHTNMStaging" StartNavigator="CTHTNMStagingCollectionViaCTHTNMStagingMatrix1" EndNavigator="CTHStagingCollectionViaCTHTNMStagingMatrix1" Relationship1="CTHTNMStagingMatrix.CTHStagingItem-CTHStaging.CTHTNMStagingMatrixCollection" Relationship2="CTHTNMStagingMatrix.CTHTNMStagingItem1-CTHTNMStaging.CTHTNMStagingMatrixCollection1" />
+      <IndirectRelationship Start=":CTHStaging" End=":CTHTNMStaging" StartNavigator="CTHTNMStagingCollectionViaCTHTNMStagingMatrix2" EndNavigator="CTHStagingCollectionViaCTHTNMStagingMatrix2" Relationship1="CTHTNMStagingMatrix.CTHStagingItem-CTHStaging.CTHTNMStagingMatrixCollection" Relationship2="CTHTNMStagingMatrix.CTHTNMStagingItem2-CTHTNMStaging.CTHTNMStagingMatrixCollection2" />
+      <IndirectRelationship Start=":CTHStaging" End=":CTHTreatmentType" StartNavigator="CTHTreatmentTypeCollectionViaCTHPatientClinicalData" EndNavigator="CTHStagingCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHStagingItem-CTHStaging.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHTreatmentTypeItem-CTHTreatmentType.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHStaging" End=":CTHTumorGrade" StartNavigator="CTHTumorGradeCollectionViaCTHPatientClinicalData" EndNavigator="CTHStagingCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHStagingItem-CTHStaging.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHTumorGradeItem-CTHTumorGrade.CTHPatientClinicalDataCollection" />
+      <IndirectRelationship Start=":CTHTNMStaging" End=":CTHTNMStaging" StartNavigator="CTHTNMStagingCollectionViaCTHTNMStagingMatrix" EndNavigator="CTHTNMStagingCollectionViaCTHTNMStagingMatrix_" Relationship1="CTHTNMStagingMatrix.CTHTNMStagingItem-CTHTNMStaging.CTHTNMStagingMatrixCollection" Relationship2="CTHTNMStagingMatrix.CTHTNMStagingItem1-CTHTNMStaging.CTHTNMStagingMatrixCollection1" />
+      <IndirectRelationship Start=":CTHTNMStaging" End=":CTHTNMStaging" StartNavigator="CTHTNMStagingCollectionViaCTHTNMStagingMatrix1" EndNavigator="CTHTNMStagingCollectionViaCTHTNMStagingMatrix1_" Relationship1="CTHTNMStagingMatrix.CTHTNMStagingItem-CTHTNMStaging.CTHTNMStagingMatrixCollection" Relationship2="CTHTNMStagingMatrix.CTHTNMStagingItem2-CTHTNMStaging.CTHTNMStagingMatrixCollection2" />
+      <IndirectRelationship Start=":CTHTNMStaging" End=":CTHTNMStaging" StartNavigator="CTHTNMStagingCollectionViaCTHTNMStagingMatrix2" EndNavigator="CTHTNMStagingCollectionViaCTHTNMStagingMatrix2_" Relationship1="CTHTNMStagingMatrix.CTHTNMStagingItem1-CTHTNMStaging.CTHTNMStagingMatrixCollection1" Relationship2="CTHTNMStagingMatrix.CTHTNMStagingItem2-CTHTNMStaging.CTHTNMStagingMatrixCollection2" />
+      <IndirectRelationship Start=":CTHTreatmentType" End=":CTHTumorGrade" StartNavigator="CTHTumorGradeCollectionViaCTHPatientClinicalData" EndNavigator="CTHTreatmentTypeCollectionViaCTHPatientClinicalData" Relationship1="CTHPatientClinicalData.CTHTreatmentTypeItem-CTHTreatmentType.CTHPatientClinicalDataCollection" Relationship2="CTHPatientClinicalData.CTHTumorGradeItem-CTHTumorGrade.CTHPatientClinicalDataCollection" />
+    </Relationships>
+    <InheritanceHierarchies />
+  </EntityModel>
+  <TargetDatabases>
+    <TargetDatabase Type="2D18D138-1DD2-467E-86CC-4838250611AE" SyncSource="2">
+      <ConnectionElements>
+        <ConnectionElement Name="ServerName" Value="10.0.0.10" />
+        <ConnectionElement Name="CatalogName" Value="master" />
+        <ConnectionElement Name="UserID" Value="appuser" />
+        <ConnectionElement Name="Password" Value="" />
+        <ConnectionElement Name="UseTransientErrorRecovery" Value="true" />
+      </ConnectionElements>
+      <SystemSequences>
+        <Sequence Name="SCOPE_IDENTITY()" />
+        <Sequence Name="@@IDENTITY" />
+      </SystemSequences>
+      <Catalogs>
+        <Catalog Name="CTH">
+          <Schemas>
+            <Schema Name="dbo" SyncSource="2" LastSyncWithDatabase="2020-02-09T12:54:25.8502687Z">
+              <Tables>
+                <Table Name="CTHCancerHistologic">
+                  <PkConstraintName Name="PK_CTHHistologicSubTypeCancer" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="Name" Ordinal="2" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="CanerID" Ordinal="3" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="ParentID" Ordinal="4" IsOptional="true" DbType="8" Precision="10" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHCancerMolecular">
+                  <PkConstraintName Name="PK_CTHMolecularSubTypeCancer" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="Name" Ordinal="2" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="CanerID" Ordinal="3" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="ParentID" Ordinal="4" IsOptional="true" DbType="8" Precision="10" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHCancerSide">
+                  <PkConstraintName Name="PK_CTHCancerSide" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="Side" Ordinal="2" IsOptional="true" DbType="12" Length="2147483647" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHCancerStaging">
+                  <PkConstraintName Name="PK_CTHCancerStaging" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="Name" Ordinal="2" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="Number" Ordinal="3" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="Remarks" Ordinal="4" IsOptional="true" DbType="12" Length="2147483647" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHCancerType">
+                  <PkConstraintName Name="PK_CTHCancerType" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="ICDCode" Ordinal="2" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="TypeName" Ordinal="3" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="ParentID" Ordinal="4" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="IsParent" Ordinal="5" IsOptional="true" DbType="2" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHChemotherapyProtocol">
+                  <PkConstraintName Name="PK_CTHChemotherapyProtocol" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="ProtocolName" Ordinal="2" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="CancerTypeID" Ordinal="3" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="Days" Ordinal="4" IsOptional="true" DbType="8" Precision="10" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHImaging">
+                  <PkConstraintName Name="PK_CTHImaging" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="ImageName" Ordinal="2" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="Remarks" Ordinal="3" IsOptional="true" DbType="12" Length="2147483647" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHKimoSurvey">
+                  <PkConstraintName Name="PK_CTHKimoSurvey" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="PatientClinicalDataID" Ordinal="2" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="ProtocolID" Ordinal="3" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="CycleNum" Ordinal="4" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="Days" Ordinal="5" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="Weight" Ordinal="6" IsOptional="true" DbType="6" Precision="38" />
+                    <Field Name="Height" Ordinal="7" IsOptional="true" DbType="6" Precision="38" />
+                    <Field Name="SerumCreatinine" Ordinal="8" IsOptional="true" DbType="6" Precision="38" />
+                    <Field Name="BodyMassIndex" Ordinal="9" IsOptional="true" DbType="6" Precision="38" />
+                    <Field Name="BodySurfaceArea" Ordinal="10" IsOptional="true" DbType="6" Precision="38" />
+                    <Field Name="AdjustBodyWeight" Ordinal="11" IsOptional="true" DbType="6" Precision="38" />
+                    <Field Name="LeanBodyWeight" Ordinal="12" IsOptional="true" DbType="6" Precision="38" />
+                    <Field Name="BodySurfaceAreaInAdultAmputees" Ordinal="13" IsOptional="true" DbType="6" Precision="38" />
+                    <Field Name="CRCL" Ordinal="14" IsOptional="true" DbType="6" Precision="38" />
+                    <Field Name="IsSpecialCase" Ordinal="15" IsOptional="true" DbType="2" />
+                    <Field Name="SpecialCaseID" Ordinal="16" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="SpecialCasePartID" Ordinal="17" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="Date" Ordinal="18" IsOptional="true" DbType="4" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHLab">
+                  <PkConstraintName Name="PK_CTHLab" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="LabName" Ordinal="2" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="Remarks" Ordinal="3" IsOptional="true" DbType="12" Length="2147483647" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHLabDetail">
+                  <PkConstraintName Name="PK_CTHLabDetail" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="LabDetailsName" Ordinal="2" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="Remarks" Ordinal="3" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="LabID" Ordinal="4" IsOptional="true" DbType="8" Precision="10" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHLabDetailCondition">
+                  <PkConstraintName Name="PK_CTHLabDetailCondition" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="OpertorID" Ordinal="2" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="Number" Ordinal="3" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="LabDetailID" Ordinal="4" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="Message" Ordinal="5" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="Condition" Ordinal="6" IsOptional="true" DbType="12" Length="2147483647" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHOperator">
+                  <PkConstraintName Name="PK_CTHOperator" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="OpertorIcon" Ordinal="2" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="OpertorName" Ordinal="3" IsOptional="true" DbType="12" Length="2147483647" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHPathologyReportType">
+                  <PkConstraintName Name="PK_CTHPathologyReportType" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="Name" Ordinal="2" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="Remarks" Ordinal="3" IsOptional="true" DbType="12" Length="2147483647" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHPatient">
+                  <PkConstraintName Name="PK_CTHPatient" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="PatientNameA" Ordinal="2" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="PatientNameE" Ordinal="3" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="PatientNumber" Ordinal="4" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="BirthDate" Ordinal="5" IsOptional="true" DbType="28" />
+                    <Field Name="PatientAge" Ordinal="6" IsOptional="true" DbType="6" Precision="38" />
+                    <Field Name="PatientGender" Ordinal="7" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="Residence" Ordinal="8" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="NationalID" Ordinal="9" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="ContactNumber" Ordinal="10" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="Occupation" Ordinal="11" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="PaymentTypeId" Ordinal="12" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="SponserCompanyName" Ordinal="13" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="FirstVisitDate" Ordinal="14" IsOptional="true" DbType="28" />
+                    <Field Name="CareProviderTitle" Ordinal="15" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="CareProviderName" Ordinal="16" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="NationalIDPhotoPath" Ordinal="17" IsOptional="true" DbType="12" Length="2147483647" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHPatientClinicalData">
+                  <PkConstraintName Name="PK_CTHPatientClinicalData" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="PatientID" Ordinal="2" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="CancerTypeID" Ordinal="3" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="CancerSideId" Ordinal="4" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="TumorGradeID" Ordinal="5" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="StageGradeID" Ordinal="6" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="TreatmentTypeID" Ordinal="7" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="DataDate" Ordinal="8" IsOptional="true" DbType="4" />
+                    <Field Name="CancerHistologicalID" Ordinal="9" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="CancerMolecularID" Ordinal="10" IsOptional="true" DbType="8" Precision="10" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHPatientImaging">
+                  <PkConstraintName Name="PK_CTHPatientImaging" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="PatientClinicalDataID" Ordinal="2" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="ImagingTypeID" Ordinal="3" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="Image" Ordinal="4" IsOptional="true" DbType="12" Length="2147483647" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHPatientLab">
+                  <PkConstraintName Name="PK_CTHPatientLab" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="PatientClinicalDataID" Ordinal="2" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="LabDetailID" Ordinal="3" IsOptional="true" DbType="8" Precision="10" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHPatientPathologyReport">
+                  <PkConstraintName Name="PK_CTHPatientPathologyReport" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="ReportTypeID" Ordinal="2" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="PatienClinicalDataID" Ordinal="3" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="Report" Ordinal="4" IsOptional="true" DbType="12" Length="2147483647" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHPatientSurgery">
+                  <PkConstraintName Name="PK_CTHPatientSurgery" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="PatientClinicalDataID" Ordinal="2" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="SurgeryTypeId" Ordinal="3" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="SurgeryDate" Ordinal="4" IsOptional="true" DbType="28" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHPaymentType">
+                  <PkConstraintName Name="PK_CTHPaymentType" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="PaymentType" Ordinal="2" IsOptional="true" DbType="12" Length="2147483647" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHPermission">
+                  <PkConstraintName Name="PK_CTHPermission" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="PermissionName" Ordinal="2" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="GroupID" Ordinal="3" IsOptional="true" DbType="8" Precision="10" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHPermissionGroup">
+                  <PkConstraintName Name="PK_CTHPermissionGroup" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="GroupName" Ordinal="2" IsOptional="true" DbType="12" Length="2147483647" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHSpecialCase">
+                  <PkConstraintName Name="PK_CTHSpecialCase" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="CaseName" Ordinal="2" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="Remarks" Ordinal="3" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="HasParts" Ordinal="4" IsOptional="true" DbType="2" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHSpecialCasePart">
+                  <PkConstraintName Name="PK_CTHSpecialCasePart" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="PartName" Ordinal="2" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="Remarks" Ordinal="3" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="CaseID" Ordinal="4" IsOptional="true" DbType="8" Precision="10" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHStaging">
+                  <PkConstraintName Name="PK_CTHStage" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="Name" Ordinal="2" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="Number" Ordinal="3" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="Remarks" Ordinal="4" IsOptional="true" DbType="12" Length="2147483647" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHSurgeryType">
+                  <PkConstraintName Name="PK_CTHSurgeryType" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="SurgeryType" Ordinal="2" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="CancerTypeID" Ordinal="3" IsOptional="true" DbType="8" Precision="10" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHTNMStaging">
+                  <PkConstraintName Name="PK_CTHTNMStaging" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="Name" Ordinal="2" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="Number" Ordinal="3" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="TNMFrom" Ordinal="4" IsOptional="true" DbType="6" Precision="38" />
+                    <Field Name="TNMTo" Ordinal="5" IsOptional="true" DbType="6" Precision="38" />
+                    <Field Name="Remarks" Ordinal="6" IsOptional="true" DbType="12" Length="2147483647" />
+                    <Field Name="TNMTypeID" Ordinal="7" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="Description" Ordinal="8" IsOptional="true" DbType="12" Length="2147483647" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHTNMStagingMatrix">
+                  <PkConstraintName Name="PK_CTHTNMStagingMatrix" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="TID" Ordinal="2" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="NID" Ordinal="3" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="MID" Ordinal="4" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="StageID" Ordinal="5" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="CancerTypeID" Ordinal="6" IsOptional="true" DbType="8" Precision="10" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHTNMType">
+                  <PkConstraintName Name="PK_CTHTNMType" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="TypeName" Ordinal="2" IsOptional="true" DbType="12" Length="2147483647" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHTreatmentType">
+                  <PkConstraintName Name="PK_CTHTreatmentType" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="TreatmentType" Ordinal="2" IsOptional="true" DbType="12" Length="2147483647" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHTumorGrade">
+                  <PkConstraintName Name="PK_CTHTumorGrade" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="TumorGrade" Ordinal="2" IsOptional="true" DbType="6" Precision="38" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHUser">
+                  <PkConstraintName Name="PK_CTHUser" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="UserName" Ordinal="2" IsOptional="true" DbType="12" Length="50" />
+                    <Field Name="Password" Ordinal="3" IsOptional="true" DbType="12" Length="2147483647" />
+                  </Fields>
+                </Table>
+                <Table Name="CTHUserPermission">
+                  <PkConstraintName Name="PK_CTHUserPermission" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="UserID" Ordinal="2" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="PermissionID" Ordinal="3" IsOptional="true" DbType="8" Precision="10" />
+                  </Fields>
+                </Table>
+              </Tables>
+            </Schema>
+          </Schemas>
+          <ForeignKeyConstraints>
+            <ForeignKeyConstraint Name="dbo:CTHCancerHistologic:FK_CTHCancerHistologic_CTHCancerHistologic_Parent">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHCancerHistologic:ID" FkField="dbo:CTHCancerHistologic:ParentID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHCancerHistologic:FK_CTHCancerHistologic_CTHCancerType">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHCancerType:ID" FkField="dbo:CTHCancerHistologic:CanerID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHCancerMolecular:FK_CTHCancerMolecular_CTHCancerMolecular_Parent">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHCancerMolecular:ID" FkField="dbo:CTHCancerMolecular:ParentID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHCancerMolecular:FK_CTHCancerMolecular_CTHCancerType">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHCancerType:ID" FkField="dbo:CTHCancerMolecular:CanerID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHCancerType:FK_CTHCancerType_CTHCancerType_Parent">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHCancerType:ID" FkField="dbo:CTHCancerType:ParentID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHChemotherapyProtocol:FK_CTHChemotherapyProtocol_CTHCancerType" DeleteRuleAction="1">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHCancerType:ID" FkField="dbo:CTHChemotherapyProtocol:CancerTypeID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHKimoSurvey:FK_CTHKimoSurvey_CTHChemotherapyProtocol" DeleteRuleAction="1">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHChemotherapyProtocol:ID" FkField="dbo:CTHKimoSurvey:ProtocolID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHKimoSurvey:FK_CTHKimoSurvey_CTHPatient" DeleteRuleAction="1">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHPatientClinicalData:ID" FkField="dbo:CTHKimoSurvey:PatientClinicalDataID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHKimoSurvey:FK_CTHKimoSurvey_CTHSpecialCase" DeleteRuleAction="1">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHSpecialCase:ID" FkField="dbo:CTHKimoSurvey:SpecialCaseID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHKimoSurvey:FK_CTHKimoSurvey_CTHSpecialCasePart">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHSpecialCasePart:ID" FkField="dbo:CTHKimoSurvey:SpecialCasePartID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHLabDetail:FK_CTHLabDetail_CTHLab" DeleteRuleAction="1">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHLab:ID" FkField="dbo:CTHLabDetail:LabID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHLabDetailCondition:FK_CTHLabDetailCondition_CTHLabDetail" DeleteRuleAction="1">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHLabDetail:ID" FkField="dbo:CTHLabDetailCondition:LabDetailID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHLabDetailCondition:FK_CTHLabDetailCondition_CTHOperator" DeleteRuleAction="1">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHOperator:ID" FkField="dbo:CTHLabDetailCondition:OpertorID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHPatient:FK_CTHPatient_CTHPaymentType">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHPaymentType:ID" FkField="dbo:CTHPatient:PaymentTypeId" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHPatientClinicalData:FK_CTHPatientClinicalData_CTHCancerSide">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHCancerSide:ID" FkField="dbo:CTHPatientClinicalData:CancerSideId" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHPatientClinicalData:FK_CTHPatientClinicalData_CTHCancerSubSubSubType">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHCancerType:ID" FkField="dbo:CTHPatientClinicalData:CancerTypeID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHPatientClinicalData:FK_CTHPatientClinicalData_CTHHistologicSubSubTypeCancer">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHCancerHistologic:ID" FkField="dbo:CTHPatientClinicalData:CancerHistologicalID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHPatientClinicalData:FK_CTHPatientClinicalData_CTHMolecularSubSubTypeCancer">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHCancerMolecular:ID" FkField="dbo:CTHPatientClinicalData:CancerMolecularID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHPatientClinicalData:FK_CTHPatientClinicalData_CTHPatient">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHPatient:ID" FkField="dbo:CTHPatientClinicalData:PatientID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHPatientClinicalData:FK_CTHPatientClinicalData_CTHStage">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHStaging:ID" FkField="dbo:CTHPatientClinicalData:StageGradeID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHPatientClinicalData:FK_CTHPatientClinicalData_CTHTreatmentType">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHTreatmentType:ID" FkField="dbo:CTHPatientClinicalData:TreatmentTypeID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHPatientClinicalData:FK_CTHPatientClinicalData_CTHTumorGrade">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHTumorGrade:ID" FkField="dbo:CTHPatientClinicalData:TumorGradeID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHPatientImaging:FK_CTHPatientImaging_CTHImaging" DeleteRuleAction="1">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHImaging:ID" FkField="dbo:CTHPatientImaging:ImagingTypeID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHPatientImaging:FK_CTHPatientImaging_CTHPatientClinicalData" DeleteRuleAction="1">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHPatientClinicalData:ID" FkField="dbo:CTHPatientImaging:PatientClinicalDataID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHPatientLab:FK_CTHPatientLab_CTHLabDetail" DeleteRuleAction="1">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHLabDetail:ID" FkField="dbo:CTHPatientLab:LabDetailID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHPatientLab:FK_CTHPatientLab_CTHPatientClinicalData" DeleteRuleAction="1">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHPatientClinicalData:ID" FkField="dbo:CTHPatientLab:PatientClinicalDataID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHPatientPathologyReport:FK_CTHPatientPathologyReport_CTHPathologyReportType" DeleteRuleAction="1">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHPathologyReportType:ID" FkField="dbo:CTHPatientPathologyReport:ReportTypeID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHPatientPathologyReport:FK_CTHPatientPathologyReport_CTHPatientClinicalData" DeleteRuleAction="1">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHPatientClinicalData:ID" FkField="dbo:CTHPatientPathologyReport:PatienClinicalDataID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHPatientSurgery:FK_CTHPatientSurgery_CTHPatientClinicalData" DeleteRuleAction="1">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHPatientClinicalData:ID" FkField="dbo:CTHPatientSurgery:PatientClinicalDataID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHPatientSurgery:FK_CTHPatientSurgery_CTHSurgeryType">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHSurgeryType:ID" FkField="dbo:CTHPatientSurgery:SurgeryTypeId" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHPermission:FK_CTHPermission_CTHPermissionGroup">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHPermissionGroup:ID" FkField="dbo:CTHPermission:GroupID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHSpecialCasePart:FK_CTHSpecialCasePart_CTHSpecialCase" DeleteRuleAction="1">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHSpecialCase:ID" FkField="dbo:CTHSpecialCasePart:CaseID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHSurgeryType:FK_CTHSurgeryType_CTHCancerType" DeleteRuleAction="1">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHCancerType:ID" FkField="dbo:CTHSurgeryType:CancerTypeID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHTNMStaging:FK_CTHTNMStaging_CTHTNMType">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHTNMType:ID" FkField="dbo:CTHTNMStaging:TNMTypeID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHTNMStagingMatrix:FK_CancerType">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHCancerType:ID" FkField="dbo:CTHTNMStagingMatrix:CancerTypeID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHTNMStagingMatrix:FK_MStaging">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHTNMStaging:ID" FkField="dbo:CTHTNMStagingMatrix:MID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHTNMStagingMatrix:FK_NStaging">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHTNMStaging:ID" FkField="dbo:CTHTNMStagingMatrix:NID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHTNMStagingMatrix:FK_Staging">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHStaging:ID" FkField="dbo:CTHTNMStagingMatrix:StageID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHTNMStagingMatrix:FK_TStaging">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHTNMStaging:ID" FkField="dbo:CTHTNMStagingMatrix:TID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHUserPermission:FK_CTHUserPermission_CTHPermission">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHPermission:ID" FkField="dbo:CTHUserPermission:PermissionID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:CTHUserPermission:FK_CTHUserPermission_CTHUser">
+              <FieldPairs>
+                <FieldPair PkField="dbo:CTHUser:ID" FkField="dbo:CTHUserPermission:UserID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+          </ForeignKeyConstraints>
+        </Catalog>
+      </Catalogs>
+    </TargetDatabase>
+  </TargetDatabases>
+  <MappingStores>
+    <MappingStore Type="2D18D138-1DD2-467E-86CC-4838250611AE">
+      <EntityMappings>
+        <EntityMapping EntityName=":CTHCancerHistologic" TargetName="CTH:dbo:CTHCancerHistologic">
+          <FieldMappings>
+            <FieldMapping FieldName="CanerID" TargetFieldName="CanerID" />
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="Name" TargetFieldName="Name" />
+            <FieldMapping FieldName="ParentID" TargetFieldName="ParentID" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHCancerMolecular" TargetName="CTH:dbo:CTHCancerMolecular">
+          <FieldMappings>
+            <FieldMapping FieldName="CanerID" TargetFieldName="CanerID" />
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="Name" TargetFieldName="Name" />
+            <FieldMapping FieldName="ParentID" TargetFieldName="ParentID" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHCancerSide" TargetName="CTH:dbo:CTHCancerSide">
+          <FieldMappings>
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="Side" TargetFieldName="Side" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHCancerStaging" TargetName="CTH:dbo:CTHCancerStaging">
+          <FieldMappings>
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="Name" TargetFieldName="Name" />
+            <FieldMapping FieldName="Number" TargetFieldName="Number" />
+            <FieldMapping FieldName="Remarks" TargetFieldName="Remarks" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHCancerType" TargetName="CTH:dbo:CTHCancerType">
+          <FieldMappings>
+            <FieldMapping FieldName="ICDCode" TargetFieldName="ICDCode" />
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="IsParent" TargetFieldName="IsParent" />
+            <FieldMapping FieldName="ParentID" TargetFieldName="ParentID" />
+            <FieldMapping FieldName="TypeName" TargetFieldName="TypeName" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHChemotherapyProtocol" TargetName="CTH:dbo:CTHChemotherapyProtocol">
+          <FieldMappings>
+            <FieldMapping FieldName="CancerTypeID" TargetFieldName="CancerTypeID" />
+            <FieldMapping FieldName="Days" TargetFieldName="Days" />
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="ProtocolName" TargetFieldName="ProtocolName" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHImaging" TargetName="CTH:dbo:CTHImaging">
+          <FieldMappings>
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="ImageName" TargetFieldName="ImageName" />
+            <FieldMapping FieldName="Remarks" TargetFieldName="Remarks" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHKimoSurvey" TargetName="CTH:dbo:CTHKimoSurvey">
+          <FieldMappings>
+            <FieldMapping FieldName="AdjustBodyWeight" TargetFieldName="AdjustBodyWeight" />
+            <FieldMapping FieldName="BodyMassIndex" TargetFieldName="BodyMassIndex" />
+            <FieldMapping FieldName="BodySurfaceArea" TargetFieldName="BodySurfaceArea" />
+            <FieldMapping FieldName="BodySurfaceAreaInAdultAmputees" TargetFieldName="BodySurfaceAreaInAdultAmputees" />
+            <FieldMapping FieldName="CRCL" TargetFieldName="CRCL" />
+            <FieldMapping FieldName="CycleNum" TargetFieldName="CycleNum" />
+            <FieldMapping FieldName="Date" TargetFieldName="Date" />
+            <FieldMapping FieldName="Days" TargetFieldName="Days" />
+            <FieldMapping FieldName="Height" TargetFieldName="Height" />
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="IsSpecialCase" TargetFieldName="IsSpecialCase" />
+            <FieldMapping FieldName="LeanBodyWeight" TargetFieldName="LeanBodyWeight" />
+            <FieldMapping FieldName="PatientClinicalDataID" TargetFieldName="PatientClinicalDataID" />
+            <FieldMapping FieldName="ProtocolID" TargetFieldName="ProtocolID" />
+            <FieldMapping FieldName="SerumCreatinine" TargetFieldName="SerumCreatinine" />
+            <FieldMapping FieldName="SpecialCaseID" TargetFieldName="SpecialCaseID" />
+            <FieldMapping FieldName="SpecialCasePartID" TargetFieldName="SpecialCasePartID" />
+            <FieldMapping FieldName="Weight" TargetFieldName="Weight" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHLab" TargetName="CTH:dbo:CTHLab">
+          <FieldMappings>
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="LabName" TargetFieldName="LabName" />
+            <FieldMapping FieldName="Remarks" TargetFieldName="Remarks" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHLabDetail" TargetName="CTH:dbo:CTHLabDetail">
+          <FieldMappings>
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="LabDetailsName" TargetFieldName="LabDetailsName" />
+            <FieldMapping FieldName="LabID" TargetFieldName="LabID" />
+            <FieldMapping FieldName="Remarks" TargetFieldName="Remarks" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHLabDetailCondition" TargetName="CTH:dbo:CTHLabDetailCondition">
+          <FieldMappings>
+            <FieldMapping FieldName="Condition" TargetFieldName="Condition" />
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="LabDetailID" TargetFieldName="LabDetailID" />
+            <FieldMapping FieldName="Message" TargetFieldName="Message" />
+            <FieldMapping FieldName="Number" TargetFieldName="Number" />
+            <FieldMapping FieldName="OpertorID" TargetFieldName="OpertorID" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHOperator" TargetName="CTH:dbo:CTHOperator">
+          <FieldMappings>
+            <FieldMapping FieldName="ID" TargetFieldName="ID" />
+            <FieldMapping FieldName="OpertorIcon" TargetFieldName="OpertorIcon" />
+            <FieldMapping FieldName="OpertorName" TargetFieldName="OpertorName" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHPathologyReportType" TargetName="CTH:dbo:CTHPathologyReportType">
+          <FieldMappings>
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="Name" TargetFieldName="Name" />
+            <FieldMapping FieldName="Remarks" TargetFieldName="Remarks" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHPatient" TargetName="CTH:dbo:CTHPatient">
+          <FieldMappings>
+            <FieldMapping FieldName="BirthDate" TargetFieldName="BirthDate" />
+            <FieldMapping FieldName="CareProviderName" TargetFieldName="CareProviderName" />
+            <FieldMapping FieldName="CareProviderTitle" TargetFieldName="CareProviderTitle" />
+            <FieldMapping FieldName="ContactNumber" TargetFieldName="ContactNumber" />
+            <FieldMapping FieldName="FirstVisitDate" TargetFieldName="FirstVisitDate" />
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="NationalID" TargetFieldName="NationalID" />
+            <FieldMapping FieldName="NationalIDPhotoPath" TargetFieldName="NationalIDPhotoPath" />
+            <FieldMapping FieldName="Occupation" TargetFieldName="Occupation" />
+            <FieldMapping FieldName="PatientAge" TargetFieldName="PatientAge" />
+            <FieldMapping FieldName="PatientGender" TargetFieldName="PatientGender" />
+            <FieldMapping FieldName="PatientNameA" TargetFieldName="PatientNameA" />
+            <FieldMapping FieldName="PatientNameE" TargetFieldName="PatientNameE" />
+            <FieldMapping FieldName="PatientNumber" TargetFieldName="PatientNumber" />
+            <FieldMapping FieldName="PaymentTypeId" TargetFieldName="PaymentTypeId" />
+            <FieldMapping FieldName="Residence" TargetFieldName="Residence" />
+            <FieldMapping FieldName="SponserCompanyName" TargetFieldName="SponserCompanyName" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHPatientClinicalData" TargetName="CTH:dbo:CTHPatientClinicalData">
+          <FieldMappings>
+            <FieldMapping FieldName="CancerHistologicalID" TargetFieldName="CancerHistologicalID" />
+            <FieldMapping FieldName="CancerMolecularID" TargetFieldName="CancerMolecularID" />
+            <FieldMapping FieldName="CancerSideId" TargetFieldName="CancerSideId" />
+            <FieldMapping FieldName="CancerTypeID" TargetFieldName="CancerTypeID" />
+            <FieldMapping FieldName="DataDate" TargetFieldName="DataDate" />
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="PatientID" TargetFieldName="PatientID" />
+            <FieldMapping FieldName="StageGradeID" TargetFieldName="StageGradeID" />
+            <FieldMapping FieldName="TreatmentTypeID" TargetFieldName="TreatmentTypeID" />
+            <FieldMapping FieldName="TumorGradeID" TargetFieldName="TumorGradeID" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHPatientImaging" TargetName="CTH:dbo:CTHPatientImaging">
+          <FieldMappings>
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="Image" TargetFieldName="Image" />
+            <FieldMapping FieldName="ImagingTypeID" TargetFieldName="ImagingTypeID" />
+            <FieldMapping FieldName="PatientClinicalDataID" TargetFieldName="PatientClinicalDataID" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHPatientLab" TargetName="CTH:dbo:CTHPatientLab">
+          <FieldMappings>
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="LabDetailID" TargetFieldName="LabDetailID" />
+            <FieldMapping FieldName="PatientClinicalDataID" TargetFieldName="PatientClinicalDataID" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHPatientPathologyReport" TargetName="CTH:dbo:CTHPatientPathologyReport">
+          <FieldMappings>
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="PatienClinicalDataID" TargetFieldName="PatienClinicalDataID" />
+            <FieldMapping FieldName="Report" TargetFieldName="Report" />
+            <FieldMapping FieldName="ReportTypeID" TargetFieldName="ReportTypeID" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHPatientSurgery" TargetName="CTH:dbo:CTHPatientSurgery">
+          <FieldMappings>
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="PatientClinicalDataID" TargetFieldName="PatientClinicalDataID" />
+            <FieldMapping FieldName="SurgeryDate" TargetFieldName="SurgeryDate" />
+            <FieldMapping FieldName="SurgeryTypeId" TargetFieldName="SurgeryTypeId" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHPaymentType" TargetName="CTH:dbo:CTHPaymentType">
+          <FieldMappings>
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="PaymentType" TargetFieldName="PaymentType" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHPermission" TargetName="CTH:dbo:CTHPermission">
+          <FieldMappings>
+            <FieldMapping FieldName="GroupID" TargetFieldName="GroupID" />
+            <FieldMapping FieldName="ID" TargetFieldName="ID" />
+            <FieldMapping FieldName="PermissionName" TargetFieldName="PermissionName" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHPermissionGroup" TargetName="CTH:dbo:CTHPermissionGroup">
+          <FieldMappings>
+            <FieldMapping FieldName="GroupName" TargetFieldName="GroupName" />
+            <FieldMapping FieldName="ID" TargetFieldName="ID" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHSpecialCase" TargetName="CTH:dbo:CTHSpecialCase">
+          <FieldMappings>
+            <FieldMapping FieldName="CaseName" TargetFieldName="CaseName" />
+            <FieldMapping FieldName="HasParts" TargetFieldName="HasParts" />
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="Remarks" TargetFieldName="Remarks" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHSpecialCasePart" TargetName="CTH:dbo:CTHSpecialCasePart">
+          <FieldMappings>
+            <FieldMapping FieldName="CaseID" TargetFieldName="CaseID" />
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="PartName" TargetFieldName="PartName" />
+            <FieldMapping FieldName="Remarks" TargetFieldName="Remarks" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHStaging" TargetName="CTH:dbo:CTHStaging">
+          <FieldMappings>
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="Name" TargetFieldName="Name" />
+            <FieldMapping FieldName="Number" TargetFieldName="Number" />
+            <FieldMapping FieldName="Remarks" TargetFieldName="Remarks" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHSurgeryType" TargetName="CTH:dbo:CTHSurgeryType">
+          <FieldMappings>
+            <FieldMapping FieldName="CancerTypeID" TargetFieldName="CancerTypeID" />
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="SurgeryType" TargetFieldName="SurgeryType" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHTNMStaging" TargetName="CTH:dbo:CTHTNMStaging">
+          <FieldMappings>
+            <FieldMapping FieldName="Description" TargetFieldName="Description" />
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="Name" TargetFieldName="Name" />
+            <FieldMapping FieldName="Number" TargetFieldName="Number" />
+            <FieldMapping FieldName="Remarks" TargetFieldName="Remarks" />
+            <FieldMapping FieldName="TNMFrom" TargetFieldName="TNMFrom" />
+            <FieldMapping FieldName="TNMTo" TargetFieldName="TNMTo" />
+            <FieldMapping FieldName="TNMTypeID" TargetFieldName="TNMTypeID" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHTNMStagingMatrix" TargetName="CTH:dbo:CTHTNMStagingMatrix">
+          <FieldMappings>
+            <FieldMapping FieldName="CancerTypeID" TargetFieldName="CancerTypeID" />
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="MID" TargetFieldName="MID" />
+            <FieldMapping FieldName="NID" TargetFieldName="NID" />
+            <FieldMapping FieldName="StageID" TargetFieldName="StageID" />
+            <FieldMapping FieldName="TID" TargetFieldName="TID" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHTNMType" TargetName="CTH:dbo:CTHTNMType">
+          <FieldMappings>
+            <FieldMapping FieldName="ID" TargetFieldName="ID" />
+            <FieldMapping FieldName="TypeName" TargetFieldName="TypeName" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHTreatmentType" TargetName="CTH:dbo:CTHTreatmentType">
+          <FieldMappings>
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="TreatmentType" TargetFieldName="TreatmentType" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHTumorGrade" TargetName="CTH:dbo:CTHTumorGrade">
+          <FieldMappings>
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="TumorGrade" TargetFieldName="TumorGrade" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHUser" TargetName="CTH:dbo:CTHUser">
+          <FieldMappings>
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="Password" TargetFieldName="Password" />
+            <FieldMapping FieldName="UserName" TargetFieldName="UserName" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":CTHUserPermission" TargetName="CTH:dbo:CTHUserPermission">
+          <FieldMappings>
+            <FieldMapping FieldName="ID" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="PermissionID" TargetFieldName="PermissionID" />
+            <FieldMapping FieldName="UserID" TargetFieldName="UserID" />
+          </FieldMappings>
+        </EntityMapping>
+      </EntityMappings>
+      <TypedViewMappings />
+      <SPCallMappings />
+      <TvfCallMappings />
+      <TypeConversionDefinitions />
+    </MappingStore>
+  </MappingStores>
+  <ModelViews />
+</Project>

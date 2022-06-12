@@ -1,0 +1,96 @@
+﻿@*@model SStorm.CTH.Web.Models.DrugModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("Symptom");
+    Layout = null;
+}
+<div class="container-fluid">
+     start page title 
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("Symptom")</a></li>
+                        <li class="breadcrumb-item active"> @SharedLocalizer.GetLocalizedHtmlString("Symptom") @SharedLocalizer.GetLocalizedHtmlString("List")</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+     end page title 
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <button type="button" class="close" id="btnCloseDrag">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <div id="DragDiv">
+                        @if (Authorize(UserPermission.Symptom_EditeCreate))
+                        {
+                            <a asp-controller="Protocol" asp-action="EditCreateSymptom" asp-route-ID="0" asp-route-DrugID="@Model.DrugEntity.ID" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> @SharedLocalizer.GetLocalizedHtmlString("NewSymptom")
+                            </a>
+                        }
+                        <br />
+                        <div class="table-responsive">
+                            <table class="table m-0 table-hover">
+                                <thead class="btn-primary text-white">
+                                    <tr>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Name")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Grade")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Description")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("IsDoseLimitingToxicity")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Recommendation")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.DrugEntity.CTHDrugSymptomCollection.Count() == 0)
+                                    {
+                                        <tr>
+                                            <th scope="row" colspan="7">@SharedLocalizer.GetLocalizedHtmlString("NoData")</th>
+                                        </tr>
+                                    }
+                                    @foreach (var item in Model.DrugEntity.CTHDrugSymptomCollection)
+                                    {
+                                        <tr>
+                                            <td>@item.CTHSymptomItem.Name</td>
+                                            <td>@item.CTHSymptomItem.Grade</td>
+                                            <td>@item.CTHSymptomItem.Description</td>
+                                            <td>@item.CTHSymptomItem.IsDoseLimitingToxicity</td>
+                                            <td>@item.CTHSymptomItem.Recommendation</td>
+                                            <td>
+                                                @if (Authorize(UserPermission.Symptom_EditeCreate))
+                                                {
+                                                    <a href="#modal-add-entity" data-toggle="modal"
+                                                       data-url="@Url.Action("EditCreateSymptom", "Drug", new { ID = item.ID, DrugID = ViewBag.DrugID })"
+                                                       data-modalsize="modal-lg"
+                                                       data-modalcolor="hmodal-danger" class="btn btn-primary">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                }
+                                                @if (Authorize(UserPermission.Symptom_Delete))
+                                                {
+                                                    <a href="#modal-delete-entity" data-toggle="modal"
+                                                       data-url="@Url.Action("DeleteSymptom", "Drug", new { ID = item.ID })"
+                                                       data-modalsize="modal-lg"
+                                                       data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@

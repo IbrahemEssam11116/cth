@@ -1,0 +1,87 @@
+﻿@model SStorm.CTH.Web.Models.TNMStagingModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("EdiCreate");
+}
+
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("TNMStaging")</a></li>
+                    <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("TNMStaging")</li>
+                </ol>
+            </div>
+            <h4 class="page-title">@SharedLocalizer.GetLocalizedHtmlString("Index")</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+<div class="card">
+    <div class="card-body">
+        <div class="modal-body">
+            <ul class="nav nav-tabs" role="tablist">
+                @if (Authorize(UserPermission.TNMStaging_ViewStaging))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link active" id="Staging-tab" data-toggle="tab" href="#Staging" role="tab" aria-controls="Staging" aria-selected="false">
+                            <span class="d-block d-sm-none"><i class="fa fa-home"></i></span>
+                            <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("Staging")</span>
+                        </a>
+                    </li>
+                }
+                @if (Authorize(UserPermission.TNMStaging_ViewTumorSize))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" id="T-tab" data-toggle="tab" href="#T" role="tab" aria-controls="T" aria-selected="false">
+                            <span class="d-block d-sm-none"><i class="fa fa-home"></i></span>
+                            <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("TumorSize")</span>
+                        </a>
+                    </li>
+                }
+                @if (Authorize(UserPermission.TNMStaging_ViewLymphNode))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" id="N-tab" data-toggle="tab" href="#N" role="tab" aria-controls="N" aria-selected="true">
+                            <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
+                            <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("LymphNode")</span>
+                        </a>
+                    </li>
+                }
+                @if (Authorize(UserPermission.TNMStaging_ViewDistantMetastasis))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" id="M-tab" data-toggle="tab" href="#M" role="tab" aria-controls="M" aria-selected="true">
+                            <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
+                            <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("DistantMetastasis")</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+            <div class="tab-content">
+                <div id="Staging" class="tab-pane show active" role="tabpanel" aria-labelledby="Staging-tab">
+                    <partial name="_StagingList" model="@Model" />
+                </div>
+                <div id="T" class="tab-pane" role="tabpanel" aria-labelledby="T-tab">
+                    <partial name="_TStagingList" model="@Model" />
+                </div>
+
+                <div id="N" class="tab-pane" role="tabpanel" aria-labelledby="N-tab">
+                    <partial name="_NStagingList" model="@Model" />
+                </div>
+
+                <div id="M" class="tab-pane" role="tabpanel" aria-labelledby="M-tab">
+                    <partial name="_MStagingList" model="@Model" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

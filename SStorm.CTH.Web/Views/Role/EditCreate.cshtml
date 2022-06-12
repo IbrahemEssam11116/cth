@@ -1,0 +1,66 @@
+﻿@model SStorm.CTH.DAL.EntityClasses.CTHRoleEntity
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("EditCreate");
+}
+
+<link href="~/assets/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet" />
+
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <h4 class="page-title">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("Role")</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="EditCreate">
+            <div class="modal-body">
+                <input type="hidden" asp-for="ID" value="@Model.ID" />
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label asp-for="RoleNmae" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("RoleName")</label>
+                        <input asp-for="RoleNmae" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("EnterName")" required />
+                        <span asp-validation-for="RoleNmae" class="text-danger"></span>
+                    </div>
+                </div>
+                @*
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label asp-for="ArRoleNmae" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("RoleName") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                        <input asp-for="ArRoleNmae" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString("EnterName") @SharedLocalizer.GetLocalizedHtmlString("inArabic")" />
+                        <span asp-validation-for="ArRoleNmae" class="text-danger"></span>
+                    </div>
+                </div>
+                *@
+            </div>
+            <div class="modal-footer">
+                @if (Authorize(UserPermission.Role_View))
+                {
+                    <a class="btn btn-secondary waves-effect" asp-controller="Role" asp-action="Index">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</a>
+                }
+                <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="line"></div>
+@if (Model.ID != 0)
+{
+    <partial name="_GetRoleUsers" model="@Model" />
+}
+
+<script src="~/assets/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('select').selectpicker({
+            dropupAuto: false
+        });
+    });
+</script>

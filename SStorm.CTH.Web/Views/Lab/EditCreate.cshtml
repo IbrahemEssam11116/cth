@@ -1,0 +1,96 @@
+﻿@model SStorm.CTH.Web.Models.LabModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<form asp-action="EditCreate">
+    <div class="color-line"></div>
+
+    <div class="modal-header">
+        <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("Lab")</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" asp-for="LabEntity.ID" value="@Model.LabEntity.ID" />
+
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="LabEntity.LabName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("LabCategory")</label>
+                <input asp-for="LabEntity.LabName" class="form-control" required />
+                <span asp-validation-for="LabEntity.LabName" class="text-danger"></span>
+            </div>
+        </div>
+        @*<div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="LabEntity.ArLabName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("LabName") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input asp-for="LabEntity.ArLabName" class="form-control" required />
+                <span asp-validation-for="LabEntity.ArLabName" class="text-danger"></span>
+            </div>
+        </div>*@
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="LabEntity.Remarks" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Remarks")</label>
+                <textarea asp-for="LabEntity.Remarks" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="LabEntity.Remarks" class="text-danger"></span>
+            </div>
+        </div>
+        @*<div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="LabEntity.ArRemarks" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Remarks") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <textarea asp-for="LabEntity.ArRemarks" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="LabEntity.ArRemarks" class="text-danger"></span>
+            </div>
+        </div>*@
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="LabEntity.ProtocolID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("ChemotherapyProtocol")</label>
+                <select asp-for="LabEntity.ProtocolID" class="form-control selectpicker"
+                        data-live-search="true" asp-items="@Model.ProtocolList">
+                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("SelectProtocol")</option>
+                </select>
+                <span asp-validation-for="LabEntity.ProtocolID" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="LabEntity.IsMandatory" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("IsMandatory")</label>
+                @if (Model.LabEntity.IsMandatory == true)
+                {
+                    <input type="checkbox" name="LabEntity_IsMandatory" id="LabEntity_IsMandatory" value="true" checked>
+                }
+                else
+                {
+                    <input type="checkbox" name="LabEntity_IsMandatory" id="LabEntity_IsMandatory" value="false">
+                }
+                <span asp-validation-for="LabEntity.IsMandatory" class="text-danger"></span>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</button>
+
+        <button type="submit" class="btn btn-primary waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+    </div>
+</form>
+<script>
+    $(document).ready(function () {
+
+        $('select').selectpicker({
+            dropupAuto: false
+        });
+
+        $("#LabEntity_IsMandatory").change(function () {
+            var checkVal = $(this).val();
+            if (checkVal == "true") {
+                $(this).val("false");
+            }
+            else {
+                $(this).val("true");
+            }
+        });
+
+    });
+
+</script>

@@ -1,0 +1,71 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>aspnet-SStorm.Web-7ABFE9EA-CBFF-4D9A-8D94-4505F68CD2A3</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\DrugController.cs" />
+    <Compile Remove="Controllers\DrugSymptomController.cs" />
+    <Compile Remove="Controllers\LabController.cs" />
+    <Compile Remove="Controllers\PatientSheetController.cs" />
+    <Compile Remove="Controllers\PatientSurgeryController.cs" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.8" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="SD.LLBLGen.Pro.DQE.SqlServer" Version="5.7.1" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Areas\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="Views\DrugSymptom\EditCreate.cshtml" />
+    <None Include="Views\DrugSymptom\Index.cshtml" />
+    <None Include="Views\Drug\EditCreateDrug.cshtml" />
+    <None Include="Views\Drug\GetProtocolDrugs.cshtml" />
+    <None Include="Views\Drug\_SymptomCollection.cshtml" />
+    <None Include="Views\Lab\EditCreate.cshtml" />
+    <None Include="Views\Lab\EditCreateLabDetail.cshtml" />
+    <None Include="Views\Lab\EditCreateLabDetailCondition.cshtml" />
+    <None Include="Views\Lab\GetLabDetailCondition.cshtml" />
+    <None Include="Views\Lab\GetLabsInfo.cshtml" />
+    <None Include="Views\Lab\Index.cshtml" />
+    <None Include="Views\PatientSheet\PatientSheet.cshtml" />
+    <None Include="Views\Staging\AssignTNMToStage.cshtml" />
+    <None Include="Views\Staging\EditCreate.cshtml" />
+    <None Include="Views\Staging\Index.cshtml" />
+    <None Include="Views\Staging\StagingMatrix.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\SStorm.CTH.BL\SStorm.CTH.BL.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Reference Include="SStorm.CTH.DAL">
+      <HintPath>..\Lib\SStorm.CTH.DAL.dll</HintPath>
+    </Reference>
+    <Reference Include="SStorm.CTH.DALDBSpecific">
+      <HintPath>..\Lib\SStorm.CTH.DALDBSpecific.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

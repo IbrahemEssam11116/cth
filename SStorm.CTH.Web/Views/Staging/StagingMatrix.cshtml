@@ -1,0 +1,30 @@
+﻿@model SStorm.CTH.DAL.HelperClasses.EntityCollection<SStorm.CTH.DAL.EntityClasses.CTHStagingEntity>
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<div class="table-responsive">
+    <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th>@SharedLocalizer.GetLocalizedHtmlString("TumorSize")</th>
+                <th>@SharedLocalizer.GetLocalizedHtmlString("LymphNode")</th>
+                <th>@SharedLocalizer.GetLocalizedHtmlString("DistantMetastasis")</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            int rows = item.CTHTNMStagingMatrixCollection.Count + 1;
+            <tr>
+                <td rowspan="@rows">@item.Name</td>
+            </tr>
+            @foreach (var i in item.CTHTNMStagingMatrixCollection)
+            {
+                <tr>
+                    <td>@i.CTHTNMStagingItem2.Name</td>
+                    <td>@i.CTHTNMStagingItem1.Name</td>
+                    <td>@i.CTHTNMStagingItem.Name</td>
+                </tr>
+            }
+        }
+    </table>
+</div>

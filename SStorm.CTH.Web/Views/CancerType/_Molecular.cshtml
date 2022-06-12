@@ -1,0 +1,47 @@
+﻿@model SStorm.CTH.Web.Models.TreeViewNode
+@using SStorm.CTH.Web.Resources
+
+@inject LocService SharedLocalizer
+<div>
+    @if (Authorize(UserPermission.CancerType_EditCreateMolecularSubtype))
+    {
+    <a href="#modal-add-entity" data-toggle="modal"
+       data-url="@Url.Action("EditCreateMolecular", "CancerType", new { ID = 0 ,CancerID = Model.CancerType.ID})"
+       data-modalsize="modal-lg"
+       data-modalcolor="hmodal-danger" class="btn btn-info">
+        <i class="fas fa-plus"></i>@SharedLocalizer.GetLocalizedHtmlString("NewCancerMolecular")
+    </a>
+    }
+    <br /><br />
+    <partial name="MolecularList" model="@Model">
+
+
+</div>
+
+<script>
+    var toggler3 = document.getElementsByClassName("caret3");
+    var i;
+    for (i = 0; i < toggler3.length; i++) {
+        toggler3[i].addEventListener("click", function () {
+            this.parentElement.querySelector(".nested3").classList.toggle("active");
+            this.classList.toggle("caret-down3");
+        });
+    }
+    function RefreshMolecular(response) {
+        if (response[0] == 3) {
+            $.ajax({
+                url: '@Url.Action("GetCancerMolecular", "CancerType")',
+                type: 'GET',
+                cache: false,
+                data: { CancerTypeID: @Model.CancerType.ID}
+            }).done(function (result) {
+                $('#dvMolecular').html(result);
+                swal("Done", "Data Deleted successfully", "success");
+            });
+        }
+        else {
+             swal("Error", "Data Not Deleted successfully", "error");
+        }
+
+    }
+</script>

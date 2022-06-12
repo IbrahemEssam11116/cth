@@ -1,0 +1,120 @@
+﻿@model SStorm.CTH.Web.Models.PatientClinicalDataModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var i = 1;
+}
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-12">
+
+            @{
+                if (Model.PatientClinicalData.ID != 0)
+                {
+                    @if (Authorize(UserPermission.Patient_PerformInvestigation))
+                    {
+                        <a href="#modal-add-entity" data-toggle="modal"
+                           data-url="@Url.Action("EditCreateImaging", "PatientClinicalData", new { ID = 0, PatientClinicalDataID = Model.PatientClinicalData.ID })"
+                           data-modalsize="modal-lg"
+                           data-modalcolor="hmodal-danger" class="btn btn-info">
+                            <i class="fas fa-plus"></i> @SharedLocalizer.GetLocalizedHtmlString("AddNewImaging")
+                        </a>
+                    }
+                    <br />
+                }
+
+                if (Model.PatientClinicalData.CTHPatientImagingCollection.Count == 0)
+
+                {
+                    <span scope="row" colspan="7">@SharedLocalizer.GetLocalizedHtmlString("NoData")</span>
+                }
+                else
+                {
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>@SharedLocalizer.GetLocalizedHtmlString("ImagingType")</th>
+                                            <th>@SharedLocalizer.GetLocalizedHtmlString("TextResult")</th>
+                                            <th>@SharedLocalizer.GetLocalizedHtmlString("AttachmentResult")</th>
+                                            <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model.PatientClinicalData.CTHPatientImagingCollection)
+                                        {
+                                            <tr>
+                                                
+                                                <td>@item.CTHImagingItem.ImageName</td>
+                                                <td>
+                                                    @if (item.TextResult != null)
+                                                    {<span>@item.TextResult</span>}
+                                                </td>
+                                                <td>
+                                                    @if (item.AttachmentResult != "")
+                                                    {
+                                                        <a class="btn btn-dark" asp-controller="Home" asp-action="DownloadFile" asp-route-path="@item.AttachmentResult"><i class="fa fa-download"></i> @SharedLocalizer.GetLocalizedHtmlString("Download")</a>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @if (Authorize(UserPermission.Patient_PerformInvestigation))
+                                                    {
+                                                        <a href="#modal-add-entity" data-toggle="modal"
+                                                            data-url="@Url.Action("EditCreateImaging", "PatientClinicalData", new { ID = @item.ID, PatientClinicalDataID = Model.PatientClinicalData.ID })"
+                                                            data-modalsize="modal-lg"
+                                                            data-modalcolor="hmodal-danger" class="btn btn-info">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    }
+                                                    @if (Authorize(UserPermission.Patient_DeleteInvestigation))
+                                                    {
+                                                        <a href="#modal-delete-entity" data-toggle="modal"
+                                                            data-url="@Url.Action("DeleteImaging", "PatientClinicalData", new { ID = @item.ID })"
+                                                            data-modalsize="modal-lg"
+                                                            data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                                            <i class="fas fa-times"></i>
+                                                        </a>
+                                                    }
+                                                </td>
+                                                
+                                            </tr>
+
+                                            i++;
+                                        }<!--foreach-->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                }<!--else-->
+            }<!--if-->
+
+        </div>
+    </div>
+</div>
+<script>
+    function LoadImaging(response) {
+        if (response[0] == 3) {
+            $.ajax({
+             url: '@Url.Action("GETPatientImagingList", "PatientClinicalData")',
+            type: 'GET',
+            cache: false,
+             data: { PatientClinicalDataID:@Model.PatientClinicalData.ID}
+            }).done(function (result)
+            {
+                swal("Done", "Deleted Successfully", "success");
+                $('#ShowImaging').html(result);
+            });
+        }
+         else {
+                swal("Error", "Data Not Deleted successfully", "error");
+         }
+    }
+</script>

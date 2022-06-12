@@ -1,0 +1,374 @@
+﻿@model DrugModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                </ol>
+            </div>
+            <h4 class="page-title">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("Drug")</h4>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <form asp-action="EditCreateDrug" enctype="multipart/form-data">
+            <div class="modal-body">
+                <input type="hidden" asp-for="DrugEntity.ID" value="@Model.DrugEntity.ID" />
+                <input type="hidden" asp-for="DrugEntity.ProtocolID" value="@Model.DrugEntity.ProtocolID" />
+                <input type="hidden" asp-for="CancerID" value="@Model.CancerID" />
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label asp-for="DrugEntity.Name" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Name")</label>
+                        <input asp-for="DrugEntity.Name" class="form-control" required />
+                        <span asp-validation-for="DrugEntity.Name" class="text-danger"></span>
+                    </div>
+                    @*
+                        <div class="col-md-6">
+                            <label asp-for="DrugEntity.ArName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Name") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                            <input asp-for="DrugEntity.ArName" class="form-control" />
+                            <span asp-validation-for="DrugEntity.ArName" class="text-danger"></span>
+                        </div>
+                    *@
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label asp-for="DrugEntity.RouteID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Route")</label>
+                        <select asp-for="DrugEntity.RouteID" class="form-control selectpicker"
+                                data-live-search="true" asp-items="@Model.RouteList">
+                            <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("SelectRoute")</option>
+                        </select>
+                        <span asp-validation-for="DrugEntity.RouteID" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Files")</label>
+                        <input asp-for="file" type="file" id="file " name="files" value="file" multiple class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @if (Model.DrugEntity.RouteID == 2)
+                    {
+                        <div class="col-md-6" id="FormID">
+                            <label asp-for="DrugEntity.FormID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Form")</label>
+                            <select asp-for="DrugEntity.FormID" class="form-control selectpicker"
+                                    data-live-search="true" asp-items="@Model.FormList">
+                                <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("Form")</option>
+                            </select>
+                            <span asp-validation-for="DrugEntity.FormID" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6" id="FormAmount">
+                            <label asp-for="DrugEntity.FormAmount" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("FormAmount")</label>
+                            <input asp-for="DrugEntity.FormAmount" class="form-control" />
+                            <span asp-validation-for="DrugEntity.FormAmount" class="text-danger"></span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-6" id="FormID" style="display:none;">
+                            <label asp-for="DrugEntity.FormID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Form")</label>
+                            <select asp-for="DrugEntity.FormID" class="form-control selectpicker"
+                                    data-live-search="true" asp-items="@Model.FormList">
+                                <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("Form")</option>
+                            </select>
+                            <span asp-validation-for="DrugEntity.FormID" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6" id="FormAmount" style="display:none;">
+                            <label asp-for="DrugEntity.FormAmount" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("FormAmount")</label>
+                            <input asp-for="DrugEntity.FormAmount" class="form-control" />
+                            <span asp-validation-for="DrugEntity.FormAmount" class="text-danger"></span>
+                        </div>
+                    }
+                </div>
+
+                <div class="form-group row">
+                    @if (Model.DrugEntity.RouteID == 1 || Model.DrugEntity.RouteID == 4)
+                    {
+                        <div class="col-md-6" id="SolutionID">
+                            <label asp-for="DrugEntity.SolutionID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Solution")</label>
+                            <select asp-for="DrugEntity.SolutionID" class="form-control selectpicker"
+                                    data-live-search="true" asp-items="@Model.SolutionList">
+                                <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("Solution")</option>
+                            </select>
+                            <span asp-validation-for="DrugEntity.SolutionID" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6" id="SolutionAmount">
+                            <label asp-for="DrugEntity.SolutionAmount" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("SolutionAmount")</label>
+                            <input asp-for="DrugEntity.SolutionAmount" class="form-control" />
+                            <span asp-validation-for="DrugEntity.SolutionAmount" class="text-danger"></span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-6" id="SolutionID" style="display:none;">
+                            <label asp-for="DrugEntity.SolutionID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Solution")</label>
+                            <div class="input-group">
+                                <select asp-for="DrugEntity.SolutionID" class="form-control selectpicker"
+                                        data-live-search="true" asp-items="@Model.SolutionList">
+                                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("Solution")</option>
+                                </select>
+                                <span asp-validation-for="DrugEntity.SolutionID" class="text-danger"></span>
+                                <span class="input-group-btn" tabindex="0">
+                                    <label for="filestyle-3" style="margin-bottom: 0;">
+                                        @if (Authorize(UserPermission.Solution_EditCreate))
+                                        {
+                                            <a href="#modal-add-entity" data-toggle="modal"
+                                               data-url="@Url.Action("AddNewSolution", "Protocol")"
+                                               data-modalsize="modal-lg"
+                                               data-modalcolor="hmodal-danger" class="btn btn-info">
+                                                <i class="fa fa-plus"></i>
+                                            </a>
+                                        }
+                                    </label>
+                                </span>
+                            </div>                        
+                        </div>
+                        <div class="col-md-6" id="SolutionAmount" style="display:none;">
+                            <label asp-for="DrugEntity.SolutionAmount" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("SolutionAmount")</label>
+                            <input asp-for="DrugEntity.SolutionAmount" class="form-control" />
+                            <span asp-validation-for="DrugEntity.SolutionAmount" class="text-danger"></span>
+                        </div>
+                    }
+                </div>
+                <div class="form-group row">
+                    @if (Model.DrugEntity.RouteID == 1)
+                    {
+                        <div class="col-md-12" id="FinalConcentration">
+                            <label asp-for="DrugEntity.FinalConcentration" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("FinalConentration")</label>
+                            <input asp-for="DrugEntity.FinalConcentration" class="form-control" />
+                            <span asp-validation-for="DrugEntity.FinalConcentration" class="text-danger"></span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-12" id="FinalConcentration" style="display:none;">
+                            <label asp-for="DrugEntity.FinalConcentration" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("FinalConentration")</label>
+                            <input asp-for="DrugEntity.FinalConcentration" class="form-control" />
+                            <span asp-validation-for="DrugEntity.FinalConcentration" class="text-danger"></span>
+                        </div>
+                    }
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label asp-for="DrugEntity.Duration" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Duration")</label>
+                        <input asp-for="DrugEntity.Duration" class="form-control" required />
+                        <span asp-validation-for="DrugEntity.Duration" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="DrugEntity.DurationUnitID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("DurationUnit")</label>
+                        <select required asp-for="DrugEntity.DurationUnitID" class="form-control selectpicker"
+                                data-live-search="true" asp-items="@Model.DurationUnitList">
+                            <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("unit")</option>
+                        </select>
+                        <span asp-validation-for="DrugEntity.DurationUnitID" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label asp-for="DrugEntity.Every" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Every")</label>
+                        <input asp-for="DrugEntity.Every" class="form-control" required />
+                        <span asp-validation-for="DrugEntity.Every" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="DrugEntity.EveryUnitID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("EveryUnit")</label>
+                        <select required asp-for="DrugEntity.EveryUnitID" class="form-control selectpicker"
+                                data-live-search="true" asp-items="@Model.DurationUnitList">
+                            <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("unit")</option>
+                        </select>
+                        <span asp-validation-for="DrugEntity.EveryUnitID" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4">
+                        <label asp-for="DrugEntity.Dose" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Dose")</label>
+                        <input asp-for="DrugEntity.Dose" class="form-control" type="number" required />
+                        <span asp-validation-for="DrugEntity.Dose" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="DrugEntity.DoseUnitID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("DoseUnits")</label>
+                        <div class="bootstrap-filestyle input-group">
+                            <select asp-for="DrugEntity.DoseUnitID" class="form-control selectpicker" data-live-search="true" asp-items="Model.DoseUnitList" required style="overflow:scroll; ">
+                                <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("DoseUnit")</option>
+                            </select>
+                            <span class="group-span-filestyle input-group-btn" tabindex="0">
+                                <label for="filestyle-3" style="margin-bottom: 0;">
+                                    @if (Authorize(UserPermission.DoseUnit_EditCreate))
+                                    {
+                                        <a href="#modal-add-entity" data-toggle="modal"
+                                           data-url="@Url.Action("AddNewDoseUnit", "Protocol")"
+                                           data-modalsize="modal-lg"
+                                           data-modalcolor="hmodal-danger" class="btn btn-info">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                    }
+                                </label>
+                            </span>
+                        </div>
+                        <span asp-validation-for="DrugEntity.DoseUnitID" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="DrugEntity.DosePerID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("DosePer")</label>
+                        <select asp-for="DrugEntity.DosePerID" class="form-control selectpicker"
+                                data-live-search="true" asp-items="@Model.PerList">
+                            <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("DosePer")</option>
+                        </select>
+                        <span asp-validation-for="DrugEntity.DosePerID" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    @if (Model.DrugEntity.RouteID == 2)
+                    {
+                        <div class="col-md-6" id="SpecialAdminstrationNotes">
+                            <label asp-for="DrugEntity.SpecialAdminstrationNotes" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Adminstrationnotes")</label>
+                            <input asp-for="DrugEntity.SpecialAdminstrationNotes" class="form-control" />
+                            <span asp-validation-for="DrugEntity.SpecialAdminstrationNotes" class="text-danger"></span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-6" id="SpecialAdminstrationNotes" style="display:none;">
+                            <label asp-for="DrugEntity.SpecialAdminstrationNotes" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Adminstrationnotes")</label>
+                            <input asp-for="DrugEntity.SpecialAdminstrationNotes" class="form-control" />
+                            <span asp-validation-for="DrugEntity.SpecialAdminstrationNotes" class="text-danger"></span>
+                        </div>
+                    }
+
+                    @if (Model.DrugEntity.RouteID == 4)
+                    {
+                        <div class="col-md-6" id="TimeOfAdminstration">
+                            <label asp-for="DrugEntity.TimeOfAdminstration" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("TimeOfAdminstration")</label>
+                            <input asp-for="DrugEntity.TimeOfAdminstration" class="form-control" />
+                            <span asp-validation-for="DrugEntity.TimeOfAdminstration" class="text-danger"></span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-6" id="TimeOfAdminstration" style="display:none;">
+                            <label asp-for="DrugEntity.TimeOfAdminstration" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("TimeOfAdminstration")</label>
+                            <input asp-for="DrugEntity.TimeOfAdminstration" class="form-control" />
+                            <span asp-validation-for="DrugEntity.TimeOfAdminstration" class="text-danger"></span>
+                        </div>
+                    }
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Days")</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+
+                    @for (var i = 1; i <= 30; i++)
+                    {
+                        var check = false;
+                        if (Model.DrugEntity.ID > 0)
+                        {
+                            if (Model.DrugEntity.CTHDrugDayCollection.Count > 0)
+                            {
+                                foreach (var item in Model.DrugEntity.CTHDrugDayCollection)
+                                {
+                                    if (item.Day == i)
+                                    {
+                                        check = true;
+                                    }
+                                }
+                            }
+                        }
+                        if (check == false)
+                        {
+                            <div class="col-md-2">
+                                <input class="checkbox checkbox-success" type="checkbox" name="Days" id="Day @i" value="@i" /> @i
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-2">
+                                <input class="checkbox checkbox-success" type="checkbox" name="Days" id="Day @i" value="@i" checked /> @i
+                            </div>
+                        }
+
+                    }
+                </div>
+                <div class="form-group row">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                @if (Authorize(UserPermission.CancerType_EditCreateProtocol))
+                {
+                    <a asp-controller="Protocol" asp-action="EditCreateChemotherapyProtocol" asp-route-ID="@Model.DrugEntity.ProtocolID" asp-route-CancerTypeID="@ViewBag.cancerId" class="btn btn-secondary waves-effect">@SharedLocalizer.GetLocalizedHtmlString("Back")</a>
+                }
+                <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="DrugList">
+    @if (Model.DrugEntity.ID > 0)
+    {
+        <partial name="_SymptomCollection" model="@Model" />
+    }
+</div>
+
+@*@if (Model.DrugEntity.ID > 0)
+    {
+        <div class="DragDayList">
+            <partial name="_DrugDayCollection" model="@Model" />
+        </div>
+    }*@
+<script src="~/assets/ajax/Binding.js"></script>
+<script src="~/assets/ajax/jquery.unobtrusive-ajax.min.js"></script>
+<script>
+    $("#cancelBtn").click(function () {
+        $("#dvEditCreateDrug").hide();
+    });
+
+    $("#DrugEntity_RouteID").change(function () {
+        debugger;
+        var RoutID = $(this).val();
+        //alert(RoutID)
+        if (RoutID == 1) {
+            $("#SolutionID").show();
+            $("#SolutionAmount").show();
+            $("#FinalConcentration").show();
+            $("#SpecialAdminstrationNotes").hide();
+            $("#TimeOfAdminstration").hide();
+            $("#FormID").hide();
+            $("#FormAmount").hide();
+        }
+        else if (RoutID == 2) {
+            $("#SolutionID").hide();
+            $("#SolutionAmount").hide();
+            $("#FinalConcentration").hide();
+            $("#SpecialAdminstrationNotes").show();
+            $("#TimeOfAdminstration").hide();
+            $("#FormID").show();
+            $("#FormAmount").show();
+        }
+        else if (RoutID == 3) {
+            $("#SolutionID").hide();
+            $("#SolutionAmount").hide();
+            $("#FinalConcentration").hide();
+            $("#SpecialAdminstrationNotes").hide();
+            $("#TimeOfAdminstration").hide();
+            $("#FormID").hide();
+            $("#FormAmount").hide();
+        }
+        else {
+            $("#SolutionID").show();
+            $("#SolutionAmount").show();
+            $("#FinalConcentration").hide();
+            $("#SpecialAdminstrationNotes").hide();
+            $("#TimeOfAdminstration").show();
+            $("#DrugEntity_FormID").hide();
+            $("#FormAmount").hide();
+        }
+    });
+
+</script>

@@ -1,0 +1,72 @@
+﻿@model SStorm.CTH.Web.Models.CycleLabModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@*<link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />*@
+<div class="color-line"></div>
+<div class="card">
+    <div class="card-body">
+        <form asp-action="EditCreateCycleLab">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("CycleLabs")</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" asp-for="cycleLabEntity.ID" value="@Model.cycleLabEntity.ID" />
+                <input type="hidden" asp-for="cycleLabEntity.CycleID" value="@Model.cycleLabEntity.CycleID" />
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Lab")</label>
+                        <select id="LabCatID" class="form-control selectpicker" data-live-search="true" asp-items="Model.LabList" required>
+                            <option selected disabled value="">
+                                @SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("Lab")
+                            </option>
+                        </select>                       
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label class="control-label">@SharedLocalizer.GetLocalizedHtmlString("LabDetailName")</label>
+                        <select multiple="multiple" class="form-control selectpicker" name="LabIDS" id="cycleLabEntity_LabID" data-live-search="true" asp-items="Model.LabDetailsList" required>
+                            <option selected disabled value="">
+                                @SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("LabDetailName")
+                            </option>
+                        </select>
+                        <span asp-validation-for="cycleLabEntity.LabID" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</button>
+                <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+            </div>
+        </form>
+    </div>
+</div>
+@*<script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"></script>*@
+<script src="~/assets/ajax/Binding.js"></script>
+<script>
+    $(document).ready(function () {
+        $('select').selectpicker({
+            dropupAuto: false
+        });
+         $("#LabCatID").change(function () {
+            var LabCat = $("#LabCatID option:selected").val();
+            $.ajax({
+            url: '@Url.Action("GetLabDela", "Protocol")',
+            type: 'GET',
+            cache: false,
+            data: { ID: LabCat}
+            }).done(function (result) {
+                $('#cycleLabEntity_LabID').empty();
+                 BindCombo('cycleLabEntity_LabID', result, false);
+                $('#cycleLabEntity_LabID').selectpicker('refresh');
+            });
+        });
+        // $('#cycleLabEntity_LabID').multiselect({
+        //    includeSelectAllOption: true
+        //});
+    });
+</script>

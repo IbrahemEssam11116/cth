@@ -1,0 +1,104 @@
+﻿@model SStorm.CTH.Web.Models.PatientClinicalDataModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var i = 1;
+}
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-12">
+            @if (Authorize(UserPermission.Patient_PerformSurgery))
+            {
+                @if (Model.PatientClinicalData.ID != 0)
+                {
+                    <a class="btn btn-info text-white" onclick="ShowSuergeryForm(0);">
+                        <i class="fas fa-plus"></i> @SharedLocalizer.GetLocalizedHtmlString("NewSurgery")
+                    </a>
+
+                    <br />
+                }
+            }
+            <div id="EditCreateSurgeryForm"></div>
+
+            @if (Model.PatientClinicalData.CTHPatientSurgeryCollection.Count == 0)
+
+            {
+                <span scope="row" colspan="7">@SharedLocalizer.GetLocalizedHtmlString("NoData")</span>
+            }
+            else
+            {
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("SurgeryName")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Date")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in Model.PatientClinicalData.CTHPatientSurgeryCollection)
+                                    {
+                                    <tr>
+                                        <th scope="row">@i</th>
+                                        <td>@item.CTHSurgeryTypeItem.SurgeryType</td>
+                                        <td>@item.SurgeryDate</td>
+                                        <td>
+                                            @if (Authorize(UserPermission.Patient_PerformSurgery))
+                                            {
+                                                <a class="btn btn-info" onclick="ShowSuergeryForm(@item.ID);">
+                                                    <i class="fas fa-edit text-white"></i>
+                                                </a>
+                                            }
+                                            @if (Authorize(UserPermission.Patient_DeleteSurgery))
+                                            {
+                                                <a href="#modal-delete-entity" data-toggle="modal"
+                                                    data-url="@Url.Action("DeleteSurgery", "PatientClinicalData", new { ID = @item.ID })"
+                                                    data-modalsize="modal-lg"
+                                                    data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                            }
+                                        </td>
+                                    </tr>
+
+                                        i++;
+                                    }<!--foreach-->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    function LoadSurgeryList(response) {
+        $.ajax({
+            url: '@Url.Action("GetSurgeryList", "PatientClinicalData")',
+            type: 'GET',
+            cache: false,
+            data: { PatientClinicalDataID:@Model.PatientClinicalData.ID}
+            }).done(function (result)
+            {
+                swal("Done", "Deleted Successfully", "success");
+                $('#Surgery').html(result);
+            });
+    }
+
+    function ShowSuergeryForm(id) {
+        $("#EditCreateSurgeryForm").toggle(1000);
+            $("#EditCreateSurgeryForm").load("/PatientClinicalData/EditCreateSurgery/"+id+"?PatientClinicalDataID=@Model.PatientClinicalData.ID");
+    }
+
+</script>

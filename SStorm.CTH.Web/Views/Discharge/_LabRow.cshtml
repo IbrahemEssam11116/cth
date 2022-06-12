@@ -1,0 +1,38 @@
+﻿@model LChemoLabModel
+@{
+    Layout = null;
+}
+
+
+
+    <tr id='Lab@(Model.Index)'>
+        <td hidden>
+            <input type="hidden" asp-for="CTHChemoLabEntity.ID" value="@Model.CTHChemoLabEntity.ID" class="IDDLAB" />
+            <input type="hidden" asp-for="CTHChemoLabEntity.ChemoID" value="@Model.CTHChemoLabEntity.ChemoID" name="KimoSurveyEntity.CTHChemoLabCollection[@Model.Index].ChemoID" />
+            <input  type="hidden" asp-for="CTHChemoLabEntity.Date" class="form-control" value="@Model.CTHChemoLabEntity.Date" name="KimoSurveyEntity.CTHChemoLabCollection[@Model.Index].Date">
+            <input type="hidden" asp-for="CTHChemoLabEntity.LabDetailsID" class="form-control" value="@Model.CTHChemoLabEntity.LabDetailsID" name="KimoSurveyEntity.CTHChemoLabCollection[@Model.Index].LabDetailsID">
+        </td>
+        <td class="text-center border-right-0 border-bottom-0">
+            <button type="button" data-toggle="tooltip" class="btn btn-icon btn-outline-danger btn-lg" onclick="DeleteRowLab('Lab@(Model.Index)')">
+                <i class="fa fa-trash"></i>
+            </button>
+        </td>
+        <td>
+            @Model.LabName
+        </td>
+        <td>
+            @Model.LabDetailsName
+        </td>
+        <td>
+            @Model.CTHChemoLabEntity.Date
+        </td>
+
+    </tr>
+
+<script>
+    $(document).ready(function () {
+        $('select').selectpicker({
+            dropupAuto: false
+        });
+    });
+</script>

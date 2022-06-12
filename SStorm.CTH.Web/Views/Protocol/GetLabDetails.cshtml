@@ -1,0 +1,124 @@
+﻿@model SStorm.CTH.Web.Models.LabModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("GetLabDetails");
+}
+
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("LabItemsList")</a></li>
+                        <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("LabItemsList")</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-sm-12">
+            @if (Authorize(UserPermission.CancerType_EditCreateLab))
+            {
+                <a href="#modal-add-entity" data-toggle="modal"
+                   data-url="@Url.Action("EditCreateLabDetail", "Protocol", new { ID = 0 ,LabID=@Model.LabEntity.ID})"
+                   data-modalsize="modal-lg"
+                   data-modalcolor="hmodal-danger" class="btn btn-info">
+                    <i class="fas fa-plus"></i> @SharedLocalizer.GetLocalizedHtmlString("AddNew")
+                </a>
+
+            }
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                            <thead>
+
+                                <tr>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("LabItems(Conditions)")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Remarks")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.LabEntity.CTHLabDetailCollection.Count() == 0)
+                                {
+                                    <tr>
+                                        <th scope="row" colspan="7">@SharedLocalizer.GetLocalizedHtmlString("NoData")</th>
+                                    </tr>
+                                }
+                                @for (int i = 0; i < Model.LabEntity.CTHLabDetailCollection.Count(); i++)
+                                    {
+                                        var condition = "(";
+                                        <tr>
+                                            <td>
+                                                <span class="btn btn-outline-info text-dark">
+                                                    @Model.LabEntity.CTHLabDetailCollection[i].LabDetailsName
+
+                                                    @foreach (var cond in @Model.LabEntity.CTHLabDetailCollection[i].CTHLabDetailConditionCollection)
+                                                    {
+                                                        condition += cond.Condition;
+                                                        if (cond.ID != @Model.LabEntity.CTHLabDetailCollection[i].CTHLabDetailConditionCollection.Last().ID)
+                                                        {
+                                                            condition += ", ";
+                                                        }
+                                                        else
+                                                        {
+                                                            condition += ")";
+                                                        }
+                                                    }
+                                                    @condition
+                                                </span>
+
+                                            </td>
+                                            <td>@Model.LabEntity.CTHLabDetailCollection[i].Remarks</td>
+                                            <td>
+                                                @if (Authorize(UserPermission.CancerType_EditCreateLab))
+                                                {
+                                                    <a href="#modal-add-entity" data-toggle="modal"
+                                                       data-url="@Url.Action("EditCreateLabDetail", "Protocol", new { ID = @Model.LabEntity.CTHLabDetailCollection[i].ID ,LabID=@Model.LabEntity.ID})"
+                                                       data-modalsize="modal-lg"
+                                                       data-modalcolor="hmodal-danger" class="btn btn-info">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+
+                                                }
+                                                @if (Authorize(UserPermission.CancerType_DeleteLab))
+                                                {
+                                                    <a href="#modal-delete-entity" data-toggle="modal"
+                                                       data-url="@Url.Action("DeleteLabDetail", "Protocol", new { ID = @Model.LabEntity.CTHLabDetailCollection[i].ID})"
+                                                       data-modalsize="modal-lg"
+                                                       data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
+                                                }
+                                            <a href="#modal-add-entity" data-toggle="modal"
+                                               data-url="@Url.Action("EditCreateLabDetailCondition", "Protocol", new { ID = 0 ,LabDetailID=@Model.LabEntity.CTHLabDetailCollection[i].ID})"
+                                               data-modalsize="modal-lg"
+                                               data-modalcolor="hmodal-danger" class="btn btn-info">
+                                                <i class="fas fa-plus"></i>@SharedLocalizer.GetLocalizedHtmlString("LabItems(Conditions)")
+                                            </a>
+                                            </td>
+                                        </tr>
+                                    }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

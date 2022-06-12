@@ -1,0 +1,105 @@
+﻿@model DrugModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    Layout = null;
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("DrugDays")</a></li>
+                        <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("DrugDaysList")</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div id="dvEditCreateDrug"></div>
+            <div class="card">
+                <div class="card-body">
+                    <button type="button" class="close" id="btnCloseDrag">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <div id="DragDiv">
+                        @if (Authorize(UserPermission.CancerType_EditCreateDrug))
+                        {
+                        <a href="#modal-add-entity" data-toggle="modal"
+                           data-url="@Url.Action("EditCreateDrugDay", "Protocol", new { ID = 0 ,ProtocolID=@Model.DrugEntity.ID})"
+                           data-modalsize="modal-lg"
+                           data-modalcolor="hmodal-danger" class="btn btn-info">
+                            <i class="fas fa-plus"></i> @SharedLocalizer.GetLocalizedHtmlString("NewDrugDay")
+                        </a>
+                        }
+
+                        <br />
+                        <div class="table-responsive">
+                            <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("DrugDay")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.DrugEntity.CTHDrugDayCollection.Count() == 0)
+                                    {
+                                        <tr>
+                                            <th scope="row" colspan="7">@SharedLocalizer.GetLocalizedHtmlString("NoData")</th>
+                                        </tr>
+                                    }
+                                    @foreach (var item in Model.DrugEntity.CTHDrugDayCollection)
+                                    {
+                                        <tr>
+                                            <td>@item.Day</td>
+                                            <td>
+                                                @if (Authorize(UserPermission.CancerType_EditCreateDrug))
+                                                {
+                                                    <a href="#modal-add-entity" data-toggle="modal"
+                                                       data-url="@Url.Action("EditCreateDrugDay", "Protocol", new { ID = item.ID ,ProtocolID=@Model.DrugEntity.ID})"
+                                                       data-modalsize="modal-lg"
+                                                       data-modalcolor="hmodal-danger" class="btn btn-info">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                }
+                                                @if (Authorize(UserPermission.CancerType_DeleteDrug))
+                                                {
+                                                    <a href="#modal-delete-entity" data-toggle="modal"
+                                                       data-url="@Url.Action("DeleteDrugDay", "Protocol", new { ID = item.ID})"
+                                                       data-modalsize="modal-lg"
+                                                       data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#btnCloseDrag").click(function () {
+            $("#DragDiv").slideToggle(1000);
+        })
+    });
+</script>

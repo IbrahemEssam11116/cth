@@ -1,0 +1,116 @@
+﻿@model RolePermissionModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("EditCreate");
+}
+
+<!-- start page title -->
+<div id="header" class="header pb-6">
+    <div class="container-fluid content-layout">
+        <div class="header-body">
+            <div class="row py-4 align-items-center">
+                <div class="col-xs-12 col-sm-4 col-md-5 align-items-center">
+                    <h2 class="d-inline-flex mb-0 long-texts">@SharedLocalizer.GetLocalizedHtmlString("Permissions")</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+<form asp-action="EditCreate">
+    <div class="card">
+        <div class="card-body">
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="">
+                        <input type="checkbox" id="CheckAll" class="btn btn-info" value="false" />
+                        <label class="control-label">@SharedLocalizer.GetLocalizedHtmlString("SelectAll")</label>
+                    </div>
+                    <input type="hidden" value="@Model.Role.ID" name="RoleID" id="RoleID" asp-for="Role.ID" />
+
+                    @foreach (var item in Model.GroupPermissionList)
+                    {
+                        <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>@item.GroupName</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item1 in item.CTHPermissionCollection)
+                                {
+                                    var check = false;
+                                    foreach (var i in Model.Role.CTHRolePermissionCollection)
+                                    {
+                                        if (i.PermissionID == item1.ID)
+                                        {
+                                            check = true;
+                                        }
+                                    }
+                                    <tr>
+                                        <td>
+                                            @if (check == true)
+                                            {
+                                                <input type="checkbox" checked class="btn btn-info" name="PermissionIDs1" value="@item1.ID" />
+                                                <label class="control-label">@item1.PermissionName</label>
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" value="@item1.ID" name="PermissionIDs2" class="btn btn-info" />
+                                                <label class="control-label">@item1.PermissionName</label>
+                                            }
+                                        </td>
+                                    </tr>
+
+                                }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        @if (Authorize(UserPermission.Role_View))
+        {
+        <a type="button" class="btn btn-secondary waves-effect" asp-controller="Role" asp-action="Index">@SharedLocalizer.GetLocalizedHtmlString("Back")</a>
+        }
+    <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+    </div>
+</form>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#CheckAll").change(function () {
+            var ISChecked = $(this).val();
+            var items = document.getElementsByName('PermissionIDs2');
+            var items2 = document.getElementsByName('PermissionIDs1');
+            if (ISChecked == "false") {
+                for (var i = 0; i < items.length; i++) {
+                    if (items[i].type == 'checkbox')
+                        items[i].checked = true;
+                }
+                $("#CheckAll").val("true");
+            }
+            else {
+                for (var i = 0; i < items.length; i++) {
+                    if (items[i].type == 'checkbox') {
+                        items[i].checked = false;
+                    }
+                }
+                for (var i = 0; i < items2.length; i++) {
+                    if (items2[i].type == 'checkbox') {
+                        items2[i].checked = false;
+                    }
+
+                }
+                $("#CheckAll").val("false");
+            }
+        });
+
+    });
+</script>

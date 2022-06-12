@@ -1,0 +1,46 @@
+﻿@model SStorm.CTH.DAL.EntityClasses.CTHMainCancerImageEntity
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("MainCancerType");
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+
+<body style="background-color:white">
+
+    <div class="text-center">
+        <div class="row" style="margin-top:60px;">
+            <div class="col-sm-12 col-md-1"></div>
+            <div class="col-sm-12 col-md-4">
+                <a href="/Home/Index"><img height="300" width="50" style=" box-shadow: 5px 10px #ccc; border-radius:100%" class="card-img-top" src="@Model.SolidTumorImage"></a>
+                <div class="card-body">
+                    <a href="#modal-add-entity" data-toggle="modal"
+                       data-url="@Url.Action("ChangeMainCancerImage", "Home", new { ID = Model.ID, Type = "Solid" })"
+                       data-modalsize="modal-lg"
+                       data-modalcolor="hmodal-danger" class="btn btn-info float-left">
+                        @SharedLocalizer.GetLocalizedHtmlString("ChangeImage")
+                    </a>
+                    <a href="/Home/Index" class="btn btn-info float-right">@SharedLocalizer.GetLocalizedHtmlString("SolidTumorImage")</a>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-2"></div>
+            <div class="col-sm-12 col-md-4">
+                <img height="300" width="50" style="box-shadow: 5px 10px #ccc;border-radius:100%" class="card-img-top" src="@Model.HematologicTumorImage">
+                <div class="card-body">
+                    <a href="#modal-add-entity" data-toggle="modal"
+                       data-url="@Url.Action("ChangeMainCancerImage","Home", new { ID = Model.ID, Type = "Hematologic" })"
+                       data-modalsize="modal-lg"
+                       data-modalcolor="hmodal-danger" class="btn btn-info float-left">
+                        @SharedLocalizer.GetLocalizedHtmlString("ChangeImage")
+                    </a>
+                    <a href="#" class="btn btn-info float-right">@SharedLocalizer.GetLocalizedHtmlString("HematologicTumorImage")</a>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-1"></div>
+        </div>
+    </div>
+</body>
+
+

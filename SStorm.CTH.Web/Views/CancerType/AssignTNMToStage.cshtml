@@ -1,0 +1,114 @@
+﻿
+@model SStorm.CTH.Web.Models.TNMStagingModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<form asp-action="AssignTNMToStage" id="AssignTNMForm">
+    <div class="color-line"></div>
+
+    <div class="modal-header">
+        <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreateAssignTNMToStage")</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" asp-for="TNMStaging.CancerTypeID" value="@Model.TNMStaging.CancerTypeID" />
+        <input type="hidden" asp-for="TNMStaging.ID" value="@Model.TNMStaging.ID" />
+
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="TNMStaging.StageID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Stage")</label>
+                <select asp-for="TNMStaging.StageID" class="form-control selectpicker"
+                        data-live-search="true" asp-items="@Model.StagingList" required>
+                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("SelectStage")</option>
+                </select>
+                <span asp-validation-for="TNMStaging.StageID" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="TNMStaging.TID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("TumorSize")</label>
+                <select asp-for="TNMStaging.TID" class="form-control selectpicker"
+                        data-live-search="true" asp-items="@Model.TumorSizeList" required>
+                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("SelectTumorSize")</option>
+                </select>
+                <span asp-validation-for="TNMStaging.TID" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="TNMStaging.NID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("LymphNode")</label>
+                <select asp-for="TNMStaging.NID" class="form-control selectpicker"
+                        data-live-search="true" asp-items="@Model.LymphNodeList" required>
+                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("SelectLymphNode")</option>
+                </select>
+                <span asp-validation-for="TNMStaging.NID" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="TNMStaging.MID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("DistantMetastasis")</label>
+                <select asp-for="TNMStaging.MID" class="form-control selectpicker"
+                        data-live-search="true" asp-items="@Model.DistantMetastasisList" required>
+                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("SelectDistantMetastasis")</option>
+                </select>
+                <span asp-validation-for="TNMStaging.MID" class="text-danger"></span>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</button>
+
+        <button type="submit" id="btnAssignTNM" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+    </div>
+</form>
+
+<script>
+    $('select').selectpicker({
+        dropupAuto: false
+    });
+
+    $("#btnAssignTNM").click(function () {
+        $('#modal-add-entity').modal('hide');
+    });
+
+    $('#AssignTNMForm').submit(function (e) {
+        //debugger;
+            e.preventDefault();
+            var form = $('#AssignTNMForm')[0]; // Get form
+            var data = new FormData(form); // Create an FormData object
+            $.ajax({
+                url: form.action,
+                type: form.method,
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 600000,
+                success: function (data) {
+                    if (data == 1) {
+                        $.ajax({
+                            url: '@Url.Action("GetStagingMatrix", "CancerType")',
+                            type: 'GET',
+                            cache: false,
+                            data: { CancerTypeID: @Model.TNMStaging.CancerTypeID}
+                        }).done(function (result) {
+                            $('#dvStaging').html(result);
+                            swal("Done", "Data saved successfully", "success");
+                        });
+                    }
+                    else {
+                         swal("Error", "This item already exists", "error");
+                    }
+
+                }
+            });
+        });
+
+
+</script>

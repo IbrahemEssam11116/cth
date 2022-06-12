@@ -1,0 +1,8 @@
+﻿@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("PrivacyPolicy");
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>@SharedLocalizer.GetLocalizedHtmlString("Privacymessage")</p>

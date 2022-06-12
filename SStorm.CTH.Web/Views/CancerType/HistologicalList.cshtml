@@ -1,0 +1,51 @@
+﻿
+@model SStorm.CTH.Web.Models.TreeViewNode
+@{
+    Layout = null;
+}
+<ul id="myUL1">
+
+    @foreach (var node in Model.HistologicCollection)
+    {
+        if (node.ParentID == Model.Seed)
+        {
+            SStorm.CTH.Web.Models.TreeViewNode inner = new SStorm.CTH.Web.Models.TreeViewNode { Seed = node.ID, HistologicCollection = Model.HistologicCollection };
+            <li>
+                <span class="caret1"></span> <a href="#" class="text-black-50"><i class="fa fa-folder"></i>@node.Name</a>
+                <span>
+                    @if (Authorize(UserPermission.CancerType_EditCreateHistologicalSubtype))
+                    {
+                        <a href="#modal-add-entity" data-toggle="modal"
+                           data-url="@Url.Action("EditCreateHistological", "CancerType", new { ID = 0 ,CancerID = node.CanerID ,ParentID = node.ID})"
+                           data-modalsize="modal-lg"
+                           data-modalcolor="hmodal-danger">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    }
+                    @if (Authorize(UserPermission.CancerType_EditCreateHistologicalSubtype))
+                    {
+                        <a href="#modal-add-entity" data-toggle="modal"
+                           data-url="@Url.Action("EditCreateHistological", "CancerType", new { ID = node.ID ,CancerID =node.CanerID})"
+                           data-modalsize="modal-lg"
+                           data-modalcolor="hmodal-danger">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    }
+                    @if (Authorize(UserPermission.CancerType_DeleteHistologicalSubtype))
+                    {
+                        <a href="#modal-delete-entity" data-toggle="modal"
+                           data-url="@Url.Action("DeleteHistological", "CancerType", new {id = node.ID})"
+                           data-modalsize="modal-lg"
+                           data-modalcolor="hmodal-danger">
+                            <i class="fa fa-trash" />
+                        </a>
+                    }
+
+                </span>
+                <ul class="nested1">
+                    <partial name="HistologicalList" model="inner">
+                </ul>
+            </li>
+        }
+    }
+</ul>

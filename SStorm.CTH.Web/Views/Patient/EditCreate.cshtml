@@ -1,0 +1,477 @@
+﻿@model SStorm.CTH.Web.Models.PatientModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("EditCreate");
+}
+<style>
+    .notification-list .btn-light {
+        background-color: #348cd4;
+        border: 0;
+        color:#fff;
+    }
+    .notification-list .btn-light:hover,
+    .notification-list .btn-light::selection{
+        background-color: #348cd4;
+        border: 0;
+    }
+    .notification-list .filter-option {
+        background-color: #348cd4;
+        border:0;
+    }
+    .notification-list .dropdown-menu {
+        border:none;
+       
+    }
+    .notification-list .dropdown-menu .dropdown-item {
+        background-color: #348cd4;
+        color: #fff;
+        border: none;
+    }
+    .notification-list .dropdown-menu .dropdown-item:hover {
+        background-color: #348cd4;
+        color: #fff;
+        border: none;
+    }
+</style>
+
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("Patient")</a></li>
+                    <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("PatientDetails")</li>
+                </ol>
+            </div>
+            <h4 class="page-title">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("Patient")</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+<div class="card">
+    <div class="card-body">
+
+        <div class="modal-body">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="PatientData-tab" data-toggle="tab" href="#PatientData" role="tab" aria-controls="PatientData" aria-selected="false">
+                        <span class="d-block d-sm-none"><i class="fa fa-home"></i></span>
+                        <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("Data")</span>
+                    </a>
+                </li>
+                @if (Model.PatientEntity.ID > 0)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" id="PatientClinicalData-tab" data-toggle="tab" href="#PatientClinicalData" role="tab" aria-controls="PatientClinicalData" aria-selected="true">
+                            <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
+                            <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("ClinicalData")</span>
+                        </a>
+                    </li>
+                }
+                @if (Model.PatientEntity.ID > 0)
+                {
+                    @if (Model.PatientEntity.CTHPatientClinicalDataCollection.Count > 0)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" id="ChemoSessions-tab" data-toggle="tab" href="#ChemoSessions" role="tab" aria-controls="ChemoSessions" aria-selected="true">
+                                <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
+                                <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("Chemo")</span>
+                            </a>
+                        </li>
+                    }
+                }
+                @if (Model.PatientEntity.ID > 0)
+                {
+                    if (Model.PatientEntity.CTHPatientClinicalDataCollection.Count > 0)
+                    {
+                        if (Model.PatientEntity.CTHPatientClinicalDataCollection.First().CTHKimoSurveyCollection.Count > 0)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" id="PateintSchedule-tab" data-toggle="tab" href="#PateintSchedule" role="tab" aria-controls="PateintSchedule" aria-selected="true">
+                                    <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
+                                    <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("Schedule")</span>
+                                </a>
+                            </li>
+                        }
+                    }
+                }
+                @if (Model.PatientEntity.ID > 0)
+                {
+                    if (Model.PatientEntity.CTHPatientClinicalDataCollection.Count > 0)
+                    {
+                        if (Model.PatientEntity.CTHPatientClinicalDataCollection.First().CTHKimoSurveyCollection.Count > 0)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" id="PateintFollowUp-tab" data-toggle="tab" href="#PateintFollowUp" role="tab" aria-controls="PateintFollowUp" aria-selected="true">
+                                    <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
+                                    <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("PostChemoFollowUp")</span>
+                                </a>
+                            </li>
+                        }
+                    }
+                }
+
+                @if (Model.PatientEntity.ID > 0)
+                {
+                    if (Model.PatientEntity.CTHPatientClinicalDataCollection.Count > 0)
+                    {
+                        if (Model.PatientEntity.CTHPatientClinicalDataCollection.First().CTHKimoSurveyCollection.Count > 0)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" id="Education-tab" data-toggle="tab" href="#Education" role="tab" aria-controls="Education" aria-selected="true">
+                                    <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
+                                    <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("Education")</span>
+                                </a>
+                            </li>
+                        }
+                    }
+
+                }
+
+                @if (Model.PatientEntity.ID > 0)
+                {
+                    if (Model.PatientEntity.CTHPatientClinicalDataCollection.Count > 0)
+                    {
+                        if (Model.PatientEntity.CTHPatientClinicalDataCollection.First().CTHKimoSurveyCollection.Count > 0)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" id="Assessment-tab" data-toggle="tab" href="#Assessment" role="tab" aria-controls="Assessment" aria-selected="true">
+                                    <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
+                                    <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("Assessment")</span>
+                                </a>
+                            </li>
+                        }
+                    }
+
+                }
+
+            </ul>
+            <div class="tab-content">
+
+                <div id="PatientData" class="tab-pane show active" role="tabpanel" aria-labelledby="PatientData-tab">
+                    <form asp-action="EditCreate" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="PatientEntity.UserID" value="@Model.PatientEntity.UserID" />
+                        <div class="form-group row" style="display:none;">
+                            <label asp-for="PatientEntity.ID" class="col-md-3 col-form-label"></label>
+                            <div class="col-md-12">
+                                <input asp-for="PatientEntity.ID" readonly="" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label asp-for="PatientEntity.PatientNameE" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("FullName")</label>
+                                <input asp-for="PatientEntity.PatientNameE" class="form-control" required />
+                                <span asp-validation-for="PatientEntity.PatientNameE" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="PatientEntity.Residence" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Residence")</label>
+                                <input asp-for="PatientEntity.Residence" class="form-control" required />
+                                <span asp-validation-for="PatientEntity.Residence" class="text-danger"></span>
+                            </div>
+                            @*
+                                <div class="col-md-6">
+                                    <label asp-for="PatientEntity.PatientNameA" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("FullName") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                                    <input asp-for="PatientEntity.PatientNameA" class="form-control" />
+                                    <span asp-validation-for="PatientEntity.PatientNameA" class="text-danger"></span>
+                                </div>
+                            *@
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label asp-for="PatientEntity.PatientNumber" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("MRN")</label>
+                                <input asp-for="PatientEntity.PatientNumber" class="form-control" required />
+                                <span asp-validation-for="PatientEntity.PatientNumber" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="PatientEntity.ContactNumber" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Contactnumber")</label>
+                                <input asp-for="PatientEntity.ContactNumber" class="form-control" type="tel" required />
+                                <span asp-validation-for="PatientEntity.ContactNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @*<div class="col-md-6">
+                                    <label asp-for="PatientEntity.ArContactNumber" class="control-label">Contact Number in Arabic</label>
+                                    <input asp-for="PatientEntity.ArContactNumber" class="form-control" type="number" />
+                                    <span asp-validation-for="PatientEntity.ArContactNumber" class="text-danger"></span>
+                                </div>*@
+                            <div class="col-md-6">
+                                <label asp-for="PatientEntity.BirthDate" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("BirthDate")</label>
+                                <input asp-for="PatientEntity.BirthDate" class="form-control" type="date" required onchange="calculateAge(this.value)" />
+                                <span asp-validation-for="PatientEntity.BirthDate" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="PatientEntity.PatientAge" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Age")</label>
+                                <input asp-for="PatientEntity.PatientAge" class="form-control" type="number" required />
+                                <span asp-validation-for="PatientEntity.PatientAge" class="text-danger"></span>
+                            </div>
+                        </div>
+                        @*<div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label asp-for="PatientEntity.ArResidence" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Residence") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                                        <input asp-for="PatientEntity.ArResidence" class="form-control" />
+                                        <span asp-validation-for="PatientEntity.ArResidence" class="text-danger"></span>
+                                    </div>
+                            </div>*@
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label asp-for="PatientEntity.NationalID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("NationalID")</label>
+                                <input asp-for="PatientEntity.NationalID" class="form-control" type="number" maxlength="14" required />
+                                <span asp-validation-for="PatientEntity.NationalID" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="NationalIDPhoto" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("NationalIDPhotoCopy")</label>
+
+                                <div class="input-group">
+                                    <input asp-for="NationalIDPhoto" class="form-control" type="file" />
+                                    <span asp-validation-for="NationalIDPhoto" class="text-danger"></span>
+
+                                    @if (Model.PatientEntity.ID != 0)
+                                    {
+                                        <a class="btn btn-dark" href="@Url.Action("DownloadFile", "Patient", new { id = Model.PatientEntity.ID })">
+                                            <i class="fa fa-download text-info"></i>
+                                        </a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label asp-for="PatientEntity.ArOccupation" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Occupation") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                                        <input asp-for="PatientEntity.ArOccupation" class="form-control" />
+                                        <span asp-validation-for="PatientEntity.ArOccupation" class="text-danger"></span>
+                                    </div>
+                            </div>*@
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label asp-for="PatientEntity.PaymentTypeId" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("PaymentType")</label>
+                                <select asp-for="PatientEntity.PaymentTypeId" class="form-control selectpicker"
+                                        data-live-search="true" asp-items="@Model.PaymentTypeList" id="selectPayment" required>
+                                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("PaymentType")</option>
+                                </select>
+                                <span asp-validation-for="PatientEntity.PaymentTypeId" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="PatientEntity.FirstVisitDate" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("FirstVisitDate")</label>
+                                <input asp-for="PatientEntity.FirstVisitDate" class="form-control" type="date" />
+                                <span asp-validation-for="PatientEntity.FirstVisitDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12" style="display: none; " id="SponserCompanyName">
+                                <label asp-for="PatientEntity.SponserCompanyName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("SponserCompanyName")</label>
+                                <input asp-for="PatientEntity.SponserCompanyName" class="form-control" value="@Model.PatientEntity.SponserCompanyName" />
+                                <span asp-validation-for="PatientEntity.SponserCompanyName" class="text-danger"></span>
+                            </div>
+                            @*<div class="col-md-6" style="display:none;" id="SponserCompanyNamear">
+                                <label asp-for="PatientEntity.ArSponserCompanyName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("SponserCompanyName") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                                <input asp-for="PatientEntity.ArSponserCompanyName" class="form-control" value="@Model.PatientEntity.ArSponserCompanyName" />
+                                <span asp-validation-for="PatientEntity.ArSponserCompanyName" class="text-danger"></span>
+                            </div>*@
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label asp-for="PatientEntity.DoctorID" class="control-label"> @SharedLocalizer.GetLocalizedHtmlString("Doctor")  </label>
+                                <div class="input-group">
+                                    <select asp-for="PatientEntity.DoctorID" class="form-control selectpicker" data-live-search="true" asp-items="Model.DoctorList" required>
+                                        <option selected disabled value="">
+                                            @SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("Doctor")
+                                        </option>
+                                    </select>
+                                    <div class="input-group-prepen">
+                                        @if (Authorize(UserPermission.Doctor_EditCreate))
+                                        {
+                                            <a href="#modal-add-entity" data-toggle="modal"
+                                               data-url="@Url.Action("EditCreateDoctor", "Patient")"
+                                               data-modalsize="modal-lg"
+                                               data-modalcolor="hmodal-danger" class="btn btn-info">
+                                                <i class="fas fa-plus"></i>
+                                            </a>
+                                        }
+                                    </div>
+                                </div>
+
+                                <span asp-validation-for="PatientEntity.DoctorID" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="PatientEntity.CTHUserItem.UserName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("username")</label>
+                                <input class="form-control" asp-for="PatientEntity.CTHUserItem.UserName" required />
+                                <span asp-validation-for="PatientEntity.CTHUserItem.UserName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label asp-for="PatientEntity.CTHUserItem.Password" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Password")</label>
+                                @if (Model.PatientEntity.ID==0)
+                                {<input class="form-control" asp-for="PatientEntity.CTHUserItem.Password" required type="password"  />
+                                }
+                                else { 
+                                <input class="form-control" asp-for="PatientEntity.CTHUserItem.Password" required type="password" value="@Model.PatientEntity.CTHUserItem.Password" />
+                                }
+                                <span asp-validation-for="PatientEntity.CTHUserItem.Password" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="PatientEntity.CTHUserItem.Email" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Email")</label>
+                                <input class="form-control" asp-for="PatientEntity.CTHUserItem.Email" required type="email" />
+                                <span asp-validation-for="PatientEntity.CTHUserItem.Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label asp-for="PatientEntity.Occupation" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Occupation")</label>
+                                <input asp-for="PatientEntity.Occupation" class="form-control" required />
+                                <span asp-validation-for="PatientEntity.Occupation" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="PatientEntity.PatientGender" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Gender")</label>
+                                <div class="col-md-6">
+                                    <div class="custom-control custom-radio custom-control-inline mb-2">
+                                        <input asp-for="PatientEntity.PatientGender" id="PatientEntity_PatientGender1" class="custom-control-input" type="radio" value="Male" required />
+                                        <label for="PatientEntity_PatientGender1" class="custom-control-label">@SharedLocalizer.GetLocalizedHtmlString("Male")</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline mb-2">
+                                        <input asp-for="PatientEntity.PatientGender" id="PatientEntity_PatientGender2" class="custom-control-input" type="radio" value="Female" required />
+                                        <label for="PatientEntity_PatientGender2" class="custom-control-label">@SharedLocalizer.GetLocalizedHtmlString("Female")</label>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="PatientEntity.PatientGender" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            @if (Authorize(UserPermission.Patient_View))
+                            {
+                                <a class="btn btn-secondary" asp-controller="Patient" asp-action="Index">@SharedLocalizer.GetLocalizedHtmlString("Back")</a>
+                            }
+                            <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+
+                        </div>
+                    </form>
+                </div>
+
+                @if (Model.PatientEntity.ID > 0)
+                {
+                    <div id="PatientClinicalData" class="tab-pane" role="tabpanel" aria-labelledby="PatientClinicalData-tab">
+                        <partial name="_PatientClinicalDataList" model="@Model" />
+                    </div>
+                }
+
+                @if (Model.PatientEntity.ID > 0)
+                {
+                    if (Model.PatientEntity.CTHPatientClinicalDataCollection.Count > 0)
+                    {
+                        <div id="ChemoSessions" class="tab-pane" role="tabpanel" aria-labelledby="ChemoSessions-tab">
+                            <partial name="_ChemoSessionList" model="@Model" />
+                        </div>
+                    }
+                }
+                @if (Model.PatientEntity.ID > 0)
+                {
+                    if (Model.PatientEntity.CTHPatientClinicalDataCollection.Count > 0)
+                    {
+                        if (Model.PatientEntity.CTHPatientClinicalDataCollection.First().CTHKimoSurveyCollection.Count > 0)
+                        {
+                            <div id="PateintSchedule" class="tab-pane" role="tabpanel" aria-labelledby="PateintSchedule-tab">
+                            </div>
+                        }
+                    }
+                }
+
+                @if (Model.PatientEntity.ID > 0)
+                {
+                    if (Model.PatientEntity.CTHPatientClinicalDataCollection.Count > 0)
+                    {
+                        if (Model.PatientEntity.CTHPatientClinicalDataCollection.First().CTHKimoSurveyCollection.Count > 0)
+                        {
+                            <div id="PateintFollowUp" class="tab-pane" role="tabpanel" aria-labelledby="PateintFollowUp-tab">
+                            </div>
+                        }
+                    }
+                }
+
+                @if (Model.PatientEntity.ID > 0)
+                {
+                    if (Model.PatientEntity.CTHPatientClinicalDataCollection.Count > 0)
+                    {
+                        if (Model.PatientEntity.CTHPatientClinicalDataCollection.First().CTHKimoSurveyCollection.Count > 0)
+                        {
+                            <div id="Education" class="tab-pane" role="tabpanel" aria-labelledby="Education-tab">
+                                <partial name="_PatientEducation" model="@Model" />
+                            </div>
+                        }
+                    }
+                }
+
+                @if (Model.PatientEntity.ID > 0)
+                {
+                    if (Model.PatientEntity.CTHPatientClinicalDataCollection.Count > 0)
+                    {
+                        if (Model.PatientEntity.CTHPatientClinicalDataCollection.First().CTHKimoSurveyCollection.Count > 0)
+                        {
+                            <div id="Assessment" class="tab-pane" role="tabpanel" aria-labelledby="Assessment-tab">
+                                <partial name="_PatientAssessment" model="@Model" />
+                            </div>
+                        }
+                    }
+
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function calculateAge(birthdate) {
+        var birthdate = birthdate.split('-');
+        var birthYear = birthdate[0];
+        var birthMonth = birthdate[1];
+        var birthDay = birthdate[2];
+        todayDate = new Date();
+        todayYear = todayDate.getFullYear();
+        todayMonth = todayDate.getMonth();
+        todayDay = todayDate.getDate();
+        age = todayYear - birthYear;
+        if (todayMonth < birthMonth - 1) {
+            age--;
+        }
+        if (birthMonth - 1 == todayMonth && todayDay < birthDay) {
+            age--;
+        }
+        document.getElementById("PatientEntity_PatientAge").value = age;
+    }
+
+    $("#selectPayment").on('change', function () {
+        var getValue = $(this).val();
+        if (getValue == 2) {
+            $("#PatientEntity_SponserCompanyName").show();
+            $("#PatientEntity_SponserCompanyNamear").show();
+        }
+        else {
+            $("#PatientEntity_SponserCompanyName").hide()
+            $("#PatientEntity_SponserCompanyNamear").hide();
+
+        }
+    });
+
+    $(document).ready(function () {
+        $('select').selectpicker({
+            dropupAuto: false
+        });
+        if (@Model.PatientEntity.ID > 0) {
+            $("#PateintSchedule").load("/Patient/PatientSchedule?PatientID=@Model.PatientEntity.ID");
+        }
+        if (@Model.PatientEntity.ID > 0) {
+            $("#PateintFollowUp").load("/Patient/GetPatientSymptoms?patientID=@Model.PatientEntity.ID");
+        }
+
+        @*if (@Model.PatientEntity.ID > 0) {
+            $("#Education").load("/Patient/PatientEducation?PatientID=@Model.PatientEntity.ID");
+        }*@
+    });
+
+</script>

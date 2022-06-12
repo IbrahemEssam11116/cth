@@ -1,0 +1,30 @@
+﻿@model SStorm.CTH.Web.Models.PatientModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="table-responsive">
+                @*@if (Model.PatientEntity.CTHPatientClinicalDataCollection.Count != 0)
+                {
+                    if (Authorize(UserPermission.Patient_ViewPatientChemoSurveySessions))
+                    {
+                        <a asp-controller="PatientClinicalData" asp-action="GetKimoSurvey" asp-route-ID="@Model.ClinicalDataID" class="btn btn-info text-white">@SharedLocalizer.GetLocalizedHtmlString("ChemicalSurveySessions")</a>
+                    }
+                    <br /><br />
+                }*@
+                <div id="dvPatientClinicalData">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#dvPatientClinicalData").load("/PatientClinicalData/EditCreate/@Model.ClinicalDataID?PatientID=@Model.PatientEntity.ID");
+    });
+</script>

@@ -1,0 +1,184 @@
+﻿@model SStorm.CTH.Web.Models.LabDetailConditionModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = "EditCreateLabDetailCondition";
+}
+
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="EditCreateLabDetailCondition" class="overflow-auto">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("LabDetailCondition")</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body" style="max-height:400px !important; overflow: auto">
+                <div style="display:none">
+                    <input type="hidden" asp-for="LabDetailConditionEntity.ID" value="@Model.LabDetailConditionEntity.ID" />
+                    <input type="hidden" asp-for="LabDetailConditionEntity.LabDetailID" value="@Model.LabDetailConditionEntity.LabDetailID" />
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label asp-for="LabDetailConditionEntity.OpertorID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("OpertorType")</label>
+                        <select required asp-for="LabDetailConditionEntity.OpertorID" id="LabDetailConditionEntity_OpertorID" class="form-control selectpicker"
+                                data-live-search="true" asp-items="@Model.OpertorList">
+                            <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("SelectOpertor")</option>
+                        </select>
+                        <span asp-validation-for="LabDetailConditionEntity.OpertorID" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="LabDetailConditionEntity.Number" class="control-label"> @SharedLocalizer.GetLocalizedHtmlString("Number")</label>
+                        <input asp-for="LabDetailConditionEntity.Number" id="LabDetailConditionEntity_Number" class="form-control" />
+                        <span validation-for="LabDetailConditionEntity_Number" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class=" text-center">
+                    <button type="button" id="AppendConditionBtn" class="btn btn-dark">@SharedLocalizer.GetLocalizedHtmlString("AppendCondition")</button>
+                </div>
+                <br />
+                <table id="MyConditionsTable" class="table m-0 table-hover">
+                    <thead>
+                        <tr>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Condition")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Statement")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Remove")</th>
+                        </tr>
+
+                    </thead>
+                    <tbody id="MyConditionsTableBody"></tbody>
+                </table><br />
+
+                <div class=" text-center">
+                    <button type="button" id="FinishBtn" class="btn btn-dark">@SharedLocalizer.GetLocalizedHtmlString("Finish")</button>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label asp-for="LabDetailConditionEntity.Condition" class="control-label"> @SharedLocalizer.GetLocalizedHtmlString("Condition")</label>
+                        <input asp-for="LabDetailConditionEntity.Condition" class="form-control" readonly />
+                        <span asp-validation-for="LabDetailConditionEntity.Condition" class="text-danger"></span>
+                    </div>
+                </div>
+                @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="LabDetailConditionEntity.ArCondition" class="control-label"> @SharedLocalizer.GetLocalizedHtmlString("Condition") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input asp-for="LabDetailConditionEntity.ArCondition" class="form-control" readonly />
+                <span asp-validation-for="LabDetailConditionEntity.ArCondition" class="text-danger"></span>
+            </div>
+        </div>
+                *@
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label asp-for="LabDetailConditionEntity.Message" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Message")</label>
+                        <textarea asp-for="LabDetailConditionEntity.Message" class="form-control" rows="4"></textarea>
+                        <span asp-validation-for="LabDetailConditionEntity.Message" class="text-danger"></span>
+                    </div>
+                </div>
+                @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="LabDetailConditionEntity.ArMessage" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Message") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <textarea asp-for="LabDetailConditionEntity.ArMessage" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="LabDetailConditionEntity.ArMessage" class="text-danger"></span>
+            </div>
+        </div>
+                *@
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-secondary text-white" id="CancelBtn" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</a>
+
+                <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $('select').selectpicker({
+        dropupAuto: false
+    });
+    var StatementIDs = [];
+    var Conditions = [];
+    $(document).ready(function () {
+        var i = 0;
+
+        $("#BtnCancel").click(function () {
+            $("#dvEditCreateLabDetCondition").slideUp(1000);
+        });
+        $("#AppendConditionBtn").click(function () {
+            var operator = $("#LabDetailConditionEntity_OpertorID option:selected").text();
+            var number = $("#LabDetailConditionEntity_Number").val();
+            var statementID = "S" + i;
+            var condition =
+            {
+                key: i,
+                value: operator + " " + number
+            };
+
+            var rowid = "R" + i;
+            var myRow = '<tr id="' + rowid + '"><td>' + condition.value + '</td><td><select class="form-control" id="' + statementID + '" required><option selected disabled>Select Statement</option><option value="1">AND</option><option value="2">OR</option></select></td><td><a class="btn btn-danger" onclick="DeleteMyRow(' + i + ');"><i class="fa fa-times"></i></a></td></tr>';
+            $("#MyConditionsTableBody").append(myRow);
+            i++;
+            StatementIDs.push(statementID);
+            Conditions.push(condition);
+        });
+
+        $("#FinishBtn").click(function () {
+            var TotalCondition = "";
+            for (var x = 0; x < StatementIDs.length; x++) {
+                var statementtxt = "";
+                var statementval = Number($("#" + StatementIDs[x]).val());
+                if (statementval == 1) {
+                    statementtxt = "AND";
+                }
+                else if (statementval == 2) {
+                    statementtxt = "OR";
+                }
+                else {
+                    statementtxt = "";
+                }
+                var condition = Conditions[x].value;
+                TotalCondition += " " + condition + " " + statementtxt + " ";
+            }
+            document.getElementById("LabDetailConditionEntity_Condition").value = TotalCondition;
+        });
+
+    });
+
+    function DeleteMyRow(rowid) {
+        var myRow = "R" + rowid;
+        var statementID = "S" + rowid;
+        var row = document.getElementById(myRow);
+        var table = row.parentNode;
+        while (table && table.tagName != 'TABLE')
+            table = table.parentNode;
+        if (!table)
+            return;
+        table.deleteRow(row.rowIndex);
+        for (var i = 0; i < StatementIDs.length; i++) {
+            if (StatementIDs[i] === statementID) {
+                StatementIDs.splice(i, 1);
+            }
+        }
+        var TotalCondition = "";
+        for (var x = 0; x < StatementIDs.length; x++) {
+            var statementtxt = "";
+            var statementval = Number($("#" + StatementIDs[x]).val());
+            if (statementval == 1) {
+                statementtxt = "AND";
+            }
+            else if (statementval == 2) {
+                statementtxt = "OR";
+            }
+            else {
+                statementtxt = "";
+            }
+            var condition = Conditions[x].value;
+            TotalCondition += " " + condition + " " + statementtxt + " ";
+        }
+        document.getElementById("LabDetailConditionEntity_Condition").value = TotalCondition;
+    }
+</script>

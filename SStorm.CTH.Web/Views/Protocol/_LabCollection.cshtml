@@ -1,0 +1,125 @@
+﻿@model SStorm.CTH.Web.Models.ChemotherapyProtocolModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("LabList");
+    Layout = null;
+}
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("CycleLabsCategory")</a></li>
+                        <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("CycleLabsCategoryList")</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <button type="button" class="close" id="btnCloselab">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <div id="labDiv">
+                        @if (Authorize(UserPermission.CancerType_EditCreateLab))
+                        {
+                            
+                            <a asp-controller="Protocol" asp-action="EditCreateLab" asp-route-ID="0" asp-route-ProtocolID="@Model.ChemotherapyProtocolEntity.ID" class="btn btn-info">
+                                <i class="fas fa-plus"></i> @SharedLocalizer.GetLocalizedHtmlString("AddNew")
+                            </a>
+                        }
+
+                        <div class="table-responsive" id="btnCloselab">
+                            <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("CycleLabsCategory")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("LabItems(Conditions)")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                     @if (Model.ChemotherapyProtocolEntity.CTHLabCollection.Count != 0)
+                                        {
+                                            @foreach (var lab in Model.ChemotherapyProtocolEntity.CTHLabCollection)
+                                            {
+                                                <tr>
+                                                    <td>@lab.LabName</td>
+                                                    <td>
+                                                        @foreach (var labDetail in lab.CTHLabDetailCollection)
+                                                        {
+                                                            var condition = "(";
+                                                            <span class="btn btn-outline-info text-dark">
+                                                                @labDetail.LabDetailsName
+
+                                                                @foreach (var cond in labDetail.CTHLabDetailConditionCollection)
+                                                                {
+                                                                    condition += cond.Condition;
+                                                                    if (cond.ID != labDetail.CTHLabDetailConditionCollection.Last().ID)
+                                                                    {
+                                                                        condition += ", ";
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        condition += ")";
+                                                                    }
+                                                                }
+                                                                @condition
+                                                            </span>
+
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (Authorize(UserPermission.CancerType_EditCreateLab))
+                                                        {
+                                                            <a asp-controller="Protocol" asp-action="EditCreateLab" asp-route-ID="@lab.ID" asp-route-ProtocolID="@Model.ChemotherapyProtocolEntity.ID" class="btn btn-info">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+                                                          
+                                                        }
+                                                        @if (Authorize(UserPermission.CancerType_DeleteLab))
+                                                        {
+                                                            <a href="#modal-delete-entity" data-toggle="modal"
+                                                               data-url="@Url.Action("DeleteLab", "Protocol", new { ID = @lab.ID})"
+                                                               data-modalsize="modal-lg"
+                                                               data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                                                <i class="fas fa-times"></i>
+                                                            </a>
+                                                        }
+                                                        @*@if (Authorize(UserPermission.CancerType_ViewProtocolLabs))
+                                                        {
+                                                            <a class="btn btn-info" asp-controller="Protocol" asp-action="GetLabDetails" asp-route-ID="@lab.ID">@SharedLocalizer.GetLocalizedHtmlString("NewLabItems")</a>
+                                                        }*@
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#btnCloselab").click(function () {
+            $("#labDiv").slideToggle(1000);
+        })
+    });
+</script>

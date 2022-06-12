@@ -1,0 +1,57 @@
+﻿@model SStorm.CTH.DAL.EntityClasses.CTHSolutionEntity
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    Layout = null;
+}
+
+<div class="color-line"></div>
+<div class="modal-header">
+    <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("Solution")</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<form asp-action="EditCreate">
+    <div class="modal-body">
+        <input type="hidden" asp-for="ID" name="ID" id="ID" value="@Model.ID" />
+
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="Name" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("SolutionName")</label>
+                <input class="form-control" asp-for="Name" required>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="ArName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("SolutionName") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input class="form-control" asp-for="ArName">
+                <span asp-validation-for="ArName" class="text-danger"></span>
+            </div>
+        </div>
+        *@
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="Description" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Description")</label>
+                <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+        @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="ArDescription" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Description") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <textarea asp-for="ArDescription" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="ArDescription" class="text-danger"></span>
+            </div>
+        </div>
+        *@
+        <div class="modal-footer">
+            <a class="btn btn-secondary text-white" id="CancelBtn" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</a>
+
+            <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+        </div>
+    </div>
+</form>

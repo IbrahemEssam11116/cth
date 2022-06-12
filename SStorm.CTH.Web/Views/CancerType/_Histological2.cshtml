@@ -1,0 +1,28 @@
+﻿@model SStorm.CTH.Web.Models.TreeViewNode
+    <ul id="myUL">
+        @foreach (var node in Model.CancerType.CTHCancerHistologicCollection)
+        {
+            if (node.ParentID == Model.Seed)
+            {
+                SStorm.CTH.Web.Models.TreeViewNode inner = new SStorm.CTH.Web.Models.TreeViewNode { Seed = node.ID, CancerType = Model.CancerType };
+                <li>
+
+                    <span class="caret"></span> <a href="#" class="text-black-50 text-capitalize"><i class="fa fa-folder"></i>@node.Name</a>
+                    <ul class="nested">
+                        <partial name="_Histological2" model="inner">
+                    </ul>
+                </li>
+            }
+        }
+    </ul>
+
+   <script>
+    var toggler = document.getElementsByClassName("caret");
+    var i;
+    for (i = 0; i < toggler.length; i++) {
+      toggler[i].addEventListener("click", function() {
+        this.parentElement.querySelector(".nested").classList.toggle("active");
+        this.classList.toggle("caret-down");
+      });
+    }
+    </script>

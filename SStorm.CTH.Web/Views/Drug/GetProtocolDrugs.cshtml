@@ -1,0 +1,101 @@
+﻿@*@model SStorm.CTH.DAL.EntityClasses.CTHChemotherapyProtocolEntity
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("ProtocolDrugs");
+}
+
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+
+<div class="container-fluid">
+
+     start page title 
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("ProtocolDrugs") @SharedLocalizer.GetLocalizedHtmlString("List")</a></li>
+                        <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("ProtocolDrugs") @SharedLocalizer.GetLocalizedHtmlString("List")</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">@SharedLocalizer.GetLocalizedHtmlString("ProtocolDrugs")</h4>
+            </div>
+        </div>
+    </div>
+     end page title 
+
+    <div class="row">
+        <div class="col-sm-12">
+            @if (Authorize(UserPermission.Drug_EditCreate))
+            {
+                <a href="#" class="btn btn-primary" onclick="EditCreateDrug(0);">
+                    <i class="fas fa-plus"></i> @SharedLocalizer.GetLocalizedHtmlString("NewDrug")
+                </a>
+            }
+            <div id="dvEditCreateDrug"></div>
+            <div class="card">
+                <div class="card-body">
+
+
+                    <div class="table-responsive">
+                        <table class="table m-0 table-hover">
+                            <thead class="btn-primary text-white">
+                                <tr>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Drug") @SharedLocalizer.GetLocalizedHtmlString("Name")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("DrugDose")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Route")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.CTHDrugCollection.Count() == 0)
+                                {
+                                    <tr>
+                                        <th scope="row" colspan="7">@SharedLocalizer.GetLocalizedHtmlString("NoData")</th>
+                                    </tr>
+                                }
+                                @foreach (var item in Model.CTHDrugCollection)
+                                {
+                                    <tr>
+                                        <td>@item.Name</td>
+                                        <td>@item.Dose @item.CTHDoseUnitItem.Name</td>
+                                        <td>@Enum.GetName(typeof(Route), item.RouteID)</td>
+                                        <td>
+                                            @if (Authorize(UserPermission.Drug_EditCreate))
+                                            {
+                                                <a href="#" class="btn btn-primary" onclick="EditCreateDrug(@item.ID);">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                            }
+                                            @if (Authorize(UserPermission.Drug_Delete))
+                                            {
+                                                <a href="#modal-delete-entity" data-toggle="modal"
+                                                   data-url="@Url.Action("DeleteDrug", "Drug", new { ID = item.ID })"
+                                                   data-modalsize="modal-lg"
+                                                   data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function EditCreateDrug(id) {
+        $("#dvEditCreateDrug").show();
+        $("#dvEditCreateDrug").load("/Drug/EditCreateDrug/" + id + "?ProtocolID=" + @Model.ID);
+    }
+</script>*@

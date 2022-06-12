@@ -1,0 +1,122 @@
+﻿@model SStorm.CTH.DAL.HelperClasses.EntityCollection<SStorm.CTH.DAL.EntityClasses.CTHStagingEntity>
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("EditCreate");
+}
+
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("Staging")</a></li>
+                    <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("Staging")</li>
+                </ol>
+            </div>
+            <h4 class="page-title">@SharedLocalizer.GetLocalizedHtmlString("Index")</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+<div class="card">
+    <div class="card-body">
+        <div class="modal-body">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="StagingList-tab" data-toggle="tab" href="#StagingList" role="tab" aria-controls="StagingList" aria-selected="false">
+                        <span class="d-block d-sm-none"><i class="fa fa-home"></i></span>
+                        <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("StagingList")</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="StagingMatrix-tab" data-toggle="tab" href="#StagingMatrix" role="tab" aria-controls="StagingMatrix" aria-selected="true">
+                        <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
+                        <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("StagingMatrix")</span>
+                    </a>
+                </li>
+
+            </ul>
+            <div class="tab-content">
+                <div id="StagingList" class="tab-pane show active" role="tabpanel" aria-labelledby="StagingList-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            @if (Authorize(UserPermission.TNMStaging_EditCreateStaging))
+                            {
+                            <a href="#modal-add-entity" data-toggle="modal"
+                               data-url="@Url.Action("EditCreate", "Staging", new { ID = 0})"
+                               data-modalsize="modal-lg"
+                               data-modalcolor="hmodal-danger" class="btn btn-info">
+                                <i class="fas fa-plus"></i> @SharedLocalizer.GetLocalizedHtmlString("NewStaging")
+                            </a>
+                            }
+                            <div class="table-responsive">
+                                <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>@SharedLocalizer.GetLocalizedHtmlString("Name")</th>
+                                            <th>@SharedLocalizer.GetLocalizedHtmlString("Number")</th>
+                                            <th>@SharedLocalizer.GetLocalizedHtmlString("Remarks")</th>
+                                            <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.Count() == 0)
+                                        {
+                                            <tr>
+                                                <th scope="row" colspan="7">@SharedLocalizer.GetLocalizedHtmlString("NoData")</th>
+                                            </tr>
+                                        }
+                                        @for (int i = 0; i < Model.Count(); i++)
+                                        {
+                                            <tr>
+                                                <td>@Model[i].Name</td>
+                                                <td>@Model[i].Number</td>
+                                                <td>@Model[i].Remarks</td>
+                                                <td>
+                                                    @if (Authorize(UserPermission.TNMStaging_EditCreateStaging))
+                                                    {
+                                                        <a href="#modal-add-entity" data-toggle="modal"
+                                                           data-url="@Url.Action("EditCreate", "Staging", new { ID = @Model[i].ID})"
+                                                           data-modalsize="modal-lg"
+                                                           data-modalcolor="hmodal-danger" class="btn btn-info">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    }
+                                                    @if (Authorize(UserPermission.TNMStaging_DeleteStaging))
+                                                    {
+                                                        <a href="#modal-delete-entity" data-toggle="modal"
+                                                           data-url="@Url.Action("Delete", "Staging", new { ID = @Model[i].ID})"
+                                                           data-modalsize="modal-lg"
+                                                           data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                                            <i class="fas fa-times"></i>
+                                                        </a>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="StagingMatrix" class="tab-pane" role="tabpanel" aria-labelledby="N-tab">
+                    <partial name="StagingMatrix" model="@Model" />
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,107 @@
+﻿@model TreeBrowserDisplayModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<link href="~/assets/css/JSTree/themes/default/style.css" rel="stylesheet" />
+
+<div class="color-line"></div>
+
+<div class="modal-header text-center">
+    <h3 class="modal-title">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("CancerType")</h3>
+</div>
+
+
+
+
+
+
+<form asp-action="CancertTypeTreeBrowser" data-ajax-method="post" data-ajax="true"
+      data-ajax-success="BindCancertypeList">
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-body">
+
+        @Html.Hidden("selectedItems")
+        <div class="form-horizontal">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="color-line"></div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div style="max-height:200px !important; overflow: auto">
+                                <!--
+                                <div id="jstree">
+                                    (Html.TreeView(Model.CancerTypeModel).Children(f => f.CTHCancerTypeCollection)
+                                        .HtmlAttributes(new { id = "tree" })
+                                        .ChildrenHtmlAttributes(new { class = "subItem" })
+                                        .ItemText(m => m.TypeName)
+                                        .ItemTemplate(<text>
+                                                    <a href="#" desc="item.TypeName">item.TypeName</a>
+                                        </text> ))
+                                </div>
+                                    -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="pull-left">
+                <input type="button" class="btn fa fa-plus" value="CollapseAll" onclick="$('#jstree').jstree('close_all');">
+                <input type="button" class="btn fa fa-minus" value="ExpandAll" onclick="$('#jstree').jstree('open_all');">
+            </div>
+            <div class="pull-right">
+                <button type="button" class="btn btn-default fa fa-close" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="~/assets/js/JSTree/jstree.min.js"></script>
+
+<script>
+
+    $('#jstree').on('changed.jstree', function (e, data) {
+        var i, j;
+        var selectedItems = 0;
+        for (i = 0, j = data.selected.length; i < j; i++) {
+            var selectedItems = data.selected[i];
+        }
+        $('#selectedItems').val(JSON.stringify(selectedItems));
+        $("#FolderID").val(selectedItems);
+
+        $("#FolderID").selectpicker('refresh');
+        $("#FolderID").trigger("change");
+
+    }).jstree({
+        "core": {
+            "multiple": true,
+            "check_callback": false,
+            'themes': {
+                "responsive": true,
+                'variant': 'larg',
+                'stripes': true,
+                'dots': true
+            }
+        },
+        "types": {
+            "default": {
+                "icon": "fa fa-folder icon-state-warning icon-lg"
+            },
+            "file": {
+                "icon": "fa fa-file icon-state-warning icon-lg"
+            }
+        },
+        "plugins": ["dnd"/*, "state"*/, "types", "sort", "radio", "search", "sort"],
+        "selected": [],
+        "radio": {
+            "keep_selected_style": false
+        },
+        "search": { "show_only_matches": true }
+
+    }).on('ready.jstree', function () {
+
+        $(this).jstree('open_all')
+    });
+</script>

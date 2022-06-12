@@ -1,0 +1,138 @@
+﻿@model SStorm.CTH.Web.Models.KimoSurveyModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString("DrugsList");
+    Layout = null;
+}
+
+<div class="form-group row">
+    <div class="col-md-12">
+        <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>@SharedLocalizer.GetLocalizedHtmlString("Drug")</th>
+                    <th>Dose/Unit/Per</th>
+                    <th>Dose Modification</th>
+                    <th>Route</th>
+                    <th>Date</th>
+                    <th>@SharedLocalizer.GetLocalizedHtmlString("Files")</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.ChemoDrugs.Count == 0)
+                {
+                    <tr><th colspan="3">@SharedLocalizer.GetLocalizedHtmlString("NoData")</th></tr>
+                }
+                @{ var i = 0;}
+                @foreach (var item in Model.ChemoDrugs)
+                {
+                    <tr>
+                        <td>
+                            @item.DrugName
+                        </td>
+                        <td>
+                            <div class="form-group row">
+                                <div class="col-md-4">
+                                    <input asp-for="ChemoDrugs[i].DrugDose" id="drugDose_@i" onkeyup="ChangeDoseModification('@i');" type="number" value="@item.DrugDose" class="form-control" />
+                                </div>
+                                <div class="col-md-4">
+                                    <select asp-for="ChemoDrugs[i].DrugDoseUnit" class="form-control selectpicker"
+                                            data-live-search="true" required>
+                                        @foreach (var unit in item.DrugDoseUnitList)
+                                        {
+                                            if (unit.Value == item.DrugDoseUnit.ToString())
+                                            {
+                                                <option value="@unit.Value" selected>@unit.Text</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@unit.Value">@unit.Text</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <select asp-for="ChemoDrugs[i].DrugDosePer" class="form-control selectpicker"
+                                            data-live-search="true" required id="dosePer_@i" onchange="ChangeDoseModification('@i');">
+                                        @foreach (var per in item.DrugDosePerList)
+                                        {
+                                            if (per.Value == item.DrugDosePer.ToString())
+                                            {
+                                                <option value="@per.Value" selected>@per.Text</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@per.Value">@per.Text</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+
+                            </div>
+                        </td>
+                        <td>
+                            <input asp-for="ChemoDrugs[i].DoseModification" id="doseModification_@i" type="number" class="form-control" placeholder="Dose Percentage" value="@item.DoseModification" required />
+                            <input asp-for="ChemoDrugs[i].ID" type="hidden" value="@item.ID" />
+                        </td>
+                        <td>
+                            <select asp-for="ChemoDrugs[i].RouteID" class="form-control selectpicker"
+                                    data-live-search="true" required>
+                                @foreach (var route in item.RouteList)
+                                {
+                                    if (route.Value == item.RouteID.ToString())
+                                    {
+                                        <option value="@route.Value" selected>@route.Text</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@route.Value">@route.Text</option>
+                                    }
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <input asp-for="ChemoDrugs[i].Date"  type="date" class="form-control datepicker" placeholder="yyyy-mm-dd" asp-format="{0:yyyy-MM-dd}"
+                                       data-provide="datepicker" data-date-autoclose="true" data-date-todayHighlight="true" data-date-format="yyyy-mm-dd" required/>
+                        </td>
+                        <td>
+                            <a href="#modal-add-entity" data-toggle="modal"
+                               data-url="@Url.Action("AttachmentCollection", "PatientClinicalData", new { DrugID = item.ID })"
+                               data-modalsize="modal-lg"
+                               data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                <i class="fas fa-file"></i>
+                                @SharedLocalizer.GetLocalizedHtmlString("Files")
+                            </a>
+
+                        </td>
+                    </tr>
+                    i++;
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function ChangeDoseModification(i) {
+        var drugDose = $("#drugDose_" + i).val();
+        var dosePer = $("#dosePer_" + i).val();
+        //Number(drugDose) * Number(dosePer)
+        var doseModification = 0;
+        if (dosePer == 1) {
+            doseModification = Number(drugDose) * @Model.KimoSurveyEntity.BodySurfaceArea;
+        }
+        else if (dosePer == 2) {
+            doseModification = Number(drugDose) * @Model.KimoSurveyEntity.AdjustBodyWeight;
+        }
+        else if (dosePer == 3) {
+            doseModification = Number(drugDose) * @Model.KimoSurveyEntity.LeanBodyWeight;
+        }
+        else {
+            doseModification = Number(drugDose) * @Model.KimoSurveyEntity.CRCL;
+        }
+        $("#doseModification_" + i).val(doseModification);
+    }
+</script>

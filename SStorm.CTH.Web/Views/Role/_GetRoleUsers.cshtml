@@ -1,0 +1,89 @@
+﻿@model SStorm.CTH.DAL.EntityClasses.CTHRoleEntity
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+@Html.SmartModal("modal-add-entity", ModalSize.Large, ModalType.Default, "static")
+
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <h4 class="page-title">@SharedLocalizer.GetLocalizedHtmlString("ListUserRole")</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    @if (Authorize(UserPermission.Role_AssignUserToRole))
+                    {
+                    <a href="#modal-add-entity" data-toggle="modal"
+                       data-url="@Url.Action("AssignUser", "Role", new {ID=0 , RoleID = Model.ID })"
+                       data-modalsize="modal-lg"
+                       data-modalcolor="hmodal-danger" class="btn btn-info my-2 btn-sm header-button-top">
+                        <i class="fa fa-plus"></i> &nbsp;  @SharedLocalizer.GetLocalizedHtmlString("NewUser")
+                    </a>
+                    }
+
+                    <br />
+                    <div class="table-responsive">
+                        <table id="UserRoleTable" class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("username")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("FullName")</th>
+                                    <th data-breakpoints="xs">@SharedLocalizer.GetLocalizedHtmlString("Email")</th>
+                                    <th data-breakpoints="xs">@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.CTHUserRoleCollection.Count() == 0)
+                                {
+                                    <tr>
+                                        <th colspan="4">@SharedLocalizer.GetLocalizedHtmlString("NoData")</th>
+                                    </tr>
+                                }
+                                @for (int i = 0; i < Model.CTHUserRoleCollection.Count(); i++)
+                                {
+                                    <tr>
+                                        <td>@Model.CTHUserRoleCollection[i].CTHUserItem.UserName</td>
+                                        <td>@Model.CTHUserRoleCollection[i].CTHUserItem.UserName</td>
+                                        <td>@Model.CTHUserRoleCollection[i].CTHUserItem.Email</td>
+                                        <td>
+                                            @if (Authorize(UserPermission.Role_AssignUserToRole))
+                                            {
+                                            <a href="#modal-add-entity" data-toggle="modal"
+                                               data-url="@Url.Action("AssignUser", "Role", new {ID = @Model.CTHUserRoleCollection[i].ID , RoleID =@Model.CTHUserRoleCollection[i].RoleID})"
+                                               data-modalsize="modal-lg"
+                                               data-modalcolor="hmodal-danger" class="btn btn-info">
+                                                <i class="fa fa-edit"></i>@SharedLocalizer.GetLocalizedHtmlString("Edit")
+                                            </a>
+                                            }
+                                            @if (Authorize(UserPermission.Role_DeleteUserFromRole))
+                                            {
+                                        <a href="#modal-delete-entity" data-toggle="modal"
+                                           data-url="@Url.Action("DeleteUserRole", "Role", new { ID = @Model.CTHUserRoleCollection[i].ID })"
+                                           data-modalsize="modal-lg"
+                                           data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                            <i class="fa fa-brush"></i> @SharedLocalizer.GetLocalizedHtmlString("Delete")
+                                        </a>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

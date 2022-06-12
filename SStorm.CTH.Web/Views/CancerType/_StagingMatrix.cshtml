@@ -1,0 +1,95 @@
+﻿@model SStorm.CTH.Web.Models.TreeViewNode
+@using SStorm.CTH.Web.Resources
+
+@inject LocService SharedLocalizer
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+<div class="card">
+    <div class="card-body">
+        <div class="modal-body">
+            @if (Authorize(UserPermission.CancerType_AssignStageToTNM))
+            {
+                <a href="#modal-add-entity" data-toggle="modal"
+                   data-url="@Url.Action("AssignTNMToStage", "CancerType", new { CancerTypeID = Model.CancerType.ID})"
+                   data-modalsize="modal-lg"
+                   data-modalcolor="hmodal-danger" class="btn btn-info">
+                    <i class="fas fa-plus"></i>@SharedLocalizer.GetLocalizedHtmlString("NewTNMStaging")
+                </a>
+            }
+            <div class="table-responsive">
+                <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Stage")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("TumorSize")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("LymphNode")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("DistantMetastasis")</th>
+                            <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+                        </tr>
+                    </thead>
+                    @if (Model.CancerType.CTHTNMStagingMatrixCollection.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="5"><span>@SharedLocalizer.GetLocalizedHtmlString("NoData")</span></td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model.CancerType.CTHTNMStagingMatrixCollection)
+                        {
+                            <tr>
+                                <td>@item.CTHStagingItem.Name</td>
+                                <td title="@item.CTHTNMStagingItem2.Description" style="cursor:pointer;">@item.CTHTNMStagingItem2.Name</td>
+                                <td title="@item.CTHTNMStagingItem1.Description" style="cursor:pointer;">@item.CTHTNMStagingItem1.Name</td>
+                                <td title="@item.CTHTNMStagingItem.Description" style="cursor:pointer;">@item.CTHTNMStagingItem.Name</td>
+                                <td>
+                                    @if (Authorize(UserPermission.CancerType_AssignStageToTNM))
+                                    {
+                                        <a href="#modal-add-entity" data-toggle="modal"
+                                           data-url="@Url.Action("AssignTNMToStage", "CancerType", new { CancerTypeID = Model.CancerType.ID, ID = item.ID})"
+                                           data-modalsize="modal-lg"
+                                           data-modalcolor="hmodal-danger" class="btn btn-info">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    }
+                                    @if (Authorize(UserPermission.CancerType_DeleteTNMStaging))
+                                    {
+                                        <a href="#modal-delete-entity" data-toggle="modal"
+                                           data-url="@Url.Action("DeleteStagingMatrix", "CancerType", new {ID = item.ID})"
+                                           data-modalsize="modal-lg"
+                                           data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                            <i class="fas fa-times"></i>
+                                        </a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function RefreshStagingMatrix(response) {
+        if (response[0] == 3) {
+            $.ajax({
+                url: '@Url.Action("GetStagingMatrix", "CancerType")',
+                type: 'GET',
+                cache: false,
+                data: { CancerTypeID: @Model.CancerType.ID}
+            }).done(function (result) {
+                $('#dvStagingMatrix').html(result);
+                swal("Done", "Data Deleted successfully", "success");
+            });
+        }
+        else {
+             swal("Error", "Data Not Deleted successfully", "error");
+        }
+
+    }
+</script>
+
+<script src="~/assets/ajax/jquery.unobtrusive-ajax.js"></script>

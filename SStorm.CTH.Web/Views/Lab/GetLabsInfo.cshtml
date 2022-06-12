@@ -1,0 +1,84 @@
+﻿@model SStorm.CTH.DAL.HelperClasses.EntityCollection<SStorm.CTH.DAL.EntityClasses.CTHLabEntity>
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("GetLabsInfo");
+}
+
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("LabsInfo")</a></li>
+                        <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("LabsInfo")</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">@SharedLocalizer.GetLocalizedHtmlString("Index")</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="card">
+                <div class="card-body">
+                    @if (Authorize(UserPermission.CancerType_ViewProtocolLabs))
+                    {
+                    <a asp-controller="Lab" asp-action="Index" class="btn btn-primary">@SharedLocalizer.GetLocalizedHtmlString("GotoLabs")</a>
+                    }
+                    <div class="table-responsive">
+                        <table class="table m-0 table-hover">
+                            <thead class="btn-primary text-white">
+                                <tr>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("LabCategory")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("LabItems")</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Count != 0)
+                                {
+                                    @foreach (var lab in Model)
+                                    {
+                                        var x = @lab.CTHLabDetailCollection.Count + 1;
+                                        <tr>
+                                            <th rowspan="@x">@lab.LabName</th>
+                                        </tr>
+                                        @if (lab.CTHLabDetailCollection.Count != 0)
+                                        {
+                                            @foreach (var labDetail in lab.CTHLabDetailCollection)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <span class="btn btn-outline-dark text-primary">@labDetail.LabDetailsName</span>
+                                                        <span>
+                                                            @if (labDetail.CTHLabDetailConditionCollection.Count != 0)
+                                                            {
+                                                                @foreach (var condition in labDetail.CTHLabDetailConditionCollection)
+                                                                {
+                                                                    if (!condition.Condition.Equals(""))
+                                                                    {
+                                                                        <span title="@condition.Message" class="btn btn-outline-secondary">@condition.Condition</span>
+                                                                    }
+                                                                }
+                                                            }
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

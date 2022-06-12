@@ -1,0 +1,70 @@
+﻿@*@model SStorm.CTH.Web.Models.UserPermissionModel
+ start page title 
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">User Permission</a></li>
+                    <li class="breadcrumb-item active">Edit / Create User Permission</li>
+                </ol>
+            </div>
+            <h4 class="page-title">Edit / Create User Permission</h4>
+        </div>
+    </div>
+</div>
+ end page title 
+<div class="card">
+    <div class="card-body">
+        <form asp-action="UserPermission">
+            <div class="modal-body">
+                <div class="col-md-12"><h3>Permission List</h3></div>
+                <input type="hidden" value="@Model.User.ID" name="User_ID" id="User_ID" asp-for="User.ID" />
+
+                @foreach (var item in Model.PermissionGroupList)
+                {
+                    <table class="table m-0" border="1">
+                        <thead class="btn-primary text-white">
+                            <tr>
+                                <th>@item.GroupName</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item1 in item.CTHPermissionCollection)
+                            {
+                                var check = false;
+                                foreach (var i in Model.User.CTHUserPermissionCollection)
+                                {
+                                    if (i.PermissionID == item1.ID)
+                                    {
+                                        check = true;
+                                    }
+                                }
+                                <tr>
+                                    <td>
+                                        @if (check == true)
+                                        {
+                                            <input type="checkbox" checked class="btn btn-info" name="PermissionIDsToDelete" value="@item1.ID" />
+                                            <label class="control-label">@item1.PermissionName</label>
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" value="@item1.ID" name="PermissionIDsToCreate" class="btn btn-info" />
+                                            <label class="control-label">@item1.PermissionName</label>
+                                        }
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                }
+                <div class="modal-footer">
+                    <a class="btn btn-secondary text-white" asp-controller="User" asp-action="Index">Back To User List</a>
+
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>*@

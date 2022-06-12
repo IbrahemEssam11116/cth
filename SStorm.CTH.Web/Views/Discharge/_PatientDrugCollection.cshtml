@@ -1,0 +1,90 @@
+﻿@model KimoSurveyModel
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    Layout = null;
+}
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover" id="tabDrugid">
+    <thead>
+        <tr>
+            <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+            <th>@SharedLocalizer.GetLocalizedHtmlString("Name")</th>
+            <th>@SharedLocalizer.GetLocalizedHtmlString("Dose")</th>
+            <th>@SharedLocalizer.GetLocalizedHtmlString("Every")</th>
+            <th>@SharedLocalizer.GetLocalizedHtmlString("Duration")</th>
+            <th>@SharedLocalizer.GetLocalizedHtmlString("Route")</th>
+            <th>@SharedLocalizer.GetLocalizedHtmlString("Days")</th>
+            <th>@SharedLocalizer.GetLocalizedHtmlString("Date")</th>
+        </tr>
+    </thead>
+    <tbody id="bodytabDrugid">
+            @for (int x = 0; x < Model.KimoSurveyEntity.CTHPatientDrugCollection.Count; x++)
+            {
+                var y = "Drug" + x;
+                <tr id='@y'>
+                    <td hidden>
+                        <input type="hidden" asp-for="KimoSurveyEntity.CTHPatientDrugCollection[x].ID" name="KimoSurveyEntity.CTHPatientDrugCollection[@x].ID" value="@Model.KimoSurveyEntity.CTHPatientDrugCollection[x].ID" />
+                        <input type="hidden" asp-for="KimoSurveyEntity.CTHPatientDrugCollection[x].Date" name="KimoSurveyEntity.CTHPatientDrugCollection[@x].Date" value="@Model.KimoSurveyEntity.CTHPatientDrugCollection[x].Date" />
+                        <input type="hidden" asp-for="KimoSurveyEntity.CTHPatientDrugCollection[x].IsNew" name="KimoSurveyEntity.CTHPatientDrugCollection[@x].IsNew" value="@Model.KimoSurveyEntity.CTHPatientDrugCollection[x].IsNew" />
+                        <input type="hidden" asp-for="KimoSurveyEntity.CTHPatientDrugCollection[x].DrugID" name="KimoSurveyEntity.CTHPatientDrugCollection[@x].DrugID" value="@Model.KimoSurveyEntity.CTHPatientDrugCollection[x].CTHDrugItem.ID" />
+                        <input type="hidden" asp-for="KimoSurveyEntity.CTHPatientDrugCollection[x].KimoID" name="KimoSurveyEntity.CTHPatientDrugCollection[@x].KimoID" value="@Model.KimoSurveyEntity.CTHPatientDrugCollection[x].KimoID" />
+                    </td>
+                    <td class="text-center border-right-0 border-bottom-0">
+                        <button type="button" data-toggle="tooltip" class="btn btn-icon btn-outline-danger btn-lg" onclick="DeleteRowDrug2('@Model.KimoSurveyEntity.CTHPatientDrugCollection[x].ID')">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                    <td>
+                        <input type="hidden" value="@Model.KimoSurveyEntity.CTHPatientDrugCollection[x].CTHDrugItem.ID" class="IDDru" />
+                        @Model.KimoSurveyEntity.CTHPatientDrugCollection[x].CTHDrugItem.Name
+                    </td>
+                    <td>
+                        @Model.KimoSurveyEntity.CTHPatientDrugCollection[x].CTHDrugItem.Every  @Enum.GetName(typeof(EveryUnit), @Model.KimoSurveyEntity.CTHPatientDrugCollection[x].CTHDrugItem.EveryUnitID)
+                    </td>
+                    <td>
+                        @Model.KimoSurveyEntity.CTHPatientDrugCollection[x].CTHDrugItem.Duration  @Enum.GetName(typeof(DurationUnit), @Model.KimoSurveyEntity.CTHPatientDrugCollection[x].CTHDrugItem.DurationUnitID)
+                    </td>
+                    <td>
+                        @Model.KimoSurveyEntity.CTHPatientDrugCollection[x].CTHDrugItem.Dose  @Model.KimoSurveyEntity.CTHPatientDrugCollection[x].CTHDrugItem.CTHDoseUnitItem.Name
+                    </td>
+                    <td>
+                        @Enum.GetName(typeof(Route), @Model.KimoSurveyEntity.CTHPatientDrugCollection[x].CTHDrugItem.RouteID)
+                    </td>
+                    <td>
+                        @foreach (var item2 in Model.KimoSurveyEntity.CTHPatientDrugCollection[x].CTHDrugItem.CTHDrugDayCollection)
+                        {
+                            <span>@item2.Day , </span>
+                        }
+                    </td>
+                    <td>
+                        @Model.KimoSurveyEntity.CTHPatientDrugCollection[x].Date
+                    </td>
+                    @*<td>
+                        <a href="#modal-delete-entity" data-toggle="modal"
+                           data-url="@Url.Action("DeletePatientDrug", "Discharge", new {ID = @Model.KimoSurveyEntity.CTHPatientDrugCollection[x].ID})"
+                           data-modalsize="modal-lg"
+                           data-modalcolor="hmodal-danger" class="btn btn-danger">
+                            Delete
+                        </a>
+                    </td>*@
+                </tr>
+            }
+    </tbody>
+</table>
+
+<script>
+    function DeleteRowDrug2(id) {
+        $.ajax({
+            url: '@Url.Action("ConfirmDeletePatientDrug", "Discharge")',
+            type: 'GET',
+            cache: false,
+            data: { ID:id}
+            }).done(function (result) {
+            $('#PatientDrugCollection').empty();
+            $('#PatientDrugCollection').html(result);
+        });
+      }
+</script>

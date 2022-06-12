@@ -1,0 +1,81 @@
+﻿@model SStorm.CTH.DAL.EntityClasses.CTHTNMStagingEntity
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    Layout = null;
+}
+<form asp-action="EditCreateTumerSize" data-ajax-method="post" data-ajax="true"
+      data-ajax-success="LoadTumerSizeList">
+    <div class="color-line"></div>
+
+    <div class="modal-header">
+        <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreateTumerSize")</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" name="ID" asp-for="ID" />
+        <input type="hidden" asp-for="@Model.IsNew" />
+        <input type="hidden" asp-for="CancerTypeID" />
+        <input type="hidden" asp-for="@Model.TNMTypeID" />
+
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="Name" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Name")</label>
+                <input asp-for="Name" class="form-control" required />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="Number" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Number")</label>
+                <input asp-for="Number" class="form-control" required />
+                <span asp-validation-for="Number" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label asp-for="TNMFrom" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("From")</label>
+                <input asp-for="TNMFrom" class="form-control" required />
+
+                <span asp-validation-for="TNMFrom" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="TNMTo" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("To")</label>
+                <input asp-for="TNMTo" class="form-control" required />
+
+                <span asp-validation-for="TNMTo" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="Remarks" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Remarks")</label>
+                <textarea class="form-control" asp-for="Remarks"></textarea>
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+        </div>
+        @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="ArName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("MolecularName") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input asp-for="ArName" class="form-control" />
+                <span asp-validation-for="ArName" class="text-danger"></span>
+            </div>
+        </div>
+        *@
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</button>
+
+        <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+    </div>
+</form>
+
+<script>
+
+
+</script>

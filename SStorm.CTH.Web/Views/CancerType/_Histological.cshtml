@@ -1,0 +1,49 @@
+﻿@model SStorm.CTH.Web.Models.TreeViewNode
+@using SStorm.CTH.Web.Resources
+
+@inject LocService SharedLocalizer
+<div>
+    @if (Authorize(UserPermission.CancerType_EditCreateHistologicalSubtype))
+    {
+        <a href="#modal-add-entity" data-toggle="modal"
+           data-url="@Url.Action("EditCreateHistological", "CancerType", new { ID = 0 ,CancerID = Model.CancerType.ID})"
+           data-modalsize="modal-lg"
+           data-modalcolor="hmodal-danger" class="btn btn-info">
+            <i class="fas fa-plus"></i>@SharedLocalizer.GetLocalizedHtmlString("NewCancerHistological")
+        </a>
+    }
+    <br /><br />
+    <partial name="HistologicalList" model="@Model">
+
+
+</div>
+
+<script>
+    var toggler1 = document.getElementsByClassName("caret1");
+    var i;
+    for (i = 0; i < toggler1.length; i++) {
+      toggler1[i].addEventListener("click", function() {
+        this.parentElement.querySelector(".nested1").classList.toggle("active");
+        this.classList.toggle("caret-down1");
+      });
+    }
+
+    function RefreshHistological(response) {
+        if (response[0] == 3) {
+            $.ajax({
+
+                url: '@Url.Action("GetCancerHistological", "CancerType")',
+                type: 'GET',
+                cache: false,
+                data: { CancerTypeID: @Model.CancerType.ID}
+            }).done(function (result) {
+                $('#dvHistological').html(result);
+                swal("Done", "Data Deleted successfully", "success");
+            });
+        }
+        else {
+             swal("Error", "Data Not Deleted successfully", "error");
+        }
+
+    }
+</script>

@@ -1,0 +1,58 @@
+﻿@model SStorm.CTH.Web.Models.MainCancerModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<link href="~/assets/libs/dropify/dropify.min.css" rel="stylesheet" />
+
+
+<form asp-action="ChangeMainCancerImage" enctype="multipart/form-data">
+    <div class="modal-header">
+        <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("ChangeImage")</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" asp-for="mainCancerImageEntity.ID" value="@Model.mainCancerImageEntity.ID" />
+        <input type="hidden" asp-for="Type" value="@Model.Type" />
+        <input type="hidden" asp-for="mainCancerImageEntity.ImageNum" value="@Model.mainCancerImageEntity.ImageNum"/>
+        <div class="form-group row">
+            <div class="col-md-12">
+                @if (Model.Type == "Solid")
+                {
+                    <input type="file" asp-for="Image" id="ProductPhoto" class="dropify" data-default-file="@Model.mainCancerImageEntity.SolidTumorImage" />
+                }
+                else
+                {
+                    <input type="file" asp-for="Image" id="ProductPhoto" class="dropify" data-default-file="@Model.mainCancerImageEntity.HematologicTumorImage" />
+                }
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="btn btn-secondary text-white" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</a>
+
+            <button id="btnSubmit" type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+        </div>
+    </div>
+</form>
+
+<script src="~/assets/libs/dropify/dropify.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.dropify').dropify({
+            messages: {
+                'default': 'Drag a file or click here to upload a file',
+                'replace': 'Drag another file or click here to change the file',
+                'remove': 'Delete',
+                'error': 'Ooops, something wrong happended.'
+            }
+        });
+    });
+</script>
+
+
+
+
+
+

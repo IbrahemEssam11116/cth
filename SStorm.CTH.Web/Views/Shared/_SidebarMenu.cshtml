@@ -1,0 +1,259 @@
+﻿@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<div id="sidebar-menu">
+
+    <ul class="metismenu" id="side-menu">
+
+        <li class="menu-title">@SharedLocalizer.GetLocalizedHtmlString("Navigation")</li>
+
+        <li>
+            <a asp-controller="Home" asp-action="Index">
+                <i class="fas fa-hospital"></i>
+                <span class="badge badge-success badge-pill float-right">1</span>
+                <span> @SharedLocalizer.GetLocalizedHtmlString("Dashboard") </span>
+            </a>
+        </li>
+        @if (Authorize(UserPermission.Patient_View))
+        {
+            <li>
+
+                <a href="javascript: void(0);">
+                    <i class=" fas fa-user"></i>
+                    <span> @SharedLocalizer.GetLocalizedHtmlString("Patients") </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <ul class="nav-second-level" aria-expanded="false">
+                    <li><a asp-controller="Patient" asp-action="Index"><i class="fa fa-users"></i> @SharedLocalizer.GetLocalizedHtmlString("PatientList")</a></li>
+                </ul>
+            </li>
+        }
+
+        <li>
+            <a href="javascript: void(0);">
+                <i class="fe-plus-square"></i>
+                <span>@SharedLocalizer.GetLocalizedHtmlString("ClinicalData")  </span>
+                <span class="menu-arrow"></span>
+            </a>
+            <ul class="nav-second-level nav mm-collapse" aria-expanded="false">
+                <li class="">
+                    <a href="javascript: void(0);" aria-expanded="false">
+                        @SharedLocalizer.GetLocalizedHtmlString("Diagnosis")
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="nav-third-level nav mm-collapse" aria-expanded="false">
+                        @if (Authorize(UserPermission.CancerType_View))
+                        {
+                            <li><a asp-controller="CancerType" asp-action="Index"><i class="fas fa-bong"></i> @SharedLocalizer.GetLocalizedHtmlString("CancerTypes")</a></li>
+                        }
+                        @if (Authorize(UserPermission.TNMStaging_ViewStaging))
+                        {
+                            <li><a asp-controller="TNMStaging" asp-action="Index"><i class="fas fa-star"></i> @SharedLocalizer.GetLocalizedHtmlString("TNMStaging")</a></li>
+                        }
+                        @if (Authorize(UserPermission.TumorGrade_View))
+                        {
+                            <li><a asp-controller="TumorGrade" asp-action="Index"><i class="fas fa-bong"></i> @SharedLocalizer.GetLocalizedHtmlString("TumorGrade")</a></li>
+
+                        }
+
+                    </ul>
+                </li>
+                <li class="">
+                    <a href="javascript: void(0);" aria-expanded="true">
+                        @SharedLocalizer.GetLocalizedHtmlString("Investigation")
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="nav-third-level nav mm-collapse" aria-expanded="false">
+                        @if (Authorize(UserPermission.PathologyReport_View))
+                        {
+                            <li><a asp-controller="PathologyReportType" asp-action="Index"><i class="fas fa-reply"></i> @SharedLocalizer.GetLocalizedHtmlString("PathologyReport")</a></li>
+                        }
+                        @if (Authorize(UserPermission.Imaging_View))
+                        {
+                            <li><a asp-controller="Imaging" asp-action="Index"><i class="fas fa-image"></i> @SharedLocalizer.GetLocalizedHtmlString("Imaging")</a></li>
+                        }
+                        @if (Authorize(UserPermission.IntialLab_View))
+                        {
+                            <li><a asp-controller="IntialLab" asp-action="Index"><i class="fas fa-clinic-medical"></i> @SharedLocalizer.GetLocalizedHtmlString("IntialLabs")</a></li>
+                        }
+                        @if (Authorize(UserPermission.LabGroup_View))
+                        {
+
+                            <li>
+                                <a asp-controller="LabGroup" asp-action="Index"><i class="fa fa-flask"></i> @SharedLocalizer.GetLocalizedHtmlString("LabGroupList")</a>
+
+                            </li>
+
+                        }
+
+                    </ul>
+                </li>
+            </ul>
+
+        </li>
+
+        <li>
+            <a href="javascript: void(0);" aria-expanded="false">
+                <i class="fe-folder-plus"></i>
+                <span> @SharedLocalizer.GetLocalizedHtmlString("ChemoProtocole")</span>
+                <span class="menu-arrow"></span>
+            </a>
+            <ul class="nav-second-level mm-collapse" aria-expanded="false">
+                @if (Authorize(UserPermission.CancerType_ViewCancerTypeProtocols))
+                {
+                    <li><a asp-controller="Protocol" asp-action="Index"><i class="fas fa-boxes"></i> @SharedLocalizer.GetLocalizedHtmlString("ChemoProtocole")</a></li>
+                }
+                @if (Authorize(UserPermission.SpecialCase_View))
+                {
+                    <li><a asp-controller="SpecialCase" asp-action="Index"><i class="fas fa-boxes"></i> @SharedLocalizer.GetLocalizedHtmlString("SpecialCase")</a></li>
+                }
+                @if (Authorize(UserPermission.Premedication_View))
+                {
+                    <li><a asp-controller="PreMedication" asp-action="Index"><i class="fas fa-syringe"></i> @SharedLocalizer.GetLocalizedHtmlString("Premedication")</a></li>
+                }
+                @if (Authorize(UserPermission.Solution_View))
+                {
+                    <li><a asp-controller="Solution" asp-action="Index"><i class="fas fa-tasks"></i> @SharedLocalizer.GetLocalizedHtmlString("Solution")</a></li>
+                }
+                @if (Authorize(UserPermission.DoseUnit_View))
+                {
+                    <li><a asp-controller="DoseUnit" asp-action="Index"><i class="fas fa-capsules"></i> @SharedLocalizer.GetLocalizedHtmlString("DoseUnits")</a></li>
+                }
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript: void(0);" aria-expanded="false">
+                <i class="fe-folder-plus"></i>
+                <span>@SharedLocalizer.GetLocalizedHtmlString("Treatment")  </span>
+                <span class="menu-arrow"></span>
+            </a>
+            <ul class="nav-second-level mm-collapse" aria-expanded="false">
+                @if (Authorize(UserPermission.TreatmentType_View))
+                {
+                    <li><a asp-controller="Treatement" asp-action="TreatmentType"><i class="fas fa-book-medical"></i> @SharedLocalizer.GetLocalizedHtmlString("TreatmentTypes")</a></li>
+
+                }
+                @if (Authorize(UserPermission.TreatmentType_View))
+                {
+                    <li><a asp-controller="Treatement" asp-action="TreatmentPlan"><i class="fas fa-book-medical"></i> @SharedLocalizer.GetLocalizedHtmlString("TreatmentPlans")</a></li>
+
+                }
+                @if (Authorize(UserPermission.TreatmentType_View))
+                {
+                    <li><a asp-controller="Treatement" asp-action="TreatmentResponse"><i class="fas fa-book-medical"></i> @SharedLocalizer.GetLocalizedHtmlString("TreatmentResponses")</a></li>
+
+                }
+
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript: void(0);" aria-expanded="false">
+                <i class="fe-folder-plus"></i>
+                <span>@SharedLocalizer.GetLocalizedHtmlString("Symptom")  </span>
+                <span class="menu-arrow"></span>
+            </a>
+            <ul class="nav-second-level mm-collapse" aria-expanded="false">
+                @if (Authorize(UserPermission.Symptom_View))
+                {
+                    <li><a asp-controller="SideEffect" asp-action="SideEffect"><i class="fab fa-discourse"></i> @SharedLocalizer.GetLocalizedHtmlString("SideEffect")</a></li>
+
+                }
+                @if (Authorize(UserPermission.Symptom_View))
+                {
+                    <li><a asp-controller="SideEffect" asp-action="Doselimitingtoxicity"><i class="fab fa-discourse"></i> @SharedLocalizer.GetLocalizedHtmlString("Doselimitingtoxicity")</a></li>
+                }
+
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript: void(0);">
+                <i class=" fas fa-user"></i>
+                <span> @SharedLocalizer.GetLocalizedHtmlString("User") </span>
+                <span class="menu-arrow"></span>
+            </a>
+            <ul class="nav-second-level" aria-expanded="false">
+                @if (Authorize(UserPermission.User_View))
+                {
+                    <li><a asp-controller="User" asp-action="Index"><i class="fa fa-users"></i> @SharedLocalizer.GetLocalizedHtmlString("UserList")</a></li>
+                }
+                @if (Authorize(UserPermission.Doctor_View))
+                {
+                    <li><a asp-controller="Doctor" asp-action="Index"><i class="fas fa-user-nurse"></i> @SharedLocalizer.GetLocalizedHtmlString("Doctors")</a></li>
+                }
+                @if (Authorize(UserPermission.Role_View))
+                {
+                    <li><a asp-controller="Role" asp-action="Index"><i class="fab fa-critical-role"></i> @SharedLocalizer.GetLocalizedHtmlString("Roles")</a></li>
+                }
+               
+            </ul>
+        </li>
+
+
+        <!--
+     <li>
+         <a href="javascript: void(0);">
+             <i class=" fas fa-tools"></i>
+             <span> @SharedLocalizer.GetLocalizedHtmlString("Maintenance") </span>
+             <span class="menu-arrow"></span>
+         </a>
+         <ul class="nav-second-level" aria-expanded="false">
+             @if (Authorize(UserPermission.SurgeryType_View))
+             {
+                 <li><a asp-controller="SurgeryType" asp-action="Index"><i class="fas fa-heartbeat"></i> @SharedLocalizer.GetLocalizedHtmlString("SurgeryTypes")</a></li>
+             }
+             @if (Authorize(UserPermission.CancerType_View))
+             {
+                 <li><a asp-controller="CancerType" asp-action="Index"><i class="fas fa-bong"></i> @SharedLocalizer.GetLocalizedHtmlString("CancerTypes")</a></li>
+             }
+             @if (Authorize(UserPermission.TreatmentType_View))
+             {
+                 <li><a asp-controller="Treatement" asp-action="Index"><i class="fas fa-book-medical"></i> @SharedLocalizer.GetLocalizedHtmlString("TreatementTypes")</a></li>
+             }
+             @if (Authorize(UserPermission.TNMStaging_ViewStaging))
+             {
+                 <li><a asp-controller="TNMStaging" asp-action="Index"><i class="fas fa-star"></i> @SharedLocalizer.GetLocalizedHtmlString("TNMStaging")</a></li>
+             }
+             @if (Authorize(UserPermission.Imaging_View))
+             {
+                 <li><a asp-controller="Imaging" asp-action="Index"><i class="fas fa-image"></i> @SharedLocalizer.GetLocalizedHtmlString("Imaging")</a></li>
+             }
+             @if (Authorize(UserPermission.PathologyReport_View))
+             {
+                 <li><a asp-controller="PathologyReportType" asp-action="Index"><i class="fas fa-reply"></i> @SharedLocalizer.GetLocalizedHtmlString("PathologyReport")</a></li>
+             }
+            @if (Authorize(UserPermission.SpecialCase_View))
+             {
+                 <li><a asp-controller="SpecialCase" asp-action="Index"><i class="fas fa-boxes"></i> @SharedLocalizer.GetLocalizedHtmlString("SpecialCase")</a></li>
+             }
+            @if (Authorize(UserPermission.IntialLab_View))
+             {
+                 <li><a asp-controller="IntialLab" asp-action="Index"><i class="fas fa-clinic-medical"></i> @SharedLocalizer.GetLocalizedHtmlString("IntialLabs")</a></li>
+             }
+             @if (Authorize(UserPermission.Premedication_View))
+             {
+                 <li><a asp-controller="PreMedication" asp-action="Index"><i class="fas fa-syringe"></i> @SharedLocalizer.GetLocalizedHtmlString("Premedication")</a></li>
+             }
+            @if (Authorize(UserPermission.Solution_View))
+             {
+                 <li><a asp-controller="Solution" asp-action="Index"><i class="fas fa-tasks"></i> @SharedLocalizer.GetLocalizedHtmlString("Solution")</a></li>
+             }
+             @if (Authorize(UserPermission.DoseUnit_View))
+             {
+                 <li><a asp-controller="DoseUnit" asp-action="Index"><i class="fas fa-capsules"></i> @SharedLocalizer.GetLocalizedHtmlString("DoseUnits")</a></li>
+             }
+             @if (Authorize(UserPermission.Symptom_View))
+             {
+                 <li><a asp-controller="Symptom" asp-action="Index"><i class="fab fa-discourse"></i> @SharedLocalizer.GetLocalizedHtmlString("Symptom")</a></li>
+             }
+         </ul>
+     </li>
+    -->
+      
+
+
+
+
+    </ul>
+</div>

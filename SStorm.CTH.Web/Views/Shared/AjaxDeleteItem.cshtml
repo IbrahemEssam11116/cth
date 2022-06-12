@@ -1,0 +1,76 @@
+﻿@model DeleteItemModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+
+<form asp-action="@Model.ActionName" asp-controller="@Model.ControllerName" id="delete-modal-form">
+
+    <div class="color-line"></div>
+    <div class="modal-header ">
+        <h4 class="modal-title text-danger">
+            <i class="fa fa-fw fa-trash"></i>
+            @SharedLocalizer.GetLocalizedHtmlString("ConfirmDelete")
+        </h4>
+    </div>
+    <div class="modal-body">
+        @Html.HiddenFor(x => x.ItemID)
+
+        @Html.AntiForgeryToken()
+
+        <span>
+            @SharedLocalizer.GetLocalizedHtmlString("sureMessage")
+        </span>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</button>
+
+
+        <button type="submit" class="btn btn-danger waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Delete")</button>
+
+    </div>
+</form>
+<script src="~/assets/ajax/jquery.unobtrusive-ajax.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.js"></script>
+
+
+
+<script type="text/javascript">
+    //function OnInfoSuccess() {
+    //    $('#modal-delete-entity').modal('hide');
+    //    SmartAlert('deleted Successufully', '');
+    //}
+
+
+    $(document).ready(function () {
+        var form = $('#delete-modal-form');
+        //$.validator.unobtrusive.parse("#delete-modal-form");
+
+        form.submit(function () {
+            $(this).ajaxSubmit({
+                target: '#@Model.DataAjaxUpdate',
+                beforeSubmit: function () {
+                    $('#modal-delete-entity').find('.validation-summary-errors').remove();
+                },
+                success: function (data, status, xhr) {
+
+                    $('#modal-delete-entity').modal('hide');
+                    OnInfoSuccess(data, status, xhr);
+                }
+                ,
+                error: function (xhr, status, error) {
+
+                    if (xhr.statusText === "Validation") {
+                        HandleValidationErrors(form, xhr.responseJSON.Errors);
+                        form.find('button[type="submit"]').each(function () {
+                            $(this).button('reset');
+                            $(this).attr("disabled", false);
+                        });
+                    }
+                    else
+                        $('#modal-delete-entity').modal('hide');
+                }
+            });
+            return false;
+        });
+    });
+</script>

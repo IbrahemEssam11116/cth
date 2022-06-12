@@ -1,0 +1,31 @@
+﻿@model SStorm.CTH.Web.Models.TreeViewNode
+@{
+    Layout = null;
+}
+
+<form>
+    <ul id="myUL">
+
+        @foreach (var node in Model.CancerTypeCollection)
+        {
+            if (node.ParentID == Model.Seed)
+            {
+                SStorm.CTH.Web.Models.TreeViewNode inner = new SStorm.CTH.Web.Models.TreeViewNode { Seed = node.ID, CancerTypeCollection = Model.CancerTypeCollection };
+                <li>
+                    <span class="caret"></span><input type="radio" id="@node.ID" name="myCheckboxes" onclick="SelectItem(@node.ID);" /> <i class="fa fa-folder"></i>(@node.ICDCode)@node.TypeName
+                    <ul class="nested">
+                        <partial name="CancerTypeList" model="inner">
+                    </ul>
+                </li>
+            }
+        }
+    </ul>
+</form>
+
+
+<script>
+    function SelectItem(nodeID) {
+        var x = nodeID;
+        //alert(x);
+    }
+</script>

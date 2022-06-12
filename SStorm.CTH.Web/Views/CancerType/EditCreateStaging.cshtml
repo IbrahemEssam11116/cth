@@ -1,0 +1,64 @@
+﻿@model SStorm.CTH.DAL.EntityClasses.CTHStagingEntity
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    Layout = null;
+}
+    <form asp-action="EditCreateStaging" data-ajax-method="post" data-ajax="true"
+          data-ajax-success="LoadStagingList">
+        <div class="color-line"></div>
+
+        <div class="modal-header">
+            <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreateStaging")</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" name="ID" asp-for="ID" />
+            <input type="hidden"  asp-for="@Model.IsNew"  />
+            <input type="hidden"  asp-for="CancerTypeID"  />
+            <div class="form-group row">
+                <div class="col-md-12">
+                    <label asp-for="Name" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("StagingName")</label>
+                    <input asp-for="Name" class="form-control" required />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-12">
+                    <label asp-for="Number" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("StaagingNumber")</label>
+                    <input asp-for="Number" class="form-control" required />
+                    <span asp-validation-for="Number" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-12">
+                    <label asp-for="Remarks" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Remarks")</label>
+                    <textarea class="form-control" asp-for="Remarks"></textarea>
+                    <span asp-validation-for="Remarks" class="text-danger"></span>
+                </div>
+            </div>
+            @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="ArName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("MolecularName") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input asp-for="ArName" class="form-control" />
+                <span asp-validation-for="ArName" class="text-danger"></span>
+            </div>
+        </div>
+            *@
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</button>
+
+            <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+        </div>
+    </form>
+
+<script>
+
+    
+</script>

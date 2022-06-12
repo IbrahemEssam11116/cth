@@ -1,0 +1,177 @@
+﻿@model SStorm.CTH.Web.Models.PatientClinicalDataModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    Layout = null;
+}
+
+<link href="~/assets/libs/dropify/dropify.min.css" rel="stylesheet" />
+
+<form asp-action="EditCreatePatientLab" enctype="multipart/form-data" id="formPatientLab">
+    <div class="modal-header">
+        <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("PatientLab")</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" asp-for="PatientLabEntity.ID" value="@Model.PatientLabEntity.ID" />
+        <input type="hidden" asp-for="PatientLabEntity.PatientClinicalDataID" value="@Model.PatientLabEntity.PatientClinicalDataID" />
+        <input type="hidden" asp-for="PatientClinicalData.PatientID" value="@Model.PatientClinicalData.PatientID" />
+
+        @*<div class="form-group row">
+            <div class="col-md-12">
+                <label class="control-label">Lab  </label>
+                <select id="PatientLabEntityLabID" class="form-control selectpicker"
+                        data-live-search="true" asp-items="@Model.LabList">
+                    <option selected disabled value="">Select Lab  </option>
+                </select>
+            </div>
+        </div>*@
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="PatientLabEntity.LabID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Lab")</label>
+                <select asp-for="PatientLabEntity.LabID" class="form-control selectpicker" id="PatientLabEntity_LabDetailID"
+                        data-live-search="true" asp-items="@Model.LabList" required>
+                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("Lab")</option>
+                </select>
+                <span asp-validation-for="PatientLabEntity.LabID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="PatientLabEntity.TextResult" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("TextResult")</label>
+                <input asp-for="PatientLabEntity.TextResult" class="form-control" />
+                <span asp-validation-for="PatientLabEntity.TextResult" class="text-danger"></span>
+            </div>
+        </div>
+        @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="PatientLabEntity.ArTextResult" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("TextResult") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input asp-for="PatientLabEntity.ArTextResult" class="form-control" />
+                <span asp-validation-for="PatientLabEntity.ArTextResult" class="text-danger"></span>
+            </div>
+        </div>
+        *@
+        @*<div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="PatientLabEntity.PatientLabFile" class="control-label">Lab File </label>
+                @if (Model.PatientLabEntity.ID > 0)
+                {
+                    <input type="file" asp-for="Image" id="ProductPhoto" class="dropify" data-default-file="@Model.PatientLabEntity.PatientLabFile" />
+                }
+                else
+                {
+                    <input type="file" asp-for="Image" id="ProductPhoto" class="dropify" />
+                }
+                <span asp-validation-for="PatientLabEntity.PatientLabFile" class="text-danger"></span>
+            </div>
+        </div>*@
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="LabAttachmentResult" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("AttachmentResult")</label>
+
+                <div class="input-group">
+                    <input asp-for="LabAttachmentResult" class="form-control" type="file" />
+                    <span asp-validation-for="LabAttachmentResult" class="text-danger"></span>
+
+                    @if (Model.PatientLabEntity.AttachmentResult != "")
+                    {
+                        <a class="btn btn-dark" asp-controller="Home" asp-action="DownloadFile" asp-route-path="@Model.PatientLabEntity.AttachmentResult">
+                            <i class="fa fa-download"></i>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal-footer">
+            <a class="btn btn-secondary text-white" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Canceel")</a>
+
+            <button id="formbtn" type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+        </div>
+    </div>
+</form>
+
+<script src="~/assets/ajax/Binding.js"></script>
+<script src="~/assets/libs/dropify/dropify.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $('select').selectpicker({
+            dropupAuto: false
+        });
+          $('.dropify').dropify({
+            messages: {
+                'default': 'Drag a file or click here to upload a file',
+                'replace': 'Drag another file or click here to change the file',
+                'remove': 'Delete',
+                'error': 'Ooops, something wrong happended.'
+            }
+          });
+
+        $("#PatientLabEntityLabID").change(function () {
+            $.ajax({
+                url: '@Url.Action("GetLabDetailList", "PatientClinicalData")',
+                type: 'GET',
+                cache: false,
+                data: { SelectedID: this.value}
+            }).done(function (result) {
+                if (result != null) {
+                    BindCombo('PatientLabEntity_LabDetailID', result, false);
+                    $('#PatientLabEntity_LabDetailID').selectpicker('refresh');
+                } else {
+                    $('#KimoSurveyEntity_SpecialCasePartID').empty();
+                    $("#KimoSurveyEntity_SpecialCasePartID").append('<option selected="true" disabled="true" value="" >Select Lab Detail</option>')
+                    $('#KimoSurveyEntity_SpecialCasePartID').selectpicker('refresh');
+                }
+            });
+        });
+
+
+        $('#formPatientLab').submit(function (e) {
+            e.preventDefault();
+            var form = $('#formPatientLab')[0]; // Get form
+            var data = new FormData(form); // Create an FormData object
+            $.ajax({
+                url: form.action,
+                type: form.method,
+                enctype: form.enctype,
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 600000,
+                success: function (data) {
+                    $('#modal-add-entity').modal('hide');
+                    $('#ShowLab').html(data);
+                    swal("Done", "Data Saved Successfully", "success");
+                },
+            });
+        });
+
+    });
+
+    @*function LoadPatientLab(response) {
+        debugger
+        $('#modal-add-entity').modal('hide');
+        if (response == 2) {
+            swal("Error", "Data not Saved", "error");
+        }
+        else {
+            $.ajax({
+                url: '@Url.Action("GETLabList", "PatientClinicalData")',
+                type: 'GET',
+                cache: false,
+                data: { PatientClinicalDataID: @Model.PatientClinicalData.ID}
+            }).done(function (result) {
+                $('#ShowLab').html(result);
+                swal("Done", "Data Saved Successfully", "success");
+            });
+        }
+    }*@
+</script>
+

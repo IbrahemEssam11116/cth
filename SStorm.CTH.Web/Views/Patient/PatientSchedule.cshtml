@@ -1,0 +1,119 @@
+﻿@model PatientScheduleModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<link href="~/assets/css/PagedList.css" rel="stylesheet" />
+<link href="~/assets/css/footable.bootstrap.css" rel="stylesheet" />
+@{
+    Layout = null;
+}
+
+<link href="~/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
+
+
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-9"></div>
+        <div class="col-md-3">
+            <input asp-for="Date" type="date" class="form-control datepicker" placeholder="yyyy-mm-dd" asp-format="{0:yyyy-MM-dd}"
+                   data-provide="datepicker" data-date-autoclose="true" data-date-todayHighlight="true"
+                   data-date-format="yyyy-mm-dd" name="Date" id="Date" required />
+        </div>
+        <br /><br /><br />
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <label>@SharedLocalizer.GetLocalizedHtmlString("Labs")</label>
+                        <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("LabCategory")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("LabItem")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Remarks")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Date")</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.patientEntity.CTHPatientClinicalDataCollection.Count() > 0)
+                                {
+                                    @foreach (var item in Model.patientEntity.CTHPatientClinicalDataCollection.FirstOrDefault().CTHKimoSurveyCollection)
+                                    {
+                                        foreach (var lab in item.CTHChemoLabCollection.Where(c => ((DateTime)c.Date).Date == Model.Date))
+                                        {
+                                            if (lab.CTHLabDetailItem != null)
+                                            {
+                                                <tr>
+                                                    <td>@lab.CTHLabDetailItem.CTHLabItem.LabName</td>
+                                                    <td>@lab.CTHLabDetailItem.LabDetailsName</td>
+                                                    <td>@lab.CTHLabDetailItem.Remarks</td>
+                                                    <td>@lab.Date</td>
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <label>@SharedLocalizer.GetLocalizedHtmlString("PatientDrugs")</label>
+                        <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("DrugName")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Dose")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Duration")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Every")</th>
+                                    <th>@SharedLocalizer.GetLocalizedHtmlString("Date")</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.patientEntity.CTHPatientClinicalDataCollection.Count() > 0)
+                                {
+                                    @foreach (var item in Model.patientEntity.CTHPatientClinicalDataCollection.FirstOrDefault().CTHKimoSurveyCollection)
+                                    {
+                                        foreach (var drug in item.CTHPatientDrugCollection.Where(c => ((DateTime)c.Date).Date == Model.Date))
+                                        {
+                                            if (drug.CTHDrugDayItem != null)
+                                            {
+                                                if (drug.CTHDrugDayItem.CTHDrugItem != null)
+                                                {
+                                <tr>
+                                    <td>@drug.CTHDrugDayItem.CTHDrugItem.Name</td>
+                                    <td>@drug.DoseModification @drug.CTHDrugDayItem.CTHDrugItem.CTHDoseUnitItem.Name</td>
+                                    <td>@drug.CTHDrugDayItem.CTHDrugItem.Duration @Enum.GetName(typeof(DurationUnit), @drug.CTHDrugDayItem.CTHDrugItem.DurationUnitID)</td>
+                                    <td>@drug.CTHDrugDayItem.CTHDrugItem.Every @Enum.GetName(typeof(DurationUnit), @drug.CTHDrugDayItem.CTHDrugItem.EveryUnitID)</td>
+                                    <td>@drug.Date</td>
+                                </tr>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+
+<script>
+    $("#Date").change(function () {
+        var Date = $(this).val();
+        $("#PateintSchedule").load("/Patient/PatientSchedule?PatientID=@Model.patientEntity.ID&&Date=" + Date);
+    })
+</script>
+

@@ -1,0 +1,1251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="AddNew" xml:space="preserve">
+    <value>Add New</value>
+  </data>
+  <data name="AddNewCancerType" xml:space="preserve">
+    <value>Add New Cancer Type</value>
+  </data>
+  <data name="AddNewImaging" xml:space="preserve">
+    <value>Add New Imaging</value>
+  </data>
+  <data name="AddNewSubType" xml:space="preserve">
+    <value>Add New SubType</value>
+  </data>
+  <data name="AddRow" xml:space="preserve">
+    <value>Add Row</value>
+  </data>
+  <data name="AdjustBodyWeight" xml:space="preserve">
+    <value>Adjust Body Weight</value>
+  </data>
+  <data name="Administrationnotes" xml:space="preserve">
+    <value>Administration notes</value>
+  </data>
+  <data name="Age" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="AlertColor" xml:space="preserve">
+    <value>Alert Color</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="AppendCondition" xml:space="preserve">
+    <value>Append Condition</value>
+  </data>
+  <data name="ArabicDocRecommendation" xml:space="preserve">
+    <value>Arabic Doctor Recommendation</value>
+  </data>
+  <data name="Assessment" xml:space="preserve">
+    <value>Assessment</value>
+  </data>
+  <data name="AttachmentResult" xml:space="preserve">
+    <value>Attachment Result</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="BackToHome" xml:space="preserve">
+    <value>Back To Home</value>
+  </data>
+  <data name="BirthDate" xml:space="preserve">
+    <value>Birth Date</value>
+  </data>
+  <data name="BodyMassIndex" xml:space="preserve">
+    <value>Body Mass Index (BMI)</value>
+  </data>
+  <data name="Bodysurfacearea" xml:space="preserve">
+    <value>Body surface area</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="Calculate" xml:space="preserve">
+    <value>Calculate</value>
+  </data>
+  <data name="Canceel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>No, Cancel</value>
+  </data>
+  <data name="CancerDefinitions" xml:space="preserve">
+    <value>Cancer Definitions</value>
+  </data>
+  <data name="CancerSide" xml:space="preserve">
+    <value>Cancer Side</value>
+  </data>
+  <data name="CancerType" xml:space="preserve">
+    <value>Cancer Type</value>
+  </data>
+  <data name="CancerTypes" xml:space="preserve">
+    <value>Cancer Types</value>
+  </data>
+  <data name="CantDeleteRow" xml:space="preserve">
+    <value>You can't Delete This Row</value>
+  </data>
+  <data name="CaseName" xml:space="preserve">
+    <value>Case Name</value>
+  </data>
+  <data name="ChangeImage" xml:space="preserve">
+    <value>Change The Image</value>
+  </data>
+  <data name="ChemicalSurveySessions" xml:space="preserve">
+    <value>Chemical Survey Sessions</value>
+  </data>
+  <data name="Chemo" xml:space="preserve">
+    <value>Chemo</value>
+  </data>
+  <data name="ChemoProtocole" xml:space="preserve">
+    <value>Chemo Protocole</value>
+  </data>
+  <data name="ChemoSessions" xml:space="preserve">
+    <value>Chemo Sessions</value>
+  </data>
+  <data name="ChemotherapyProtocol" xml:space="preserve">
+    <value>Chemotherapy Protocol</value>
+  </data>
+  <data name="Clickhere" xml:space="preserve">
+    <value>Click Here</value>
+  </data>
+  <data name="ClinicalData" xml:space="preserve">
+    <value>Clinical Data</value>
+  </data>
+  <data name="CollapseAll" xml:space="preserve">
+    <value>Collapse All</value>
+  </data>
+  <data name="Concentration" xml:space="preserve">
+    <value>Concentration</value>
+  </data>
+  <data name="Condition" xml:space="preserve">
+    <value>Condition</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Confirm Delete</value>
+  </data>
+  <data name="Contactnumber" xml:space="preserve">
+    <value>Contact Number</value>
+  </data>
+  <data name="CreatePatientSymptom" xml:space="preserve">
+    <value>Create Patient Symptom</value>
+  </data>
+  <data name="Cycle" xml:space="preserve">
+    <value>Cycle</value>
+  </data>
+  <data name="CycleDrugs" xml:space="preserve">
+    <value>Cycle Drugs</value>
+  </data>
+  <data name="CycleDrugsList" xml:space="preserve">
+    <value>Cycle Drugs List</value>
+  </data>
+  <data name="CycleLabs" xml:space="preserve">
+    <value>Cycle Labs</value>
+  </data>
+  <data name="CycleLabsCategory" xml:space="preserve">
+    <value>Cycle Labs Category</value>
+  </data>
+  <data name="CycleLabsCategoryList" xml:space="preserve">
+    <value>Cycle Labs Category List</value>
+  </data>
+  <data name="CycleLabsList" xml:space="preserve">
+    <value>Cycle Labs List</value>
+  </data>
+  <data name="Cyclenumber" xml:space="preserve">
+    <value>Cycle number</value>
+  </data>
+  <data name="Cycles" xml:space="preserve">
+    <value>Cycles</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Dayno" xml:space="preserve">
+    <value>Day no.</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>Days</value>
+  </data>
+  <data name="Definitions" xml:space="preserve">
+    <value>Definitions</value>
+  </data>
+  <data name="Degree" xml:space="preserve">
+    <value>Degree</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteRow" xml:space="preserve">
+    <value>Delete Row</value>
+  </data>
+  <data name="Dergee" xml:space="preserve">
+    <value>Degree</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details (Conditions)</value>
+  </data>
+  <data name="Diagnosis" xml:space="preserve">
+    <value>Diagnosis</value>
+  </data>
+  <data name="DischargeNote" xml:space="preserve">
+    <value>Discharge Note</value>
+  </data>
+  <data name="DischargeNoteData" xml:space="preserve">
+    <value>Discharge Note Data</value>
+  </data>
+  <data name="DistantMetastasis" xml:space="preserve">
+    <value>M: Distant Metastasis</value>
+  </data>
+  <data name="DocProfile" xml:space="preserve">
+    <value>Doctor Profile</value>
+  </data>
+  <data name="Doctor" xml:space="preserve">
+    <value>Doctor</value>
+  </data>
+  <data name="DoctorRecommendation" xml:space="preserve">
+    <value>Doctor Recommendation</value>
+  </data>
+  <data name="Doctors" xml:space="preserve">
+    <value>Doctors</value>
+  </data>
+  <data name="Dose" xml:space="preserve">
+    <value>Dose</value>
+  </data>
+  <data name="Doselimitingtoxicity" xml:space="preserve">
+    <value>Dose limiting toxicity</value>
+  </data>
+  <data name="DoseLimitingToxicityList" xml:space="preserve">
+    <value>Dose Limiting Toxicity List</value>
+  </data>
+  <data name="DoseLimitingToxicityType" xml:space="preserve">
+    <value>Dose Limiting Toxicity Type</value>
+  </data>
+  <data name="DosePer" xml:space="preserve">
+    <value>Dose Per</value>
+  </data>
+  <data name="DosePercentage" xml:space="preserve">
+    <value>Dose Percentage</value>
+  </data>
+  <data name="DoseUnits" xml:space="preserve">
+    <value>Dose Units</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="DownloadArabicPdf" xml:space="preserve">
+    <value>Download Arabic pdf</value>
+  </data>
+  <data name="DownloadAsPdf" xml:space="preserve">
+    <value>Download As Pdf</value>
+  </data>
+  <data name="DownloadEnglishPdf" xml:space="preserve">
+    <value>Download English pdf</value>
+  </data>
+  <data name="Drug" xml:space="preserve">
+    <value>Drug</value>
+  </data>
+  <data name="DrugDay" xml:space="preserve">
+    <value>Drug Day</value>
+  </data>
+  <data name="DrugDays" xml:space="preserve">
+    <value>Drug Days</value>
+  </data>
+  <data name="DrugDaysList" xml:space="preserve">
+    <value>Drug Days List</value>
+  </data>
+  <data name="DrugDose" xml:space="preserve">
+    <value>Drug Dose</value>
+  </data>
+  <data name="DrugName" xml:space="preserve">
+    <value>Drug Name</value>
+  </data>
+  <data name="Drugs" xml:space="preserve">
+    <value>Drugs</value>
+  </data>
+  <data name="DrugsList" xml:space="preserve">
+    <value>Drugs List</value>
+  </data>
+  <data name="DrugSymptom" xml:space="preserve">
+    <value>Drug Symptom</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="DurationAmount" xml:space="preserve">
+    <value>Duration Amount</value>
+  </data>
+  <data name="DurationUnit" xml:space="preserve">
+    <value>Duration Unit</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EditCreate" xml:space="preserve">
+    <value>Edit / Create</value>
+  </data>
+  <data name="EditCreateAssignTNMToStage" xml:space="preserve">
+    <value>Edit / Create Assign TNM To Stage</value>
+  </data>
+  <data name="EditCreateCancerType" xml:space="preserve">
+    <value>Edit / Create Cancer Type</value>
+  </data>
+  <data name="EditCreateDrug" xml:space="preserve">
+    <value>Edit / Create Drug</value>
+  </data>
+  <data name="EditCreateHistological" xml:space="preserve">
+    <value>Edit / Create Histological</value>
+  </data>
+  <data name="EditCreateKimoSurvey" xml:space="preserve">
+    <value>Edit / Create Kimo Survey</value>
+  </data>
+  <data name="EditCreateMolecular" xml:space="preserve">
+    <value>Edit / Create Molecular</value>
+  </data>
+  <data name="EditCreateProtocolCycle" xml:space="preserve">
+    <value>Edit / CreateProtocol Cycle</value>
+  </data>
+  <data name="Education" xml:space="preserve">
+    <value>Education</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Emetodenicrisk" xml:space="preserve">
+    <value>Emetodenic Risk</value>
+  </data>
+  <data name="Emetogenicrisk" xml:space="preserve">
+    <value>Emetogenic Risk</value>
+  </data>
+  <data name="EnglishDocRecommendation" xml:space="preserve">
+    <value>English Doctor Recommendation</value>
+  </data>
+  <data name="EnterName" xml:space="preserve">
+    <value>Enter Name</value>
+  </data>
+  <data name="Every" xml:space="preserve">
+    <value>Every</value>
+  </data>
+  <data name="EveryUnit" xml:space="preserve">
+    <value>Every Unit</value>
+  </data>
+  <data name="ExpandAll" xml:space="preserve">
+    <value>Expand All</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>File Name</value>
+  </data>
+  <data name="Files" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="FinalConcentration" xml:space="preserve">
+    <value>Final Concentration</value>
+  </data>
+  <data name="FinalConentration" xml:space="preserve">
+    <value>Final Conentration</value>
+  </data>
+  <data name="Finish" xml:space="preserve">
+    <value>Finish</value>
+  </data>
+  <data name="FirstVisitDate" xml:space="preserve">
+    <value>First Visit Date</value>
+  </data>
+  <data name="FollowUp" xml:space="preserve">
+    <value>Follow Up</value>
+  </data>
+  <data name="Form" xml:space="preserve">
+    <value>Form</value>
+  </data>
+  <data name="FormAmount" xml:space="preserve">
+    <value>Form Amount</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>Full Name</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="GetLabDetailCondition" xml:space="preserve">
+    <value>Get Lab Detail Condition</value>
+  </data>
+  <data name="GetLabDetails" xml:space="preserve">
+    <value>Get Lab Details</value>
+  </data>
+  <data name="GetLabsInfo" xml:space="preserve">
+    <value>Get Labs Info</value>
+  </data>
+  <data name="GetPatientSymptoms" xml:space="preserve">
+    <value>Get Patient Symptoms</value>
+  </data>
+  <data name="Gotolabs" xml:space="preserve">
+    <value>Go to labs</value>
+  </data>
+  <data name="Grade" xml:space="preserve">
+    <value>Grade</value>
+  </data>
+  <data name="Has Part" xml:space="preserve">
+    <value>Has Part</value>
+  </data>
+  <data name="HasParts" xml:space="preserve">
+    <value>Has Parts ?</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="HematologicTumorImage" xml:space="preserve">
+    <value>Hematologic Tumors</value>
+  </data>
+  <data name="Histological" xml:space="preserve">
+    <value>Histological</value>
+  </data>
+  <data name="HistologicalName" xml:space="preserve">
+    <value>Histological Name</value>
+  </data>
+  <data name="HistologicalSubTypeCancer" xml:space="preserve">
+    <value>Histological Sub Type Cancer</value>
+  </data>
+  <data name="ICDCode" xml:space="preserve">
+    <value>ICD Code</value>
+  </data>
+  <data name="ImageName" xml:space="preserve">
+    <value>Image Name</value>
+  </data>
+  <data name="Imaging" xml:space="preserve">
+    <value>Imaging</value>
+  </data>
+  <data name="ImagingList" xml:space="preserve">
+    <value>Imaging List</value>
+  </data>
+  <data name="ImagingType" xml:space="preserve">
+    <value>Imaging Type</value>
+  </data>
+  <data name="inArabic" xml:space="preserve">
+    <value> in Arabic</value>
+  </data>
+  <data name="Index" xml:space="preserve">
+    <value>Index</value>
+  </data>
+  <data name="IntialLab" xml:space="preserve">
+    <value>Intial Labs</value>
+  </data>
+  <data name="IntialLabList" xml:space="preserve">
+    <value>Intial Labs List</value>
+  </data>
+  <data name="IntialLabs" xml:space="preserve">
+    <value>Intial Labs</value>
+  </data>
+  <data name="Investigation" xml:space="preserve">
+    <value>Investigation</value>
+  </data>
+  <data name="Isantimicrobial" xml:space="preserve">
+    <value>Is antimicrobial</value>
+  </data>
+  <data name="IsDoseLimitingToxicity" xml:space="preserve">
+    <value>Is Dose Limiting Toxicity</value>
+  </data>
+  <data name="Isgrowthfactor" xml:space="preserve">
+    <value>Is growth factor</value>
+  </data>
+  <data name="IsMandatory" xml:space="preserve">
+    <value>Is Mandatory ?</value>
+  </data>
+  <data name="IsNewSymptom" xml:space="preserve">
+    <value>Is New Symptom?</value>
+  </data>
+  <data name="IsSepecialCase" xml:space="preserve">
+    <value>Is Special Case ?</value>
+  </data>
+  <data name="Kimosurveydata" xml:space="preserve">
+    <value>Kimo survey data</value>
+  </data>
+  <data name="KimoSurveyList" xml:space="preserve">
+    <value>Kimo Survey List</value>
+  </data>
+  <data name="Lab" xml:space="preserve">
+    <value>Lab</value>
+  </data>
+  <data name="LabCategory" xml:space="preserve">
+    <value>Lab Category</value>
+  </data>
+  <data name="LabDetail" xml:space="preserve">
+    <value>Lab Detail</value>
+  </data>
+  <data name="LabDetailCondition" xml:space="preserve">
+    <value>Lab Detail Condition</value>
+  </data>
+  <data name="LabDetailConditionList" xml:space="preserve">
+    <value>Lab Detail Condition List</value>
+  </data>
+  <data name="LabDetailName" xml:space="preserve">
+    <value>Lab Detail Name</value>
+  </data>
+  <data name="LabDetails" xml:space="preserve">
+    <value>Lab Details</value>
+  </data>
+  <data name="LabDetailsList" xml:space="preserve">
+    <value>Lab Details List</value>
+  </data>
+  <data name="LabItem" xml:space="preserve">
+    <value>Lab Item</value>
+  </data>
+  <data name="LabItems(Conditions)" xml:space="preserve">
+    <value>LabItems(Conditions)</value>
+  </data>
+  <data name="LabItemsList" xml:space="preserve">
+    <value>Lab Items List</value>
+  </data>
+  <data name="LabList" xml:space="preserve">
+    <value>Lab List</value>
+  </data>
+  <data name="LabName" xml:space="preserve">
+    <value>Lab Name</value>
+  </data>
+  <data name="Labs" xml:space="preserve">
+    <value>Labs</value>
+  </data>
+  <data name="LabsInfo" xml:space="preserve">
+    <value>Labs Info</value>
+  </data>
+  <data name="LabSubtype" xml:space="preserve">
+    <value>Lab Sub Type</value>
+  </data>
+  <data name="LabType" xml:space="preserve">
+    <value>Lab Type</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LeanBodyWeight" xml:space="preserve">
+    <value>Lean Body Weight (LBW)</value>
+  </data>
+  <data name="List" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="ListUserRole" xml:space="preserve">
+    <value>List User Role</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="LymphNode" xml:space="preserve">
+    <value>N: Lymph Node</value>
+  </data>
+  <data name="MainCancerType" xml:space="preserve">
+    <value>Main Cancer Type</value>
+  </data>
+  <data name="Maintenance" xml:space="preserve">
+    <value>Maintenance</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Molecular" xml:space="preserve">
+    <value>Molecular</value>
+  </data>
+  <data name="MolecularName" xml:space="preserve">
+    <value>Molecular Name</value>
+  </data>
+  <data name="MolecularSubType" xml:space="preserve">
+    <value>Molecular Sub Type</value>
+  </data>
+  <data name="MRN" xml:space="preserve">
+    <value>MRN (Medical Record Number)</value>
+  </data>
+  <data name="Myprofile" xml:space="preserve">
+    <value>My Profile</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NationalID" xml:space="preserve">
+    <value>National ID</value>
+  </data>
+  <data name="NationalIDPhotoCopy" xml:space="preserve">
+    <value>National ID Photo Copy</value>
+  </data>
+  <data name="Navigation" xml:space="preserve">
+    <value>Navigation</value>
+  </data>
+  <data name="New Surgery Type" xml:space="preserve">
+    <value>New Surgery Type</value>
+  </data>
+  <data name="NewAssessment" xml:space="preserve">
+    <value>New Assessment</value>
+  </data>
+  <data name="NewCancerHistological" xml:space="preserve">
+    <value>New Cancer Histological</value>
+  </data>
+  <data name="NewCancerMolecular" xml:space="preserve">
+    <value>New Cancer Molecular</value>
+  </data>
+  <data name="NewChemotherapyProtocol" xml:space="preserve">
+    <value>New Chemotherapy Protocol</value>
+  </data>
+  <data name="NewCycle" xml:space="preserve">
+    <value>New Cycle</value>
+  </data>
+  <data name="NewDistantMetastasis" xml:space="preserve">
+    <value>New Distant Metastasis</value>
+  </data>
+  <data name="NewDoctor" xml:space="preserve">
+    <value>New Doctor</value>
+  </data>
+  <data name="NewDrug" xml:space="preserve">
+    <value>New Drug</value>
+  </data>
+  <data name="NewDrugDay" xml:space="preserve">
+    <value>New Drug Day</value>
+  </data>
+  <data name="NewImage" xml:space="preserve">
+    <value>New Image</value>
+  </data>
+  <data name="NewLab" xml:space="preserve">
+    <value>New Lab</value>
+  </data>
+  <data name="NewLabCategory" xml:space="preserve">
+    <value>New Lab Category</value>
+  </data>
+  <data name="NewLabDetail" xml:space="preserve">
+    <value>New Lab Detail</value>
+  </data>
+  <data name="NewLabDetailCondition" xml:space="preserve">
+    <value>New Lab Detail Condition</value>
+  </data>
+  <data name="NewLymphNode" xml:space="preserve">
+    <value>New Lymph Node</value>
+  </data>
+  <data name="NewPart" xml:space="preserve">
+    <value>New Part</value>
+  </data>
+  <data name="NewPathologyReport" xml:space="preserve">
+    <value>New Pathology Report</value>
+  </data>
+  <data name="NewPatient" xml:space="preserve">
+    <value>New Patient</value>
+  </data>
+  <data name="NewPreMedication" xml:space="preserve">
+    <value>New PreMedication</value>
+  </data>
+  <data name="NewSession" xml:space="preserve">
+    <value>New Session</value>
+  </data>
+  <data name="NewSolution" xml:space="preserve">
+    <value>New Solution</value>
+  </data>
+  <data name="NewSpecialCase" xml:space="preserve">
+    <value>New Special Case</value>
+  </data>
+  <data name="NewSpecialCasePart" xml:space="preserve">
+    <value>New Part</value>
+  </data>
+  <data name="NewStaging" xml:space="preserve">
+    <value>New Staging</value>
+  </data>
+  <data name="NewSurgery" xml:space="preserve">
+    <value>New Surgery</value>
+  </data>
+  <data name="NewSurgeryType" xml:space="preserve">
+    <value>New Surgery Type</value>
+  </data>
+  <data name="NewSymptom" xml:space="preserve">
+    <value>New Symptom</value>
+  </data>
+  <data name="NewTNMStaging" xml:space="preserve">
+    <value>New TNM Staging</value>
+  </data>
+  <data name="NewTreatmentType" xml:space="preserve">
+    <value>New Treatment Type</value>
+  </data>
+  <data name="NewTumorGrade" xml:space="preserve">
+    <value>New Tumor Grade</value>
+  </data>
+  <data name="NewTumorsize" xml:space="preserve">
+    <value>New Tumor size</value>
+  </data>
+  <data name="NewUnit" xml:space="preserve">
+    <value>New Unit</value>
+  </data>
+  <data name="NewUser" xml:space="preserve">
+    <value>New User</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="NoCycle" xml:space="preserve">
+    <value>There Is No Next Cycle</value>
+  </data>
+  <data name="NoData" xml:space="preserve">
+    <value>There is no data to display</value>
+  </data>
+  <data name="NoNotificationFound" xml:space="preserve">
+    <value>No Notification Found</value>
+  </data>
+  <data name="NoRecommendation" xml:space="preserve">
+    <value>No Recommendation</value>
+  </data>
+  <data name="NotASpecialCase" xml:space="preserve">
+    <value>Not A Special Case</value>
+  </data>
+  <data name="Notification" xml:space="preserve">
+    <value>Notification</value>
+  </data>
+  <data name="NotifyAfterCycle" xml:space="preserve">
+    <value>Notify After Cycle ?</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="Occupation" xml:space="preserve">
+    <value>Occupation</value>
+  </data>
+  <data name="Operator" xml:space="preserve">
+    <value>Operator</value>
+  </data>
+  <data name="OpertorType" xml:space="preserve">
+    <value>Opertor Type</value>
+  </data>
+  <data name="Part" xml:space="preserve">
+    <value>Part</value>
+  </data>
+  <data name="PartName" xml:space="preserve">
+    <value>Part Name</value>
+  </data>
+  <data name="Parts" xml:space="preserve">
+    <value>Parts</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PathologyReport" xml:space="preserve">
+    <value>Pathology Report</value>
+  </data>
+  <data name="PathologyReportList" xml:space="preserve">
+    <value>Pathology Report List</value>
+  </data>
+  <data name="PathologyReportName" xml:space="preserve">
+    <value>Pathology Report Name</value>
+  </data>
+  <data name="PathologyReportType" xml:space="preserve">
+    <value>Pathology Report Type</value>
+  </data>
+  <data name="PathologyReportTypeList" xml:space="preserve">
+    <value>Pathology Report Type List</value>
+  </data>
+  <data name="Patient" xml:space="preserve">
+    <value>Patient</value>
+  </data>
+  <data name="PatientAssessment" xml:space="preserve">
+    <value>Patient's Assessment</value>
+  </data>
+  <data name="PatientClinicalData" xml:space="preserve">
+    <value>Patient Clinical Data</value>
+  </data>
+  <data name="PatientData" xml:space="preserve">
+    <value>Patient Data</value>
+  </data>
+  <data name="PatientDataAndClinicalData" xml:space="preserve">
+    <value>Patient data and clinical data</value>
+  </data>
+  <data name="PatientDetails" xml:space="preserve">
+    <value>Patient Details</value>
+  </data>
+  <data name="PatientDrugs" xml:space="preserve">
+    <value>Patient Drugs</value>
+  </data>
+  <data name="PatientEducations" xml:space="preserve">
+    <value>Patient Educations</value>
+  </data>
+  <data name="PatientFollowUp" xml:space="preserve">
+    <value>Patient Follow Up</value>
+  </data>
+  <data name="PatientID" xml:space="preserve">
+    <value>Patient ID</value>
+  </data>
+  <data name="PatientLab" xml:space="preserve">
+    <value>Patient Lab</value>
+  </data>
+  <data name="PatientList" xml:space="preserve">
+    <value>Patients List</value>
+  </data>
+  <data name="PatientName" xml:space="preserve">
+    <value>Patient Name</value>
+  </data>
+  <data name="Patients" xml:space="preserve">
+    <value>Patients</value>
+  </data>
+  <data name="PatientSheet" xml:space="preserve">
+    <value>Patient Sheet</value>
+  </data>
+  <data name="PatientSurgery" xml:space="preserve">
+    <value>Patient Surgery</value>
+  </data>
+  <data name="PatientSymptom" xml:space="preserve">
+    <value>Patient Symptom</value>
+  </data>
+  <data name="PaymentType" xml:space="preserve">
+    <value>Payment Type</value>
+  </data>
+  <data name="Permissions" xml:space="preserve">
+    <value>Permissions</value>
+  </data>
+  <data name="PostChemoFollowUp" xml:space="preserve">
+    <value>Post Chemo Follow Up</value>
+  </data>
+  <data name="Premdication" xml:space="preserve">
+    <value>Premdication</value>
+  </data>
+  <data name="Premedication" xml:space="preserve">
+    <value>Premedication</value>
+  </data>
+  <data name="PrintOutSheet" xml:space="preserve">
+    <value>Print Out Sheet</value>
+  </data>
+  <data name="Privacymessage" xml:space="preserve">
+    <value>Use this page to detail your site's privacy policy.</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Protocol" xml:space="preserve">
+    <value>Protocol</value>
+  </data>
+  <data name="ProtocolCycle" xml:space="preserve">
+    <value>ProtocolCycle</value>
+  </data>
+  <data name="ProtocolCycles" xml:space="preserve">
+    <value>Protocol Cycles</value>
+  </data>
+  <data name="ProtocolCyclesList" xml:space="preserve">
+    <value>Protocol Cycles list</value>
+  </data>
+  <data name="ProtocolDrugs" xml:space="preserve">
+    <value>Protocol Drugs</value>
+  </data>
+  <data name="ProtocolName" xml:space="preserve">
+    <value>Protocol Name</value>
+  </data>
+  <data name="ProtocolofchemosurveyData" xml:space="preserve">
+    <value>Protocol of chemo survey Data</value>
+  </data>
+  <data name="ProtocolsList" xml:space="preserve">
+    <value>Protocols List</value>
+  </data>
+  <data name="Recommendation" xml:space="preserve">
+    <value>Recommendation</value>
+  </data>
+  <data name="recycledays" xml:space="preserve">
+    <value>recycle Days</value>
+  </data>
+  <data name="Remarks" xml:space="preserve">
+    <value>Remarks</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="RepeatRow" xml:space="preserve">
+    <value>You can't Repeat This Row</value>
+  </data>
+  <data name="ReportTypeName" xml:space="preserve">
+    <value>Report Type Name</value>
+  </data>
+  <data name="Residence" xml:space="preserve">
+    <value>Residence</value>
+  </data>
+  <data name="Response" xml:space="preserve">
+    <value>Response</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="RoleName" xml:space="preserve">
+    <value>Role Name</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="RolesList" xml:space="preserve">
+    <value>Roles List</value>
+  </data>
+  <data name="Route" xml:space="preserve">
+    <value>Route</value>
+  </data>
+  <data name="Rowexist" xml:space="preserve">
+    <value>Row already exist!</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Schedule" xml:space="preserve">
+    <value>Schedule</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Select All</value>
+  </data>
+  <data name="SelectDistantMetastasis" xml:space="preserve">
+    <value>Select Distant Metastasis</value>
+  </data>
+  <data name="SelectLymphNode" xml:space="preserve">
+    <value>Select Lymph Node</value>
+  </data>
+  <data name="SelectOpertor" xml:space="preserve">
+    <value>Select Operator</value>
+  </data>
+  <data name="SelectProtocol" xml:space="preserve">
+    <value>Select Protocol</value>
+  </data>
+  <data name="SelectRoute" xml:space="preserve">
+    <value>Select Route</value>
+  </data>
+  <data name="SelectSolution" xml:space="preserve">
+    <value>Select Solution</value>
+  </data>
+  <data name="SelectStage" xml:space="preserve">
+    <value>Select Stage</value>
+  </data>
+  <data name="SelectSymptomType" xml:space="preserve">
+    <value>Select Symptom Type</value>
+  </data>
+  <data name="SelectTumorSize" xml:space="preserve">
+    <value>Select Tumor Size</value>
+  </data>
+  <data name="SelectUnit" xml:space="preserve">
+    <value>Select Unit</value>
+  </data>
+  <data name="SerumCreatinine" xml:space="preserve">
+    <value>Serum Creatinine</value>
+  </data>
+  <data name="SideEffect" xml:space="preserve">
+    <value>Side Effect</value>
+  </data>
+  <data name="SideEffectList" xml:space="preserve">
+    <value>Side Effect List</value>
+  </data>
+  <data name="SolidTumorImage" xml:space="preserve">
+    <value>Solid Tumors</value>
+  </data>
+  <data name="Solution" xml:space="preserve">
+    <value>Solution</value>
+  </data>
+  <data name="SolutionAmount" xml:space="preserve">
+    <value>Solution Amount</value>
+  </data>
+  <data name="SolutionList" xml:space="preserve">
+    <value>Solution List</value>
+  </data>
+  <data name="SolutionName" xml:space="preserve">
+    <value>Solution Name</value>
+  </data>
+  <data name="Solutions" xml:space="preserve">
+    <value>Solutions</value>
+  </data>
+  <data name="SorryMessage" xml:space="preserve">
+    <value>Sorry, but you do not have access to the page you are looking for. Try checking the error address, then click the Update button on your browser,  or click the Back button.</value>
+  </data>
+  <data name="SpecialCase" xml:space="preserve">
+    <value>Special Case</value>
+  </data>
+  <data name="SpecialCaseList" xml:space="preserve">
+    <value>Special Case List</value>
+  </data>
+  <data name="SpecialCaseName" xml:space="preserve">
+    <value>Special Case Name</value>
+  </data>
+  <data name="SpecialCasePart" xml:space="preserve">
+    <value>Special Case Part</value>
+  </data>
+  <data name="SpecialCasePartList" xml:space="preserve">
+    <value>Special Case Part List</value>
+  </data>
+  <data name="SpecialCaseParts" xml:space="preserve">
+    <value>Special Case Parts</value>
+  </data>
+  <data name="SpecialCases" xml:space="preserve">
+    <value>Special Cases</value>
+  </data>
+  <data name="SponserCompanyName" xml:space="preserve">
+    <value>Sponser Company Name</value>
+  </data>
+  <data name="Stage" xml:space="preserve">
+    <value>Stage</value>
+  </data>
+  <data name="Staging" xml:space="preserve">
+    <value>Staging</value>
+  </data>
+  <data name="StagingList" xml:space="preserve">
+    <value>Staging List</value>
+  </data>
+  <data name="StagingMatrix" xml:space="preserve">
+    <value>Staging Matrix</value>
+  </data>
+  <data name="Statement" xml:space="preserve">
+    <value>Statement</value>
+  </data>
+  <data name="sureMessage" xml:space="preserve">
+    <value>Are you sure you want delete this item?</value>
+  </data>
+  <data name="Surgery" xml:space="preserve">
+    <value>Surgery</value>
+  </data>
+  <data name="Surgery Type" xml:space="preserve">
+    <value>Surgery Type</value>
+  </data>
+  <data name="SurgeryName" xml:space="preserve">
+    <value>Surgery Name</value>
+  </data>
+  <data name="SurgeryType" xml:space="preserve">
+    <value>Surgery Type</value>
+  </data>
+  <data name="SurgeryTypelist" xml:space="preserve">
+    <value>Surgery Type List</value>
+  </data>
+  <data name="SurgeryTypes" xml:space="preserve">
+    <value>Surgery Types</value>
+  </data>
+  <data name="Symptom" xml:space="preserve">
+    <value>Symptom</value>
+  </data>
+  <data name="SymptomColor" xml:space="preserve">
+    <value>Symptom Color</value>
+  </data>
+  <data name="SymptomDrug" xml:space="preserve">
+    <value>SymptomDrug</value>
+  </data>
+  <data name="SymptomList" xml:space="preserve">
+    <value>Symptom List</value>
+  </data>
+  <data name="SymptomsDrugs" xml:space="preserve">
+    <value>Symptoms Drugs</value>
+  </data>
+  <data name="SymptomsDrugsList" xml:space="preserve">
+    <value>Symptoms Drugs List</value>
+  </data>
+  <data name="SymptomType" xml:space="preserve">
+    <value>Symptom Type</value>
+  </data>
+  <data name="TextResult" xml:space="preserve">
+    <value>Text Result</value>
+  </data>
+  <data name="TimeofAdministration" xml:space="preserve">
+    <value>Time of Administration</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="TNMStage" xml:space="preserve">
+    <value>TNM Stage</value>
+  </data>
+  <data name="TNMStaging" xml:space="preserve">
+    <value>TNM Staging</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="Treatment" xml:space="preserve">
+    <value>Treatment</value>
+  </data>
+  <data name="TreatmentPlan" xml:space="preserve">
+    <value>Treatment Plan</value>
+  </data>
+  <data name="TreatmentPlans" xml:space="preserve">
+    <value>Treatment Plans</value>
+  </data>
+  <data name="TreatmentResponse" xml:space="preserve">
+    <value>Treatment Response</value>
+  </data>
+  <data name="TreatmentResponses" xml:space="preserve">
+    <value>Treatment Responses</value>
+  </data>
+  <data name="TreatmentType" xml:space="preserve">
+    <value>Treatment Type</value>
+  </data>
+  <data name="TreatmentTypeList" xml:space="preserve">
+    <value>Treatment Type List</value>
+  </data>
+  <data name="TreatmentTypes" xml:space="preserve">
+    <value>Treatment Types</value>
+  </data>
+  <data name="TumorGrade" xml:space="preserve">
+    <value>Tumor Grade</value>
+  </data>
+  <data name="TumorSize" xml:space="preserve">
+    <value>T: Tumor Size</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="TypeName" xml:space="preserve">
+    <value>Type Name</value>
+  </data>
+  <data name="Unauthorized" xml:space="preserve">
+    <value>Unauthorized</value>
+  </data>
+  <data name="unit" xml:space="preserve">
+    <value>unit</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="UserList" xml:space="preserve">
+    <value>Users List</value>
+  </data>
+  <data name="username" xml:space="preserve">
+    <value>User Name</value>
+  </data>
+  <data name="Weight" xml:space="preserve">
+    <value>Weight</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Youdonothaveaccess" xml:space="preserve">
+    <value>You do not have access</value>
+  </data>
+</root>

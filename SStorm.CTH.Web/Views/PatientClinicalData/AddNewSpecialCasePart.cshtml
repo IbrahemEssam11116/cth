@@ -1,0 +1,59 @@
+﻿@model SStorm.CTH.DAL.EntityClasses.CTHSpecialCasePartEntity
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<form asp-action="AddNewSpecialCasePart" data-ajax-method="post" data-ajax="true" data-ajax-success="BindSpecialCasePartList">
+    <div class="color-line"></div>
+    <div class="modal-header">
+        <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("Part")</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" asp-for="ID" value="@Model.ID" />
+        <input type="hidden" asp-for="CaseID" value="@Model.CaseID" />
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="PartName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("PartName")</label>
+                <input asp-for="PartName" class="form-control" required />
+                <span asp-validation-for="PartName" class="text-danger"></span>
+            </div>
+            @*
+            <div class="col-md-6">
+                <label asp-for="ArPartName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("PartName") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input asp-for="ArPartName" class="form-control" />
+                <span asp-validation-for="ArPartName" class="text-danger"></span>
+            </div>
+            *@
+        </div>
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="Remarks" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Remarks")</label>
+                <textarea asp-for="Remarks" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+        </div>
+        @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="ArRemarks" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Remarks") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <textarea asp-for="ArRemarks" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="ArRemarks" class="text-danger"></span>
+            </div>
+        </div>
+        *@
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</button>
+        <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+    </div>
+</form>
+
+<script>
+function BindSpecialCasePartList(response) {
+        $('#modal-add-entity').modal('hide');
+        $('#KimoSurveyEntity_SpecialCasePartID').empty();
+        BindCombo('KimoSurveyEntity_SpecialCasePartID', response, false);
+        $('#KimoSurveyEntity_SpecialCasePartID').selectpicker('refresh');
+}
+</script>

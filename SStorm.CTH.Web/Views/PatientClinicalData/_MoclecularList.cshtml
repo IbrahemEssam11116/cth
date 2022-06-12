@@ -1,0 +1,24 @@
+﻿
+@model SStorm.CTH.Web.Models.TreeViewNode
+@{
+    Layout = null;
+}
+
+
+<ul id="myUL3">
+
+    @foreach (var node in Model.MolecularCollection)
+    {
+        if (node.ParentID == Model.Seed)
+        {
+            SStorm.CTH.Web.Models.TreeViewNode inner = new SStorm.CTH.Web.Models.TreeViewNode { Seed = node.ID, MolecularCollection = Model.MolecularCollection };
+            <li class="Search">
+                <span class="caret3"></span> <a href="#" class="text-black-50 NodeColorMoc" onclick="AppendMoclecular(@node.ID ,this)"><i class=""></i>@node.Name</a>
+                <ul class="nested3">
+                    <partial name="_MoclecularList" model="inner">
+
+                </ul>
+            </li>
+        }
+    }
+</ul>

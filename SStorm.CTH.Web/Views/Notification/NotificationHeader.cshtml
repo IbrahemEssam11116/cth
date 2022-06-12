@@ -1,0 +1,190 @@
+﻿@model SStorm.CTH.DAL.HelperClasses.EntityCollection<SStorm.CTH.DAL.EntityClasses.CTHNotificationEntity>
+@inject SStorm.CTH.Web.Infrastructure.IUserService UserService
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+    <i class="fe-bell noti-icon"></i>
+    <span class="badge badge-danger rounded-circle noti-icon-badge">@Model.Where(c => c.Seen == false).ToList().Count</span>
+</a>
+<div class="dropdown-menu dropdown-menu-right dropdown-lg">
+
+    <!-- item-->
+    <div class="dropdown-item noti-title">
+        <h5 class="m-0">
+            <span class="float-right">
+                <a href="" class="text-dark">
+                </a>
+            </span>@SharedLocalizer.GetLocalizedHtmlString("Notfication")
+        </h5>
+    </div>
+
+    <div class="slimscroll noti-scroll" style="height:300px;overflow-y:auto">
+
+        @if (Model.Count == 0)
+        {
+            <h5 class="dropdown-item">
+                @SharedLocalizer.GetLocalizedHtmlString("NoNotficationFound")
+            </h5>
+        }
+
+        @foreach (var item in Model.Reverse())
+        {
+
+            String[] MessageCount;
+            var Type = "";
+            if (item.DoctorID != null)
+            {
+                MessageCount = item.Message.Split("/");
+                Type = "Patient";
+            }
+            else
+            {
+                MessageCount = item.Message.Split("_");
+                Type = "Doctor";
+            }
+            if (item.TypeID == 4)
+            {
+                MessageCount = item.Message.Split("_");
+                Type = "PatientClinicalData";
+            }
+            if (item.Seen == true)
+            {
+                if (item.DoctorID != null)
+                {
+                    <a asp-controller="@Type" asp-action="GetAllSymptomsForPatient" asp-route-NotifID="@item.ID" asp-route-PatientSymptomID="@item.PatientSymptomID" class="dropdown-item notify-item">
+                        <div class="notify-icon">
+                            <i class="fa fa-envelope-open-text text-black-50"></i>
+                        </div>
+                        <p class="text-muted mb-0 user-msg">
+                            <small>
+                                @foreach (var item2 in MessageCount)
+                                {
+                                    <span>@item2</span><br />
+                                }
+                            </small>
+                        </p>
+                    </a>
+                }
+                if (item.KimoID != null)
+                {
+                    <a asp-controller="@Type" asp-action="GetKimoSurvey" asp-route-ID="@item.KimoID" class="dropdown-item notify-item">
+                        <div class="notify-icon">
+                            <i class="fa fa-envelope-open-text text-black-50"></i>
+                        </div>
+                        <p class="text-muted mb-0 user-msg">
+                            <small>
+                                @foreach (var item2 in MessageCount)
+                                {
+                                    <span>@item2</span><br />
+                                }
+                            </small>
+                        </p>
+                    </a>
+                }
+                else
+                {
+                    <a asp-controller="@Type" asp-action="" class="dropdown-item notify-item">
+                        <div class="notify-icon">
+                            <i class="fa fa-envelope-open-text text-black-50"></i>
+                        </div>
+                        <p class="text-muted mb-0 user-msg">
+                            <small>
+                                @foreach (var item2 in MessageCount)
+                                {
+                                    <span>@item2</span><br />
+                                }
+                            </small>
+                        </p>
+                    </a>
+                }
+            }
+            else
+            {
+                if (item.DoctorID != null)
+                {
+                    <a asp-controller="@Type" asp-action="GetAllSymptomsForPatient" asp-route-NotifID="@item.ID" asp-route-PatientSymptomID="@item.PatientSymptomID" class="dropdown-item notify-item active">
+                        <div class="notify-icon">
+                            <i class="fa fa-envelope-open-text text-black-50"></i>
+                        </div>
+                        <p class="text-muted mb-0 user-msg">
+                            <small>
+                                @foreach (var item2 in MessageCount)
+                                {
+                                    <span>@item2</span><br />
+                                }
+                            </small>
+                        </p>
+                    </a>
+                }
+                else
+                {
+                    if (item.DoctorID != null)
+                    {
+                        <a asp-controller="@Type" asp-action="GetAllSymptomsForPatient" asp-route-NotifID="@item.ID" asp-route-PatientSymptomID="@item.PatientSymptomID" class="dropdown-item notify-item active" onclick="SeeNotify(@item.ID);">
+                            <div class="notify-icon">
+                                <i class="fa fa-envelope-open-text text-black-50"></i>
+                            </div>
+                            <p class="text-muted mb-0 user-msg">
+                                <small>
+                                    @foreach (var item2 in MessageCount)
+                                    {
+                                        <span>@item2</span><br />
+                                    }
+                                </small>
+                            </p>
+                        </a>
+                    }
+                    if (item.KimoID != null)
+                    {
+                        <a asp-controller="@Type" asp-action="GetKimoSurvey" asp-route-ID="@item.KimoID" class="dropdown-item notify-item active" onclick="SeeNotify(@item.ID);">
+                            <div class="notify-icon">
+                                <i class="fa fa-envelope-open-text text-black-50"></i>
+                            </div>
+                            <p class="text-muted mb-0 user-msg">
+                                <small>
+                                    @foreach (var item2 in MessageCount)
+                                    {
+                                        <span>@item2</span><br />
+                                    }
+                                </small>
+                            </p>
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-controller="@Type" asp-action="" class="dropdown-item notify-item active" onclick="SeeNotify(@item.ID);">
+                            <div class="notify-icon">
+                                <i class="fa fa-envelope-open-text text-black-50"></i>
+                            </div>
+                            <p class="text-muted mb-0 user-msg">
+                                <small>
+                                    @foreach (var item2 in MessageCount)
+                                    {
+                                        <span>@item2</span><br />
+                                    }
+                                </small>
+                            </p>
+                        </a>
+                    }
+
+                }
+            }
+
+        }
+
+    </div>
+
+</div>
+
+<script>
+      function SeeNotify(id) {
+        $.ajax({
+            url: '@Url.Action("SeeNotify", "Home")',
+            type: 'GET',
+            cache: false,
+            dataType: "json",
+            data: { ID: id }
+        }).done(function (result) {
+        });
+    }
+</script>

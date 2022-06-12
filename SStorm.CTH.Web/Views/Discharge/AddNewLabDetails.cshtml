@@ -1,0 +1,89 @@
+﻿@model LabDetailsModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<form asp-action="AddNewLabDetails" data-ajax-method="post" data-ajax="true"
+      data-ajax-success="BindListLabDet">
+    <div class="color-line"></div>
+    <div class="modal-header">
+        <h4 class="modal-title mt-0" id="custom-width-modalLabel">@SharedLocalizer.GetLocalizedHtmlString("EditCreate") @SharedLocalizer.GetLocalizedHtmlString("LabItem")</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" asp-for="LabDetailEntity.ID" value="@Model.LabDetailEntity.ID" />
+        <input type="hidden" value="@Model.CycleID" name="CycleID" />
+        <input type="hidden" value="@Model.KimoID" name="KimoID" />
+
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label asp-for="LabDetailEntity.LabDetailsName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("LabItem") @SharedLocalizer.GetLocalizedHtmlString("Name")</label>
+                <input asp-for="LabDetailEntity.LabDetailsName" class="form-control" required />
+                <span asp-validation-for="LabDetailEntity.LabDetailsName" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="LabDetailEntity.LabID" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Lab") @SharedLocalizer.GetLocalizedHtmlString("Name")</label>
+                <select asp-for="LabDetailEntity.LabID" class="form-control selectpicker"
+                        data-live-search="true" asp-items="@Model.LablList">
+                    <option selected disabled value="">@SharedLocalizer.GetLocalizedHtmlString("Select") @SharedLocalizer.GetLocalizedHtmlString("Lab")</option>
+                </select>
+                <span asp-validation-for="LabDetailEntity.LabID" class="text-danger"></span>
+            </div>
+        </div>
+        @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="LabDetailEntity.ArLabDetailsName" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("LabDetail") @SharedLocalizer.GetLocalizedHtmlString("Name") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <input asp-for="LabDetailEntity.ArLabDetailsName" class="form-control" />
+                <span asp-validation-for="LabDetailEntity.ArLabDetailsName" class="text-danger"></span>
+            </div>
+        </div>
+        *@
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="LabDetailEntity.Remarks" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Remarks")</label>
+                <textarea asp-for="LabDetailEntity.Remarks" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="LabDetailEntity.Remarks" class="text-danger"></span>
+            </div>
+        </div>
+        @*
+        <div class="form-group row">
+            <div class="col-md-12">
+                <label asp-for="LabDetailEntity.ArRemarks" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("Remarks") @SharedLocalizer.GetLocalizedHtmlString("inArabic")</label>
+                <textarea asp-for="LabDetailEntity.ArRemarks" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="LabDetailEntity.ArRemarks" class="text-danger"></span>
+            </div>
+        </div>
+        *@
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</button>
+
+        <button type="submit" class="btn btn-info waves-effect waves-light">@SharedLocalizer.GetLocalizedHtmlString("Save")</button>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $('select').selectpicker({
+            dropupAuto: false
+        });
+    });
+
+    function BindListLabDet(res) {
+        $('#modal-add-entity').modal('hide');
+        $('#FinalLabDetList').empty();
+        BindCombo('FinalLabDetList', res, false);
+        $('#FinalLabDetList').selectpicker('refresh');
+         $.ajax({
+                url: '@Url.Action("RefreshLab", "Discharge")',
+                type: 'GET',
+                cache: false,
+                data: { KimoID: @Model.KimoID }
+         }).done(function (response) {
+                $('#FinalLabList').empty();
+                 BindCombo('FinalLabList', response, false);
+                 $('#FinalLabList').selectpicker('refresh');
+             });
+    }
+</script>

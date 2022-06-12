@@ -1,0 +1,71 @@
+﻿@model KimoSurveyModel
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    Layout = null;
+}
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+<table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover" id="tablabid">
+    <thead>
+        <tr>
+            <th class="text-center border-right-0 border-bottom-0"> @SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+            <th class="text-center border-right-0 border-bottom-0"> @SharedLocalizer.GetLocalizedHtmlString("LabCategory")</th>
+            <th class="text-center border-right-0 border-bottom-0"> @SharedLocalizer.GetLocalizedHtmlString("LabItem")</th>
+            <th class="text-center border-right-0 border-bottom-0"> @SharedLocalizer.GetLocalizedHtmlString("Date")</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.KimoSurveyEntity.CTHChemoLabCollection.Count; i++)
+        {
+            var x = "Lab" + i;
+            <tr id="@x">
+                <td hidden>
+                    <input type="hidden" asp-for="KimoSurveyEntity.CTHChemoLabCollection[i].ID" value="@Model.KimoSurveyEntity.CTHChemoLabCollection[i].ID" />
+                    <input type="hidden" asp-for="KimoSurveyEntity.CTHChemoLabCollection[i].ChemoID" value="@Model.KimoSurveyEntity.CTHChemoLabCollection[i].ChemoID" name="KimoSurveyEntity.CTHChemoLabCollection[@i].ChemoID" />
+                    <input asp-for="KimoSurveyEntity.CTHChemoLabCollection[i].Date" class="form-control" value="@Model.KimoSurveyEntity.CTHChemoLabCollection[i].Date" name="KimoSurveyEntity.CTHChemoLabCollection[@i].Date">
+                    <input asp-for="KimoSurveyEntity.CTHChemoLabCollection[i].LabDetailsID" class="form-control" value="@Model.KimoSurveyEntity.CTHChemoLabCollection[i].LabDetailsID" name="KimoSurveyEntity.CTHChemoLabCollection[@i].LabDetailsID">
+
+                </td>
+                <td class="text-center border-right-0 border-bottom-0">
+                    <button type="button" data-toggle="tooltip" class="btn btn-icon btn-outline-danger btn-lg" onclick="DeleteRowlab2('@Model.KimoSurveyEntity.CTHChemoLabCollection[i].ID')">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </td>
+                <td class="width-xl">
+                    @Model.KimoSurveyEntity.CTHChemoLabCollection[i].CTHLabDetailItem.CTHLabItem.LabName
+
+                </td>
+                <td class="width-xl">
+                    @Model.KimoSurveyEntity.CTHChemoLabCollection[i].CTHLabDetailItem.LabDetailsName
+                </td>
+                <td class="width-xl">
+                    @Model.KimoSurveyEntity.CTHChemoLabCollection[i].Date
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script>
+    function DeleteRowlab2(id) {
+        $.ajax({
+            url: '@Url.Action("ConfirmDeleteChemoLab", "Discharge")',
+            type: 'GET',
+            cache: false,
+            data: { ID:id}
+        }).done(function (result) {
+            $.ajax({
+            url: '@Url.Action("ChemoLabList", "Discharge")',
+            type: 'GET',
+            cache: false,
+            data: { kimoid: result}
+             }).done(function (result) {
+               $('#ChemoLabCollection').empty();
+               $('#ChemoLabCollection').html(result);
+           });
+         });
+      }
+</script>

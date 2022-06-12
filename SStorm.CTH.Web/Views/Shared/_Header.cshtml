@@ -1,0 +1,286 @@
+﻿@using SStorm.CTH.Web
+@inject SStorm.CTH.Web.Infrastructure.IUserService UserService
+@Html.SmartModal("modal-add-entity", ModalSize.Large, ModalType.Default, "static")
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+
+@inject IViewLocalizer Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var cultureItems = LocOptions.Value.SupportedUICultures
+        .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName })
+        .ToList();
+}
+
+
+    <div class="navbar-custom">
+        <ul class="list-unstyled topnav-menu float-right mb-0">
+
+            @*<li class="d-none d-sm-block">
+            <form class="app-search">
+                <div class="app-search-box">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <div class="input-group-append">
+                            <button class="btn" type="submit">
+                                <i class="fe-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </li>*@
+
+            <li class="dropdown notification-list" id="dvNotification">
+
+                @*<a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                <i class="fe-bell noti-icon"></i>
+                <span class="badge badge-danger rounded-circle noti-icon-badge">@UserService.GetNotification().Where(c => c.Seen == false).ToList().Count</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-lg">
+
+                 item
+                <div class="dropdown-item noti-title">
+                    <h5 class="m-0">
+                        <span class="float-right">
+                            <a href="" class="text-dark">
+                            </a>
+                        </span>@SharedLocalizer.GetLocalizedHtmlString("Notfication")
+                    </h5>
+                </div>
+
+                <div class="slimscroll noti-scroll">
+
+                    @if (UserService.GetNotification().Count == 0)
+                    {
+                        <h5 class="dropdown-item">
+                            @SharedLocalizer.GetLocalizedHtmlString("NoNotficationFound")
+                        </h5>
+                    }
+
+                    @foreach (var item in UserService.GetNotification().Reverse())
+                    {
+
+                        String[] MessageCount;
+                        var Type = "";
+                        if (item.DoctorID != null)
+                        {
+                            MessageCount = item.Message.Split("/");
+                            Type = "Patient";
+                        }
+                        else
+                        {
+                            MessageCount = item.Message.Split("_");
+                            Type = "Doctor";
+                        }
+                        if (item.TypeID == 4)
+                        {
+                            MessageCount = item.Message.Split("_");
+                            Type = "PatientClinicalData";
+                        }
+                        if (item.Seen == true)
+                        {
+                            if (item.DoctorID != null)
+                            {
+                                <a asp-controller="@Type" asp-action="GetAllSymptomsForPatient" asp-route-NotifID="@item.ID" asp-route-PatientSymptomID="@item.PatientSymptomID" class="dropdown-item notify-item">
+                                    <div class="notify-icon">
+                                        <i class="fa fa-envelope-open-text text-black-50"></i>
+                                    </div>
+                                    <p class="text-muted mb-0 user-msg">
+                                        <small>
+                                            @foreach (var item2 in MessageCount)
+                                            {
+                                                <span>@item2</span><br />
+                                            }
+                                        </small>
+                                    </p>
+                                </a>
+                            }
+                            if (item.KimoID != null)
+                            {
+                                <a asp-controller="@Type" asp-action="GetKimoSurvey" asp-route-ID="@item.KimoID" class="dropdown-item notify-item">
+                                    <div class="notify-icon">
+                                        <i class="fa fa-envelope-open-text text-black-50"></i>
+                                    </div>
+                                    <p class="text-muted mb-0 user-msg">
+                                        <small>
+                                            @foreach (var item2 in MessageCount)
+                                            {
+                                                <span>@item2</span><br />
+                                            }
+                                        </small>
+                                    </p>
+                                </a>
+                            }
+                            else
+                            {
+                                <a asp-controller="@Type" asp-action="" class="dropdown-item notify-item">
+                                    <div class="notify-icon">
+                                        <i class="fa fa-envelope-open-text text-black-50"></i>
+                                    </div>
+                                    <p class="text-muted mb-0 user-msg">
+                                        <small>
+                                            @foreach (var item2 in MessageCount)
+                                            {
+                                                <span>@item2</span><br />
+                                            }
+                                        </small>
+                                    </p>
+                                </a>
+                            }
+                        }
+                        else
+                        {
+                            if (item.DoctorID != null)
+                            {
+                                <a asp-controller="@Type" asp-action="GetAllSymptomsForPatient" asp-route-NotifID="@item.ID" asp-route-PatientSymptomID="@item.PatientSymptomID" class="dropdown-item notify-item active">
+                                    <div class="notify-icon">
+                                        <i class="fa fa-envelope-open-text text-black-50"></i>
+                                    </div>
+                                    <p class="text-muted mb-0 user-msg">
+                                        <small>
+                                            @foreach (var item2 in MessageCount)
+                                            {
+                                                <span>@item2</span><br />
+                                            }
+                                        </small>
+                                    </p>
+                                </a>
+                            }
+                            else
+                            {
+                                if (item.DoctorID != null)
+                                {
+                                    <a asp-controller="@Type" asp-action="GetAllSymptomsForPatient" asp-route-NotifID="@item.ID" asp-route-PatientSymptomID="@item.PatientSymptomID" class="dropdown-item notify-item active" onclick="SeeNotify(@item.ID);">
+                                        <div class="notify-icon">
+                                            <i class="fa fa-envelope-open-text text-black-50"></i>
+                                        </div>
+                                        <p class="text-muted mb-0 user-msg">
+                                            <small>
+                                                @foreach (var item2 in MessageCount)
+                                                {
+                                                    <span>@item2</span><br />
+                                                }
+                                            </small>
+                                        </p>
+                                    </a>
+                                }
+                                if (item.KimoID != null)
+                                {
+                                    <a asp-controller="@Type" asp-action="GetKimoSurvey" asp-route-ID="@item.KimoID" class="dropdown-item notify-item active" onclick="SeeNotify(@item.ID);">
+                                        <div class="notify-icon">
+                                            <i class="fa fa-envelope-open-text text-black-50"></i>
+                                        </div>
+                                        <p class="text-muted mb-0 user-msg">
+                                            <small>
+                                                @foreach (var item2 in MessageCount)
+                                                {
+                                                    <span>@item2</span><br />
+                                                }
+                                            </small>
+                                        </p>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a asp-controller="@Type" asp-action="" class="dropdown-item notify-item active" onclick="SeeNotify(@item.ID);">
+                                        <div class="notify-icon">
+                                            <i class="fa fa-envelope-open-text text-black-50"></i>
+                                        </div>
+                                        <p class="text-muted mb-0 user-msg">
+                                            <small>
+                                                @foreach (var item2 in MessageCount)
+                                                {
+                                                    <span>@item2</span><br />
+                                                }
+                                            </small>
+                                        </p>
+                                    </a>
+                                }
+
+                            }
+                        }
+
+                    }
+                     item
+
+                </div>
+
+            </div>*@
+            </li>
+            <li class="dropdown notification-list">
+                <form id="selectLanguage" asp-controller="SetLanguage" asp-action="SetLanguage" asp-route-returnUrl="@Context.Request.Path" method="post" role="form">
+                    <span class="nav-link dropdown-toggle  waves-effect waves-light pull-right" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                        <select class="btn btn-primary" name="culture" onchange="this.form.submit();" asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems">
+                        </select>
+                    </span>
+                </form>
+            </li>
+           
+            
+            <partial name="_LoginPartial" />
+        </ul>
+
+
+        <!-- LOGO -->
+        <div class="logo-box">
+            <a asp-controller="Home" asp-action="Index" class="logo text-center">
+                <span class="logo-lg">
+                    <img src="~/assets/images/CAP2.jpeg" alt="" width="240" height="70">
+                    <!-- <span class="logo-lg-text-light">UBold</span> -->
+                </span>
+                <span class="logo-sm">
+                    <!-- <span class="logo-sm-text-dark">U</span> -->
+                    <img src="~/assets/images/CAP2.jpeg" alt="" width="70" height="70">
+                </span>
+            </a>
+        </div>
+
+        <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
+            <li>
+                <button class="button-menu-mobile waves-effect waves-light">
+                    <i class="fe-menu"></i>
+                </button>
+            </li>
+
+            @*<li class="dropdown d-none d-lg-block ">
+                <div class="lang-option">
+                    <select class="selectpicker form-control" title="" data-width="110px">
+                        <option> English </option>
+
+                    </select>
+                </div>
+
+            </li>*@
+
+        </ul>
+
+        @*<div title="@Localizer["Request culture provider:"] @requestCulture?.Provider?.GetType().Name">
+            <form class="form-inline" id="selectLanguage" asp-controller="SetLanguage" asp-action="SetLanguage" asp-route-returnUrl="@Context.Request.Path" method="post" class="form-horizontal" role="form">
+                <label class="form-label" style="padding-right:5px">@SharedLocalizer.GetLocalizedHtmlString("LANGUAGE"): </label>
+                <div class="input-group">
+                    <select class="custom-select" name="culture" onchange="this.form.submit();" asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems"></select>                
+                </div>
+            </form>
+        </div>*@
+
+      
+    </div>
+
+<script>
+     $(function () {
+        $("#dvNotification").load("/Notification/NotificationHeader");
+    });
+    $(document).ready(function () {
+        $("#selectLanguage select").change(function () {
+           $(this).parent().submit();
+        }); 
+    });
+ 
+  
+</script>

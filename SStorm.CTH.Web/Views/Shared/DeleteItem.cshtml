@@ -1,0 +1,50 @@
+﻿@model DeleteItemModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+
+    var routeValues = this.ViewContext.RouteData.Values;
+    var controller = string.IsNullOrWhiteSpace(Model.ControllerName) ? routeValues["controller"].ToString() : Model.ControllerName;
+
+    var action = string.IsNullOrWhiteSpace(Model.ActionName) ? routeValues["action"].ToString() : Model.ActionName;
+}
+
+<form asp-action="@action" asp-controller="@controller"
+      data-ajax-method="@Model.DataAjaxMethod" data-ajax="@Model.DataAjax.ToString().ToLower()"
+      data-ajax-success="dataAjaxSuccess">
+
+    <div class="color-line"></div>
+    <div class="modal-header ">
+        <h4 class="modal-title text-danger">
+            <i class="fa fa-fw fa-trash"></i>
+            @SharedLocalizer.GetLocalizedHtmlString("ConfirmDelete")
+        </h4>
+    </div>
+    <div class="modal-body">
+        @Html.HiddenFor(x => x.ItemID)
+
+        @Html.AntiForgeryToken()
+
+        <span>
+            @SharedLocalizer.GetLocalizedHtmlString("sureMessage")
+        </span>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary waves-effect btn-rounded" data-dismiss="modal">@SharedLocalizer.GetLocalizedHtmlString("Cancel")</button>
+
+        <button type="submit" class="btn btn-danger waves-effect btn-rounded">@SharedLocalizer.GetLocalizedHtmlString("Delete")</button>
+
+    </div>
+</form>
+
+<script>
+    function dataAjaxSuccess() {
+
+        //$(this).parent().find(".modal").modal("hide");
+        $('#modal-delete-entity').modal('toggle');
+
+        window["@Model.DataAjaxSuccess"](arguments);
+
+    }
+</script>

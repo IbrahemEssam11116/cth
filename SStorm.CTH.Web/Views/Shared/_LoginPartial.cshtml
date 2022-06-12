@@ -1,0 +1,83 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SStorm.CTH.Web.Infrastructure.IUserService UserService
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@*@model SStorm.CTH.Web.Models.UserModel*@
+@*<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
+        </li>
+        <li class="nav-item">
+            <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
+    </ul>*@
+
+<li class="dropdown notification-list">
+    <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+        <img src="~/assets/images/users/avatar-m.png" alt="user-image" class="rounded-circle">
+    </a>
+    <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+        <!-- item-->
+        <div class="dropdown-header noti-title">
+            <h6 class="text-overflow m-0">@SharedLocalizer.GetLocalizedHtmlString("Welcome") @User.Identity.Name!</h6>
+        </div>
+
+        <!-- item-->
+        @if (UserService.profile().Type == 1)
+        {
+            @if (Authorize(UserPermission.Doctor_EditCreate))
+            {
+                <a asp-controller="Doctor" asp-action="Profile" asp-route-ID="@UserService.profile().doctorEntity.ID" class="dropdown-item notify-item">
+
+                    <i class="fe-user"></i>
+                    <span>@SharedLocalizer.GetLocalizedHtmlString("Profile")</span>
+                </a>
+            }
+
+        }
+        else if (UserService.profile().Type == 2)
+        {
+            @if (Authorize(UserPermission.Patient_EditCreate))
+            {
+                <a asp-controller="Patient" asp-action="EditCreate" asp-route-ID="@UserService.profile().PatientEntity.ID" class="dropdown-item notify-item">
+
+                    <i class="fe-user"></i>
+                    <span>@SharedLocalizer.GetLocalizedHtmlString("Profile")</span>
+                </a>
+            }
+        }
+        else
+        {
+            <a class="dropdown-item notify-item">
+
+                <i class="fe-user"></i>
+                <span>@SharedLocalizer.GetLocalizedHtmlString("Profile")</span>
+            </a>
+        }
+        <div class="dropdown-divider"></div>
+
+        <!-- item-->
+        <a class="dropdown-item notify-item" asp-controller="Account" asp-action="Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <i class="fe-log-out"></i>
+            <span>@SharedLocalizer.GetLocalizedHtmlString("logout")</span>
+
+
+
+        </a>
+
+    </div>
+</li>

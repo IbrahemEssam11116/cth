@@ -1,0 +1,28 @@
+﻿@using SStorm.CTH.Web.Resources
+
+@inject LocService SharedLocalizer
+@{
+    ViewBag.Title = "Unauthorized";
+
+    Layout = "~/Views/Shared/_Layout_Blank.cshtml";
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <i class="fa fa-exclamation-triangle text-success big-icon"></i>
+            <h1>@SharedLocalizer.GetLocalizedHtmlString("Unauthorized")</h1>
+            <strong>
+                @SharedLocalizer.GetLocalizedHtmlString("Youdonothaveaccess")
+            </strong>
+            <p>
+                @SharedLocalizer.GetLocalizedHtmlString("SorryMessage")
+            </p>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-success waves-effect waves-light" style="float:right;">@SharedLocalizer.GetLocalizedHtmlString("BackToHome")</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+﻿@model SStorm.CTH.Web.Models.PatientClinicalDataModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@Html.SmartModal("modal-delete-entity", modalType: ModalType.Danger, backdrop: "true")
+@Html.SmartModal("modal-add-entity", modalType: ModalType.Danger, backdrop: "true")
+<div class="card">
+    <div class="card-body">
+
+        <div class="modal-body">
+            <ul class="nav nav-tabs" role="tablist">
+                @if (Authorize(UserPermission.Patient_Diagnosis))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link active" id="Diagnosis-tab" data-toggle="tab" href="#Diagnosis" role="tab" aria-controls="Diagnosis" aria-selected="false">
+                            <span class="d-block d-sm-none"><i class="fa fa-home"></i></span>
+                            <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("Diagnosis")</span>
+                        </a>
+                    </li>
+                }
+                @if (Authorize(UserPermission.Patient_ViewPatientInvestigations))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" id="Investigation-tab" data-toggle="tab" href="#Investigation" role="tab" aria-controls="Investigation" aria-selected="true">
+                            <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
+                            <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("Investigation")</span>
+                        </a>
+                    </li>
+                }
+                @if (Authorize(UserPermission.Patient_ViewPatientSurgeries))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" id="Surgery-tab" data-toggle="tab" href="#Surgery" role="tab" aria-controls="Surgery" aria-selected="true">
+                            <span class="d-block d-sm-none"><i class="fa fa-user"></i></span>
+                            <span class="d-none d-sm-block">@SharedLocalizer.GetLocalizedHtmlString("Surgery")</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+
+
+            <div class="tab-content">
+                @if (Authorize(UserPermission.Patient_Diagnosis))
+                {
+                    <div id="Diagnosis" class="tab-pane show active" role="tabpanel" aria-labelledby="Diagnosis-tab">
+                        <partial name="_PatientDiagnosis" model="@Model" />
+                    </div>
+                }
+                <div id="Investigation" class="tab-pane" role="tabpanel" aria-labelledby="Investigation-tab">
+                    <partial name="_Investigationlist" model="@Model" />
+                </div>
+
+                <div id="Surgery" class="tab-pane" role="tabpanel" aria-labelledby="Surgery-tab">
+                    <partial name="_PatientSurgeryList" model="@Model" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="~/assets/ajax/jquery.unobtrusive-ajax.min.js"></script>
+
+

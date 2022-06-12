@@ -1,0 +1,107 @@
+﻿@model SStorm.CTH.Web.Models.ChemotherapyProtocolModel
+@using SStorm.CTH.Web.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("ProtocolCyclesList");
+    Layout = null;
+}
+
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">@SharedLocalizer.GetLocalizedHtmlString("ProtocolCycles")</a></li>
+                        <li class="breadcrumb-item active">@SharedLocalizer.GetLocalizedHtmlString("ProtocolCyclesList")</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <button type="button" class="close" id="btnCloseProtocolCycleDiv">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <div id="ProtocolCycleDiv">
+                        @if (Authorize(UserPermission.CancerType_EditCreateCycle))
+                        {
+                        <a asp-controller="Protocol" asp-action="EditCreateProtocolCycle" asp-route-ID="0" asp-route-ProtocolID="@Model.ChemotherapyProtocolEntity.ID" class="btn btn-info"> <i class="fas fa-plus"></i> @SharedLocalizer.GetLocalizedHtmlString("AddNew")</a>
+                        }
+
+                        @*<a href="#modal-add-entity" data-toggle="modal"
+                               data-url="@Url.Action("EditCreateProtocolCycle", "Protocol", new { ID = 0 ,ProtocolID=@Model.ChemotherapyProtocolEntity.ID})"
+                               data-modalsize="modal-lg"
+                               data-modalcolor="hmodal-danger" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> New Cycle
+                            </a>*@
+
+                        <div class="table-responsive">
+                            <table class="table m-0 table-colored-bordered table-bordered-info table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Number")</th>
+                                        @*<th>@SharedLocalizer.GetLocalizedHtmlString("Every")</th>*@
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Description")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Recycle Date")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Recycling After")</th>
+                                        <th>@SharedLocalizer.GetLocalizedHtmlString("Actions")</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.ChemotherapyProtocolEntity.CTHProtocolCycleCollection.Count() == 0)
+                                    {
+                                        <tr>
+                                            <th scope="row" colspan="7">@SharedLocalizer.GetLocalizedHtmlString("NoData")</th>
+                                        </tr>
+                                    }
+                                    @foreach (var item in Model.ChemotherapyProtocolEntity.CTHProtocolCycleCollection)
+                                    {
+                                <tr>
+                                    <td>@item.Number</td>
+                                    <td>@item.Description</td>
+                                    <td>@item.RecycleDate</td>
+                                    <td>@item.RecyclingAfter</td>
+                                    @*<td>@item.Every @(item.EveryUnit != null ? @Enum.GetName(typeof(EveryUnit), item.EveryUnit) : "")</td>*@
+                                    <td>
+                                        @if (Authorize(UserPermission.CancerType_EditCreateCycle))
+                                        {
+                                            <a asp-controller="Protocol" asp-action="EditCreateProtocolCycle" asp-route-ID="@item.ID" asp-route-protocolID="@Model.ID" class="btn btn-info"> <i class="fas fa-edit"></i></a>
+                                        }
+                                        @if (Authorize(UserPermission.CancerType_DeleteCycle))
+                                        {
+                                            <a href="#modal-delete-entity" data-toggle="modal"
+                                               data-url="@Url.Action("DeleteProtocolCycle", "Protocol", new {ID = item.ID})"
+                                               data-modalsize="modal-lg"
+                                               data-modalcolor="hmodal-danger" class="btn btn-danger">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                        }
+                                    </td>
+                                </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#btnCloseProtocolCycleDiv").click(function () {
+            $("#ProtocolCycleDiv").slideToggle(1000);
+        });
+    });
+</script>
